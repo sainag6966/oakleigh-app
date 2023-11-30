@@ -10,6 +10,9 @@ module.exports = {
       fontFamily:{
         sans: "'sans', serif",
         cormorant: "'Cormorant Garamond', serif"
+      },
+      colors:{
+        search:'#EDE9E5'
       }
     },
   },

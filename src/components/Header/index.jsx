@@ -1,12 +1,10 @@
-import Drawer from "../../reuseComps/Drawer";
-import NextImage from "../../reuseComps/NextImage";
 import HeaderDweb from "./HeaderDweb";
 
-function Header() {
+function Header({data}) {
     const oakleighLogo = '/Images/oakleighLogo.svg'
     return (
         <>
-            <HeaderDweb/>
+            <HeaderDweb data={data}/>
         </>
     )
 }

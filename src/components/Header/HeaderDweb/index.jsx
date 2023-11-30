@@ -2,19 +2,19 @@ import { useState } from "react";
 import NextImage from "../../../reuseComps/NextImage";
 import Drawer from "../../../reuseComps/Drawer";
 
-function HeaderDweb() {
+function HeaderDweb({ data }) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const oakleighLogo = '/Images/oakleighLogo.svg';
     const menuIcon = '/Images/menuIconMweb.svg';
 
     const openDrawer = () => {
         setIsDrawerOpen(true);
-        console.log('click')
     };
 
     const closeDrawer = () => {
         setIsDrawerOpen(false);
     };
+
     return (
         <>
             <div className="px-9 py-[30px] w-full h-[98px] flex items-center justify-between">
@@ -24,7 +24,7 @@ function HeaderDweb() {
                     <img src={menuIcon} className="w-[22px] h-[10px] cursor-pointer" onClick={openDrawer} />
                 </div>
             </div>
-            <Drawer className='absolute w-20 h-full' isOpen={isDrawerOpen} />
+            <Drawer className='absolute w-20 h-full' isOpen={isDrawerOpen} direction={'right'} closeDrawer={closeDrawer} data={data} />
         </>
     )
 }

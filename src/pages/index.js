@@ -3,18 +3,52 @@ import Header from '../components/Header';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({ data }) {
+  // const [item, setItem] = useState([])
+  // const username = 'oakleighcdadevel';
+  // const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1';
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const response = await fetch('https://oakleigh.cda-development3.co.uk/wp-json/wp/v2/pages/2?acf_format=standard', {
+  //       method: 'get',
+  //       headers: {
+  //         "Content-Type": "text/plain",
+  //         'Authorization': 'Basic ' + btoa(username + ":" + password),
+  //       },
+  //     });
+  //     const data = await response.json() || [];
+  //     setItem(data);
+  //     console.log(item?.acf?.flexible_listing, 'item')
+  //   };
+  //   getData();
+  // }, []);
 
   return (
     <>
       <header>
-        <Header />
+        <Header data={data} />
       </header>
-      <main
-        className={`flex min-h-screen flex-col items-center justify-between p-2`}
-      >
+      <main>
       </main>
     </>
 
   )
+}
+
+export async function getStaticProps(context) {
+  const username = 'oakleighcdadevel';
+  const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1';
+  const response = await fetch('https://oakleigh.cda-development3.co.uk/wp-json/wp/v2/menu-items?menus=18', {
+    method: 'get',
+    headers: {
+      "Content-Type": "text/plain",
+      'Authorization': 'Basic ' + btoa(username + ":" + password),
+    },
+  });
+  const data = await response.json();
+  return {
+    props: {
+      data,
+    }
+  }
 }
