@@ -3,4 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+module.exports = {
+  ...nextConfig,
+  env: {
+    WORDPRESS_API_URL: 'https://oakleigh.cda-development3.co.uk/wp-json',
+  },
+};
