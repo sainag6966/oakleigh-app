@@ -11,11 +11,11 @@ const Drawer = ({ isOpen, closeDrawer, data, direction }) => {
                 } transition-transform duration-300 ease-in-out shadow-md z-50`}
         >
             <div className="px-9 py-[30px] w-full h-[98px] border-b border-black flex items-center justify-between">
-            <NextImage src={oakleighLogo} width='174' height='34' />
-            <div className="flex items-center gap-2.5" onClick={closeDrawer}>
-                <p className="text-xl">Close</p>
-                <img src={closeIcon} className="w-[10px] h-[10px] cursor-pointer mt-[2px]" />
-            </div>
+                <NextImage src={oakleighLogo} width='174' height='34' />
+                <div className="flex items-center gap-2.5" onClick={closeDrawer}>
+                    <p className="text-xl">Close</p>
+                    <img src={closeIcon} className="w-[10px] h-[10px] cursor-pointer mt-[2px]" />
+                </div>
             </div>
             <div className="py-[50px] px-9 flex flex-col gap-6">
                 {data?.map((e, index) => {
@@ -30,10 +30,10 @@ const Drawer = ({ isOpen, closeDrawer, data, direction }) => {
                         </div>
                     );
                 })}
-                <Divider/>
+                <Divider />
                 <div className="w-full h-10 px-[30px] bg-search flex justify-between items-center">
                     <p>Search</p>
-                    <NextImage src={searchIcon} width='18' height='20'/>
+                    <NextImage src={searchIcon} width='18' height='20' />
                 </div>
             </div>
         </div>

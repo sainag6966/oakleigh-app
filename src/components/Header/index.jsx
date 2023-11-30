@@ -1,10 +1,10 @@
-import HeaderDweb from "./HeaderDweb";
+import HeaderMweb from "./HeaderMweb";
 
 function Header({data}) {
     const oakleighLogo = '/Images/oakleighLogo.svg'
     return (
         <>
-            <HeaderDweb data={data}/>
+            <HeaderMweb data={data}/>
         </>
     )
 }

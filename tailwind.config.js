@@ -12,7 +12,9 @@ module.exports = {
         cormorant: "'Cormorant Garamond', serif"
       },
       colors:{
-        search:'#EDE9E5'
+        search:'#EDE9E5',
+        footerBg:'#242B21',
+        textPrimary:'#FFFFFF'
       }
     },
   },
