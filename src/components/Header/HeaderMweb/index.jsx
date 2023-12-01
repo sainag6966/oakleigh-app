@@ -25,6 +25,7 @@ function HeaderDweb({ data }) {
                 </div>
             </div>
             <Drawer className='absolute w-20 h-full' isOpen={isDrawerOpen} direction={'right'} closeDrawer={closeDrawer} data={data} />
+            <div>this is the drawer comp</div>
         </>
     )
 }
