@@ -2,11 +2,11 @@
   "name": "oakleigh-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://oakleigh.cda-development3.co.uk/",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "next": "14.0.3",
