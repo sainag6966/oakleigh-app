@@ -14,7 +14,7 @@ function HeaderDweb({ data }) {
     <div className="px-9 py-[30px] w-full h-[98px] flex items-center justify-between">
       <NextImage src={oakleighLogo} width="174" height="34" />
       <div className="flex justify-evenly items-center grow-[1.2]">
-        {filterData.map((item) => {
+        {filterData.map((item,index) => {
           return (
             <div key={index} className="font-sans text-[0.875rem]">{item.title.rendered}</div>
           );
