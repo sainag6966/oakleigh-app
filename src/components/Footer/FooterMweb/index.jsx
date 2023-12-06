@@ -60,7 +60,7 @@ function FooterMweb() {
       <div className="flex flex-col items-center justify-center gap-[32px] w-full h-auto">
         {data1.map((link, index) => {
           return (
-            <div className="flex flex-col items-center">
+            <div key={index} className="flex flex-col items-center">
               <div
                 className="flex gap-2 justify-center items-center"
                 key={index}

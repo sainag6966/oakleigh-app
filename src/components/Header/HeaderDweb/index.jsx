@@ -16,7 +16,7 @@ function HeaderDweb({ data }) {
       <div className="flex justify-evenly items-center grow-[1.2]">
         {filterData.map((item) => {
           return (
-            <div className="font-sans text-[0.875rem]">{item.title.rendered}</div>
+            <div key={index} className="font-sans text-[0.875rem]">{item.title.rendered}</div>
           );
         })}
       </div>
