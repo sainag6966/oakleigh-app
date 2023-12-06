@@ -6,15 +6,31 @@ module.exports = {
     // './src/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens:{
+      'sm': '640px',
+      // => @media (min-width: 640px) { ... }
+
+      'md': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '900px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl': '1280px',
+      // => @media (min-width: 1280px) { ... }
+
+      '2xl': '1536px',
+    },
     extend: {
       fontFamily:{
-        sans: "'sans', serif",
+        sans: ['sans-serif'],
         cormorant: "'Cormorant Garamond', serif"
       },
       colors:{
         search:'#EDE9E5',
         footerBg:'#242B21',
-        textPrimary:'#FFFFFF'
+        textPrimary:'#FFFFFF',
+        copyRightBorder:'#44513E'
       }
     },
   },

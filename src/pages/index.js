@@ -25,17 +25,17 @@ export default function Home({ data }) {
   // }, []);
 
   return (
-    <>
+    <div className='flex flex-col justify-between h-screen'>
       <header>
-        <Header data={item} />
+        <Header data={data} />
       </header>
       <main>
-        this is the html page
+        This is the main html page
       </main>
       <footer>
         <Footer/>
       </footer>
-    </>
+      </div>
 
   )
 }
@@ -43,7 +43,7 @@ export default function Home({ data }) {
 export async function getServerSideProps(context) {
   const username = 'oakleighcdadevel';
   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1';
-  const response = await fetch('https://oakleigh.cda-development3.co.uk/wp-json/wp/v2/menu-items?menus=18', {
+  const response = await fetch('https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18', {
     method: 'get',
     headers: {
       "Content-Type": "text/plain",
