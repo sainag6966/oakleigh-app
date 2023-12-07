@@ -31,7 +31,7 @@ export default function Home({ data }) {
         <Header data={data} />
       </header>
       <main>
-        <HeaderBanner/>
+        {/* <HeaderBanner/> */}
       </main>
       <footer>
         <Footer/>
