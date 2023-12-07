@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
 import { Inter } from 'next/font/google';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useEffect, useState } from 'react';
+import HeaderBanner from '../components/ContentBlocks/HeaderBanner';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,12 +26,12 @@ export default function Home({ data }) {
   // }, []);
 
   return (
-    <div className='flex flex-col justify-between h-screen'>
+    <div className='flex flex-col justify-between max-h-screen'>
       <header>
         <Header data={data} />
       </header>
       <main>
-        This is the main html page
+        <HeaderBanner/>
       </main>
       <footer>
         <Footer/>

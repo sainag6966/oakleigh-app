@@ -6,7 +6,7 @@ function SocialIcons() {
   const youtubeIcon = "/Images/youtubeIcon.svg";
   const twitterIcon = "/Images/twitterIcon.svg";
   return (
-    <div className="flex w-32 max-h-[19px] gap-4 justify-center items-center">
+    <div className="flex w-32 max-h-[19px] gap-4 justify-center mt-0 lg:mt-8 lg:justify-start items-center">
       <NextImage src={youtubeIcon} width="22" height="16" alt="youtube" />
       <NextImage src={facebookIcon} width="9" height="19" alt="facebook" />
       <NextImage src={twitterIcon} width="18" height="15" alt="twitter" />

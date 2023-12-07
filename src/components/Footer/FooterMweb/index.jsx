@@ -1,7 +1,7 @@
+import { useState } from "react";
 import SocialIcons from "../../Footer/SocialIcons";
 import CopyRightInfo from "../CopyRightInfo";
 import MailingList from "../MailingList";
-import { useState } from "react";
 
 function FooterMweb() {
   const [clickedLink, setClickedLink] = useState("");
@@ -52,9 +52,11 @@ function FooterMweb() {
         return "";
     }
   };
+
   const handleClose = (link) => {
     setAccor(false);
   };
+  
   return (
     <div className="bg-footerBg w-full min-h-[500px] pt-[59px] text-textPrimary flex items-center flex-col gap-[60px]">
       <div className="flex flex-col items-center justify-center gap-[32px] w-full h-auto">

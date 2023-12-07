@@ -1,6 +1,6 @@
 function MailingList() {
   return (
-    <div className="flex flex-col gap-5 px-12 w-full lg:w-[380px]">
+    <div className="flex flex-col gap-5 px-12 lg:px-0 w-full lg:w-[300px]">
       <h1 className="text-[25px]">Join Our Mailing List</h1>
       <form
         id="subscribeForm"
