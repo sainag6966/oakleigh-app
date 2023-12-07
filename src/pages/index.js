@@ -26,12 +26,12 @@ export default function Home({ data }) {
   // }, []);
 
   return (
-    <div className='flex flex-col justify-between max-h-screen'>
+    <div className='flex flex-col justify-between h-screen'>
       <header>
         <Header data={data} />
       </header>
       <main>
-        {/* <HeaderBanner/> */}
+        <HeaderBanner/>
       </main>
       <footer>
         <Footer/>
