@@ -1,11 +1,13 @@
 import NextImage from "@/reuseComps/NextImage";
 import Image from "next/image";
-import sampleTest from '../../../../public/Images/sampleTest.png'
+import headerBanner from '../../../../public/Images/headerBanner.svg'
 function HeaderBanner() {
-  const imgSrc = "/Images/sampleTest.png";
+    const imgurl = 'https://oakleigh.cda-development3.co.uk/cms/wp-content/uploads/woocommerce-placeholder.png';
+    const src= '/Images/headerBanner.svg'
   return (
     <div>
-      <Image src={sampleTest} width="2560" height="300" alt="headerBanner" placeholder="blur"/>
+      <Image src={imgurl} width="1280" height="300" alt="headerBanner"/>
+      {/* <img src={src} className="w-full h-auto" alt="headerBanner"/> */}
     </div>
   );
 }

@@ -8,4 +8,14 @@ module.exports = {
   env: {
     WORDPRESS_API_URL: 'https://oakleigh.cda-development3.co.uk/wp-json',
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+        // port: '',
+        // pathname: '**',
+      },
+    ],
+  },
 };
