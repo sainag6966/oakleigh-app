@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Inter } from 'next/font/google';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import HeaderBanner from '../components/ContentBlocks/HeaderBanner';
+import { useEffect, useState } from "react";
+import { Inter } from "next/font/google";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import HeaderBanner from "../components/ContentBlocks/HeaderBanner";
+import UspBlock from "../components/ContentBlocks/UspBlock";
+import BrandWidget from "../components/ContentBlocks/BrandWidget";
+import TwoAdBlock from "../components/ContentBlocks/TwoAdBlock";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ data }) {
   // const [item, setItem] = useState([])
@@ -26,35 +29,59 @@ export default function Home({ data }) {
   // }, []);
 
   return (
-    <div className='flex flex-col justify-between h-screen'>
+    <div className="flex flex-col justify-between h-screen">
       <header>
         <Header data={data} />
       </header>
-      <main>
-        <HeaderBanner/>
+      <main className="w-full h-auto">
+        <HeaderBanner />
+        {/* <UspBlock/> */}
+        <BrandWidget/>
+        <TwoAdBlock/>
       </main>
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
-      </div>
-
-  )
+    </div>
+  );
 }
 
 export async function getServerSideProps(context) {
-  const username = 'oakleighcdadevel';
-  const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1';
-  const response = await fetch('https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18', {
-    method: 'get',
-    headers: {
-      "Content-Type": "text/plain",
-      'Authorization': 'Basic ' + btoa(username + ":" + password),
-    },
-  });
-  const data = await response?.json();
-  return {
-    props: {
-      data,
+  try {
+    const username = "oakleighcdadevel";
+    const password = "QsJY lkVy QxL8 3iFY NhhP Cto1";
+    const response = await fetch(
+      "https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18",
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "text/plain",
+          Authorization: "Basic " + btoa(username + ":" + password),
+        },
+      }
+    );
+
+    if (!response.ok) {
+      // Handle non-successful responses (e.g., 404, 500)
+      console.error(`API request failed with status ${response.status}`);
+      return {
+        notFound: true,
+      };
     }
+
+    const data = await response.json();
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error) {
+    // Handle network errors or other exceptions
+    console.error("Error fetching data from API:", error);
+    return {
+      props: {
+        data: null, // You can set a default value or handle this case in your component
+      },
+    };
   }
 }

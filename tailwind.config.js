@@ -31,7 +31,8 @@ module.exports = {
         search:'#EDE9E5',
         footerBg:'#242B21',
         textPrimary:'#FFFFFF',
-        copyRightBorder:'#44513E'
+        copyRightBorder:'#44513E',
+        uspBlockBackground:'#CDAA72'
       }
     },
   },
