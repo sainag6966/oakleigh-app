@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
+import { useMediaQuery } from "react-responsive";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeaderBanner from "../components/ContentBlocks/HeaderBanner";
@@ -7,6 +8,8 @@ import UspBlock from "../components/ContentBlocks/UspBlock";
 import BrandWidget from "../components/ContentBlocks/BrandWidget";
 import TwoAdBlock from "../components/ContentBlocks/TwoAdBlock";
 import headerBanner from "../../public/Images/headerBanner.svg";
+import UspBlockMweb from "@/components/ContentBlocks/UspBlockMweb";
+import ThreeAdBlock from "@/components/ContentBlocks/ThreeAdBlock";
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,6 +19,7 @@ export default function Home({ data }) {
   const headerBannerMob = "/Images/headerBannerMob.svg";
   const extImage =
     "https://png.pngtree.com/background/20230517/original/pngtree-wolfs-full-hd-wallpaper-art-wallpaper-1920x1080-1080p-picture-image_2634113.jpg";
+  const isDesktop = useMediaQuery({ query: '(min-width:900px)' });
 
   // const [item, setItem] = useState([])
   // const username = 'oakleighcdadevel';
@@ -42,9 +46,10 @@ export default function Home({ data }) {
       </header>
       <main className="w-full h-auto">
         <HeaderBanner />
-        <UspBlock/>
-        {/* <BrandWidget/>
-        <TwoAdBlock/> */}
+        {isDesktop ? <UspBlockMweb/> : <UspBlock/> }
+        {/* <BrandWidget/> */}
+        <TwoAdBlock/>
+        <ThreeAdBlock/>
         {/* <div className="relative w-full h-[578px]">
           <Image
             src={headerBannerSrc}

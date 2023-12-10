@@ -3,7 +3,7 @@ import headerBanner from "../../../../public/Images/headerBanner.svg";
 
 function HeaderBanner() {
   return (
-    <div className="relative w-full h-[578px]">
+    <div className="relative w-full h-[578px] lg:h-[520px]">
       <Image
         src={headerBanner}
         alt="headerBanner"
