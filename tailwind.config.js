@@ -57,6 +57,11 @@ module.exports = {
           lineHeight:'2.188rem',
           letterSpacing:'0rem'
         }],
+        'display-12': ['1.875rem',{
+          fontWeight:'400',
+          lineHeight:'2.5rem',
+          letterSpacing:'0rem'
+        }],
         'display-13': ['2.188rem',{
           fontWeight:'400',
           lineHeight:'2.75rem',

@@ -11,6 +11,7 @@ import headerBanner from "../../public/Images/headerBanner.svg";
 import UspBlockMweb from "@/components/ContentBlocks/UspBlockMweb";
 import ThreeAdBlock from "@/components/ContentBlocks/ThreeAdBlock";
 import Image from "next/image";
+import InsightBlock from "@/components/ContentBlocks/InsightBlock";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,6 +51,7 @@ export default function Home({ data }) {
         {/* <BrandWidget/> */}
         <TwoAdBlock/>
         <ThreeAdBlock/>
+        <InsightBlock/>
         {/* <div className="relative w-full h-[578px]">
           <Image
             src={headerBannerSrc}

@@ -38,12 +38,12 @@ function MailingList() {
             </label>
           </div>
           <div className="w-36 h-12 relative border-[1px] flex justify-center items-center border-white max-w-[150px]">
-          <button
-            type="submit"
-            className="absolute border-[1px] w-full h-full top-1 right-1"
-          >
-            Subscribe
-          </button>
+            <button
+              type="submit"
+              className="absolute border-[1px] w-full h-full top-1 right-1"
+            >
+              Subscribe
+            </button>
           </div>
         </div>
       </form>

@@ -10,10 +10,16 @@ function BrandWidget() {
   ];
   return (
     <div className="w-full h-auto px-[80px] pt-[100px] flex justify-between items-center">
-      {data.map((e) => {
+      {data.map((e, index) => {
         return (
-          <div className="min-w-20 max-w-[150px] h-auto">
-            <Image src={e} width="5" height="2" layout="responsive" alt="brandLogo" />
+          <div key={index} className="min-w-20 max-w-[150px] h-auto">
+            <Image
+              src={e}
+              width="5"
+              height="2"
+              layout="responsive"
+              alt="brandLogo"
+            />
           </div>
         );
       })}

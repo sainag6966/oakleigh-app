@@ -7,7 +7,7 @@ function HeaderDweb({ data }) {
   const accountIcon = "/Images/accountIcon.svg";
   const dwebAccountIcon = "/Images/dwebAccountIcon.svg";
   const dividerLine = "/Images/dividerLine.svg";
-  const imgArr = [searchIcon,accountIcon,dwebAccountIcon ]
+  const imgArr = [searchIcon, accountIcon, dwebAccountIcon];
   const filterData = data.filter((e) => {
     const skipMenu = ["Divider", "My account", "Basket"];
     return !skipMenu.includes(e.title.rendered);
@@ -21,19 +21,26 @@ function HeaderDweb({ data }) {
       <div className="flex justify-evenly items-center grow-[2]">
         {filterData.map((item, index) => {
           return (
-            <div key={index} className="font-sans text-display-extra xl:text-display-5 2xl:text-display-8">
+            <div
+              key={index}
+              className="font-sans text-display-extra xl:text-display-5 2xl:text-display-8"
+            >
               {item.title.rendered}
             </div>
           );
         })}
       </div>
       <div className="flex gap-4 items-center justify-evenly grow-[0.3]">
-        {imgArr.map((e) =>{console.log(e)
+        {imgArr.map((e, index) => {
+          console.log(e);
           return (
-            <div className="w-3 xl:w-4 2xl:w-5 h-3 flex items-center justify-center">
-              <NextImage src={e} width="20" height="20" layout='responsive' />
+            <div
+              key={index}
+              className="w-3 xl:w-4 2xl:w-5 h-3 flex items-center justify-center"
+            >
+              <NextImage src={e} width="20" height="20" layout="responsive" />
             </div>
-          )
+          );
         })}
         {/* <NextImage src={searchIcon} width="15" height="11" />
         <NextImage src={dividerLine} width="1" height="11" />
