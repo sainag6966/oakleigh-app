@@ -6,36 +6,71 @@ module.exports = {
     // './src/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    screens:{
-      'sm': '640px',
+    screens: {
+      sm: "600px",
+      // 'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
-      'md': '768px',
+      md: "768px",
       // => @media (min-width: 768px) { ... }
 
-      'lg': '900px',
+      lg: "900px",
       // 'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '1280px',
+      xl: "1280px",
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1536px',
+      "2xl": "1536px",
+
+      "3xl": "1920px",
     },
     extend: {
-      fontFamily:{
-        sans: ['sans-serif'],
-        cormorant: "'Cormorant Garamond', serif"
+      fontFamily: {
+        sans: ["sans-serif"],
+        cormorant: "'Cormorant Garamond', serif",
       },
-      colors:{
-        search:'#EDE9E5',
-        footerBg:'#242B21',
-        textPrimary:'#FFFFFF',
-        copyRightBorder:'#44513E',
-        uspBlockBackground:'#CDAA72'
-      }
+      fontSize: {
+        'small':'2rem',
+        'display-5': ['0.875rem',{
+          fontWeight:'600',
+          lineHeight:'3.125rem',
+          letterSpacing:'0.025rem'
+        }],
+        'display-8': ['1.125rem',{
+          fontWeight:'600',
+          lineHeight:'3.125rem',
+          letterSpacing:'0.025rem'
+        }],
+        'display-9': ['1.25rem',{
+          fontWeight:'500',
+          lineHeight:'2.75rem',
+          letterSpacing:'0rem'
+        }],
+        'display-13': ['2.188rem',{
+          fontWeight:'400',
+          lineHeight:'2.75rem',
+          letterSpacing:'0rem'
+        }],
+        'display-15': ['3.438rem',{
+          fontWeight:'400',
+          lineHeight:'4rem',
+          letterSpacing:'0rem'
+        }],
+        'display-extra': ['0.75rem',{
+          fontWeight:'600',
+          lineHeight:'2.75rem',
+          letterSpacing:'0rem'
+        }]
+      },
+      colors: {
+        search: "#EDE9E5",
+        footerBg: "#242B21",
+        textPrimary: "#FFFFFF",
+        copyRightBorder: "#44513E",
+        uspBlockBackground: "#CDAA72",
+      },
     },
   },
   plugins: [],
-}
-
+};

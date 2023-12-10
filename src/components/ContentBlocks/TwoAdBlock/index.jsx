@@ -10,7 +10,6 @@ function TwoAdBlock() {
         return (
           <div className="relative">
             <Image src={e} width="540" height="450" layout="responsive" alt="AdBlock" />
-            <p className="absolute">Shop All</p>
           </div>
         );
       })}

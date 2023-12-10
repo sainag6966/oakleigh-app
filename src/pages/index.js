@@ -6,10 +6,17 @@ import HeaderBanner from "../components/ContentBlocks/HeaderBanner";
 import UspBlock from "../components/ContentBlocks/UspBlock";
 import BrandWidget from "../components/ContentBlocks/BrandWidget";
 import TwoAdBlock from "../components/ContentBlocks/TwoAdBlock";
+import headerBanner from "../../public/Images/headerBanner.svg";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ data }) {
+  const headerBannerSrc = "/Images/headerBanner.svg";
+  const headerBannerMob = "/Images/headerBannerMob.svg";
+  const extImage =
+    "https://png.pngtree.com/background/20230517/original/pngtree-wolfs-full-hd-wallpaper-art-wallpaper-1920x1080-1080p-picture-image_2634113.jpg";
+
   // const [item, setItem] = useState([])
   // const username = 'oakleighcdadevel';
   // const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1';
@@ -35,9 +42,19 @@ export default function Home({ data }) {
       </header>
       <main className="w-full h-auto">
         <HeaderBanner />
-        {/* <UspBlock/> */}
-        <BrandWidget/>
-        <TwoAdBlock/>
+        <UspBlock/>
+        {/* <BrandWidget/>
+        <TwoAdBlock/> */}
+        {/* <div className="relative w-full h-[578px]">
+          <Image
+            src={headerBannerSrc}
+            alt="headerBanner"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            style={{ objectPosition: "center" }}
+          />
+        </div> */}
       </main>
       <footer>
         <Footer />

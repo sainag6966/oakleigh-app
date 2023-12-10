@@ -1,19 +1,21 @@
-import NextImage from "@/reuseComps/NextImage";
 import Image from "next/image";
 import headerBanner from "../../../../public/Images/headerBanner.svg";
-import headerBannerMob from "../../../../public/Images/headerBannerMob.svg";
 
 function HeaderBanner() {
-  const imgurl =
-    "https://oakleigh.cda-development3.co.uk/cms/wp-content/uploads/woocommerce-placeholder.png";
-  const src = "/Images/headerBanner.svg";
   return (
-    <div className="w-full h-auto relative">
-      <Image src={headerBanner} layout="responsive" alt="headerBanner" />
-      <div className="absolute flex flex-col gap-4 top-1/2 max-w-[380px] left-[8%] -translate-y-1/2 text-[30px] text-textPrimary">
+    <div className="relative w-full h-[578px]">
+      <Image
+        src={headerBanner}
+        alt="headerBanner"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
+        style={{ objectPosition: "center" }}
+      />
+      <div className="absolute max-w-[440px] 2xl:max-w-[700px] flex flex-col gap-4 top-[80px] lg:top-1/2 left-[8%] lg:-translate-y-1/2 text-display-13 2xl:text-display-15 text-textPrimary">
         <p>THE HOME OF PRE-OWNED LUXURY WATCHES</p>
-        <div className="w-1/2 h-12 relative border-[1px] flex justify-center items-center border-white">
-          <button className="absolute text-[18px] border-[1px] w-full h-full top-1 right-1">
+        <div className="max-w-[200px] lg:max-w-[248px] h-12 relative border-[1px] flex justify-center items-center border-white">
+          <button className="absolute text-[18px] flex items-center justify-center border-[1px] w-full h-full top-1 right-1">
             Discover Our Range
           </button>
         </div>

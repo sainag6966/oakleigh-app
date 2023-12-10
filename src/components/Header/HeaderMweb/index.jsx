@@ -17,15 +17,15 @@ function HeaderMweb({ data }) {
 
   return (
     <>
-      <div className="px-9 py-[30px] w-full h-[98px] flex items-center justify-between">
+      <div className="w-full h-[98px] flex items-center justify-between px-9 py-[30px]">
         <NextImage src={oakleighLogo} width="174" height="34" />
-        <div className="flex gap-2.5 items-center">
-          <p onClick={openDrawer} className="text-xl">
+        <div className="flex items-center gap-2.5">
+          <p onClick={openDrawer} className="text-display-9">
             Menu
           </p>
           <img
             src={menuIcon}
-            className="w-[22px] h-[10px] cursor-pointer"
+            className="w-[22px] h-[10px]"
             onClick={openDrawer}
           />
         </div>
