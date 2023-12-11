@@ -18,7 +18,7 @@ import VipAdBlock from "@/components/ContentBlocks/VipAdBlock";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ data }) {
+export default function Home({ data }) {console.log(data)
   const headerBannerSrc = "/Images/headerBanner.svg";
   const headerBannerMob = "/Images/headerBannerMob.svg";
   const extImage =

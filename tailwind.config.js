@@ -82,6 +82,11 @@ module.exports = {
           lineHeight:'4rem',
           letterSpacing:'0rem'
         }],
+        'display-16': ['1.063rem',{
+          fontWeight:'600',
+          lineHeight:'2.125rem',
+          letterSpacing:'0.016rem'
+        }],
         'display-extra': ['0.75rem',{
           fontWeight:'600',
           lineHeight:'2.75rem',

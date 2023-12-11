@@ -32,7 +32,6 @@ function HeaderDweb({ data }) {
       </div>
       <div className="flex gap-4 items-center justify-evenly grow-[0.3]">
         {imgArr.map((e, index) => {
-          console.log(e);
           return (
             <div
               key={index}

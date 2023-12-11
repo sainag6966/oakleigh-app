@@ -48,7 +48,7 @@ function VipAdBlock() {
           })}
         </div>
       </div>
-      <div className="w-full lg:w-[40%] p-20 bg-uspBlockBackground flex flex-col justify-around gap-6 items-center">
+      <div className="w-full relative lg:w-[40%] p-20 bg-uspBlockBackground flex flex-col justify-around gap-6 items-center">
         <img src={vipIcon}></img>
         <p className="text-display-15 text-center">JOIN THE VIP CLUB</p>
         <p className="text-display-6 text-center">
@@ -67,6 +67,10 @@ function VipAdBlock() {
         <u>
           <span className="font-sans text-display-4">Find Out More</span>
         </u>
+        <div className="absolute top-[-1px] left-[-1px] w-5 h-5 bg-textPrimary"/>
+        <div className="absolute top-[-1px] right-[-1px] w-5 h-5 bg-textPrimary"/>
+        <div className="absolute bottom-[-1px] left-[-1px] w-5 h-5 bg-textPrimary"/>
+        <div className="absolute bottom-[-1px] right-[-1px] w-5 h-5 bg-textPrimary"/>
       </div>
     </div>
   );
