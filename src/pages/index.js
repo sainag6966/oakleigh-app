@@ -12,6 +12,9 @@ import UspBlockMweb from "@/components/ContentBlocks/UspBlockMweb";
 import ThreeAdBlock from "@/components/ContentBlocks/ThreeAdBlock";
 import Image from "next/image";
 import InsightBlock from "@/components/ContentBlocks/InsightBlock";
+import AboutBlock from "@/components/ContentBlocks/AboutBlock";
+import PromiseBlock from "@/components/ContentBlocks/PromiseBlock";
+import VipAdBlock from "@/components/ContentBlocks/VipAdBlock";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,8 +53,12 @@ export default function Home({ data }) {
         {isDesktop ? <UspBlockMweb/> : <UspBlock/> }
         {/* <BrandWidget/> */}
         <TwoAdBlock/>
+        <AboutBlock/>
+        <VipAdBlock/>
+        <PromiseBlock/>
         <ThreeAdBlock/>
         <InsightBlock/>
+        
         {/* <div className="relative w-full h-[578px]">
           <Image
             src={headerBannerSrc}

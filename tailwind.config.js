@@ -32,6 +32,11 @@ module.exports = {
       },
       fontSize: {
         'small':'2rem',
+        'display-3': ['0.875rem',{
+          fontWeight:'300',
+          lineHeight:'1.625rem',
+          letterSpacing:'0.016rem'
+        }],
         'display-4': ['0.875rem',{
           fontWeight:'400',
           lineHeight:'2.125rem',
@@ -41,6 +46,11 @@ module.exports = {
           fontWeight:'600',
           lineHeight:'3.125rem',
           letterSpacing:'0.025rem'
+        }],
+        'display-6': ['1.063rem',{
+          fontWeight:'100',
+          lineHeight:'2.125rem',
+          letterSpacing:'0.016rem'
         }],
         'display-8': ['1.125rem',{
           fontWeight:'600',
