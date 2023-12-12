@@ -1,5 +1,6 @@
 import FooterDweb from "./FooterDweb";
 import FooterMweb from "./FooterMweb";
+import FooterTop from "./FooterTop";
 
 function Footer() {
   return (

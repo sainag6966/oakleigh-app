@@ -17,6 +17,7 @@ import PromiseBlock from "@/components/ContentBlocks/PromiseBlock";
 import VipAdBlock from "@/components/ContentBlocks/VipAdBlock";
 import SimpleSlider from "@/reuseComps/Slider";
 import SliderBlock from "@/components/ContentBlocks/SliderBlock";
+import FooterTop from "@/components/Footer/FooterTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,6 +64,7 @@ export default function Home({ data }) {
         <InsightBlock />
       </main>
       <footer>
+        <FooterTop/>
         <Footer />
       </footer>
     </div>

@@ -7,7 +7,7 @@ function HeaderDweb({ data }) {
   const accountIcon = "/Images/accountIcon.svg";
   const dwebAccountIcon = "/Images/dwebAccountIcon.svg";
   const dividerLine = "/Images/dividerLine.svg";
-  const imgArr = [searchIcon, accountIcon, dwebAccountIcon];
+  const imgArr = [searchIcon,dividerLine, accountIcon, dwebAccountIcon];
   const filterData = data.filter((e) => {
     const skipMenu = ["Divider", "My account", "Basket"];
     return !skipMenu.includes(e.title.rendered);
@@ -35,7 +35,8 @@ function HeaderDweb({ data }) {
           return (
             <div
               key={index}
-              className="w-3 xl:w-4 2xl:w-5 h-3 flex items-center justify-center"
+              className={`${index === 1 ? 'w-[5px] xl:w-[5.5px] 2xl:w-[8px]' : 'w-3 xl:w-4 2xl:w-5'}h-3 flex items-center justify-center`}
+              // {`flex justify-start items-center bg-bgColor w-full ${filterData.length -1 === index ? 'pb-6': 'pb-0'}`}
             >
               <NextImage src={e} width="20" height="20" layout="responsive" />
             </div>
