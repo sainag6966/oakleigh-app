@@ -65,7 +65,7 @@ const ProductListing = () => {
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
-              <p className="text-display-6">Men's Watches</p>
+              <p className="text-display-6">{`Men's Watches`}</p>
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
@@ -76,7 +76,7 @@ const ProductListing = () => {
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
-              <p className="text-display-6">Women's Watches</p>
+              <p className="text-display-6">{`Women's Watches`}</p>
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
@@ -158,7 +158,7 @@ const ProductListing = () => {
         </div>
         <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
           <div className="flex justify-between items-center mb-5">
-            <p className="text-display-11">What's Included</p>
+            <p className="text-display-11">{`What's Included`}</p>
             <img
               className="w-4 h-3 mt-1"
               src="/Images/upArrow.svg"
@@ -299,9 +299,9 @@ const ProductListing = () => {
       </div>
       <div className="w-full h-auto flex flex-wrap justify-start gap-[26px] items-center ">
         {data.map(
-          (item) =>
+          (item,index) =>
             item.status === "publish" && (
-              <div className="flex flex-col justify-center items-center">
+              <div key={index} className="flex flex-col justify-center items-center">
                 <div className="relative w-[389px] h-[462px]" key={item.id}>
                   <Image
                     src={item.images[0]?.src}
