@@ -1,7 +1,9 @@
 import Image from "next/image";
+
 function PromiseBlock() {
-  const promiseIcon = "/Images/sample/promiseIcon.svg";
-  const promiseImg = "/Images/sample/promiseIcon1.svg";
+  const promiseIcon = "/Images/promiseIcon.svg";
+  const promiseImg = "/Images/promiseIcon1.svg";
+
   return (
     <div className="p-5 w-full mt-16 flex items-center justify-center h-[896px] lg:h-[696px] bg-footerBg">
       <div className="p-5 lg:p-20 w-full h-full flex flex-col justify-around lg:flex-row gap-8 lg:gap-12 border-[1px] border-copyRightBorder">
@@ -36,7 +38,7 @@ function PromiseBlock() {
           <Image
             src={promiseImg}
             layout="fill"
-            alt="oakleigh promise"
+            alt="oakleighpromise"
             objectFit="cover"
             quality={100}
             style={{ objectPosition: "center" }}
