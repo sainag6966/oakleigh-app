@@ -49,7 +49,7 @@ function VipAdBlock() {
         </div>
       </div>
       <div className="w-full relative lg:w-[40%] p-20 bg-uspBlockBackground flex flex-col justify-around gap-6 items-center">
-        <img src={vipIcon}></img>
+        <img src={vipIcon} alt="vipIcon"></img>
         <p className="text-display-15 text-center">JOIN THE VIP CLUB</p>
         <p className="text-display-6 text-center">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
