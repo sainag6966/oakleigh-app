@@ -15,15 +15,17 @@ import InsightBlock from "@/components/ContentBlocks/InsightBlock";
 import AboutBlock from "@/components/ContentBlocks/AboutBlock";
 import PromiseBlock from "@/components/ContentBlocks/PromiseBlock";
 import VipAdBlock from "@/components/ContentBlocks/VipAdBlock";
+import SimpleSlider from "@/reuseComps/Slider";
+import SliderBlock from "@/components/ContentBlocks/SliderBlock";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ data }) {console.log(data)
+export default function Home({ data }) {
   const headerBannerSrc = "/Images/headerBanner.svg";
   const headerBannerMob = "/Images/headerBannerMob.svg";
   const extImage =
     "https://png.pngtree.com/background/20230517/original/pngtree-wolfs-full-hd-wallpaper-art-wallpaper-1920x1080-1080p-picture-image_2634113.jpg";
-  const isDesktop = useMediaQuery({ query: '(min-width:900px)' });
+  const isDesktop = useMediaQuery({ query: "(min-width:900px)" });
 
   // const [item, setItem] = useState([])
   // const username = 'oakleighcdadevel';
@@ -50,25 +52,15 @@ export default function Home({ data }) {console.log(data)
       </header>
       <main className="w-full h-auto">
         <HeaderBanner />
-        {isDesktop ? <UspBlockMweb/> : <UspBlock/> }
+        {isDesktop ? <UspBlockMweb /> : <UspBlock />}
         {/* <BrandWidget/> */}
-        <TwoAdBlock/>
-        <AboutBlock/>
-        <VipAdBlock/>
-        <PromiseBlock/>
-        <ThreeAdBlock/>
-        <InsightBlock/>
-        
-        {/* <div className="relative w-full h-[578px]">
-          <Image
-            src={headerBannerSrc}
-            alt="headerBanner"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            style={{ objectPosition: "center" }}
-          />
-        </div> */}
+        <TwoAdBlock />
+        <AboutBlock />
+        <VipAdBlock />
+        <SliderBlock />
+        <PromiseBlock />
+        <ThreeAdBlock />
+        <InsightBlock />
       </main>
       <footer>
         <Footer />

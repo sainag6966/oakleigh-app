@@ -87,6 +87,11 @@ module.exports = {
           lineHeight:'2.125rem',
           letterSpacing:'0.016rem'
         }],
+        'display-17': ['1.125rem',{
+          fontWeight:'400',
+          lineHeight:'2.125rem',
+          letterSpacing:'0rem'
+        }],
         'display-extra': ['0.75rem',{
           fontWeight:'600',
           lineHeight:'2.75rem',
@@ -99,6 +104,7 @@ module.exports = {
         textPrimary: "#FFFFFF",
         copyRightBorder: "#44513E",
         uspBlockBackground: "#CDAA72",
+        filterBorder:'#EDE9E5'
       },
     },
   },
