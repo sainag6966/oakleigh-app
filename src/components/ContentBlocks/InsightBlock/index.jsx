@@ -24,7 +24,7 @@ function InsightBlock() {
     },
   ];
   return (
-    <div className="w-full h-auto pt-[60px] lg:pt-[100px] px-9 lg:px-20 justify-between gap-6 flex flex-col">
+    <div className="w-full h-auto pt-[60px] lg:pt-[120px] px-9 lg:px-20 2xl:px-[140px] justify-between gap-6 flex flex-col">
       <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between">
         <span className="text-display-12">Our Latest Insights</span>
         <u>

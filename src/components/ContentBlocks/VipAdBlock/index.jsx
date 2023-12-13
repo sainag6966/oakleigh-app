@@ -18,9 +18,9 @@ function VipAdBlock() {
     <div className="w-full h-auto pt-[60px] lg:pt-[100px] px-9 lg:px-20 flex flex-col justify-between lg:flex-row gap-6 ">
       <div className="justify-between gap-6 flex flex-col">
         <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between">
-          <span className="text-display-12">Watches Coming Soon</span>
+          <span className="text-display-12 2xl:text-display-14">Watches Coming Soon</span>
           <u>
-            <span className="font-sans text-display-4">
+            <span className="font-sans text-display-4 2xl:text-display-17">
               View All Coming Soon
             </span>
           </u>

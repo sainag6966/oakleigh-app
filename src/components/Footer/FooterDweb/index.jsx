@@ -29,7 +29,7 @@ function FooterDweb() {
 
   return (
     <div className="bg-footerBg w-full max-h-[796px] pt-[65px] text-textPrimary flex flex-col items-center">
-      <div className="w-full flex flex-wrap gap-9 px-[40px] pb-12 justify-start">
+      <div className="w-full flex flex-wrap gap-9 px-[40px] 2xl:px-[140px]  pb-12 justify-start">
         <div className="flex flex-col min-w-[340px] grow-[1]">
           <p className="text-[30px]">Useful Links</p>
           <div className="flex flex-col flex-wrap items-start justify-start gap-[12px] mt-3 max-h-[125px]">

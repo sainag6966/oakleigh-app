@@ -28,7 +28,7 @@ const Drawer = ({ isOpen, closeDrawer, data, direction }) => {
           />
         </div>
       </div>
-      <div className="py-[50px] px-9 flex flex-col gap-1 font-sans text-display-8">
+      <div className="py-[50px] px-9 flex text-copyRightBorder flex-col gap-1 font-sans text-display-8">
         {filterData?.map((e, index) => {
           return (
             <div

@@ -1,6 +1,6 @@
 function PlainTextBlock() {
   return (
-    <div className="w-full h-auto pt-[60px] lg:pt-[100px]">
+    <div className="w-full h-auto pt-[60px] lg:pt-[100px] px-[140px]">
       <p className="text-display-6 text-black text-center">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
         eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam

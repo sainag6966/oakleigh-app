@@ -13,23 +13,31 @@ const SimpleSlider = () => {
   const data = [
     {
       url: "/Images/Sample/insight1.svg",
-      title: "A Look At The Breitling Navitimer 806 A Unique Timeless Piece",
-      buttonTitle: "Read This",
+      title: "Rolex 16523 ‘Zenith’ Daytona",
+      buttonTitle: "View Watch",
+      description:'Oyster, 40 mm, Oystersteel and yellow gold',
+      price:'12000'
     },
     {
       url: "/Images/Sample/insight2.svg",
-      title: "What Watch Face Diameter Would Best Fit My Wrist?",
-      buttonTitle: "Read This",
+      title: "Zenith Defy EL Primero 21",
+      buttonTitle: "View Watch",
+      description:'Oyster, 40 mm, Oystersteel and yellow gold',
+      price:'13000'
     },
     {
       url: "/Images/Sample/insight3.svg",
-      title: "Top 10 Watch Care Tips",
-      buttonTitle: "Read This",
+      title: "Rolex 226570 Explorer II",
+      buttonTitle: "View Watch",
+      description:'Oyster, 40 mm, Oystersteel and yellow gold',
+      price:'14000'
     },
     {
       url: "/Images/Sample/insight4.svg",
-      title: "IS The Age Of Your Watch Important When You Sell?",
-      buttonTitle: "Read This",
+      title: "Rolex 226570 Explorer II",
+      buttonTitle: "View Watch",
+      description:'Oyster, 40 mm, Oystersteel and yellow gold',
+      price:'15000'
     },
   ];
 
@@ -57,8 +65,10 @@ const SimpleSlider = () => {
                   style={{ objectPosition: "center" }}
                 />
               </div>
-              <div className="w-full flex flex-col justify-center items-center">
-              <p className="w-full h-16 lg:h-14 text-center">{e.title}</p>
+              <div className="w-full flex flex-col justify-center items-center gap-2 mt-[20px]">
+              <p className="w-full text-center text-display-17">{e.title}</p>
+              <p className="w-full text-center font-sans text-display-3 text-footerBg">{e.description}</p>
+              <p className="w-full text-center font-sans">£{e.price}</p>
               <div className="w-24 h-8 relative border-[1px] flex justify-center items-center border-black">
                 <button
                   type="submit"

@@ -19,7 +19,7 @@ function FooterTop() {
 
   return (
     <div
-      className="w-full h-[152px] relative grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 grid-rows-1 grid-flow-col"
+      className="w-full h-[152px] mt-[120px] relative grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 grid-rows-1 grid-flow-col"
     >
       {data.map((e, index) => {
         return (

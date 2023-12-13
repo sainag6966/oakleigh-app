@@ -32,6 +32,11 @@ module.exports = {
       },
       fontSize: {
         'small':'2rem',
+        'display-1': ['0.75rem',{
+          fontWeight:'400',
+          lineHeight:'1.625rem',
+          letterSpacing:'0.016rem'
+        }],
         'display-3': ['0.875rem',{
           fontWeight:'300',
           lineHeight:'1.625rem',
@@ -77,6 +82,11 @@ module.exports = {
           lineHeight:'2.75rem',
           letterSpacing:'0rem'
         }],
+        'display-14': ['2.813rem',{
+          fontWeight:'400',
+          lineHeight:'3.438rem',
+          letterSpacing:'0rem'
+        }],
         'display-15': ['3.438rem',{
           fontWeight:'400',
           lineHeight:'4rem',
@@ -90,6 +100,11 @@ module.exports = {
         'display-17': ['1.125rem',{
           fontWeight:'400',
           lineHeight:'2.125rem',
+          letterSpacing:'0rem'
+        }],
+        'display-18': ['1.625rem',{
+          fontWeight:'500',
+          lineHeight:'2.813rem',
           letterSpacing:'0rem'
         }],
         'display-extra': ['0.75rem',{

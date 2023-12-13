@@ -13,7 +13,7 @@ function TwoAdBlock() {
     },
   ];
   return (
-    <div className="w-full h-auto pt-[60px] lg:pt-[100px] px-9 lg:px-20 justify-between flex flex-wrap lg:flex-nowrap gap-6">
+    <div className="w-full h-auto pt-[60px] lg:pt-[100px] 2xl:pt-[120px] px-9 lg:px-20 2xl:px-[140px] justify-between flex flex-wrap lg:flex-nowrap gap-6">
       {data.map((e, index) => {
         return (
           <div key={index} className="relative w-full h-[508px] lg:h-[526px]">

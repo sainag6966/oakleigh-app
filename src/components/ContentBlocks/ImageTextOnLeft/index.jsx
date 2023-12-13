@@ -2,7 +2,7 @@ import Image from "next/image";
 function ImageTextOnLeft() {
   const imgSrc = "/Images/Sample/imageTextBlock.svg";
   return (
-    <div className="w-full h-auto pt-[60px] lg:pt-[100px] px-9 lg:px-20 justify-between flex flex-wrap lg:flex-nowrap gap-6">
+    <div className="w-full h-auto pt-[60px] lg:pt-[100px] px-9 lg:px-20 2xl:px-[140px] justify-between flex flex-wrap lg:flex-nowrap gap-6">
       <div className="w-[50%] h-[508px] lg:h-[526px] flex flex-col justify-center items-start pr-40 gap-[30px]">
         <p className="text-display-15">WHY OAKLEIGH LOVES THIS BRAND</p>
         <p className="text-display-6">

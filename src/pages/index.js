@@ -56,9 +56,10 @@ export default function Home({ data }) {
         {isDesktop ? <UspBlockMweb /> : <UspBlock />}
         {/* <BrandWidget/> */}
         <TwoAdBlock />
+        <SliderBlock />
+        <TwoAdBlock />
         <AboutBlock />
         <VipAdBlock />
-        <SliderBlock />
         <PromiseBlock />
         <ThreeAdBlock />
         <InsightBlock />
