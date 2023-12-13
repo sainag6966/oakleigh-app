@@ -5,7 +5,7 @@ function UspBlockMweb() {
   const icon1 = "/Images/Sample/uspIcon1.svg";
   const icon2 = "/Images/Sample/uspIcon2.svg";
   const icon3 = "/Images/Sample/uspIcon3.svg";
-  const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const isDesktop = useMediaQuery({ query: '(min-width:900px)' });
   const data = [
     { label: "Free Delivery & Returns", icon: icon1 },
     { label: "Authentic & Certified", icon: icon2 },

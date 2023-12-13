@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import FooterDweb from "@/components/Footer/FooterDweb";
 import FooterTop from "@/components/Footer/FooterTop";
+import Filters from "./filters";
 import TwoAdBlock from "@/components/ContentBlocks/TwoAdBlock";
 import InsightBlock from "@/components/ContentBlocks/InsightBlock";
 import SliderBlock from "@/components/ContentBlocks/SliderBlock";
@@ -10,11 +11,15 @@ import PlainTextBlock from "@/components/ContentBlocks/PlainTextBlock";
 import ImageAndTextBlock from "@/components/ContentBlocks/ImageAndTextBlock";
 import ImageTextOnLeft from "@/components/ContentBlocks/ImageTextOnLeft";
 import FullWidthVipAdBlock from "@/components/ContentBlocks/FullWidthVipAdBlock";
+import { useMediaQuery } from "react-responsive";
+import FooterMweb from "@/components/Footer/FooterMweb";
+import Footer from "@/components/Footer";
 
 const ProductListing = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,274 +56,19 @@ const ProductListing = () => {
   return (
     <>
       <div className="w-full flex flex-col">
-        <div className="w-full flex gap-6 xl:gap-[48px] 3xl:gap-[98px] p-[32px] xl:p-[60px] 2xl:p-[100px] 3xl:p-[140px] justify-center items-start">
-          <div className="min-w-[180px] xl:min-w-[240px] 3xl:min-w-[320px] h-auto ">
-            <div className="w-full h-auto flex justify-between items-center pb-[30px] border-b-[1.5px] border-filterBorder">
-              <p className="text-display-11 xl:text-display-12 3xl:text-display-13">Filters</p>
-              <u>
-                <p className="text-display-1 xl:text-display-4 3xl:text-display-17 font-sans">X Clear Filters</p>
-              </u>
-            </div>
-            <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-              <div className="flex justify-between items-center mb-5">
-                <p className="text-display-17 xl:text-display-11">Gender</p>
-                <img
-                  className="w-4 h-3 mt-1"
-                  src="/Images/upArrow.svg"
-                  alt="upArrow"
-                />
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">{`Men's Watches`}</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">{`Women's Watches`}</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Unisex Watches</p>
-                </label>
-              </div>
-            </div>
-            <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-              <div className="flex justify-between items-center mb-5">
-                <p className="text-display-17 xl:text-display-11">Model</p>
-                <img
-                  className="w-4 h-3 mt-1"
-                  src="/Images/upArrow.svg"
-                  alt="upArrow"
-                />
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Model</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Model</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Model</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Model</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Model</p>
-                </label>
-              </div>
-            </div>
-            <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-              <div className="flex justify-between items-center mb-5">
-                <p className="text-display-17 xl:text-display-11">{`What's Included`}</p>
-                <img
-                  className="w-4 h-3 mt-1"
-                  src="/Images/upArrow.svg"
-                  alt="upArrow"
-                />
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Full Set</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Box and Papers</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">With Box</p>
-                </label>
-              </div>
-            </div>
-            <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-              <div className="flex justify-between items-center mb-5">
-                <p className="text-display-17 xl:text-display-11">Condition</p>
-                <img
-                  className="w-4 h-3 mt-1"
-                  src="/Images/upArrow.svg"
-                  alt="upArrow"
-                />
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Unworn</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Excellent</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Very Good</p>
-                </label>
-              </div>
-            </div>
-            <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-              <div className="flex justify-between items-center mb-5">
-                <p className="text-display-17 xl:text-display-11">Availability</p>
-                <img
-                  className="w-4 h-3 mt-1"
-                  src="/Images/upArrow.svg"
-                  alt="upArrow"
-                />
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Available</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Reserved</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Coming Soon</p>
-                </label>
-              </div>
-              <div className="flex items-center justify-start space-x-4">
-                <label className="flex justify-center items-center gap-[18px]">
-                  <input
-                    type="checkbox"
-                    className="w-3 h-3 xl:w-5 xl:h-5"
-                    // checked={selectedFilters.includes("men")}
-                    // onChange={() => handleFilterChange("men")}
-                  />
-                  <p className="text-display-6">Sold</p>
-                </label>
-              </div>
-            </div>
-          </div>
+        <div className="w-full flex flex-col lg:flex-row gap-6 xl:gap-[48px] 3xl:gap-[98px] p-[32px] xl:p-[60px] 2xl:p-[100px] 3xl:p-[140px] justify-center items-start">
+          {isDesktop && <Filters/>}
           <div className="w-full h-auto flex flex-col">
-            <div className="w-full h-auto flex flex-wrap justify-start gap-[18px] 3xl:gap-[26px] items-center ">
+            <div className="w-full h-auto flex flex-col lg:flex-row flex-wrap justify-center gap-[18px] 3xl:gap-[26px] items-center ">
               {data.map(
                 (item, index) =>
                   item.status === "publish" && (
                     <div
                       key={index}
-                      className="flex flex-col justify-center items-center grow-[1]"
+                      className=" w-full lg:w-auto flex flex-col justify-center items-center grow-[1]"
                     >
                       <div
-                        className="relative w-[195px] h-[298px] xl:w-[260px] xl:h-[340px] 2xl:w-[320px] 2xl:h-[400px] 3xl:w-[389px] 3xl:h-[462px]"
+                        className="relative w-full h-[420px] lg:w-[195px] lg:h-[298px] xl:w-[260px] xl:h-[340px] 2xl:w-[320px] 2xl:h-[400px] 3xl:w-[389px] 3xl:h-[462px]"
                         key={item.id}
                       >
                         <Image
@@ -360,16 +110,16 @@ const ProductListing = () => {
             </button>
           </div>
         </div>
-        <PlainTextBlock />
-        <TwoAdBlock />
-        <ImageAndTextBlock />
+        {/* <PlainTextBlock />
+        <TwoAdBlock /> */}
+        {/* <ImageAndTextBlock />
         <ImageTextOnLeft />
-        {/* <FullWidthVipAdBlock /> */}
+        <FullWidthVipAdBlock />
         <InsightBlock />
-        <SliderBlock />
+        <SliderBlock /> */}
       </div>
       <FooterTop/>
-      <FooterDweb />
+      <Footer />
     </>
   );
 };
