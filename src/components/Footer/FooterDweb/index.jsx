@@ -2,28 +2,20 @@ import SocialIcons from "../SocialIcons";
 import CopyRightInfo from "../CopyRightInfo";
 import MailingList from "../MailingList";
 
-function FooterDweb() {
-  const usefulLinks = [
-    "Our Story",
-    "Insights",
-    "Accounts",
-    "Contact Us",
-    "Delivery & Returns",
-    "Watch Concierge",
-    "Sustainablity",
-    "Part Exchange",
-    "Showroom",
-    "FAQs",
-    "Legal",
-  ];
-  const categories = [
-    "Shop All",
-    "Shop By Brand",
-    "New In",
-    "Collectors Choice",
-    "Vintage Watches",
-    "Online Only",
-  ];
+function FooterDweb({ dataItems }) {
+  const useFulLinks = dataItems?.filter((item) => {
+    return item.parent === 2582;
+  });
+  const categories = dataItems?.filter((item) => {
+    return item.parent === 2620;
+  });
+  const usefulLinksTitles = useFulLinks.map((e) => {
+    return e?.title?.rendered;
+  });
+  const categorieTitles = categories.map((e) => {
+    return e?.title?.rendered;
+  });
+
   const ourAddress =
     "Oakleigh Watches Tempus Works 2 Fletcher Way Norwich, NR3 3ST";
 
@@ -33,7 +25,7 @@ function FooterDweb() {
         <div className="flex flex-col min-w-[340px] grow-[1]">
           <p className="text-[30px]">Useful Links</p>
           <div className="flex flex-col flex-wrap items-start justify-start gap-[12px] mt-3 max-h-[125px]">
-            {usefulLinks.map((e, index) => {
+            {usefulLinksTitles.map((e, index) => {
               return (
                 <div
                   key={index}
@@ -48,7 +40,7 @@ function FooterDweb() {
         <div className="flex flex-col min-w-[250px] grow-[1]">
           <p className="text-[30px]">Categories</p>
           <div className="flex flex-col flex-wrap items-start justify-start gap-[12px] mt-3 max-h-[100px]">
-            {categories.map((e, index) => {
+            {categorieTitles.map((e, index) => {
               return (
                 <div
                   key={index}

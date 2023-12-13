@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import FooterDweb from "@/components/Footer/FooterDweb";
 import FooterTop from "@/components/Footer/FooterTop";
-import Filters from "./filters";
+import Filters from "./Filters";
 import TwoAdBlock from "@/components/ContentBlocks/TwoAdBlock";
 import InsightBlock from "@/components/ContentBlocks/InsightBlock";
 import SliderBlock from "@/components/ContentBlocks/SliderBlock";
@@ -14,6 +14,7 @@ import FullWidthVipAdBlock from "@/components/ContentBlocks/FullWidthVipAdBlock"
 import { useMediaQuery } from "react-responsive";
 import FooterMweb from "@/components/Footer/FooterMweb";
 import Footer from "@/components/Footer";
+import FiltersMweb from "./filtersMweb";
 
 const ProductListing = () => {
   const [data, setData] = useState([]);
@@ -58,6 +59,7 @@ const ProductListing = () => {
       <div className="w-full flex flex-col">
         <div className="w-full flex flex-col lg:flex-row gap-6 xl:gap-[48px] 3xl:gap-[98px] p-[32px] xl:p-[60px] 2xl:p-[100px] 3xl:p-[140px] justify-center items-start">
           {isDesktop && <Filters/>}
+          {!isDesktop && <div className="w-full flex justify-center items-center"><FiltersMweb/></div>}
           <div className="w-full h-auto flex flex-col">
             <div className="w-full h-auto flex flex-col lg:flex-row flex-wrap justify-center gap-[18px] 3xl:gap-[26px] items-center ">
               {data.map(
@@ -118,8 +120,8 @@ const ProductListing = () => {
         <InsightBlock />
         <SliderBlock /> */}
       </div>
-      <FooterTop/>
-      <Footer />
+      {/* <FooterTop/>
+      <Footer /> */}
     </>
   );
 };

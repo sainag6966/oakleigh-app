@@ -1,11 +1,12 @@
 import Image from "next/image";
 import headerBanner from "../../../../public/Images/headerBanner.svg";
 
-function HeaderBanner() {
+function HeaderBanner({trayData}) {
+  const bannerImg = trayData.hb_background_d_image;
   return (
     <div className="relative w-full h-[578px] lg:h-[520px]">
       <Image
-        src={headerBanner}
+        src={bannerImg}
         alt="headerBanner"
         layout="fill"
         objectFit="cover"

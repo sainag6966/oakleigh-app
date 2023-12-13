@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-function InsightBlock() {
+function InsightBlock({trayData}) {
   const data = [
     {
       url: "/Images/Sample/insight1.svg",
@@ -34,7 +34,7 @@ function InsightBlock() {
       <div className="justify-between flex flex-wrap lg:flex-nowrap gap-6">
         {data.map((e, index) => {
           return (
-            <div key={index} className="flex flex-col w-full h-auto">
+            <div key={index} className="flex flex-col w-full h-auto justify-center items-center lg:items-start text-center lg:text-start">
               <div className="relative w-full flex flex-col justify-between items-center h-[356px] 2xl:h-[526px]">
                 <Image
                   src={e.url}
@@ -45,7 +45,7 @@ function InsightBlock() {
                   style={{ objectPosition: "center" }}
                 />
               </div>
-              <p className="w-full h-16 lg:h-20">{e.title}</p>
+              <p className="w-full h-16 sm:h-10 lg:h-20 xl:h-14">{e.title}</p>
               <div className="w-24 h-8 relative border-[1px] flex justify-center items-center border-black">
                 <button
                   type="submit"

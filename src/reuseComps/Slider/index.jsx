@@ -54,7 +54,7 @@ const SimpleSlider = () => {
       <Slider ref={sliderRef} {...settings}>
       {data.map((e, index) => {
           return (
-            <div key={index} className="flex flex-col w-full h-auto px-3">
+            <div key={index} className="flex flex-col w-full h-auto px-0 lg:px-1">
               <div className="relative w-full flex flex-col justify-between items-center h-[400px] 2xl:h-[526px]">
                 <Image
                   src={e.url}
@@ -83,13 +83,13 @@ const SimpleSlider = () => {
         })}
       </Slider>
       {isDesktop && <button
-        className="w-10 h-10 absolute flex items-center justify-center top-1/2 left-2 transform -translate-y-1/2 text-black border-black border-[1px] p-2 rounded-[50%]"
+        className="w-10 h-10 absolute flex items-center justify-center top-1/2 left-2 transform -translate-y-[310%] text-black border-black border-[1px] p-2 rounded-[50%]"
         onClick={() => sliderRef.current.slickPrev()}
       >
         <img className="w-4 h-4" src="/Images/leftArrow.svg" alt='prev'/>
       </button>}
       {isDesktop && <button
-        className="w-10 h-10 absolute flex items-center justify-center top-1/2 right-2 transform -translate-y-1/2 text-black border-black border-[1px] p-2 rounded-[50%]"
+        className="w-10 h-10 absolute flex items-center justify-center top-1/2 right-2 transform -translate-y-[310%] text-black border-black border-[1px] p-2 rounded-[50%]"
         onClick={() => sliderRef.current.slickNext()}
       >
         <img className="w-4 h-4" src="/Images/rightArrow.svg" alt='next'/>
