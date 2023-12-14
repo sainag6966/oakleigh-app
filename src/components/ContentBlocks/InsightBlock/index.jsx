@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SimpleSlider from "@/reuseComps/Slider";
 
 function InsightBlock({trayData}) {
   const data = [
@@ -6,21 +7,29 @@ function InsightBlock({trayData}) {
       url: "/Images/Sample/insight1.svg",
       title: "A Look At The Breitling Navitimer 806 A Unique Timeless Piece",
       buttonTitle: "Read This",
+      description:"",
+      price:""
     },
     {
       url: "/Images/Sample/insight2.svg",
       title: "What Watch Face Diameter Would Best Fit My Wrist?",
       buttonTitle: "Read This",
+      description:"",
+      price:""
     },
     {
       url: "/Images/Sample/insight3.svg",
       title: "Top 10 Watch Care Tips",
       buttonTitle: "Read This",
+      description:"",
+      price:""
     },
     {
       url: "/Images/Sample/insight4.svg",
       title: "IS The Age Of Your Watch Important When You Sell?",
       buttonTitle: "Read This",
+      description:"",
+      price:""
     },
   ];
   return (
@@ -31,7 +40,7 @@ function InsightBlock({trayData}) {
           <span className="font-sans text-display-4">View All Insights</span>
         </u>
       </div>
-      <div className="justify-between flex flex-wrap lg:flex-nowrap gap-6">
+      {/* <div className="justify-between flex flex-wrap lg:flex-nowrap gap-6">
         {data.map((e, index) => {
           return (
             <div key={index} className="flex flex-col w-full h-auto justify-center items-center lg:items-start text-center lg:text-start">
@@ -57,7 +66,8 @@ function InsightBlock({trayData}) {
             </div>
           );
         })}
-      </div>
+      </div> */}
+      <SimpleSlider trayData={data} navButtons={false} slidesToShow={4}/>
     </div>
   );
 }
