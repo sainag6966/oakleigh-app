@@ -5,7 +5,7 @@ function ThreeAdBlock({trayData}) {
     <div className="w-full h-auto pt-[60px] lg:pt-[100px] px-9 lg:px-20 justify-between flex flex-wrap lg:flex-nowrap gap-6">
       {data.map((e, index) => {
         return (
-          <div key={index} className="relative w-full h-[356px] 2xl:h-[526px]">
+          <div key={index} className="relative w-full h-[356px] 2xl:h-[526px] bg-gradient-to-t from-black via-transparent to-transparent">
             <Image
               src={e.ab_background_image}
               layout="fill"
@@ -13,6 +13,7 @@ function ThreeAdBlock({trayData}) {
               objectFit="cover"
               quality={100}
               style={{ objectPosition: "center" }}
+              className="mix-blend-overlay"
             />
             <div className="absolute w-full text-textPrimary flex flex-col items-center bottom-6">
               <span className="text-display-11">{e.ab_title}</span>
