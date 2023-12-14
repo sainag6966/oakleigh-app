@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
-import Filters from "@/reuseComps/Filters";
 import { useMediaQuery } from "react-responsive";
-
+import Filters from "@/reuseComps/Filters";
+import FiltersMweb from "@/reuseComps/FiltersMweb";
 
 const ProductListing = () => {
   const [data, setData] = useState([]);
@@ -46,7 +46,7 @@ const ProductListing = () => {
   return (
     <div className="w-full flex flex-col">
       <div className="w-full flex flex-col lg:flex-row gap-6 xl:gap-[48px] 3xl:gap-[98px] p-[32px] xl:p-[60px] 2xl:p-[100px] 3xl:p-[140px] justify-center items-start">
-        {isDesktop && <Filters />}
+        {isDesktop ? <Filters /> : <FiltersMweb/>}
         <div className="w-full h-auto flex-col justify-center items-center">
           <div className="w-full h-auto grid grid-cols-1 lg:grid-cols-3 gap-[18px] 3xl:gap-[26px] items-center">
             {data.map(
