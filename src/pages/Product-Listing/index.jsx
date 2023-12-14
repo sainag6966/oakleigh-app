@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
-import Filters from "./Filters";
+import Filters from "@/reuseComps/Filters";
 import { useMediaQuery } from "react-responsive";
 
 
