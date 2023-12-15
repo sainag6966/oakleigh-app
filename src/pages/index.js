@@ -11,6 +11,7 @@ import AboutBlock from "@/components/ContentBlocks/AboutBlock";
 import PromiseBlock from "@/components/ContentBlocks/PromiseBlock";
 import VipAdBlock from "@/components/ContentBlocks/VipAdBlock";
 import SliderBlock from "@/components/ContentBlocks/SliderBlock";
+import MultiRangeSlider from "@/reuseComps/DoubleRangeSlider";
 
 const inter = Inter({ subsets: ["latin"] });
 
