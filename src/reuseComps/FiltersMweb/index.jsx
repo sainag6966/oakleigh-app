@@ -93,13 +93,11 @@ function FiltersMweb() {
                       link === clickedLink &&
                       linkData.map((e, index) => {
                         return (
-                          <div className="flex items-center justify-start space-x-4">
+                          <div key={index} className="flex items-center justify-start space-x-4">
                             <label className="flex justify-center items-center gap-[18px]">
                               <input
                                 type="checkbox"
                                 className="w-3 h-3 xl:w-5 xl:h-5"
-                                // checked={selectedFilters.includes("men")}
-                                // onChange={() => handleFilterChange("men")}
                               />
                               <p className="text-display-6">{e}</p>
                             </label>
