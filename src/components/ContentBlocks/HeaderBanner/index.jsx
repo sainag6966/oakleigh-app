@@ -1,27 +1,27 @@
-import Image from "next/image";
-import headerBanner from "../../../../public/Images/headerBanner.svg";
+import Image from 'next/image'
+import headerBanner from '../../../../public/Images/headerBanner.svg'
 
-function HeaderBanner({trayData}) {
-  const bannerImg = trayData.hb_background_d_image;
+function HeaderBanner({ trayData }) {
+  const bannerImg = trayData.hb_background_d_image
   return (
-    <div className="relative w-full h-[578px] lg:h-[520px]">
+    <div className="relative h-[578px] w-full lg:h-[520px]">
       <Image
         src={bannerImg}
         alt="headerBanner"
         layout="fill"
         objectFit="cover"
         quality={100}
-        style={{ objectPosition: "center" }}
+        style={{ objectPosition: 'center' }}
       />
-      <div className="absolute max-w-[440px] 2xl:max-w-[700px] flex flex-col gap-4 top-[80px] lg:top-1/2 left-[8%] lg:-translate-y-1/2 text-display-13 2xl:text-display-15 text-textPrimary">
+      <div className="dxl:max-w-[700px] dxl:text-display-15 absolute left-[8%] top-[80px] flex max-w-[440px] flex-col gap-4 text-display-13 text-textPrimary lg:top-1/2 lg:-translate-y-1/2">
         <p>THE HOME OF PRE-OWNED LUXURY WATCHES</p>
-        <div className="max-w-[200px] lg:max-w-[248px] h-12 relative border-[1px] flex justify-center items-center border-white">
-          <button className="absolute text-[18px] flex items-center justify-center border-[1px] w-full h-full top-1 right-1">
+        <div className="relative flex h-12 max-w-[200px] items-center justify-center border-[1px] border-white lg:max-w-[248px]">
+          <button className="absolute right-1 top-1 flex h-full w-full items-center justify-center border-[1px] text-[18px]">
             Discover Our Range
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default HeaderBanner;
+export default HeaderBanner

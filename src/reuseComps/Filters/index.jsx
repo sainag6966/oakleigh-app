@@ -1,33 +1,33 @@
-import MultiRangeSlider from "../DoubleRangeSlider";
+import MultiRangeSlider from '../DoubleRangeSlider'
 
 function Filters() {
   return (
     <>
-      <div className="min-w-[180px] xl:min-w-[240px] 3xl:min-w-[320px] h-auto ">
-        <div className="w-full h-auto flex justify-between items-center pb-[30px] border-b-[1.5px] border-filterBorder">
-          <p className="text-display-11 xl:text-display-12 3xl:text-display-13">
+      <div className="txl:min-w-[320px] h-auto min-w-[180px] xl:min-w-[240px] ">
+        <div className="flex h-auto w-full items-center justify-between border-b-[1.5px] border-filterBorder pb-[30px]">
+          <p className="txl:text-display-13 text-display-11 xl:text-display-12">
             Filters
           </p>
           <u>
-            <p className="text-display-1 xl:text-display-4 3xl:text-display-17 font-sans">
+            <p className="txl:text-display-17 font-sans text-display-1 xl:text-display-4">
               X Clear Filters
             </p>
           </u>
         </div>
-        <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-          <div className="flex justify-between items-center mb-5">
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="mb-5 flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Gender</p>
             <img
-              className="w-4 h-3 mt-1"
+              className="mt-1 h-3 w-4"
               src="/Images/upArrow.svg"
               alt="upArrow"
             />
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -35,10 +35,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -46,10 +46,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -57,20 +57,20 @@ function Filters() {
             </label>
           </div>
         </div>
-        <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-          <div className="flex justify-between items-center mb-5">
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="mb-5 flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Model</p>
             <img
-              className="w-4 h-3 mt-1"
+              className="mt-1 h-3 w-4"
               src="/Images/upArrow.svg"
               alt="upArrow"
             />
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -78,10 +78,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -89,10 +89,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -100,10 +100,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -111,10 +111,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -122,35 +122,37 @@ function Filters() {
             </label>
           </div>
         </div>
-        <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-        <div className="w-full flex justify-between items-center">
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="flex w-full items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Year</p>
             <img
-              className="w-4 h-3 mt-1"
+              className="mt-1 h-3 w-4"
               src="/Images/upArrow.svg"
               alt="upArrow"
             />
           </div>
-        <MultiRangeSlider
-          min={1600}
-          max={2024}
-          onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
-        />
+          <MultiRangeSlider
+            min={1600}
+            max={2024}
+            onChange={({ min, max }) =>
+              console.log(`min = ${min}, max = ${max}`)
+            }
+          />
         </div>
-        <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-          <div className="flex justify-between items-center mb-5">
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="mb-5 flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">{`What's Included`}</p>
             <img
-              className="w-4 h-3 mt-1"
+              className="mt-1 h-3 w-4"
               src="/Images/upArrow.svg"
               alt="upArrow"
             />
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -158,10 +160,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -169,10 +171,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -180,20 +182,20 @@ function Filters() {
             </label>
           </div>
         </div>
-        <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-          <div className="flex justify-between items-center mb-5">
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="mb-5 flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Condition</p>
             <img
-              className="w-4 h-3 mt-1"
+              className="mt-1 h-3 w-4"
               src="/Images/upArrow.svg"
               alt="upArrow"
             />
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -201,10 +203,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -212,10 +214,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -223,20 +225,20 @@ function Filters() {
             </label>
           </div>
         </div>
-        <div className="w-full h-auto py-[30px] border-b-[1.5px] border-filterBorder">
-          <div className="flex justify-between items-center mb-5">
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="mb-5 flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Availability</p>
             <img
-              className="w-4 h-3 mt-1"
+              className="mt-1 h-3 w-4"
               src="/Images/upArrow.svg"
               alt="upArrow"
             />
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -244,10 +246,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -255,10 +257,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -266,10 +268,10 @@ function Filters() {
             </label>
           </div>
           <div className="flex items-center justify-start space-x-4">
-            <label className="flex justify-center items-center gap-[18px]">
+            <label className="flex items-center justify-center gap-[18px]">
               <input
                 type="checkbox"
-                className="w-3 h-3 xl:w-5 xl:h-5"
+                className="h-3 w-3 xl:h-5 xl:w-5"
                 // checked={selectedFilters.includes("men")}
                 // onChange={() => handleFilterChange("men")}
               />
@@ -279,6 +281,6 @@ function Filters() {
         </div>
       </div>
     </>
-  );
+  )
 }
-export default Filters;
+export default Filters

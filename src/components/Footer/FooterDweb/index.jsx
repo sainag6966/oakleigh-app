@@ -1,61 +1,61 @@
-import SocialIcons from "../SocialIcons";
-import CopyRightInfo from "../CopyRightInfo";
-import MailingList from "../MailingList";
+import SocialIcons from '../SocialIcons'
+import CopyRightInfo from '../CopyRightInfo'
+import MailingList from '../MailingList'
 
 function FooterDweb({ dataItems }) {
   const useFulLinks = dataItems?.filter((item) => {
-    return item.parent === 2582;
-  });
+    return item.parent === 2582
+  })
   const categories = dataItems?.filter((item) => {
-    return item.parent === 2620;
-  });
+    return item.parent === 2620
+  })
   const usefulLinksTitles = useFulLinks.map((e) => {
-    return e?.title?.rendered;
-  });
+    return e?.title?.rendered
+  })
   const categorieTitles = categories.map((e) => {
-    return e?.title?.rendered;
-  });
+    return e?.title?.rendered
+  })
 
   const ourAddress =
-    "Oakleigh Watches Tempus Works 2 Fletcher Way Norwich, NR3 3ST";
+    'Oakleigh Watches Tempus Works 2 Fletcher Way Norwich, NR3 3ST'
 
   return (
-    <div className="bg-footerBg w-full max-h-[796px] pt-[65px] text-textPrimary flex flex-col items-center">
-      <div className="w-full flex flex-wrap gap-9 px-[40px] 2xl:px-[140px]  pb-12 justify-start">
-        <div className="flex flex-col min-w-[340px] grow-[1]">
+    <div className="flex max-h-[796px] w-full flex-col items-center bg-footerBg pt-[65px] text-textPrimary">
+      <div className="dxl:px-[140px] flex w-full flex-wrap justify-start gap-9  px-[40px] pb-12">
+        <div className="flex min-w-[340px] grow-[1] flex-col">
           <p className="text-[30px]">Useful Links</p>
-          <div className="flex flex-col flex-wrap items-start justify-start gap-[12px] mt-3 max-h-[125px]">
+          <div className="mt-3 flex max-h-[125px] flex-col flex-wrap items-start justify-start gap-[12px]">
             {usefulLinksTitles.map((e, index) => {
               return (
                 <div
                   key={index}
-                  className="font-extralight font-sans text-[14px]"
+                  className="font-sans text-[14px] font-extralight"
                 >
                   {e}
                 </div>
-              );
+              )
             })}
           </div>
         </div>
-        <div className="flex flex-col min-w-[250px] grow-[1]">
+        <div className="flex min-w-[250px] grow-[1] flex-col">
           <p className="text-[30px]">Categories</p>
-          <div className="flex flex-col flex-wrap items-start justify-start gap-[12px] mt-3 max-h-[100px]">
+          <div className="mt-3 flex max-h-[100px] flex-col flex-wrap items-start justify-start gap-[12px]">
             {categorieTitles.map((e, index) => {
               return (
                 <div
                   key={index}
-                  className="font-extralight font-sans text-[14px]"
+                  className="font-sans text-[14px] font-extralight"
                 >
                   {e}
                 </div>
-              );
+              )
             })}
           </div>
         </div>
-        <div className="flex flex-col grow-[1]">
+        <div className="flex grow-[1] flex-col">
           <p className="text-[30px]">Our Address</p>
-          <div className="flex flex-col flex-wrap items-start justify-start gap-[6px] mt-3 w-[130px] max-h-[100px]">
-            <div className="font-extralight font-sans text-[14px] leading-7">
+          <div className="mt-3 flex max-h-[100px] w-[130px] flex-col flex-wrap items-start justify-start gap-[6px]">
+            <div className="font-sans text-[14px] font-extralight leading-7">
               {ourAddress}
             </div>
           </div>
@@ -65,6 +65,6 @@ function FooterDweb({ dataItems }) {
       </div>
       <CopyRightInfo />
     </div>
-  );
+  )
 }
-export default FooterDweb;
+export default FooterDweb
