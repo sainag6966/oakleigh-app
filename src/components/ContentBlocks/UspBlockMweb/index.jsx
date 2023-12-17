@@ -1,31 +1,29 @@
-import NextImage from "@/reuseComps/NextImage";
-import { useMediaQuery } from "react-responsive";
+import NextImage from '@/reuseComps/NextImage'
 
 function UspBlockMweb({ trayData }) {
-  const isDesktop = useMediaQuery({ query: "(min-width:900px)" });
-  const data = trayData?.ub_list;
+  const data = trayData?.ub_list
 
   return (
-    <div className="bg-uspBlockBackground flex w-full items-center justify-evenly h-[115px]">
+    <div className="dxl:px-[268px] flex h-[115px] w-full items-center justify-evenly bg-uspBlockBackground">
       {data.map((e, index) => {
         return (
           <>
-            <div className="flex items-center justify-center gap-5 w-auto">
+            <div className="flex w-auto items-center justify-center gap-5">
               <NextImage
                 src={e.ub_image}
                 width="40"
-                height="24"
+                height="40"
                 alt="uspIcon"
               />
-              <p className="text-[20px]">{e.ub_title}</p>
+              <p className="text-display-18">{e.ub_title}</p>
             </div>
             {data.length - 1 !== index && (
-              <div className="min-w-[30px] h-[0.5px] bg-black grow-[0.1]"></div>
+              <div className="h-[0.5px] min-w-[60px] grow-[0.1] bg-black"></div>
             )}
           </>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
-export default UspBlockMweb;
+export default UspBlockMweb

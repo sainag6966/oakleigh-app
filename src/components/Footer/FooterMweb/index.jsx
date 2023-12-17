@@ -1,73 +1,73 @@
-import { useState } from "react";
-import SocialIcons from "../../Footer/SocialIcons";
-import CopyRightInfo from "../CopyRightInfo";
-import MailingList from "../MailingList";
+import { useState } from 'react'
+import SocialIcons from '../../Footer/SocialIcons'
+import CopyRightInfo from '../CopyRightInfo'
+import MailingList from '../MailingList'
 
 function FooterMweb() {
-  const [clickedLink, setClickedLink] = useState("");
-  const [linkData, setLinkData] = useState([]);
-  const [accor, setAccor] = useState(false);
-  const data1 = ["Useful Links", "Categories", "Our Address"];
+  const [clickedLink, setClickedLink] = useState('')
+  const [linkData, setLinkData] = useState([])
+  const [accor, setAccor] = useState(false)
+  const data1 = ['Useful Links', 'Categories', 'Our Address']
   const usefulLinks = [
-    "Our Story",
-    "Insights",
-    "Accounts",
-    "Contact Us",
-    "Delivery & Returns",
-    "Watch Concierge",
-    "Sustainablity",
-    "Part Exchange",
-    "Showroom",
-    "FAQs",
-    "Legal",
-  ];
+    'Our Story',
+    'Insights',
+    'Accounts',
+    'Contact Us',
+    'Delivery & Returns',
+    'Watch Concierge',
+    'Sustainablity',
+    'Part Exchange',
+    'Showroom',
+    'FAQs',
+    'Legal',
+  ]
   const categories = [
-    "Shop All",
-    "Shop By Brand",
-    "New In",
-    "Collectors Choice",
-    "Vintage Watches",
-    "Online Only",
-  ];
+    'Shop All',
+    'Shop By Brand',
+    'New In',
+    'Collectors Choice',
+    'Vintage Watches',
+    'Online Only',
+  ]
   const ourAddress = [
-    "Oakleigh Watches Tempus Works 2 Fletcher Way Norwich, NR3 3ST",
-  ];
+    'Oakleigh Watches Tempus Works 2 Fletcher Way Norwich, NR3 3ST',
+  ]
 
   const handleAcor = (link) => {
-    setAccor(true);
+    setAccor(true)
     switch (link) {
-      case "Useful Links":
-        setClickedLink(link);
-        setLinkData(usefulLinks);
-        break;
-      case "Categories":
-        setClickedLink(link);
-        setLinkData(categories);
-        break;
-      case "Our Address":
-        setClickedLink(link);
-        setLinkData(ourAddress);
-        break;
+      case 'Useful Links':
+        setClickedLink(link)
+        setLinkData(usefulLinks)
+        break
+      case 'Categories':
+        setClickedLink(link)
+        setLinkData(categories)
+        break
+      case 'Our Address':
+        setClickedLink(link)
+        setLinkData(ourAddress)
+        break
       default:
-        return "";
+        return ''
     }
-  };
+  }
 
   const handleClose = (link) => {
-    setAccor(false);
-  };
-  
+    setAccor(false)
+  }
+
   return (
-    <div className="bg-footerBg w-full min-h-[500px] pt-[59px] text-textPrimary flex items-center flex-col gap-[60px]">
-      <div className="flex flex-col items-center justify-center gap-[32px] w-full h-auto">
+    <div className="flex min-h-[500px] w-full flex-col items-center gap-[60px] bg-footerBg pt-[59px] text-textPrimary">
+      <div className="flex h-auto w-full flex-col items-center justify-center gap-[32px]">
         {data1.map((link, index) => {
           return (
             <div key={index} className="flex flex-col items-center">
               <div
-                className="flex gap-2 justify-center items-center"
+                className="flex items-center justify-center gap-2"
                 key={index}
               >
-                <div className="text-[25px] tracking-normal">{link}</div>
+                <div className="text-display-11 tracking-normal">{link}</div>
                 {accor && link === clickedLink ? (
                   <div onClick={handleClose} className="text-[25px]">
                     -
@@ -78,28 +78,28 @@ function FooterMweb() {
                   </div>
                 )}
               </div>
-              <div className="flex flex-col items-center justify-center gap-[6px] mt-3">
+              <div className="mt-3 flex flex-col items-center justify-center gap-[6px]">
                 {accor &&
                   link === clickedLink &&
                   linkData.map((e, index) => {
                     return (
                       <div
                         key={index}
-                        className="font-extralight font-sans text-[14px] max-w-[120px]"
+                        className="max-w-[120px] font-sans text-[14px] font-extralight"
                       >
                         {e}
                       </div>
-                    );
+                    )
                   })}
               </div>
             </div>
-          );
+          )
         })}
         <SocialIcons />
       </div>
       <MailingList />
       <CopyRightInfo />
     </div>
-  );
+  )
 }
-export default FooterMweb;
+export default FooterMweb

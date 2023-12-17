@@ -24,12 +24,12 @@ function FooterDweb({ dataItems }) {
       <div className="dxl:px-[140px] flex w-full flex-wrap justify-start gap-9  px-[40px] pb-12">
         <div className="flex min-w-[340px] grow-[1] flex-col">
           <p className="text-[30px]">Useful Links</p>
-          <div className="mt-3 flex max-h-[125px] flex-col flex-wrap items-start justify-start gap-[12px]">
+          <div className="dxl:max-h-[150px] mt-3 flex max-h-[125px] flex-col flex-wrap items-start justify-start gap-[12px]">
             {usefulLinksTitles.map((e, index) => {
               return (
                 <div
                   key={index}
-                  className="font-sans text-[14px] font-extralight"
+                  className="dxl:text-[17px] font-sans text-[14px] font-medium"
                 >
                   {e}
                 </div>
@@ -39,12 +39,12 @@ function FooterDweb({ dataItems }) {
         </div>
         <div className="flex min-w-[250px] grow-[1] flex-col">
           <p className="text-[30px]">Categories</p>
-          <div className="mt-3 flex max-h-[100px] flex-col flex-wrap items-start justify-start gap-[12px]">
+          <div className="dxl:max-h-[150px] mt-3 flex max-h-[100px] flex-col flex-wrap items-start justify-start gap-[12px]">
             {categorieTitles.map((e, index) => {
               return (
                 <div
                   key={index}
-                  className="font-sans text-[14px] font-extralight"
+                  className="dxl:text-[17px] font-sans text-[14px] font-medium"
                 >
                   {e}
                 </div>
@@ -54,8 +54,8 @@ function FooterDweb({ dataItems }) {
         </div>
         <div className="flex grow-[1] flex-col">
           <p className="text-[30px]">Our Address</p>
-          <div className="mt-3 flex max-h-[100px] w-[130px] flex-col flex-wrap items-start justify-start gap-[6px]">
-            <div className="font-sans text-[14px] font-extralight leading-7">
+          <div className="dxl:w-[160px] mt-3 flex max-h-[100px] w-[130px] flex-col flex-wrap items-start justify-start gap-[6px]">
+            <div className="dxl:text-[17px] font-sans text-[14px] font-medium leading-7">
               {ourAddress}
             </div>
           </div>

@@ -1,8 +1,10 @@
 import Image from 'next/image'
+
 function ThreeAdBlock({ trayData }) {
   const data = trayData?.ad_list
+
   return (
-    <div className="flex h-auto w-full flex-wrap justify-between gap-6 px-9 pt-[60px] lg:flex-nowrap lg:px-20 lg:pt-[100px]">
+    <div className="dxl:gap-[30px] dxl:px-[140px] flex h-auto w-full flex-wrap justify-between gap-[25px] px-[37px] pt-[60px] lg:flex-nowrap lg:px-20 lg:pt-[120px]">
       {data.map((e, index) => {
         return (
           <div
@@ -18,10 +20,12 @@ function ThreeAdBlock({ trayData }) {
               style={{ objectPosition: 'center' }}
               className="mix-blend-overlay"
             />
-            <div className="absolute bottom-6 flex w-full flex-col items-center text-textPrimary">
-              <span className="text-display-11">{e.ab_title}</span>
+            <div className="absolute bottom-[30px] flex w-full flex-col items-center text-textPrimary">
+              <span className="dxl:text-display-13 text-display-11">
+                {e.ab_title}
+              </span>
               <u>
-                <span className="font-sans text-display-4">
+                <span className="dxl:text-display-17 font-sans text-display-4">
                   {e.ab_button_title}
                 </span>
               </u>

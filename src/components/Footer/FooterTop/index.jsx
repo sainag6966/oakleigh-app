@@ -1,46 +1,44 @@
-import Image from "next/image";
-import { useMediaQuery } from "react-responsive";
+import Image from 'next/image'
+import { useMediaQuery } from 'react-responsive'
 
 function FooterTop() {
   const data = [
-    "/Images/Sample/footer1.svg",
-    "/Images/Sample/footer2.svg",
-    "/Images/Sample/footer3.svg",
-    "/Images/Sample/footer4.svg",
-    "/Images/Sample/footer5.svg",
-    "/Images/Sample/footer3.svg",
-    "/Images/Sample/footer2.svg",
-    "/Images/Sample/footer1.svg",
-  ];
-  const isDesktop = useMediaQuery({ query: "(min-width:900px)" });
-  const isTablet = useMediaQuery({ query: "(min-width:600px)" });
-  const num = isDesktop ? 5 : isTablet ? 4 : 3;
-  const row = 1;
+    '/Images/Sample/footer1.svg',
+    '/Images/Sample/footer2.svg',
+    '/Images/Sample/footer3.svg',
+    '/Images/Sample/footer4.svg',
+    '/Images/Sample/footer5.svg',
+    '/Images/Sample/footer3.svg',
+    '/Images/Sample/footer2.svg',
+    '/Images/Sample/footer1.svg',
+  ]
+  const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const isTablet = useMediaQuery({ query: '(min-width:600px)' })
+  const num = isDesktop ? 5 : isTablet ? 4 : 3
+  const row = 1
 
   return (
-    <div
-      className="w-full h-[152px] mt-[120px] relative grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 grid-rows-1 grid-flow-col"
-    >
+    <div className="dxl:h-[252px] relative mt-[120px] grid h-[152px] w-full grid-flow-col grid-cols-3 grid-rows-1 sm:grid-cols-4 lg:grid-cols-8">
       {data.map((e, index) => {
         return (
-          <div key={index} className="relative w-auto h-[152px] lg:h-[152px]">
+          <div key={index} className="dxl:h-[252px] relative h-[152px] w-auto">
             <Image
               src={e}
               layout="fill"
               alt="AdBlock"
               objectFit="cover"
               quality={100}
-              style={{ objectPosition: "center" }}
+              style={{ objectPosition: 'center' }}
             />
           </div>
-        );
+        )
       })}
-      <div className="absolute bottom-0 w-[248px] flex justify-center items-center ml-auto mr-auto left-0 right-0 h-[50px] bg-footerBg">
-        <p className="text-display-9 text-uspBlockBackground">
+      <div className="absolute bottom-0 left-0 right-0 ml-auto mr-auto flex h-[50px] w-[248px] items-center justify-center bg-footerBg lg:w-[315px]">
+        <p className="text-display-9 text-uspBlockBackground lg:text-display-11">
           @OAKLEIGH WATCHES
         </p>
       </div>
     </div>
-  );
+  )
 }
-export default FooterTop;
+export default FooterTop

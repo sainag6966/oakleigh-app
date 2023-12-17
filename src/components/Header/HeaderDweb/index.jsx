@@ -14,7 +14,7 @@ function HeaderDweb({ data }) {
   })
 
   return (
-    <div className="dxl:h-40 dxl:px-28 dxl:py-12 flex h-[98px] w-full items-center justify-between gap-6 px-9 py-[30px] xl:h-32 xl:px-16">
+    <div className="dxl:h-40 dxl:px-[152px] dxl:py-12 flex h-[98px] w-full items-center justify-between gap-6 px-9 py-[30px] xl:px-16">
       <div className="dxl:w-80 h-auto w-40 xl:w-48">
         <Image src={oakleighLogo} width="300" height="60" layout="responsive" />
       </div>
@@ -30,7 +30,7 @@ function HeaderDweb({ data }) {
           )
         })}
       </div>
-      <div className="flex grow-[0.3] items-center justify-evenly gap-4">
+      <div className="dxl:gap-8 flex grow-[0.3] items-center justify-evenly gap-4">
         {imgArr.map((e, index) => {
           return (
             <div
@@ -38,7 +38,7 @@ function HeaderDweb({ data }) {
               className={`${
                 index === 1
                   ? 'dxl:w-[8px] w-[5px] xl:w-[5.5px]'
-                  : 'dxl:w-5 w-3 xl:w-4'
+                  : 'dxl:w-5 w-3 lg:w-4'
               }h-3 flex items-center justify-center`}
             >
               <NextImage src={e} width="24" height="24" layout="responsive" />
