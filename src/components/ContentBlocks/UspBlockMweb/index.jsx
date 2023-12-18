@@ -4,7 +4,7 @@ function UspBlockMweb({ trayData }) {
   const data = trayData?.ub_list
 
   return (
-    <div className="dxl:px-[268px] flex h-[115px] w-full items-center justify-evenly bg-uspBlockBackground">
+    <div className="flex h-[115px] w-full items-center justify-evenly bg-uspBlockBackground dxl:px-[268px]">
       {data.map((e, index) => {
         return (
           <>
@@ -15,7 +15,9 @@ function UspBlockMweb({ trayData }) {
                 height="40"
                 alt="uspIcon"
               />
-              <p className="text-display-18">{e.ub_title}</p>
+              <p className="lg:text-display-9 xl:text-display-18">
+                {e.ub_title}
+              </p>
             </div>
             {data.length - 1 !== index && (
               <div className="h-[0.5px] min-w-[60px] grow-[0.1] bg-black"></div>

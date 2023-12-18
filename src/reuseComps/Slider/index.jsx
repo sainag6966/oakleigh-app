@@ -40,8 +40,8 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
                   style={{ objectPosition: 'center' }}
                 />
               </div>
-              <div className="mt-[30px] flex w-full flex-col items-center justify-center gap-[30px] dxl:items-start">
-                <p className="w-full text-center text-display-11  lg:line-clamp-1 dxl:text-start dxl:text-display-12">
+              <div className="mt-[30px] flex w-full flex-col items-center justify-center gap-[30px] lg:items-start">
+                <p className="w-full text-center text-display-11 lg:line-clamp-2 lg:min-h-[70px] lg:text-start  lg:text-display-17 xl:min-h-[80px] dxl:text-display-12">
                   {e.title}
                 </p>
                 {e.description && (

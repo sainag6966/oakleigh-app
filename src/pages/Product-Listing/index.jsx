@@ -45,10 +45,10 @@ const ProductListing = () => {
 
   return (
     <div className="flex w-full flex-col">
-      <div className="dxl:p-[100px] txl:gap-[98px] txl:p-[140px] flex w-full flex-col items-start justify-center gap-6 p-[32px] lg:flex-row xl:gap-[48px] xl:p-[60px]">
+      <div className="flex w-full flex-col items-start justify-center gap-6 p-[32px] lg:flex-row xl:gap-[48px] xl:p-[60px] dxl:p-[100px] txl:gap-[98px] txl:p-[140px]">
         {isDesktop ? <Filters /> : <FiltersMweb />}
         <div className="h-auto w-full flex-col items-center justify-center">
-          <div className="txl:gap-[26px] grid h-auto w-full grid-cols-1 items-center gap-[18px] lg:grid-cols-3">
+          <div className="grid h-auto w-full grid-cols-1 items-center gap-[18px] gap-y-[50px] lg:grid-cols-3 txl:gap-[26px]">
             {data.map(
               (item, index) =>
                 item.status === 'publish' && (
@@ -57,7 +57,7 @@ const ProductListing = () => {
                     className="flex grow-[1] flex-col items-center justify-center"
                   >
                     <div
-                      className="dxl:w-[320px] dxl:h-[400px] txl:h-[462px] txl:w-[389px] relative h-[420px] w-full lg:h-[298px] lg:w-[195px] xl:h-[340px] xl:w-[260px]"
+                      className="relative h-[420px] w-full lg:h-[298px] lg:w-[195px] xl:h-[340px] xl:w-[260px] dxl:h-[400px] dxl:w-[320px] txl:h-[462px] txl:w-[389px]"
                       key={item.id}
                     >
                       <Image
@@ -69,11 +69,11 @@ const ProductListing = () => {
                         style={{ objectPosition: 'center' }}
                       />
                     </div>
-                    <div className="dxl:gap-[6px] txl:gap-2 flex flex-col items-center justify-center gap-[2px] xl:gap-1">
-                      <p className="dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12 line-clamp-1 max-w-[180px] text-display-4 xl:max-w-[260px] xl:text-display-17">
+                    <div className="flex flex-col items-center justify-center gap-[2px] xl:gap-1 dxl:gap-[6px] txl:gap-2">
+                      <p className="line-clamp-1 max-w-[180px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
                         {item.name}
                       </p>
-                      <p className="dxl:text-display-6 text-display-3">
+                      <p className="text-display-3 dxl:text-display-6">
                         2019, box and papers
                       </p>
                       <div className="font-sans text-display-5 xl:text-display-16 ">
