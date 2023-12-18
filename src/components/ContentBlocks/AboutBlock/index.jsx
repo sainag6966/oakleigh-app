@@ -6,8 +6,8 @@ function AboutBlock({ trayData }) {
   const desc = trayData?.ab_body_text
   const buttonTitle = trayData?.ab_button_title
   return (
-    <div className="flex h-auto w-full flex-wrap justify-between gap-6 pt-[60px] lg:pt-[100px]">
-      <div className="dxl:h-[1080px] relative flex h-[956px] w-full justify-center lg:justify-start lg:pl-20">
+    <div className="flex h-auto w-full flex-wrap justify-between gap-6 pt-[60px] lg:pt-[120px]">
+      <div className="relative flex h-[956px] w-full justify-center lg:justify-start lg:pl-20 dxl:h-[1080px] dxl:pl-[140px]">
         <Image
           src={imageSrc}
           layout="fill"
@@ -16,14 +16,14 @@ function AboutBlock({ trayData }) {
           quality={100}
           style={{ objectPosition: 'center' }}
         />
-        <div className="dxl:w-[944px] absolute top-[72px] h-[596px] w-[90%] gap-8 bg-black p-9 text-textPrimary sm:w-[60%] lg:top-[120px] lg:h-[400px] lg:w-[720px] xl:h-[524px] xl:w-[800px]">
+        <div className="absolute top-[72px] h-[596px] w-[90%] gap-8 bg-black p-9 text-textPrimary sm:w-[60%] lg:top-[120px] lg:h-[400px] lg:w-[720px] xl:h-[524px] xl:w-[800px] dxl:w-[944px]">
           <div className="flex h-full flex-col items-start justify-around border-[1px] border-copyRightBorder p-7">
             <p className="text-display-13 xl:text-display-15">{title}</p>
-            <p className="text-display-3 xl:text-display-6">{desc}</p>
-            <div className="relative flex h-12 w-36 max-w-[150px] items-center justify-center border-[1px] border-white">
+            <p className="font-sans text-display-3 xl:text-display-6">{desc}</p>
+            <div className="relative flex h-12 w-36 max-w-[150px] items-center justify-center border-[1px] border-white dxl:min-w-[199px]">
               <button
                 type="submit"
-                className="absolute right-1 top-1 h-full w-full border-[1px]"
+                className="absolute right-1 top-1 h-full w-full border-[1px] font-sans text-display-4 dxl:text-display-17"
               >
                 {buttonTitle}
               </button>

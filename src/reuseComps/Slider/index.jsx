@@ -30,7 +30,7 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
               key={index}
               className="flex h-auto w-full flex-col px-0 lg:px-1"
             >
-              <div className="dxl:h-[526px] relative flex h-[400px] w-full flex-col items-center justify-between">
+              <div className="relative flex h-[400px] w-full flex-col items-center justify-between dxl:h-[526px]">
                 <Image
                   src={e.url}
                   layout="fill"
@@ -40,8 +40,8 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
                   style={{ objectPosition: 'center' }}
                 />
               </div>
-              <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-2">
-                <p className="line-clamp-1 w-full text-center text-display-17">
+              <div className="mt-[30px] flex w-full flex-col items-center justify-center gap-[30px] dxl:items-start">
+                <p className="w-full text-center text-display-11  lg:line-clamp-1 dxl:text-start dxl:text-display-12">
                   {e.title}
                 </p>
                 {e.description && (
@@ -53,10 +53,10 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
                   <p className="w-full text-center font-sans">£{e.price}</p>
                 )}
                 {e.buttonTitle && (
-                  <div className="relative flex h-8 w-24 items-center justify-center border-[1px] border-black">
+                  <div className="relative flex h-12 w-[142px] items-center justify-center border-[1px] border-black">
                     <button
                       type="submit"
-                      className="absolute right-[1px] top-[1px] h-full w-full border-[1px] border-black"
+                      className="absolute right-[2px] top-[2px] h-full w-full border-[1px] border-black font-sans text-[14px]"
                     >
                       {e.buttonTitle}
                     </button>

@@ -15,8 +15,8 @@ function HeaderBanner({ trayData }) {
         quality={100}
         style={{ objectPosition: 'center' }}
       />
-      <div className="dxl:max-w-[900px] dxl:gap-10 dxl:px-[144px] absolute top-[80px] flex w-full flex-col gap-9 px-9 text-display-13 text-textPrimary md:px-16 lg:top-[196px] xl:max-w-[740px] xl:px-[100px] xl:text-display-15">
-        <div className="dxl:max-w-[980px] max-w-[420px] xl:max-w-[740px]">
+      <div className="absolute top-[80px] flex w-full flex-col gap-9 px-9 text-display-13 text-textPrimary md:px-16 lg:top-[196px] lg:min-w-[1000px] lg:max-w-[1000px] xl:max-w-[740px] xl:px-[100px] dxl:gap-10 dxl:px-[144px] dxl:text-display-15">
+        <div className="max-w-[420px] xl:max-w-[740px] dxl:max-w-[980px]">
           <p>{title}</p>
         </div>
         <div className="relative flex h-12 max-w-[200px] items-center justify-center border-[1px] border-white lg:max-w-[248px]">
