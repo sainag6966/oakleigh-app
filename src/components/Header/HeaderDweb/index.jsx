@@ -1,5 +1,7 @@
 import NextImage from '@/reuseComps/NextImage'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import LoginPage from '../../LoginAndSignup/LoginPage'
 
 function HeaderDweb({ data }) {
   const oakleighLogo = '/Images/oakleighLogo.svg'
@@ -12,10 +14,16 @@ function HeaderDweb({ data }) {
     const skipMenu = ['Divider', 'My account', 'Basket']
     return !skipMenu.includes(e.title.rendered)
   })
+  const router = useRouter()
 
   return (
-    <div className="dxl:h-40 dxl:px-[152px] dxl:py-12 flex h-[98px] w-full items-center justify-between gap-6 px-9 py-[30px] xl:px-16">
-      <div className="dxl:w-80 h-auto w-40 xl:w-48">
+    <div className="flex h-[98px] w-full items-center justify-between gap-6 px-9 py-[30px] xl:px-16 dxl:h-40 dxl:px-[152px] dxl:py-12">
+      <div
+        className="h-auto w-40 cursor-pointer xl:w-48 dxl:w-80"
+        onClick={() => {
+          router.push('/')
+        }}
+      >
         <Image src={oakleighLogo} width="300" height="60" layout="responsive" />
       </div>
       <div className="flex grow-[2] items-center justify-evenly">
@@ -23,22 +31,25 @@ function HeaderDweb({ data }) {
           return (
             <div
               key={index}
-              className="dxl:text-display-8 font-sans text-display-extra xl:text-display-5"
+              className="cursor-pointer font-sans text-display-extra xl:text-display-5 dxl:text-display-8"
+              onClick={() => {
+                router.push('/Product-Listing')
+              }}
             >
               {item.title.rendered}
             </div>
           )
         })}
       </div>
-      <div className="dxl:gap-8 flex grow-[0.3] items-center justify-evenly gap-4">
+      <div className="flex grow-[0.3] items-center justify-evenly gap-4 dxl:gap-8">
         {imgArr.map((e, index) => {
           return (
             <div
               key={index}
               className={`${
                 index === 1
-                  ? 'dxl:w-[8px] w-[5px] xl:w-[5.5px]'
-                  : 'dxl:w-5 w-3 lg:w-4'
+                  ? 'w-[5px] xl:w-[5.5px] dxl:w-[8px]'
+                  : 'w-3 lg:w-4 dxl:w-5'
               }h-3 flex items-center justify-center`}
             >
               <NextImage src={e} width="24" height="24" layout="responsive" />

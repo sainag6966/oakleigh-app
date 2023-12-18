@@ -165,6 +165,7 @@ module.exports = {
         search: '#EDE9E5',
         footerBg: '#242B21',
         textPrimary: '#FFFFFF',
+        textSecondary: '#242B21',
         copyRightBorder: '#44513E',
         uspBlockBackground: '#CDAA72',
         filterBorder: '#EDE9E5',

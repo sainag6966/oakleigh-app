@@ -98,13 +98,12 @@ function SliderBlock() {
                     </p>
                   )}
                   {e.buttonTitle && (
-                    <div className="relative flex h-[42px] w-[138px] items-center justify-center border-[1px] border-black dxl:h-[53px] dxl:w-[174px]">
-                      <button
-                        type="submit"
-                        className="absolute right-[2px] top-[2px] h-full w-full border-[1px] border-black font-sans text-[14px]"
-                      >
+                    <div className="relative flex h-[42px] w-[138px] xl:h-[53px] xl:w-[174px]">
+                      <div className="absolute bottom-0 h-[39px] w-[135px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[171px]"></div>
+                      <div className="absolute right-0 h-[39px] w-[135px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[171px]"></div>
+                      <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
                         {e.buttonTitle}
-                      </button>
+                      </div>
                     </div>
                   )}
                 </div>

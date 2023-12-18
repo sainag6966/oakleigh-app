@@ -138,13 +138,12 @@ function VipAdBlock() {
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua.
         </p>
-        <div className="relative flex h-8 w-48 items-center justify-center border-[1px] border-black">
-          <button
-            type="submit"
-            className="absolute right-[1px] top-[1px] h-full w-full border-[1px] border-black"
-          >
-            JOIN NOW FOR FREE
-          </button>
+        <div className="relative flex h-[56px] w-[198px] xl:h-[53px] xl:w-[263px]">
+          <div className="absolute bottom-0 h-[53px] w-[195px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[260px]"></div>
+          <div className="absolute right-0 h-[53px] w-[195px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[260px]"></div>
+          <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
+            Join Now For Free
+          </div>
         </div>
         <u>
           <span className="font-sans text-display-4">Find Out More</span>

@@ -30,7 +30,7 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
               key={index}
               className="flex h-auto w-full flex-col px-0 lg:px-1"
             >
-              <div className="relative flex h-[400px] w-full flex-col items-center justify-between dxl:h-[526px]">
+              <div className="relative flex h-[485px] w-full flex-col items-center justify-between dxl:h-[526px]">
                 <Image
                   src={e.url}
                   layout="fill"
@@ -53,13 +53,12 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
                   <p className="w-full text-center font-sans">£{e.price}</p>
                 )}
                 {e.buttonTitle && (
-                  <div className="relative flex h-12 w-[142px] items-center justify-center border-[1px] border-black">
-                    <button
-                      type="submit"
-                      className="absolute right-[2px] top-[2px] h-full w-full border-[1px] border-black font-sans text-[14px]"
-                    >
+                  <div className="relative flex h-[49px] w-[143px] xl:h-[53px] xl:w-[175px]">
+                    <div className="absolute bottom-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
+                    <div className="absolute right-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
+                    <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
                       {e.buttonTitle}
-                    </button>
+                    </div>
                   </div>
                 )}
               </div>

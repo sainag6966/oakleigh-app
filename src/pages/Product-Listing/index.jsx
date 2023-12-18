@@ -48,7 +48,7 @@ const ProductListing = () => {
       <div className="flex w-full flex-col items-start justify-center gap-6 p-[32px] lg:flex-row xl:gap-[48px] xl:p-[60px] dxl:p-[100px] txl:gap-[98px] txl:p-[140px]">
         {isDesktop ? <Filters /> : <FiltersMweb />}
         <div className="h-auto w-full flex-col items-center justify-center">
-          <div className="grid h-auto w-full grid-cols-1 items-center gap-[18px] gap-y-[50px] lg:grid-cols-3 txl:gap-[26px]">
+          <div className="grid h-auto w-full grid-cols-1 items-center gap-[18px] gap-y-[50px] lg:grid-cols-3 txl:gap-[50px]">
             {data.map(
               (item, index) =>
                 item.status === 'publish' && (
@@ -70,7 +70,7 @@ const ProductListing = () => {
                       />
                     </div>
                     <div className="flex flex-col items-center justify-center gap-[2px] xl:gap-1 dxl:gap-[6px] txl:gap-2">
-                      <p className="line-clamp-1 max-w-[180px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
+                      <p className="line-clamp-1 max-w-[400px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
                         {item.name}
                       </p>
                       <p className="text-display-3 dxl:text-display-6">
@@ -80,13 +80,12 @@ const ProductListing = () => {
                         £{item.price}
                       </div>
                     </div>
-                    <div className="relative flex h-[28px] w-[100px] max-w-[150px] items-center justify-center border-[1px] border-black xl:h-[52px] xl:w-[176px]">
-                      <button
-                        type="submit"
-                        className="absolute right-1 top-1 flex h-full w-full items-center justify-center border-[1px] border-black text-display-4 xl:text-display-17"
-                      >
+                    <div className="relative flex h-[49px] w-[143px] xl:h-[53px] xl:w-[175px]">
+                      <div className="absolute bottom-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
+                      <div className="absolute right-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
+                      <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
                         View Watch
-                      </button>
+                      </div>
                     </div>
                   </div>
                 ),
