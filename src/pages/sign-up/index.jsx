@@ -1,3 +1,5 @@
+import SignupForm from '../../components/LoginAndSignup/SignUpForm'
+
 function SignupPage() {
   return (
     <div className="flex h-auto w-full flex-col items-center justify-between gap-[58px] px-[141px] pt-[25px]">
@@ -19,9 +21,15 @@ function SignupPage() {
         <div className="flex w-full items-start justify-center gap-8">
           <div className="w-auto bg-search p-[50px]">
             <p className="text-display-13">New Customers</p>
+            <p className="h-auto w-full text-display-6">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua
+            </p>
+            <SignupForm />
             <div className="relative flex h-[53px] w-[220px] font-sans text-display-17">
-              <div className="border-textSecondary absolute bottom-0 h-[50px] w-[217px] border-[0.5px]"></div>
-              <div className="border-textSecondary absolute right-0 h-[50px] w-[217px] border-[0.5px]"></div>
+              <div className="absolute bottom-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
+              <div className="absolute right-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
               <div className="relative flex w-full items-center justify-center">
                 Create Account
               </div>
