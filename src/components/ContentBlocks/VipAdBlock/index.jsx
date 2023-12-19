@@ -19,6 +19,22 @@ function VipAdBlock() {
     speed: 500,
     slidesToShow: isDesktop ? slidesToShow : 1,
     slidesToScroll: 1,
+    appendDots: (dots) => (
+      <div
+        style={{
+          position: 'relative',
+          display: 'block',
+          marginTop: '20px',
+          top: '0px',
+        }}
+      >
+        {dots.map((dot, index) => (
+          <span key={index} className="custom-dot">
+            {dot}
+          </span>
+        ))}
+      </div>
+    ),
   }
   const trayData = [
     {

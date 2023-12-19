@@ -1,0 +1,12 @@
+.custom {
+    width: 15px; /* Adjust the width of the dot */
+    height: 15px; /* Adjust the height of the dot */
+    background-color: #ccc; /* Adjust the background color of the dot */
+    border-radius: 50%; /* Make the dot a circle */
+    display: inline-block;
+    margin: 0 5px; /* Adjust the spacing between dots */
+  }
+
+  .custom-dot.slick-active {
+    background-color: #333; /* Adjust the background color of the active dot */
+  }

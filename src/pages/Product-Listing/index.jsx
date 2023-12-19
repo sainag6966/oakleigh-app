@@ -69,15 +69,15 @@ const ProductListing = () => {
                         style={{ objectPosition: 'center' }}
                       />
                     </div>
-                    <div className="flex flex-col items-center justify-center gap-[2px] xl:gap-1 dxl:gap-[6px] txl:gap-2">
+                    <div className="mt-6 flex flex-col items-center justify-center gap-[2px] xl:gap-1 dxl:gap-[6px] txl:gap-2">
                       <p className="line-clamp-1 max-w-[400px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
                         {item.name}
                       </p>
-                      <p className="text-display-3 dxl:text-display-6">
+                      <p className="font-sans text-display-3 dxl:text-display-6">
                         2019, box and papers
                       </p>
                       <div className="font-sans text-display-5 xl:text-display-16 ">
-                        £{item.price}
+                        £ {item.price}
                       </div>
                     </div>
                     <div className="relative flex h-[49px] w-[143px] xl:h-[53px] xl:w-[175px]">

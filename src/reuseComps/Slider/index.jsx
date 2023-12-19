@@ -3,6 +3,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
+import styles from '../../../src/styles/slider.module.css'
 import { useMediaQuery } from 'react-responsive'
 
 const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
@@ -15,6 +16,22 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
     speed: 500,
     slidesToShow: isDesktop ? slidesToShow : 1,
     slidesToScroll: 1,
+    appendDots: (dots) => (
+      <div
+        style={{
+          position: 'relative',
+          display: 'block',
+          marginTop: '20px',
+          top: '0px',
+        }}
+      >
+        {dots.map((dot, index) => (
+          <span key={index} className="custom-dot">
+            {dot}
+          </span>
+        ))}
+      </div>
+    ),
   }
 
   return (

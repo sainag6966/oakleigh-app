@@ -21,8 +21,9 @@ function PromiseBlock({ trayData }) {
             </p>
             <div className="font-sans text-display-3 text-textPrimary dxl:text-display-6">
               <div
+                className="list-disc"
                 dangerouslySetInnerHTML={{
-                  __html: `<ul class="list-disc">${bodyText}</ul>`,
+                  __html: `<ul style="list-disc">${bodyText}</ul>`,
                 }}
               />
             </div>
