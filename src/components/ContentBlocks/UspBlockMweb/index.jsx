@@ -15,7 +15,7 @@ function UspBlockMweb({ trayData }) {
                 height="40"
                 alt="uspIcon"
               />
-              <p className="lg:text-display-9 xl:text-display-18">
+              <p className="text-footerBg lg:text-display-9 xl:text-display-18">
                 {e.ub_title}
               </p>
             </div>

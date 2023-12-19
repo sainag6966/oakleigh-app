@@ -53,7 +53,7 @@ function VipAdBlock() {
     },
   ]
   return (
-    <div className="flex h-auto w-full flex-col justify-between gap-6 px-[35px] pt-[60px] lg:flex-row lg:pt-[100px] xl:px-20 txl:px-[140px] ">
+    <div className="flex h-auto w-full flex-col justify-between gap-6 px-[35px] pt-[60px] text-footerBg lg:flex-row lg:pt-[100px] xl:px-20 txl:px-[140px] ">
       <div className="flex flex-col justify-between gap-[30px] lg:w-[60%]">
         <div className="flex h-auto w-full flex-col items-center justify-between gap-[15px] lg:flex-row">
           <span className="text-display-12 dxl:text-display-14">

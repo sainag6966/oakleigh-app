@@ -44,7 +44,7 @@ const ProductListing = () => {
   }
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col text-footerBg">
       <div className="flex w-full flex-col items-start justify-center gap-6 p-[32px] lg:flex-row xl:gap-[48px] xl:p-[60px] dxl:p-[100px] txl:gap-[98px] txl:p-[140px]">
         {isDesktop ? <Filters /> : <FiltersMweb />}
         <div className="h-auto w-full flex-col items-center justify-center">

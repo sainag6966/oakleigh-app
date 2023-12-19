@@ -40,7 +40,7 @@ const Drawer = ({ isOpen, closeDrawer, data, direction }) => {
           return (
             <div
               key={index}
-              className={`bg-bgColor flex w-full items-center justify-start ${
+              className={`bg-bgColor flex w-full items-center justify-start text-copyRightBorder ${
                 filterData.length - 1 === index ? 'pb-6' : 'pb-0'
               }`}
               onClick={handleLink}

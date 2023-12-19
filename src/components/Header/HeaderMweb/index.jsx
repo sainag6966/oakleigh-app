@@ -22,7 +22,10 @@ function HeaderMweb({ data }) {
       <div className="flex h-[98px] w-full items-center justify-between px-9 py-[30px]">
         <NextImage src={oakleighLogo} width="174" height="34" />
         <div className="flex items-center gap-2.5">
-          <p onClick={openDrawer} className="text-display-9">
+          <p
+            onClick={openDrawer}
+            className="text-display-9 text-copyRightBorder"
+          >
             Menu
           </p>
           <img

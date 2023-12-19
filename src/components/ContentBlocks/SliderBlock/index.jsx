@@ -66,7 +66,7 @@ function SliderBlock() {
     },
   ]
   return (
-    <div className="flex flex-col items-center justify-center gap-[30px] px-[35px] pt-[60px] lg:px-20 lg:pt-[100px] dxl:gap-10 dxl:px-[140px] dxl:pt-[120px]">
+    <div className="flex flex-col items-center justify-center gap-[30px] px-[35px] pt-[60px] text-footerBg lg:px-20 lg:pt-[100px] dxl:gap-10 dxl:px-[140px] dxl:pt-[120px]">
       <div className="flex w-full flex-col items-center justify-center gap-[10px] lg:flex-row lg:justify-between">
         <p className="text-display-12 dxl:text-display-14">
           Currently Available

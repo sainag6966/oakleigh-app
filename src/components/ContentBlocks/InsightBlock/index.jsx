@@ -33,13 +33,13 @@ function InsightBlock({ trayData }) {
     },
   ]
   return (
-    <div className="dxl:px-[140px] dxl:gap-[50px] flex h-auto w-full flex-col justify-between gap-[30px] px-9 pt-[60px] lg:px-20 lg:pt-[120px]">
+    <div className="flex h-auto w-full flex-col justify-between gap-[30px] px-9 pt-[60px] text-footerBg lg:px-20 lg:pt-[120px] dxl:gap-[50px] dxl:px-[140px]">
       <div className="flex h-auto w-full flex-col items-center justify-between lg:flex-row">
-        <span className="dxl:text-display-14 text-display-12">
+        <span className="text-display-12 dxl:text-display-14">
           Our Latest Insights
         </span>
         <u>
-          <span className="dxl:text-display-17 font-sans text-display-4">
+          <span className="font-sans text-display-4 dxl:text-display-17">
             View All Insights
           </span>
         </u>

@@ -9,7 +9,7 @@ function UspBlock({ trayData }) {
         <div className="h-[0.5px] min-w-[30px] grow-[0.4] bg-black" />
         <div className="flex w-auto items-center justify-center gap-5">
           <NextImage src={data.ub_image} width="38" height="38" alt="uspIcon" />
-          <p className="text-display-9">{data.ub_title}</p>
+          <p className="text-display-9 text-footerBg">{data.ub_title}</p>
         </div>
         <div className="h-[0.5px] min-w-[30px] grow-[0.4] bg-black" />
       </div>

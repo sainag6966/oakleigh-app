@@ -4,19 +4,23 @@ import { useState } from 'react'
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    subscribeNewsletter: false,
+    username: '',
+    roles: [],
   })
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
+    if (name === 'confirmPassword') {
+      return
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === 'checkbox' ? checked : value,
+      roles: ['customer'],
     }))
   }
 
@@ -58,16 +62,16 @@ const SignupForm = () => {
       <form className="w-full max-w-md" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
-            htmlFor="firstName"
+            htmlFor="first_name"
             className="mb-2 block text-sm font-bold text-gray-700"
           >
             First Name
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
+            id="first_name"
+            name="first_name"
+            value={formData.first_name}
             onChange={handleChange}
             className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             required
@@ -75,16 +79,16 @@ const SignupForm = () => {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="lastName"
+            htmlFor="last_name"
             className="mb-2 block text-sm font-bold text-gray-700"
           >
             Last Name
           </label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
+            id="last_name"
+            name="last_name"
+            value={formData.last_name}
             onChange={handleChange}
             className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             required

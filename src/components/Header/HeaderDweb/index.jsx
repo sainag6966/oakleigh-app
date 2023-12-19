@@ -31,7 +31,7 @@ function HeaderDweb({ data }) {
           return (
             <div
               key={index}
-              className="cursor-pointer font-sans text-display-extra xl:text-display-5 dxl:text-display-8"
+              className="cursor-pointer font-sans text-display-extra text-footerBg xl:text-display-5 dxl:text-display-8"
               onClick={() => {
                 router.push('/Product-Listing')
               }}
