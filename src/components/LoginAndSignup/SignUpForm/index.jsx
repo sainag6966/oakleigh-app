@@ -9,6 +9,7 @@ const SignupForm = () => {
     email: '',
     password: '',
     username: '',
+    subscribe_to_newsletter: false,
     roles: [],
   })
 
@@ -16,6 +17,9 @@ const SignupForm = () => {
     const { name, value, type, checked } = e.target
     if (name === 'confirmPassword') {
       return
+    }
+    if (name === 'email') {
+      formData.username = value
     }
     setFormData((prevData) => ({
       ...prevData,
@@ -32,7 +36,7 @@ const SignupForm = () => {
     // Make POST request to API
     try {
       const username = 'oakleighcdadevel'
-      const password = 'cyxzew-syzKib-qerbo1'
+      const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/users',
         {
@@ -58,8 +62,8 @@ const SignupForm = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <form className="w-full max-w-md" onSubmit={handleSubmit}>
+    <div className="flex items-center justify-center">
+      <form className="w-full" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
             htmlFor="first_name"
@@ -149,20 +153,22 @@ const SignupForm = () => {
           <label className="flex items-center">
             <input
               type="checkbox"
-              name="subscribeNewsletter"
-              checked={formData.subscribeNewsletter}
+              name="subscribe_to_newsletter"
+              checked={formData.subscribe_to_newsletter}
               onChange={handleChange}
               className="mr-2 leading-tight"
             />
-            <span className="text-sm">Sign up for newsletter</span>
+            <span className="text-sm">Sign up to Oakleigh Watches updates</span>
           </label>
         </div>
-        <div className="mb-4">
+        <div className="relative flex h-[53px] w-[220px] font-sans text-display-17">
+          <div className="absolute bottom-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
+          <div className="absolute right-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
           <button
             type="submit"
-            className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+            className="relative flex w-full items-center justify-center"
           >
-            Submit
+            Create Account
           </button>
         </div>
       </form>

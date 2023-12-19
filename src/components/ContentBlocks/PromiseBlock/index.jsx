@@ -8,7 +8,7 @@ function PromiseBlock({ trayData }) {
 
   return (
     <div className="px-9 dxl:px-[140px]">
-      <div className="mt-[60px] flex h-[896px] w-full items-center justify-center bg-footerBg p-5 lg:h-[696px] dxl:mt-[120px]">
+      <div className="mt-[60px] flex h-auto w-full items-center justify-center bg-footerBg p-5 lg:h-[696px] dxl:mt-[120px]">
         <div className="flex h-full w-full flex-col items-center justify-around gap-8 border-[1px] border-copyRightBorder p-[30px] lg:flex-row lg:gap-12 lg:p-20 dxl:gap-[144px]">
           <div className=" flex w-full flex-col items-start justify-between gap-6 lg:max-w-[50%] lg:justify-center">
             <img

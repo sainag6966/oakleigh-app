@@ -18,8 +18,8 @@ function SignupPage() {
           dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
           et justo duo dolores et ea rebum.
         </div>
-        <div className="flex w-full items-start justify-center gap-8">
-          <div className="w-auto bg-search p-[50px]">
+        <div className="flex w-full items-start justify-between gap-8">
+          <div className="w-auto max-w-[803px] bg-search p-[50px]">
             <p className="text-display-13">New Customers</p>
             <p className="h-auto w-full text-display-6">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -27,16 +27,21 @@ function SignupPage() {
               erat, sed diam voluptua
             </p>
             <SignupForm />
+          </div>
+          <div className="w-auto max-w-[803px] bg-search p-[50px]">
+            <div className="text-display-13">Already Have An Account?</div>
+            <p className="text-display-6">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua.
+            </p>
             <div className="relative flex h-[53px] w-[220px] font-sans text-display-17">
               <div className="absolute bottom-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
               <div className="absolute right-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
               <div className="relative flex w-full items-center justify-center">
-                Create Account
+                Login
               </div>
             </div>
-          </div>
-          <div className="w-auto bg-search p-[50px] text-display-13">
-            Already Have An Account?
           </div>
         </div>
       </div>

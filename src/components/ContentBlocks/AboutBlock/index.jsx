@@ -16,7 +16,7 @@ function AboutBlock({ trayData }) {
           quality={100}
           style={{ objectPosition: 'center' }}
         />
-        <div className="absolute top-[72px] h-[596px] w-[90%] gap-8 bg-black p-9 text-textPrimary sm:w-[60%] lg:top-[120px] lg:h-[400px] lg:w-[720px] xl:h-[524px] xl:w-[800px] dxl:w-[944px]">
+        <div className="absolute top-[72px] h-[596px] w-[90%] gap-8 bg-black p-4 text-textPrimary sm:w-[60%] lg:top-[120px] lg:h-[400px] lg:w-[720px] xl:h-[524px] xl:w-[800px] xl:p-9 dxl:w-[944px]">
           <div className="flex h-full flex-col items-start justify-around border-[1px] border-copyRightBorder p-7">
             <p className="text-display-13 xl:text-display-15">{title}</p>
             <p className="font-sans text-display-3 xl:text-display-6">{desc}</p>
