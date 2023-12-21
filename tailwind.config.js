@@ -169,6 +169,7 @@ module.exports = {
         copyRightBorder: '#44513E',
         uspBlockBackground: '#CDAA72',
         filterBorder: '#EDE9E5',
+        colorBlack: '#000000',
       },
     },
   },

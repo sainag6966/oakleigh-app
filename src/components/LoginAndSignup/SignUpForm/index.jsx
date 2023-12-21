@@ -3,6 +3,12 @@
 import { useState } from 'react'
 
 const SignupForm = () => {
+  const [firstNameError, setFirstNameError] = useState('')
+  const [lastNameError, setLastNameError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [validationError, setValidationError] = useState(false)
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -12,14 +18,53 @@ const SignupForm = () => {
     subscribe_to_newsletter: false,
     roles: [],
   })
+  const formNotValidated =
+    firstNameError || lastNameError || emailError || passwordError
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
     if (name === 'confirmPassword') {
+      setValidationError(false)
+      setConfirmPassword(value)
       return
     }
+    if (name === 'first_name') {
+      if (!value) {
+        setFirstNameError('First name is required')
+      } else if (!/^[a-zA-Z]+$/.test(value)) {
+        setFirstNameError('Please enter only alphabets')
+      } else {
+        setFirstNameError('')
+      }
+    }
+    if (name === 'last_name') {
+      if (!value) {
+        setLastNameError('Last name is required')
+      } else if (!/^[a-zA-Z]+$/.test(value)) {
+        setLastNameError('Please enter only alphabets')
+      } else {
+        setLastNameError('')
+      }
+    }
     if (name === 'email') {
+      if (!value) {
+        setEmailError('Email address is required')
+      } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+        setEmailError('Please enter a valid email address')
+      } else {
+        setEmailError('')
+      }
       formData.username = value
+    }
+    if (name === 'password') {
+      if (!value) {
+        setPasswordError('Password is required')
+      } else if (value.length < 8) {
+        setPasswordError('Password must be at least 8 characters long')
+      } else {
+        setPasswordError('')
+      }
+      setValidationError(false)
     }
     setFormData((prevData) => ({
       ...prevData,
@@ -30,10 +75,14 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // Validate form data (you may add more validation as needed)
-
-    // Make POST request to API
+    console.log(confirmPassword)
+    if (formNotValidated) {
+      return
+    }
+    if (formData.password !== confirmPassword) {
+      setValidationError(true)
+      return
+    }
     try {
       const username = 'oakleighcdadevel'
       const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
@@ -62,94 +111,76 @@ const SignupForm = () => {
   }
 
   return (
-    <div className="flex items-center justify-center">
-      <form className="w-full" onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="first_name"
-            className="mb-2 block text-sm font-bold text-gray-700"
-          >
-            First Name
-          </label>
+    <div className="flex items-center justify-center font-sans">
+      <form className="flex w-full flex-col gap-5" onSubmit={handleSubmit}>
+        <div className="h-auto">
           <input
             type="text"
             id="first_name"
             name="first_name"
             value={formData.first_name}
+            placeholder="First Name*"
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            required
+            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 font-sans text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
+          {firstNameError && (
+            <p className="mt-1 text-sm text-red-500">{firstNameError}</p>
+          )}
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="last_name"
-            className="mb-2 block text-sm font-bold text-gray-700"
-          >
-            Last Name
-          </label>
+        <div className="h-auto">
           <input
             type="text"
             id="last_name"
             name="last_name"
             value={formData.last_name}
+            placeholder="Last Name*"
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            required
+            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
+          {lastNameError && (
+            <p className="mt-1 text-sm text-red-500">{lastNameError}</p>
+          )}
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="mb-2 block text-sm font-bold text-gray-700"
-          >
-            Email Address
-          </label>
+        <div className="h-auto">
           <input
             type="email"
             id="email"
             name="email"
+            placeholder="Email address*"
             value={formData.email}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            required
+            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
+          {emailError && (
+            <p className="mt-1 text-sm text-red-500">{emailError}</p>
+          )}
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="mb-2 block text-sm font-bold text-gray-700"
-          >
-            Password
-          </label>
+        <div className="h-auto">
           <input
             type="password"
             id="password"
             name="password"
+            placeholder="Password*"
             value={formData.password}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            required
+            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
+          {passwordError && (
+            <p className="mt-1 text-sm text-red-500">{passwordError}</p>
+          )}
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="confirmPassword"
-            className="mb-2 block text-sm font-bold text-gray-700"
-          >
-            Confirm Password
-          </label>
+        <div className="h-[50px]">
           <input
             type="password"
             id="confirmPassword"
             name="confirmPassword"
+            placeholder="Confirm Password*"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            required
+            className="focus:shadow-outline h-full w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
         </div>
-        <div className="mb-4">
+        <div className="">
           <label className="flex items-center">
             <input
               type="checkbox"
@@ -161,6 +192,11 @@ const SignupForm = () => {
             <span className="text-sm">Sign up to Oakleigh Watches updates</span>
           </label>
         </div>
+        {validationError && (
+          <p className="mt-1 text-sm text-red-500">
+            Password and Confirm Password does not match
+          </p>
+        )}
         <div className="relative flex h-[53px] w-[220px] font-sans text-display-17">
           <div className="absolute bottom-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
           <div className="absolute right-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
