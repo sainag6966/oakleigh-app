@@ -75,7 +75,6 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(confirmPassword)
     if (formNotValidated) {
       return
     }

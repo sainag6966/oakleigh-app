@@ -11,13 +11,13 @@ function HeaderDweb({ data }) {
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const searchIcon = '/Images/searchIcon.svg'
   const accountIcon = '/Images/accountIcon.svg'
-  const dwebAccountIcon = '/Images/dwebAccountIcon.svg'
+  const basketIcon = '/Images/dwebAccountIcon.svg'
   const dividerLine = '/Images/dividerLine.svg'
   const imgArr = [
     { title: 'search', url: searchIcon },
     { title: 'divider', url: dividerLine },
     { title: 'account', url: accountIcon },
-    { title: 'search', url: dwebAccountIcon },
+    { title: 'search', url: basketIcon },
   ]
   const filterData = data.filter((e) => {
     const skipMenu = ['Divider', 'My account', 'Basket']

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
@@ -6,6 +7,7 @@ import Filters from '@/reuseComps/Filters'
 import FiltersMweb from '@/reuseComps/FiltersMweb'
 
 const ProductListing = () => {
+  const router = useRouter()
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
@@ -38,6 +40,10 @@ const ProductListing = () => {
     }
     fetchData()
   }, [page])
+
+  const handleProductClick = (item) => {
+    router.push(`product/${item.slug}/${item.id}`)
+  }
 
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1)
@@ -73,6 +79,7 @@ const ProductListing = () => {
                       <p className="line-clamp-1 max-w-[400px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
                         {item.name}
                       </p>
+                      <p>{item.stock_status}</p>
                       <p className="font-sans text-display-3 dxl:text-display-6">
                         2019, box and papers
                       </p>
@@ -83,7 +90,12 @@ const ProductListing = () => {
                     <div className="relative flex h-[49px] w-[143px] xl:h-[53px] xl:w-[175px]">
                       <div className="absolute bottom-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
                       <div className="absolute right-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
-                      <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
+                      <div
+                        onClick={() => {
+                          handleProductClick(item)
+                        }}
+                        className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17"
+                      >
                         View Watch
                       </div>
                     </div>
