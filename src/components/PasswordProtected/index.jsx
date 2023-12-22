@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const PasswordProtection = ({ children }) => {
   const [password, setPassword] = useState('')
-  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false)
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(true)
   const correctPassword = 'oakleighpass' // Replace with your actual password
 
   const handleSubmit = (e) => {

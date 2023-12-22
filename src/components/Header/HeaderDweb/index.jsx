@@ -17,7 +17,7 @@ function HeaderDweb({ data }) {
     { title: 'search', url: searchIcon },
     { title: 'divider', url: dividerLine },
     { title: 'account', url: accountIcon },
-    { title: 'search', url: basketIcon },
+    { title: 'basket', url: basketIcon },
   ]
   const filterData = data.filter((e) => {
     const skipMenu = ['Divider', 'My account', 'Basket']
@@ -25,10 +25,13 @@ function HeaderDweb({ data }) {
   })
 
   const handleIconClick = (icon) => {
-    if (icon !== 'account') {
+    if (icon === 'basket') {
+      router.push('/your-basket')
+    }
+    if (icon === 'account') {
+      setOpenLoginModal(!openLoginModal)
       return
     }
-    setOpenLoginModal(!openLoginModal)
   }
 
   const handleSuccessfulLogin = () => {
