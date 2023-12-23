@@ -6,40 +6,40 @@ import { useMediaQuery } from 'react-responsive'
 import Filters from '@/reuseComps/Filters'
 import FiltersMweb from '@/reuseComps/FiltersMweb'
 
-const ProductListing = () => {
+const ProductListing = ({ data }) => {
   const router = useRouter()
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
-      try {
-        const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
-        const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
-        const response = await axios.get(
-          `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?page=${page}`,
-          {
-            headers: {
-              'Content-Type': 'text/plain',
-              Authorization: 'Basic ' + btoa(username + ':' + password),
-            },
-          },
-        )
-        const newData = response.data
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true)
+  //     try {
+  //       const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
+  //       const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
+  //       const response = await axios.get(
+  //         `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?page=${page}`,
+  //         {
+  //           headers: {
+  //             'Content-Type': 'text/plain',
+  //             Authorization: 'Basic ' + btoa(username + ':' + password),
+  //           },
+  //         },
+  //       )
+  //       const newData = response.data
 
-        // Assuming the API response has a property called 'items' containing the data
-        setData((prevData) => [...prevData, ...newData])
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchData()
-  }, [page])
+  //       // Assuming the API response has a property called 'items' containing the data
+  //       setData((prevData) => [...prevData, ...newData])
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error)
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
+  //   fetchData()
+  // }, [page])
 
   const handleProductClick = (item) => {
     router.push(`product/${item.slug}/${item.id}`)
@@ -115,5 +115,42 @@ const ProductListing = () => {
     </div>
   )
 }
-
 export default ProductListing
+
+export async function getServerSideProps(context) {
+  try {
+    const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
+    const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
+    const response = await fetch(
+      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?per_page=50',
+      {
+        method: 'get',
+        headers: {
+          'Content-Type': 'text/plain',
+          Authorization: 'Basic ' + btoa(username + ':' + password),
+        },
+      },
+    )
+    if (!response.ok) {
+      // Handle non-successful responses (e.g., 404, 500)
+      console.error(`API request failed with status ${response.status}`)
+      return {
+        notFound: true,
+      }
+    }
+    const data = await response.json()
+    return {
+      props: {
+        data,
+      },
+    }
+  } catch (error) {
+    // Handle network errors or other exceptions
+    console.error('Error fetching data from API:', error)
+    return {
+      props: {
+        data: null,
+      },
+    }
+  }
+}

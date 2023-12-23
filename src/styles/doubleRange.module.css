@@ -25,6 +25,7 @@
   .sliderTrack,
   .sliderRange,
   .sliderLeftValue,
+  .sliderLeftMin,
   .sliderRightValue {
     position: absolute;
   }
@@ -46,6 +47,7 @@
   }
   
   .sliderLeftValue,
+  .sliderLeftMin,
   .sliderRightValue {
     color: #09090a;
     font-size: 17px;
@@ -54,6 +56,12 @@
   
   .sliderLeftValue {
     left: 6px;
+  }
+
+  .sliderLeftMin {
+    left: 80px;
+    display:flex;
+    gap:10px;
   }
   
   .sliderRightValue {

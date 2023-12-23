@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -9,6 +9,7 @@ import { useMediaQuery } from 'react-responsive'
 const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
   const sliderRef = useRef(null)
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const settings = {
     dots: isDesktop ? false : true,
@@ -16,22 +17,15 @@ const SimpleSlider = ({ trayData, navButtons, slidesToShow }) => {
     speed: 500,
     slidesToShow: isDesktop ? slidesToShow : 1,
     slidesToScroll: 1,
-    appendDots: (dots) => (
-      <div
-        style={{
-          position: 'relative',
-          display: 'block',
-          marginTop: '20px',
-          top: '0px',
-        }}
-      >
-        {dots.map((dot, index) => (
-          <span key={index} className="custom-dot">
-            {dot}
-          </span>
-        ))}
-      </div>
+    customPaging: (i) => (
+      <span
+        className={`${styles['custom-dot']} ${
+          i === currentSlide ? styles.active : ''
+        }`}
+        onClick={() => sliderRef.current.slickGoTo(i)}
+      ></span>
     ),
+    beforeChange: (current, next) => setCurrentSlide(next),
   }
 
   return (

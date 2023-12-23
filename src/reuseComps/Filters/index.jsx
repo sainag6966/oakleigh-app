@@ -3,13 +3,13 @@ import MultiRangeSlider from '../DoubleRangeSlider'
 function Filters() {
   return (
     <>
-      <div className="txl:min-w-[320px] h-auto min-w-[180px] xl:min-w-[240px] ">
+      <div className="h-auto min-w-[180px] xl:min-w-[240px] txl:min-w-[320px] ">
         <div className="flex h-auto w-full items-center justify-between border-b-[1.5px] border-filterBorder pb-[30px]">
-          <p className="txl:text-display-13 text-display-11 xl:text-display-12">
+          <p className="text-display-11 xl:text-display-12 txl:text-display-13">
             Filters
           </p>
           <u>
-            <p className="txl:text-display-17 font-sans text-display-1 xl:text-display-4">
+            <p className="font-sans text-display-1 xl:text-display-4 txl:text-display-17">
               X Clear Filters
             </p>
           </u>
@@ -134,6 +134,8 @@ function Filters() {
           <MultiRangeSlider
             min={1600}
             max={2024}
+            preText={''}
+            postText={''}
             onChange={({ min, max }) =>
               console.log(`min = ${min}, max = ${max}`)
             }
@@ -226,6 +228,25 @@ function Filters() {
           </div>
         </div>
         <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="flex w-full items-center justify-between">
+            <p className="text-display-17 xl:text-display-11">PRICE</p>
+            <img
+              className="mt-1 h-3 w-4"
+              src="/Images/upArrow.svg"
+              alt="upArrow"
+            />
+          </div>
+          <MultiRangeSlider
+            min={600}
+            max={25000}
+            preText={'£'}
+            postText={''}
+            onChange={({ min, max }) =>
+              console.log(`min = ${min}, max = ${max}`)
+            }
+          />
+        </div>
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
           <div className="mb-5 flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Availability</p>
             <img
@@ -278,6 +299,25 @@ function Filters() {
               <p className="text-display-6">Sold</p>
             </label>
           </div>
+        </div>
+        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+          <div className="flex w-full items-center justify-between">
+            <p className="text-display-17 xl:text-display-11">BRACELET SIZE</p>
+            <img
+              className="mt-1 h-3 w-4"
+              src="/Images/upArrow.svg"
+              alt="upArrow"
+            />
+          </div>
+          <MultiRangeSlider
+            min={120}
+            max={210}
+            preText={''}
+            postText={'mm'}
+            onChange={({ min, max }) =>
+              console.log(`min = ${min}, max = ${max}`)
+            }
+          />
         </div>
       </div>
     </>

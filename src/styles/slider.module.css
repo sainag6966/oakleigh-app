@@ -10,3 +10,20 @@
   .custom-dot.slick-active {
     background-color: #333; /* Adjust the background color of the active dot */
   }
+
+  .custom-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: solid 1px;
+    background-color: white; /* Default background color for inactive dots */
+    display: inline-block;
+    margin: 0 8px;
+    margin-top: 30px;
+    cursor: pointer;
+  }
+  
+  .active {
+    background-color: black; /* Background color for active dot */
+    /* You can add additional styling for active dots here */
+  }
