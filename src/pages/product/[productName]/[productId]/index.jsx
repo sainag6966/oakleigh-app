@@ -18,7 +18,6 @@ function ProductDetailPage({ data }) {
     try {
       //   const username = 'oakleighcdadevel'
       //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
-      setIsBasketOpen(true)
       setLoadingToast(true)
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/cocart/v2/cart/add-item',
@@ -37,6 +36,7 @@ function ProductDetailPage({ data }) {
         const data = await response.json()
         const cartKey = data?.cart_key
         localStorage.setItem('cartKey', cartKey)
+        setIsBasketOpen(true)
         setShowToast(true)
         setLoadingToast(false)
         setToastMessage('Item has been added to the basket')

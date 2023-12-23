@@ -11,18 +11,21 @@ function BasketDrawer({
   }
   return (
     <div className="absolute left-0 top-[-98px] z-[1] h-full w-full bg-colorBlack bg-opacity-75 dxl:top-[-160px]">
-      <div className="absolute right-0 top-0 z-[2] flex h-auto w-auto max-w-[817px] flex-col items-start bg-textPrimary text-footerBg">
-        <div className="flex items-center justify-center gap-20 self-stretch bg-footerBg px-[140px] py-[52px] text-textPrimary">
-          <p className="text-display-14">ADDED TO BASKET</p>
+      <div className="absolute right-0 top-0 z-[2] flex h-auto w-auto max-w-[360px] flex-col items-start bg-textPrimary text-footerBg lg:max-w-[817px]">
+        <div className="flex items-center justify-between gap-5 self-stretch bg-footerBg px-[32px] py-[32px] text-textPrimary lg:gap-20 lg:px-[140px] lg:py-[52px]">
+          <p className="text-display-11 lg:text-display-14 ">ADDED TO BASKET</p>
           <u>
-            <p onClick={handleClose} className="font-sans text-display-17">
+            <p
+              onClick={handleClose}
+              className="font-sans text-display-1 lg:text-display-17"
+            >
               Close
             </p>
           </u>
         </div>
-        <div className="h-auto w-full px-[140px] text-footerBg">
-          <div className="flex h-auto w-full gap-[52px] py-[50px]">
-            <div className="relative flex h-[231px] w-[194px] items-center justify-between self-stretch">
+        <div className="h-auto w-full px-[32px] text-footerBg lg:px-[140px]">
+          <div className="flex h-auto w-full gap-[24px] py-[32px] lg:gap-[52px] lg:py-[50px]">
+            <div className="relative flex h-[231px] w-[220px] items-center justify-between self-stretch lg:w-[194px]">
               <Image
                 src={imageSrc}
                 layout="fill"
@@ -33,31 +36,35 @@ function BasketDrawer({
               />
             </div>
             <div className="flex h-auto w-auto max-w-[279px] flex-col items-start justify-center gap-5">
-              <p className="text-display-12">{productName}</p>
-              <p className="font-sans text-display-16">£ {productPrice}</p>
+              <p className="text-display-17 lg:text-display-12">
+                {productName}
+              </p>
+              <p className="font-sans text-display-4 font-semibold lg:text-display-16">
+                £ {productPrice}
+              </p>
               <u>
-                <p className="mt-[10px] font-sans text-display-17">
+                <p className="mt-[10px] font-sans text-display-4 lg:text-display-17">
                   Remove Item
                 </p>
               </u>
             </div>
           </div>
-          <div className="flex items-center justify-between border-y-[1px] border-search py-[42px] font-sans">
+          <div className="flex items-center justify-between border-y-[1px] border-search py-[28px] font-sans lg:py-[42px]">
             <p className="text-[19px] font-normal">Total</p>
             <p className="text-display-17 font-semibold">£ {productPrice}</p>
           </div>
-          <div className="flex flex-col gap-[30px] pb-[176px] pt-[50px] font-sans">
+          <div className="flex flex-col gap-[20px] pb-[176px] pt-[32px] font-sans lg:gap-[30px] lg:pt-[50px]">
             <div className="relative flex h-[53px] w-full">
-              <div className="absolute bottom-0 h-[50px] w-[99.5%] border-[0.5px] border-textSecondary bg-textSecondary" />
-              <div className="absolute right-0 h-[50px] w-[99.5%] border-[0.5px] border-textSecondary" />
-              <div className="absolute bottom-[3px] left-[0.5%] right-[0.5%] h-[47px] w-[99%] border-b-[0.5px] border-l-[0.5px] border-textPrimary" />
+              <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
+              <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />
+              <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-[47px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:w-[99%]" />
               <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary xl:text-display-17">
                 Proceed To Checkout
               </div>
             </div>
             <div className="relative flex h-[53px] w-full">
-              <div className="absolute bottom-0 h-[50px] w-[99.5%] border-[0.5px] border-textSecondary"></div>
-              <div className="absolute right-0 h-[50px] w-[99.5%] border-[0.5px] border-textSecondary"></div>
+              <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]"></div>
+              <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]"></div>
               <div className="relative flex w-full items-center justify-center text-display-4 text-footerBg xl:text-display-17">
                 View Basket
               </div>
