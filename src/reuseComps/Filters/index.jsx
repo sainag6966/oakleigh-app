@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import MultiRangeSlider from '../DoubleRangeSlider'
 
 function Filters() {
+  const [expandGenderSec, setExpandGenderSec] = useState(false)
+  const [expandModelSec, setExpandModelSec] = useState(false)
+  const [expandYearSec, setExpandYearSec] = useState(false)
   return (
     <>
       <div className="h-auto min-w-[180px] xl:min-w-[240px] txl:min-w-[320px] ">
@@ -15,131 +19,160 @@ function Filters() {
           </u>
         </div>
         <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
-          <div className="mb-5 flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Gender</p>
             <img
-              className="mt-1 h-3 w-4"
-              src="/Images/upArrow.svg"
+              className="mt-1 h-3 w-4 cursor-pointer"
+              src={
+                expandGenderSec
+                  ? '/Images/downArrow.svg'
+                  : '/Images/upArrow.svg'
+              }
               alt="upArrow"
+              onClick={() => {
+                setExpandGenderSec(!expandGenderSec)
+              }}
             />
           </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">{`Men's Watches`}</p>
-            </label>
-          </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">{`Women's Watches`}</p>
-            </label>
-          </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">Unisex Watches</p>
-            </label>
-          </div>
+          {expandGenderSec && (
+            <div className="mt-5">
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">{`Men's Watches`}</p>
+                </label>
+              </div>
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">{`Women's Watches`}</p>
+                </label>
+              </div>
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">Unisex Watches</p>
+                </label>
+              </div>
+            </div>
+          )}
         </div>
         <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
-          <div className="mb-5 flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Model</p>
             <img
-              className="mt-1 h-3 w-4"
-              src="/Images/upArrow.svg"
+              className="mt-1 h-3 w-4 cursor-pointer"
+              src={
+                expandModelSec ? '/Images/downArrow.svg' : '/Images/upArrow.svg'
+              }
               alt="upArrow"
+              onClick={() => {
+                setExpandModelSec(!expandModelSec)
+              }}
             />
           </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">Model</p>
-            </label>
-          </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">Model</p>
-            </label>
-          </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">Model</p>
-            </label>
-          </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">Model</p>
-            </label>
-          </div>
-          <div className="flex items-center justify-start space-x-4">
-            <label className="flex items-center justify-center gap-[18px]">
-              <input
-                type="checkbox"
-                className="h-3 w-3 xl:h-5 xl:w-5"
-                // checked={selectedFilters.includes("men")}
-                // onChange={() => handleFilterChange("men")}
-              />
-              <p className="text-display-6">Model</p>
-            </label>
-          </div>
+          {expandModelSec && (
+            <div className="mt-5">
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">Model</p>
+                </label>
+              </div>
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">Model</p>
+                </label>
+              </div>
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">Model</p>
+                </label>
+              </div>
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">Model</p>
+                </label>
+              </div>
+              <div className="flex items-center justify-start space-x-4">
+                <label className="flex items-center justify-center gap-[18px]">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    // checked={selectedFilters.includes("men")}
+                    // onChange={() => handleFilterChange("men")}
+                  />
+                  <p className="text-display-6">Model</p>
+                </label>
+              </div>
+            </div>
+          )}
         </div>
         <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
           <div className="flex w-full items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Year</p>
             <img
               className="mt-1 h-3 w-4"
-              src="/Images/upArrow.svg"
+              src={
+                expandYearSec ? '/Images/downArrow.svg' : '/Images/upArrow.svg'
+              }
               alt="upArrow"
+              onClick={() => {
+                setExpandYearSec(!expandYearSec)
+              }}
             />
           </div>
-          <MultiRangeSlider
-            min={1600}
-            max={2024}
-            preText={''}
-            postText={''}
-            onChange={({ min, max }) =>
-              console.log(`min = ${min}, max = ${max}`)
-            }
-          />
+          {expandYearSec && (
+            <div className="h-[72px] w-full">
+              <MultiRangeSlider
+                min={1600}
+                max={2024}
+                preText={''}
+                postText={''}
+                onChange={({ min, max }) =>
+                  console.log(`min = ${min}, max = ${max}`)
+                }
+              />
+            </div>
+          )}
         </div>
         <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
           <div className="mb-5 flex items-center justify-between">

@@ -69,9 +69,9 @@ function HeaderDweb({ data }) {
 
   return (
     <>
-      <div className="relative flex h-[98px] w-full items-center justify-between gap-6 px-9 py-[30px] xl:px-16 dxl:h-40 dxl:px-[132px] dxl:py-12">
+      <div className="relative flex h-[98px] w-full items-center justify-between gap-6 px-9 py-[30px] xl:px-16 dxl:h-40 dxl:px-[132px] dxl:py-[45px]">
         <div
-          className="h-auto w-40 cursor-pointer xl:w-48 dxl:w-80"
+          className="h-auto w-40 cursor-pointer xl:w-48 dxl:w-[300px]"
           onClick={() => {
             router.push('/')
           }}
@@ -161,7 +161,9 @@ function HeaderDweb({ data }) {
       {openLoginModal && (
         <LoginDropdown handleSuccessfulLogin={handleSuccessfulLogin} />
       )}
-      {openSearchModal && <SearchDropdown />}
+      {openSearchModal && (
+        <SearchDropdown setOpenSearchModal={setOpenSearchModal} />
+      )}
       {isBasketOpen && (
         <BasketDrawer
           imageSrc={productImage}

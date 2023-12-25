@@ -27,7 +27,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['sans-serif'],
+        sans: ['Open Sans', 'sans-serif'],
         cormorant: "'Cormorant Garamond', serif",
       },
       fontSize: {

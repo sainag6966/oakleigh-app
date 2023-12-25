@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/Images/fav.svg" type="image/svg+xml" />
       </Head>
       <PasswordProtection>
         <LayoutWrapper>

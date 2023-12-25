@@ -1,8 +1,9 @@
 .container {
-    height: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
   
   .slider {
@@ -51,21 +52,23 @@
   .sliderRightValue {
     color: #09090a;
     font-size: 17px;
-    margin-top: 20px;
+    margin-top: 18px;
   }
   
   .sliderLeftValue {
-    left: 6px;
+    left: -2px;
+    font-weight: 300;
   }
 
   .sliderLeftMin {
-    left: 80px;
+    left: 68px;
     display:flex;
     gap:10px;
   }
   
   .sliderRightValue {
-    right: -6px;
+    right: 0px;
+    font-weight: 300;
   }
   
   /* Removing the default appearance */
