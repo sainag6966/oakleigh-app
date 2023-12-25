@@ -58,7 +58,7 @@ function ProductDetailPage({ data }) {
   }
   return (
     <div className="relative flex h-auto w-full flex-col gap-4">
-      <p>product name : {data.name}</p>
+      <p>product name : {data?.name}</p>
       <img className="h-60 w-80" src={imgSrc}></img>
       <button
         onClick={handleAddToBasket}
@@ -112,6 +112,7 @@ function ProductDetailPage({ data }) {
           productName={data?.name}
           productPrice={productPrice}
           setIsBasketOpen={setIsBasketOpen}
+          isFromHeader={false}
         />
       )}
     </div>

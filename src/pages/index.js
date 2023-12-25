@@ -50,9 +50,13 @@ export default function Home({ data }) {
 
   return (
     <main className="h-auto w-full">
-      {trayData.map((tray) => {
-        return getTrays(tray)
-      })}
+      {trayData ? (
+        trayData.map((tray) => {
+          return getTrays(tray)
+        })
+      ) : (
+        <p>Something went wrong unable to fetch the data</p>
+      )}
     </main>
   )
 }

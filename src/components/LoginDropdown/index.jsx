@@ -47,7 +47,7 @@ function LoginDropdown({ handleSuccessfulLogin }) {
   }
 
   return (
-    <div className="bg-colorBlack absolute z-[1] h-full w-full bg-opacity-75">
+    <div className="absolute z-[1] h-full w-full border-t-[1px] border-colorBlack bg-colorBlack bg-opacity-75">
       <div className="absolute top-0 z-[2] flex h-auto w-full items-start justify-between gap-8 bg-textPrimary px-[140px] py-[50px] text-footerBg">
         <div className="flex w-auto max-w-[803px] flex-1 flex-col justify-between gap-7 self-stretch bg-search p-[50px]">
           <p className="text-display-13">New Customers</p>
