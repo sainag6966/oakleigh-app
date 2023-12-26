@@ -55,7 +55,7 @@ const ProductListing = ({ data }) => {
         {isDesktop ? <Filters /> : <FiltersMweb />}
         <div className="h-auto w-full flex-col items-center justify-center">
           <div className="grid h-auto w-full grid-cols-1 items-center gap-[18px] gap-y-[50px] lg:grid-cols-3 txl:gap-[50px]">
-            {data.map(
+            {data?.map(
               (item, index) =>
                 item.status === 'publish' && (
                   <div

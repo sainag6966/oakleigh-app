@@ -81,12 +81,13 @@ function HeaderDweb({ data }) {
             width="300"
             height="60"
             layout="responsive"
+            alt="logo"
           />
         </div>
         <div className="flex grow-[2] items-center justify-evenly">
           {filterData.map((item, index) => {
             return (
-              <div className="relative">
+              <div key={index} className="relative">
                 <div
                   key={index}
                   className="cursor-pointer font-sans text-display-extra text-footerBg xl:text-display-5 dxl:text-display-8"
@@ -117,7 +118,7 @@ function HeaderDweb({ data }) {
         <div className="flex h-full w-auto grow-[0.2] items-center justify-between gap-4 dxl:gap-6">
           {imgArr.map((e, index) => {
             return (
-              <div className="flex flex-col">
+              <div key={index} className="flex flex-col">
                 <div
                   key={index}
                   className={`relative ${
