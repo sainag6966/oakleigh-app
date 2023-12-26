@@ -3,7 +3,6 @@ import { useState } from 'react'
 import BasketDrawer from '@/components/BasketDrawer'
 
 function ProductDetailPage({ data }) {
-  console.log(data)
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [loadingToast, setLoadingToast] = useState(false)

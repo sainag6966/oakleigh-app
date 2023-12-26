@@ -27,7 +27,6 @@ function YourBasket() {
       }
     }
     fetchData()
-    console.log(data || [])
   }, [])
 
   return (

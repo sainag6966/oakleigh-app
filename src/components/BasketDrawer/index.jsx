@@ -10,12 +10,13 @@ function BasketDrawer({
   const headingText = isFromHeader ? 'YOUR BASKET' : 'ADDED TO BASKET'
   const handleClose = () => {
     setIsBasketOpen(false)
+    document.body.classList.remove('no-scroll')
   }
   return (
     <div
       className={`absolute left-0 ${
         isFromHeader ? 'top-0 dxl:top-0' : 'top-[-98px] dxl:top-[-160px]'
-      } z-[1] h-screen w-full bg-colorBlack bg-opacity-75`}
+      } z-[1] h-screen w-full overflow-y-scroll bg-colorBlack bg-opacity-75`}
     >
       <div className="absolute right-0 top-0 z-[2] flex min-h-screen w-auto max-w-[360px] flex-col items-start bg-textPrimary text-footerBg sm:max-w-[480px] lg:max-w-[817px]">
         <div className="flex items-center justify-between gap-5 self-stretch bg-footerBg px-[32px] py-[32px] text-textPrimary lg:gap-20 lg:px-[80px] dxl:px-[140px] dxl:py-[52px]">
@@ -25,7 +26,7 @@ function BasketDrawer({
           <u>
             <p
               onClick={handleClose}
-              className="font-sans text-display-1 lg:text-display-17"
+              className="cursor-pointer font-sans text-display-1 lg:text-display-17"
             >
               Close
             </p>

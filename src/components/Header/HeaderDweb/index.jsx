@@ -38,7 +38,11 @@ function HeaderDweb({ data }) {
     setOpenLoginModal(false)
     setOpenSearchModal(false)
     if (item?.title?.rendered === 'Shop By Brand') {
+      document.body.classList.add('no-scroll')
       setOpenBrandDropdown(!openBrandDropdown)
+      if (openBrandDropdown) {
+        document.body.classList.remove('no-scroll')
+      }
       return
     }
     setOpenBrandDropdown(false)
@@ -46,19 +50,32 @@ function HeaderDweb({ data }) {
   }
 
   const handleIconClick = (icon) => {
+    if (icon === 'divider') {
+      return
+    }
+    document.body.classList.add('no-scroll')
     setOpenBrandDropdown(false)
     if (icon === 'account') {
+      if (openLoginModal) {
+        document.body.classList.remove('no-scroll')
+      }
       setOpenLoginModal(!openLoginModal)
       setOpenSearchModal(false)
       return
     }
     if (icon === 'search') {
+      if (openSearchModal) {
+        document.body.classList.remove('no-scroll')
+      }
       setOpenLoginModal(false)
       setOpenSearchModal(!openSearchModal)
       return
     }
     if (icon === 'basket') {
       setIsBasketOpen(true)
+      setOpenLoginModal(false)
+      setOpenSearchModal(false)
+      document.body.classList.add('no-scroll')
       return
     }
   }

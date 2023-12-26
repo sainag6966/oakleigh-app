@@ -2,6 +2,7 @@ import Head from 'next/head'
 import LayoutWrapper from '@/components/LayoutWrapper'
 import PasswordProtection from '@/components/PasswordProtected'
 import '@/styles/globals.css'
+import NextNProgress from 'nextjs-progressbar'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -17,6 +18,13 @@ export default function App({ Component, pageProps }) {
       </Head>
       <PasswordProtection>
         <LayoutWrapper>
+          <NextNProgress
+            color="#CDAA72"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={2}
+            options={{ showSpinner: false }}
+          />
           <Component {...pageProps} />
         </LayoutWrapper>
       </PasswordProtection>
