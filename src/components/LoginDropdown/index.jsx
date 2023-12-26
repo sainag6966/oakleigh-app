@@ -49,7 +49,7 @@ function LoginDropdown({ handleSuccessfulLogin }) {
   return (
     <div className="absolute z-[1] h-full w-full border-t-[1px] border-colorBlack bg-colorBlack bg-opacity-75">
       <div className="absolute top-0 z-[2] flex h-auto w-full items-start justify-between gap-4 bg-textPrimary px-[50px] py-[50px] text-footerBg xl:gap-8 xl:px-[80px] dxl:px-[140px]">
-        <div className="flex w-auto max-w-[803px] flex-1 flex-col justify-between gap-7 self-stretch bg-search p-[50px]">
+        <div className="flex w-auto max-w-[803px] flex-1 flex-col justify-between gap-7 self-stretch bg-search p-6 xl:p-9 dxl:p-[50px]">
           <p className="text-display-11 xl:text-display-13">
             Registered Customers
           </p>
@@ -103,7 +103,7 @@ function LoginDropdown({ handleSuccessfulLogin }) {
             </div>
           </form>
         </div>
-        <div className="flex w-auto max-w-[803px] flex-1 flex-col justify-between gap-7 self-stretch bg-search p-[50px]">
+        <div className="flex w-auto max-w-[803px] flex-1 flex-col justify-between gap-4 self-stretch bg-search p-6 xl:p-9 dxl:gap-7 dxl:p-[50px]">
           <div className="text-display-11 xl:text-display-13">
             Don’t Have An Account?
           </div>

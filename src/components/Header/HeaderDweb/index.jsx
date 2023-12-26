@@ -98,7 +98,7 @@ function HeaderDweb({ data }) {
                   {item.title.rendered}
                   {openBrandDropdown &&
                     item.title.rendered === 'Shop By Brand' && (
-                      <div className="absolute bottom-[-24px] left-0 right-0 ml-auto mr-auto h-2 w-4 dxl:bottom-0 dxl:top-[93px] dxl:h-3 dxl:w-6">
+                      <div className="absolute bottom-[-27px] left-0 right-0 ml-auto mr-auto h-2 w-4 xl:bottom-[-24px] dxl:bottom-0 dxl:top-[93px] dxl:h-3 dxl:w-6">
                         <Image
                           src={pointingArrow}
                           layout="fill"

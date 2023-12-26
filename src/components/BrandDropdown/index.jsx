@@ -20,17 +20,20 @@ function BrandDropdown() {
   ]
   return (
     <div className="absolute z-[1] h-full w-full border-t-[1px] border-colorBlack bg-colorBlack bg-opacity-75">
-      <div className="absolute top-0 z-[2] flex h-auto w-full items-start justify-between gap-[30px] bg-textPrimary px-[140px] py-[80px] text-footerBg">
-        <div className="relative z-[2] flex h-[300px] flex-col flex-wrap items-start justify-start gap-[30px]">
+      <div className="absolute top-0 z-[2] flex h-auto w-full items-start justify-between gap-[30px] bg-textPrimary  px-20 py-12 text-footerBg dxl:px-[140px] dxl:py-[80px]">
+        <div className="relative z-[2] flex h-[180px] flex-col flex-wrap items-start justify-start gap-[16px] xl:h-[240px] dxl:h-[300px] dxl:gap-[30px]">
           {brandList.map((e, index) => {
             return (
-              <p key={index} className="w-[248px] text-display-12">
+              <p
+                key={index}
+                className="xl:text-display-10 w-[120px] xl:w-[172px] dxl:w-[248px]  dxl:text-display-12"
+              >
                 {e}
               </p>
             )
           })}
         </div>
-        <div className="relative z-[2] h-[344px] w-[526px] shrink-[5] bg-gradient-to-t from-black via-transparent to-transparent">
+        <div className="relative z-[2] h-[180px] w-[264px] shrink-[5] bg-gradient-to-t from-black to-transparent xl:h-[280px] xl:w-[400px] dxl:h-[344px] dxl:w-[526px]">
           <Image
             src={ImageSrc}
             layout="fill"
@@ -40,12 +43,12 @@ function BrandDropdown() {
             style={{ objectPosition: 'center' }}
             className="mix-blend-overlay"
           />
-          <div className="absolute bottom-6 flex w-full flex-col items-center gap-2 text-textPrimary">
-            <span className="text-display-11 dxl:text-display-13">
+          <div className="absolute bottom-3 flex w-full flex-col items-center text-textPrimary xl:bottom-6 xl:gap-2">
+            <span className="text-display-17 xl:text-display-11 dxl:text-display-13">
               {title1}
             </span>
             <u>
-              <span className="font-sans text-display-4 dxl:text-display-17">
+              <span className="font-sans text-display-1 xl:text-display-4 dxl:text-display-17">
                 {title2}
               </span>
             </u>

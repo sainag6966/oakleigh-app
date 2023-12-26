@@ -88,6 +88,14 @@ module.exports = {
             letterSpacing: '0rem',
           },
         ],
+        'display-10': [
+          '1.25rem',
+          {
+            fontWeight: '400',
+            lineHeight: '2.125rem',
+            letterSpacing: '0rem',
+          },
+        ],
         'display-11': [
           '1.563rem',
           {

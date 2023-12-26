@@ -15,11 +15,13 @@ function BasketDrawer({
     <div
       className={`absolute left-0 ${
         isFromHeader ? 'top-0 dxl:top-0' : 'top-[-98px] dxl:top-[-160px]'
-      } z-[1] h-full w-full bg-colorBlack bg-opacity-75`}
+      } z-[1] h-screen w-full bg-colorBlack bg-opacity-75`}
     >
-      <div className="absolute right-0 top-0 z-[2] flex h-auto w-auto max-w-[360px] flex-col items-start bg-textPrimary text-footerBg lg:max-w-[817px]">
-        <div className="flex items-center justify-between gap-5 self-stretch bg-footerBg px-[32px] py-[32px] text-textPrimary lg:gap-20 lg:px-[140px] lg:py-[52px]">
-          <p className="text-display-11 lg:text-display-14 ">{headingText}</p>
+      <div className="absolute right-0 top-0 z-[2] flex min-h-screen w-auto max-w-[360px] flex-col items-start bg-textPrimary text-footerBg sm:max-w-[480px] lg:max-w-[817px]">
+        <div className="flex items-center justify-between gap-5 self-stretch bg-footerBg px-[32px] py-[32px] text-textPrimary lg:gap-20 lg:px-[80px] dxl:px-[140px] dxl:py-[52px]">
+          <p className="text-display-11 lg:text-display-13 dxl:text-display-14 ">
+            {headingText}
+          </p>
           <u>
             <p
               onClick={handleClose}
@@ -29,8 +31,8 @@ function BasketDrawer({
             </p>
           </u>
         </div>
-        <div className="h-auto w-full px-[32px] text-footerBg lg:px-[140px]">
-          <div className="flex h-auto w-full gap-[24px] py-[32px] lg:gap-[52px] lg:py-[50px]">
+        <div className="h-auto w-full px-[32px] text-footerBg lg:px-[80px] dxl:px-[140px]">
+          <div className="flex h-auto w-full gap-[24px] py-[32px] sm:gap-[36px] lg:gap-[52px] lg:py-9 dxl:py-[50px]">
             <div className="relative flex h-[231px] w-[220px] items-center justify-between self-stretch lg:w-[194px]">
               <Image
                 src={imageSrc}
@@ -55,11 +57,11 @@ function BasketDrawer({
               </u>
             </div>
           </div>
-          <div className="flex items-center justify-between border-y-[1px] border-search py-[28px] font-sans lg:py-[42px]">
+          <div className="flex items-center justify-between border-y-[1px] border-search py-[28px] font-sans dxl:py-[42px]">
             <p className="text-[19px] font-normal">Total</p>
             <p className="text-display-17 font-semibold">£ {productPrice}</p>
           </div>
-          <div className="flex flex-col gap-[20px] pb-[176px] pt-[32px] font-sans lg:gap-[30px] lg:pt-[50px]">
+          <div className="flex flex-col gap-[20px] pb-[176px] pt-[32px] font-sans lg:gap-[30px] dxl:pt-[50px]">
             <div className="relative flex h-[53px] w-full">
               <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
               <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />

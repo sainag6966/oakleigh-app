@@ -94,7 +94,7 @@ const ProductListing = ({ data }) => {
                         onClick={() => {
                           handleProductClick(item)
                         }}
-                        className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17"
+                        className="relative flex w-full cursor-pointer items-center justify-center font-sans text-display-4 xl:text-display-17"
                       >
                         View Watch
                       </div>
@@ -122,7 +122,7 @@ export async function getServerSideProps(context) {
     const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
     const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
     const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?per_page=50',
+      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?per_page=40',
       {
         method: 'get',
         headers: {
