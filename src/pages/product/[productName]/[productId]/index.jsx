@@ -122,7 +122,7 @@ function ProductDetailPage({ data }) {
                 return (
                   e.key === 'whats_included_text' && (
                     <div className="flex items-center justify-start gap-2">
-                      <p className="font-semibold">What's Included:</p>
+                      <p className="font-semibold">{`What's Included:`}</p>
                       {/* <p className="line-clamp-1">{e.value}</p> */}
                     </div>
                   )
