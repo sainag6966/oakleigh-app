@@ -146,7 +146,7 @@ function Filters() {
             </div>
           )}
         </div>
-        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+        <div className="flex h-auto w-full flex-col gap-8 border-b-[1.5px] border-filterBorder py-[30px]">
           <div className="flex w-full items-center justify-between">
             <p className="text-display-17 xl:text-display-11">Year</p>
             <img
@@ -161,17 +161,15 @@ function Filters() {
             />
           </div>
           {expandYearSec && (
-            <div className="h-[72px] w-full">
-              <MultiRangeSlider
-                min={1600}
-                max={2024}
-                preText={''}
-                postText={''}
-                onChange={({ min, max }) =>
-                  console.log(`min = ${min}, max = ${max}`)
-                }
-              />
-            </div>
+            <MultiRangeSlider
+              min={1600}
+              max={2024}
+              preText={''}
+              postText={''}
+              onChange={({ min, max }) =>
+                console.log(`min = ${min}, max = ${max}`)
+              }
+            />
           )}
         </div>
         <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
@@ -260,7 +258,7 @@ function Filters() {
             </label>
           </div>
         </div>
-        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+        <div className="flex h-auto w-full flex-col gap-8 border-b-[1.5px] border-filterBorder py-[30px]">
           <div className="flex w-full items-center justify-between">
             <p className="text-display-17 xl:text-display-11">PRICE</p>
             <img
@@ -333,7 +331,7 @@ function Filters() {
             </label>
           </div>
         </div>
-        <div className="h-auto w-full border-b-[1.5px] border-filterBorder py-[30px]">
+        <div className="flex h-auto w-full flex-col gap-8 border-b-[1.5px] border-filterBorder py-[30px]">
           <div className="flex w-full items-center justify-between">
             <p className="text-display-17 xl:text-display-11">BRACELET SIZE</p>
             <img

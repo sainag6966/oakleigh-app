@@ -34,17 +34,26 @@
   .sliderTrack,
   .sliderRange {
     height: 1px;
+    max-width: 240px;
+  }
+  @media only screen and (min-width: 1920px) {
+    .sliderRange, 
+    .sliderTrack {
+      max-width: 320px;
+    }
   }
   
   .sliderTrack {
-    background-color: #ced4da;
+    background-color: #EDE9E5;
     width: 100%;
     z-index: 1;
+    height: 2px;
   }
   
   .sliderRange {
-    background-color: #0d0e0d;
+    background-color: #242B21;
     z-index: 2;
+    height: 2px;
   }
   
   .sliderLeftValue,

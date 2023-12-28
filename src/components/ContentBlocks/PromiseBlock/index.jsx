@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 function PromiseBlock({ trayData }) {
+  console.log(trayData)
   const promiseIcon = trayData?.top_logo_image
   const promiseImg = trayData?.top_image
   const title = trayData?.top_title

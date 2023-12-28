@@ -41,63 +41,119 @@ const MultiRangeSlider = ({ min, max, onChange, preText, postText }) => {
   }, [minVal, maxVal, onChange])
 
   return (
-    <div className={styles.container}>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={minVal}
-        onChange={(event) => {
-          const value = Math.min(Number(event.target.value), maxVal - 1)
-          setMinVal(value)
-          minValRef.current = value
-        }}
-        className={`${styles.thumb} ${styles.thumbLeft}`}
-        style={{ zIndex: minVal > max - 100 && '5' }}
-      />
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={maxVal}
-        onChange={(event) => {
-          const value = Math.max(Number(event.target.value), minVal + 1)
-          setMaxVal(value)
-          maxValRef.current = value
-        }}
-        className={`${styles.thumb} ${styles.thumbRight}`}
-      />
-
-      <div className={styles.slider}>
+    <div className="relative flex h-auto w-full flex-col gap-5">
+      <div className="relative h-auto w-full">
         <div className={styles.sliderTrack} />
         <div ref={range} className={styles.sliderRange} />
-        <div>
-          <div className={`font-sans ${styles.sliderLeftValue}`}>
+        <input
+          type="range"
+          min={min}
+          max={max}
+          value={minVal}
+          onChange={(event) => {
+            const value = Math.min(Number(event.target.value), maxVal - 1)
+            setMinVal(value)
+            minValRef.current = value
+          }}
+          className={`${styles.thumb} ${styles.thumbLeft}`}
+          style={{ zIndex: minVal > max - 100 && '5' }}
+        />
+        <input
+          type="range"
+          min={min}
+          max={max}
+          value={maxVal}
+          onChange={(event) => {
+            const value = Math.max(Number(event.target.value), minVal + 1)
+            setMaxVal(value)
+            maxValRef.current = value
+          }}
+          className={`${styles.thumb} ${styles.thumbRight}`}
+        />
+      </div>
+      <div className="relative flex h-auto w-full justify-between font-sans">
+        <div className="">
+          {preText}
+          {min}
+          {postText}
+        </div>
+        <div className="flex gap-[6px] font-semibold">
+          <div>
             {preText}
-            {min}
+            {minVal}
             {postText}
           </div>
-          <div className={`font-sans ${styles.sliderLeftMin}`}>
-            <div className="font-sans">
-              {preText}
-              {minVal}
-              {postText}
-            </div>
-            <p>-</p>
-            <div className="font-sans">
-              {preText}
-              {maxVal}
-              {postText}
-            </div>
-          </div>
-          <div className={`font-sans ${styles.sliderRightValue}`}>
+          <p>-</p>
+          <div>
             {preText}
-            {max}
+            {maxVal}
             {postText}
           </div>
         </div>
+        <div className="">
+          {preText}
+          {max}
+          {postText}
+        </div>
       </div>
     </div>
+    // <div className={styles.container}>
+    //   <input
+    //     type="range"
+    //     min={min}
+    //     max={max}
+    //     value={minVal}
+    //     onChange={(event) => {
+    //       const value = Math.min(Number(event.target.value), maxVal - 1)
+    //       setMinVal(value)
+    //       minValRef.current = value
+    //     }}
+    //     className={`${styles.thumb} ${styles.thumbLeft}`}
+    //     style={{ zIndex: minVal > max - 100 && '5' }}
+    //   />
+    //   <input
+    //     type="range"
+    //     min={min}
+    //     max={max}
+    //     value={maxVal}
+    //     onChange={(event) => {
+    //       const value = Math.max(Number(event.target.value), minVal + 1)
+    //       setMaxVal(value)
+    //       maxValRef.current = value
+    //     }}
+    //     className={`${styles.thumb} ${styles.thumbRight}`}
+    //   />
+
+    //   <div className={styles.slider}>
+    //     <div className={styles.sliderTrack} />
+    //     <div ref={range} className={styles.sliderRange} />
+    //     <div>
+    //       <div className={`font-sans ${styles.sliderLeftValue}`}>
+    //         {preText}
+    //         {min}
+    //         {postText}
+    //       </div>
+    //       <div className={`font-sans ${styles.sliderLeftMin}`}>
+    //         <div className="font-sans">
+    //           {preText}
+    //           {minVal}
+    //           {postText}
+    //         </div>
+    //         <p>-</p>
+    //         <div className="font-sans">
+    //           {preText}
+    //           {maxVal}
+    //           {postText}
+    //         </div>
+    //       </div>
+    //       <div className={`font-sans ${styles.sliderRightValue}`}>
+    //         {preText}
+    //         {max}
+    //         {postText}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   )
 }
 

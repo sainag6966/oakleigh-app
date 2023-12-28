@@ -37,6 +37,7 @@ function HeaderDweb({ data }) {
   const handleMenuClick = (item) => {
     setOpenLoginModal(false)
     setOpenSearchModal(false)
+    document.body.classList.remove('no-scroll')
     if (item?.title?.rendered === 'Shop By Brand') {
       document.body.classList.add('no-scroll')
       setOpenBrandDropdown(!openBrandDropdown)
