@@ -6,6 +6,7 @@ import InstallmentButton from '@/reuseComps/InstallmentButton'
 import ImageComp from '@/reuseComps/ImageComp'
 import ApplePayButton from '@/reuseComps/ApplePayButton'
 import SmallPromiseBlock from '@/components/ContentBlocks/SmallPromiseBlock'
+import ProductMeta from '@/components/ProductMeta'
 
 function ProductDetailPage({ data }) {
   const { price, name } = data
@@ -83,7 +84,7 @@ function ProductDetailPage({ data }) {
           </li>
         </nav>
       </nav>
-      <section className="h-auto w-full">
+      <section className="flex h-auto w-full flex-col gap-[70px]">
         <section className="flex h-auto w-full items-start justify-between gap-[168px]">
           <section className="grid-rows-auto flex-1.1 grid grid-cols-2 gap-[30px]">
             {imageList.map((image, index) => {
@@ -156,6 +157,16 @@ function ProductDetailPage({ data }) {
             <SmallPromiseBlock />
           </section>
         </section>
+        <section className="h-auto w-[804px]">
+          {/* <iframe
+            src="https://player.vimeo.com/video/882553386"
+            width="804"
+            height="360"
+            allowFullScreen
+            controls={0}
+          ></iframe> */}
+        </section>
+        <ProductMeta />
       </section>
     </main>
     // <div className="relative flex h-auto w-full flex-col gap-4">

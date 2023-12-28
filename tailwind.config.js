@@ -178,6 +178,7 @@ module.exports = {
         uspBlockBackground: '#CDAA72',
         filterBorder: '#EDE9E5',
         colorBlack: '#000000',
+        metaBorder: '#EAEAEA',
       },
     },
   },
