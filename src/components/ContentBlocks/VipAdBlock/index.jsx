@@ -146,7 +146,7 @@ function VipAdBlock() {
       </div>
       <div className="relative mt-[60px] flex w-full flex-col items-center justify-around gap-6 bg-uspBlockBackground px-[44px] py-[60px] lg:mt-[0px] lg:w-[35%] lg:p-5 xl:w-[30%] xl:p-[40px] dxl:p-[60px]">
         <img src={vipIcon} alt="vipIcon"></img>
-        <p className="text-center text-display-13 dxl:text-display-15">
+        <p className="max-w-[204px] text-center text-display-13 xl:max-w-[300px] xl:text-display-15">
           JOIN THE VIP CLUB
         </p>
         <p className="text-center text-display-6">

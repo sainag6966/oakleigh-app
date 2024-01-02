@@ -19,9 +19,9 @@ function HeaderBanner({ trayData }) {
         <div className="max-w-[420px] xl:max-w-[740px] dxl:max-w-[980px]">
           <p>{title}</p>
         </div>
-        <div className="xl:[263px] relative flex h-[53px] w-[215px]">
-          <div className="absolute bottom-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[260]"></div>
-          <div className="absolute right-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[260]"></div>
+        <div className="relative flex h-[53px] w-[215px] xl:w-[263px]">
+          <div className="absolute bottom-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[260px]"></div>
+          <div className="absolute right-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[260px]"></div>
           <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
             {buttonTitle}
           </div>

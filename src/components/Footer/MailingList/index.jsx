@@ -6,7 +6,7 @@ function MailingList() {
       </h1>
       <form
         id="subscribeForm"
-        className="flex flex-col gap-[15px]"
+        className="flex flex-col gap-[15px] font-sans text-display-6"
         action="#"
         method="post"
       >
@@ -14,7 +14,7 @@ function MailingList() {
           type="text"
           id="name"
           name="name"
-          placeholder="Your Name"
+          placeholder="Your name"
           required
           className="h-[50px] w-full pl-[30px]"
         />
@@ -22,14 +22,14 @@ function MailingList() {
           type="email"
           id="email"
           name="email"
-          placeholder="Your Email Address"
+          placeholder="Your email address"
           required
           className="h-[50px] w-full pl-[30px]"
         />
 
-        <div className="flex h-[50px] items-center justify-between gap-5">
+        <div className="flex h-[53px] w-full items-center justify-between gap-5">
           <div className="flex items-center justify-center gap-2">
-            <div className="h-[15px] w-[15px]">
+            <div className="flex h-[15px] w-[15px] items-center justify-between">
               <input
                 type="checkbox"
                 id="subscribeCheckbox"
@@ -40,18 +40,25 @@ function MailingList() {
             </div>
             <label
               for="subscribeCheckbox"
-              className="font-sans text-[10px] dxl:text-[12px]"
+              className="font-sans text-[10px] leading-normal dxl:text-[12px]"
             >
               I consent to receiving marketing communication
             </label>
           </div>
-          <div className="relative flex h-12 w-36 max-w-[150px] items-center justify-center border-[1px] border-white">
+          {/* <div className="relative flex h-12 w-36 max-w-[150px] items-center justify-center border-[1px] border-white">
             <button
               type="submit"
               className="absolute right-1 top-1 h-full w-full border-[1px] font-sans text-display-4 xl:text-display-17"
             >
               Subscribe
             </button>
+          </div> */}
+          <div className="relative flex h-[53px] w-[215px] xl:w-[187px]">
+            <div className="absolute bottom-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[184px]"></div>
+            <div className="absolute right-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[184px]"></div>
+            <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
+              Subscribe
+            </div>
           </div>
         </div>
       </form>

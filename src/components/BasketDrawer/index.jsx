@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 function BasketDrawer({
   imageSrc,
   productName,
@@ -8,15 +9,15 @@ function BasketDrawer({
 }) {
   const copyRightIcons = '/Images/copyRightImg.svg'
   const headingText = isFromHeader ? 'YOUR BASKET' : 'ADDED TO BASKET'
+  const router = useRouter()
   const handleClose = () => {
     setIsBasketOpen(false)
     document.body.classList.remove('no-scroll')
   }
   return (
     <div
-      className={`absolute left-0 ${
-        isFromHeader ? 'top-0 dxl:top-0' : 'top-[-98px] dxl:top-[-160px]'
-      } z-[1] h-screen w-full overflow-y-scroll bg-colorBlack bg-opacity-75`}
+      className="absolute left-0 top-0 z-[1]
+       h-screen w-full overflow-y-scroll bg-colorBlack bg-opacity-75 dxl:top-0"
     >
       <div className="absolute right-0 top-0 z-[2] flex min-h-screen w-auto max-w-[360px] flex-col items-start bg-textPrimary text-footerBg sm:max-w-[480px] lg:max-w-[817px]">
         <div className="flex items-center justify-between gap-5 self-stretch bg-footerBg px-[32px] py-[32px] text-textPrimary lg:gap-20 lg:px-[80px] dxl:px-[140px] dxl:py-[52px]">
@@ -71,7 +72,12 @@ function BasketDrawer({
                 Proceed To Checkout
               </div>
             </div>
-            <div className="relative flex h-[53px] w-full">
+            <div
+              className="relative flex h-[53px] w-full"
+              onClick={() => {
+                router.push('/your-basket')
+              }}
+            >
               <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]"></div>
               <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]"></div>
               <div className="relative flex w-full items-center justify-center text-display-4 text-footerBg xl:text-display-17">

@@ -3,31 +3,37 @@ import { useEffect, useState } from 'react'
 
 function YourBasket() {
   const [data, setData] = useState([])
-  // const [cartKey, setCartKey] = useState('')
+  const [nonce, setNonce] = useState('')
 
   useEffect(() => {
-    const fetchData = async () => {
-      const cartKey = localStorage.getItem('cartKey')
+    const getNouce = async () => {
       try {
-        // const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
-        // const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
-        const response = await axios.get(
-          `https://oakleigh.cda-development3.co.uk/cms/wp-json/cocart/v2/cart?cart_key=${cartKey}`,
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
           {
-            headers: {
-              'Content-Type': 'application/json',
-              // Authorization: 'Basic ' + btoa(username + ':' + password),
-            },
+            method: 'get',
           },
         )
-        const newData = response.data
-        setData(newData)
+
+        if (response.ok) {
+          const data = await response.json()
+          const nonceid = data?.Nonce
+          setNonce(nonceid)
+        } else {
+          console.error(
+            'Failed to add item to the basket. Status:',
+            response.status,
+          )
+          const errorData = await response.json()
+          console.error('Error Details:', errorData)
+        }
       } catch (error) {
-        console.error('Error fetching data:', error)
+        console.error('Error:', error)
       }
     }
+    // getNouce()
     fetchData()
-  }, [])
+  }, [nonce])
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import Toast from '@/reuseComps/ToastMessage'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import BasketDrawer from '@/components/BasketDrawer'
 import InstallmentButton from '@/reuseComps/InstallmentButton'
@@ -7,6 +7,8 @@ import ImageComp from '@/reuseComps/ImageComp'
 import ApplePayButton from '@/reuseComps/ApplePayButton'
 import SmallPromiseBlock from '@/components/ContentBlocks/SmallPromiseBlock'
 import ProductMeta from '@/components/ProductMeta'
+import CustomVimeoPlayer from '@/reuseComps/CustomVimeoPlayer'
+import axios from 'axios'
 
 function ProductDetailPage({ data }) {
   const { price, name } = data
@@ -14,6 +16,8 @@ function ProductDetailPage({ data }) {
   const [toastMessage, setToastMessage] = useState('')
   const [loadingToast, setLoadingToast] = useState(false)
   const [isBasketOpen, setIsBasketOpen] = useState(false)
+  const [nonce, setNonce] = useState('')
+  const vimeoVideoId = '884473540'
   const requiredMeta = [
     'product_year',
     'whats_included_text',
@@ -26,20 +30,73 @@ function ProductDetailPage({ data }) {
   const imageList = data?.images
   const productPrice = data?.price
 
+  useEffect(() => {
+    const getNouce = async () => {
+      try {
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
+          {
+            method: 'get',
+          },
+        )
+
+        if (response.ok) {
+          const data = await response.json()
+          const nonceid = data?.Nonce
+          setNonce(nonceid)
+        } else {
+          console.error(
+            'Failed to add item to the basket. Status:',
+            response.status,
+          )
+          const errorData = await response.json()
+          console.error('Error Details:', errorData)
+        }
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    }
+    const fetchData = async () => {
+      try {
+        // const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
+        // const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
+        const response = await axios.get(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
+          {
+            headers: {
+              // 'Content-Type': 'application/json',
+              Nonce: nonce,
+              // Cookie:
+              //   'woocommerce_cart_hash=3daa5241d2ecc0595b52f840cbdd5635; woocommerce_items_in_cart=1; wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea=t_8d076334fd9589fcef3820d939eb66%7C%7C1704353532%7C%7C1704349932%7C%7C65aac11c2dbc3fdee36b6bdf5c1fc4f5',
+            },
+          },
+        )
+        const newData = response?.data
+        console.log(response, '111')
+        // setData(newData)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    getNouce()
+    fetchData()
+  }, [])
+
   const handleAddToBasket = async () => {
-    const productId = String(data?.id)
-    const quantity = '1'
+    const productId = data?.id
+    const quantity = 1
     const productData = { id: productId, quantity: quantity }
     try {
       //   const username = 'oakleighcdadevel'
       //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
       setLoadingToast(true)
       const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/cocart/v2/cart/add-item',
+        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/add-item',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Nonce: nonce,
             // Authorization: 'Basic ' + btoa(username + ':' + password),
           },
           body: JSON.stringify(productData),
@@ -157,17 +214,28 @@ function ProductDetailPage({ data }) {
             <SmallPromiseBlock />
           </section>
         </section>
-        <section className="h-auto w-[804px]">
-          {/* <iframe
-            src="https://player.vimeo.com/video/882553386"
-            width="804"
-            height="360"
-            allowFullScreen
-            controls={0}
-          ></iframe> */}
+        <section className="h-[452px] w-[804px]">
+          <CustomVimeoPlayer videoId={vimeoVideoId} width={804} height={452} />
         </section>
         <ProductMeta />
       </section>
+      {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
+      <div className="h-auto w-full">
+        <Toast
+          message={toastMessage}
+          showToast={showToast}
+          setShowToast={setShowToast}
+        />
+      </div>
+      {isBasketOpen && (
+        <BasketDrawer
+          imageSrc={imgSrc}
+          productName={data?.name}
+          productPrice={productPrice}
+          setIsBasketOpen={setIsBasketOpen}
+          isFromHeader={false}
+        />
+      )}
     </main>
     // <div className="relative flex h-auto w-full flex-col gap-4">
     //   <p>product name : {data?.name}</p>

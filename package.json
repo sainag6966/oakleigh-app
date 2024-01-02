@@ -9,6 +9,7 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@vimeo/player": "^2.20.1",
     "axios": "^1.6.2",
     "next": "14.0.3",
     "nextjs-progressbar": "^0.0.16",
@@ -16,7 +17,8 @@
     "react-dom": "^18",
     "react-responsive": "^9.0.2",
     "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
