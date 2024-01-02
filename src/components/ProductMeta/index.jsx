@@ -76,9 +76,12 @@ function ProductMeta() {
 
   return (
     <section className="flex h-auto w-[804px] flex-col">
-      {metaArr.map((e) => {
+      {metaArr.map((e, index) => {
         return (
-          <section className="border-metaBorder h-auto w-full border-y-[1px] py-[30px]">
+          <section
+            key={index}
+            className="h-auto w-full border-y-[1px] border-metaBorder py-[30px]"
+          >
             <section
               className="flex items-center justify-between"
               onClick={() => {
