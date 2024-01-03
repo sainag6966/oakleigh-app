@@ -95,7 +95,7 @@ function ProductDetailPage({ data }) {
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/json',
             Nonce: nonce,
             // Authorization: 'Basic ' + btoa(username + ':' + password),
           },

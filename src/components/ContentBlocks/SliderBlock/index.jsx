@@ -87,7 +87,7 @@ function SliderBlock() {
             return (
               <div
                 key={index}
-                className="flex h-auto w-full flex-col px-0 lg:px-3 dxl:px-6"
+                className="flex h-auto w-full flex-col px-0 lg:px-3 dxl:px-8"
               >
                 <div className="relative flex h-[428px] w-full flex-col items-center justify-between dxl:h-[544px]">
                   <Image

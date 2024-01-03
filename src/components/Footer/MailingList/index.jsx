@@ -15,7 +15,6 @@ function MailingList() {
           id="name"
           name="name"
           placeholder="Your name"
-          required
           className="h-[50px] w-full pl-[30px]"
         />
         <input
@@ -23,12 +22,11 @@ function MailingList() {
           id="email"
           name="email"
           placeholder="Your email address"
-          required
           className="h-[50px] w-full pl-[30px]"
         />
 
         <div className="flex h-[53px] w-full items-center justify-between gap-5">
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex flex-1 items-center justify-start gap-2">
             <div className="flex h-[15px] w-[15px] items-center justify-between">
               <input
                 type="checkbox"
@@ -53,10 +51,10 @@ function MailingList() {
               Subscribe
             </button>
           </div> */}
-          <div className="relative flex h-[53px] w-[215px] xl:w-[187px]">
-            <div className="absolute bottom-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[184px]"></div>
-            <div className="absolute right-0 h-[50px] w-[212px] border-[0.5px] border-textPrimary xl:w-[184px]"></div>
-            <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
+          <div className="relative flex h-[49px] w-[143px] cursor-pointer dxl:h-[53px] dxl:w-[187px]">
+            <div className="absolute bottom-0 h-[46px] w-[140px] border-[0.5px] border-textPrimary dxl:h-[50px] dxl:w-[184px]"></div>
+            <div className="absolute right-0 h-[46px] w-[140px] border-[0.5px] border-textPrimary dxl:h-[50px] dxl:w-[184px]"></div>
+            <div className="relative flex w-full items-center justify-center font-sans text-display-4 dxl:text-display-17">
               Subscribe
             </div>
           </div>
