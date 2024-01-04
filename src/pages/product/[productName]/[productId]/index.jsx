@@ -1,6 +1,7 @@
 import Toast from '@/reuseComps/ToastMessage'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Cookies from 'js-cookie'
 import BasketDrawer from '@/components/BasketDrawer'
 import InstallmentButton from '@/reuseComps/InstallmentButton'
 import ImageComp from '@/reuseComps/ImageComp'
@@ -31,6 +32,17 @@ function ProductDetailPage({ data }) {
   const productPrice = data?.price
 
   useEffect(() => {
+    Cookies.set('woocommerce_items_in_cart', '1', { expires: 7 })
+    Cookies.set('woocommerce_cart_hash', 'e6c0eb6d73b547652811d739079d2a10', {
+      expires: 7,
+    })
+    Cookies.set(
+      'wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea',
+      't_9ca03c2ca695bcb83142cc77df4d18%7C%7C1704522677%7C%7C1704519077%7C%7Cf1ee9b509af174e8e332660dc2b0108a',
+      {
+        expires: 7,
+      },
+    )
     const getNouce = async () => {
       try {
         const response = await fetch(
@@ -43,6 +55,7 @@ function ProductDetailPage({ data }) {
         if (response.ok) {
           const data = await response.json()
           const nonceid = data?.Nonce
+          localStorage.setItem('nonce', nonceid)
           setNonce(nonceid)
         } else {
           console.error(
@@ -56,35 +69,12 @@ function ProductDetailPage({ data }) {
         console.error('Error:', error)
       }
     }
-    const fetchData = async () => {
-      try {
-        // const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
-        // const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
-        const response = await axios.get(
-          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
-          {
-            headers: {
-              // 'Content-Type': 'application/json',
-              Nonce: nonce,
-              // Cookie:
-              //   'woocommerce_cart_hash=3daa5241d2ecc0595b52f840cbdd5635; woocommerce_items_in_cart=1; wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea=t_8d076334fd9589fcef3820d939eb66%7C%7C1704353532%7C%7C1704349932%7C%7C65aac11c2dbc3fdee36b6bdf5c1fc4f5',
-            },
-          },
-        )
-        const newData = response?.data
-        console.log(response, '111')
-        // setData(newData)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
     getNouce()
-    fetchData()
   }, [])
 
   const handleAddToBasket = async () => {
-    const productId = data?.id
-    const quantity = 1
+    const productId = String(data?.id)
+    const quantity = '1'
     const productData = { id: productId, quantity: quantity }
     try {
       //   const username = 'oakleighcdadevel'
@@ -95,15 +85,19 @@ function ProductDetailPage({ data }) {
         {
           method: 'POST',
           headers: {
-            // 'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             Nonce: nonce,
             // Authorization: 'Basic ' + btoa(username + ':' + password),
           },
+          credentials: 'include',
+          // SameSite: 'None',
+          // credentials: 'include',
           body: JSON.stringify(productData),
         },
       )
 
       if (response.ok) {
+        console.log(response)
         // Handle success (e.g., redirect to a success page)
         const data = await response.json()
         const cartKey = data?.cart_key
