@@ -76,6 +76,8 @@ function ProductDetailPage({ data }) {
     const productId = String(data?.id)
     const quantity = '1'
     const productData = { id: productId, quantity: quantity }
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
     try {
       //   const username = 'oakleighcdadevel'
       //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
@@ -87,6 +89,7 @@ function ProductDetailPage({ data }) {
           headers: {
             'Content-Type': 'application/json',
             Nonce: nonce,
+            // Authorization: `Bearer ${token}`,
             // Authorization: 'Basic ' + btoa(username + ':' + password),
           },
           credentials: 'include',
