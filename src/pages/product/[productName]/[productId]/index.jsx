@@ -103,7 +103,6 @@ function ProductDetailPage({ data }) {
       )
 
       if (response.ok) {
-        console.log(response)
         // Handle success (e.g., redirect to a success page)
         const data = await response.json()
         const cartKey = data?.cart_key
@@ -129,7 +128,7 @@ function ProductDetailPage({ data }) {
     }
   }
   return (
-    <main className="flex h-auto w-full flex-col items-center justify-between gap-[50px] px-[141px] pt-[25px] text-footerBg">
+    <main className="flex h-auto w-full flex-col items-center justify-between gap-[50px] px-10 pt-[25px] text-footerBg dxl:px-[141px]">
       <nav aria-label="Breadcrumb" role="navigation" className="w-full">
         <nav className="flex w-full list-none gap-1 font-sans text-[15px]">
           <li>
@@ -142,24 +141,31 @@ function ProductDetailPage({ data }) {
         </nav>
       </nav>
       <section className="flex h-auto w-full flex-col gap-[70px]">
-        <section className="flex h-auto w-full items-start justify-between gap-[168px]">
-          <section className="grid-rows-auto flex-1.1 grid grid-cols-2 gap-[30px]">
+        <section className="flex h-auto w-full flex-col items-start justify-between gap-8 lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
+          <section className="grid-rows-auto flex-1.3 grid grid-cols-2 gap-4 dxl:gap-[30px]">
             {imageList.map((image, index) => {
               return (
-                <figure key={index} className="relative h-[458px] w-[387px]">
+                <figure
+                  key={index}
+                  className="relative h-[280px] w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
+                >
                   <ImageComp src={image.src} alt={'productImg'} />
                 </figure>
               )
             })}
           </section>
-          <section className="flex flex-1 flex-col gap-[30px] font-sans">
-            <h1 className="font-cormorant text-display-14">{name}</h1>
-            <h5 className="text-display-11 font-semibold">£{price}</h5>
-            <section className="flex items-center justify-between border-y-[1px] border-search py-[30px] text-display-6">
+          <section className="flex flex-1 flex-col gap-5 font-sans dxl:gap-[30px]">
+            <h1 className="font-cormorant text-display-11 xl:text-display-12 dxl:text-display-14">
+              {name}
+            </h1>
+            <h5 className="text-display-3 font-semibold xl:text-display-17 dxl:text-display-11">
+              £{price}
+            </h5>
+            <section className="flex items-center justify-between border-y-[1px] border-search py-5 text-[11px] xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
               {requiredMetaData.map((e) => {
                 return (
                   e.key === 'product_reference' && (
-                    <div className="flex items-center justify-start gap-2">
+                    <div className="flex items-center justify-start gap-1 dxl:gap-2">
                       <p className="font-semibold">Ref No:</p>
                       <p>{e.value}</p>
                     </div>
@@ -194,12 +200,12 @@ function ProductDetailPage({ data }) {
               <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
               <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />
               <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-[47px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:w-[99%]" />
-              <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary xl:text-display-17">
+              <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
                 Add To Basket
               </div>
             </section>
-            <section className="flex h-auto w-full items-center justify-between gap-[30px]">
-              <div className="flex-1">
+            <section className="flex h-auto w-full items-center justify-between gap-2 xl:gap-5 txl:gap-[30px]">
+              <div className="flex-1 ">
                 <InstallmentButton />
               </div>
               <div>
@@ -207,7 +213,7 @@ function ProductDetailPage({ data }) {
               </div>
             </section>
             <section className="h-auto w-full">
-              <p className="text-display-6">
+              <p className="text-display-1 xl:text-display-3 dxl:text-display-6">
                 Lorem ipsum dolor sit amet finance <u>website link here</u>
               </p>
             </section>

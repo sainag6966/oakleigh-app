@@ -1,8 +1,16 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Vimeo from '@vimeo/player'
+import ImageComp from '../ImageComp'
 
 const CustomVimeoPlayer = ({ videoId, width, height }) => {
   const playerRef = useRef(null)
+  const [play, setPlay] = useState(false)
+  const playIcon = '/Images/playIcon.svg'
+  const pauseIcon = '/Images/pauseIcon.svg'
+
+  const setPlayPause = () => {
+    setPlay(!play)
+  }
 
   useEffect(() => {
     // Initialize Vimeo player
@@ -35,10 +43,22 @@ const CustomVimeoPlayer = ({ videoId, width, height }) => {
   }, [videoId])
 
   return (
-    <div className="relativeh-full w-full">
-      <div id="player-element"></div>
-      <button id="playPauseButton">Play/Pause</button>
-    </div>
+    <main className="relative h-full w-full">
+      <section id="player-element" className="relative">
+        <section
+          id="playPauseButton"
+          className="absolute bottom-5 left-7  z-[1] flex items-center justify-center gap-4 text-display-11 text-textPrimary"
+          onClick={setPlayPause}
+        >
+          <section className="flex h-10 w-10 items-center justify-center rounded-[20px] border-2 border-textPrimary">
+            <figure className="relative h-3 w-3">
+              <ImageComp src={play ? pauseIcon : playIcon} alt={'play/pause'} />
+            </figure>
+          </section>
+          <button id="playPauseButton">{play ? 'PAUSE' : 'PLAY'}</button>
+        </section>
+      </section>
+    </main>
   )
 }
 
