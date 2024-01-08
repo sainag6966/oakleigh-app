@@ -32,17 +32,17 @@ function ProductDetailPage({ data }) {
   const productPrice = data?.price
 
   useEffect(() => {
-    Cookies.set('woocommerce_items_in_cart', '1', { expires: 7 })
-    Cookies.set('woocommerce_cart_hash', 'e6c0eb6d73b547652811d739079d2a10', {
-      expires: 7,
-    })
-    Cookies.set(
-      'wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea',
-      't_9ca03c2ca695bcb83142cc77df4d18%7C%7C1704522677%7C%7C1704519077%7C%7Cf1ee9b509af174e8e332660dc2b0108a',
-      {
-        expires: 7,
-      },
-    )
+    // Cookies.set('woocommerce_items_in_cart', '1', { expires: 7 })
+    // Cookies.set('woocommerce_cart_hash', 'e6c0eb6d73b547652811d739079d2a10', {
+    //   expires: 7,
+    // })
+    // Cookies.set(
+    //   'wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea',
+    //   't_9ca03c2ca695bcb83142cc77df4d18%7C%7C1704522677%7C%7C1704519077%7C%7Cf1ee9b509af174e8e332660dc2b0108a',
+    //   {
+    //     expires: 7,
+    //   },
+    // )
     const getNouce = async () => {
       try {
         const response = await fetch(
@@ -92,9 +92,12 @@ function ProductDetailPage({ data }) {
             // Authorization: `Bearer ${token}`,
             // Authorization: 'Basic ' + btoa(username + ':' + password),
           },
+          // params: {
+          //   inSecure: 'cool',
+          //   SameSite: 'Strict',
+          // },
+          // withCredentials: true,
           credentials: 'include',
-          // SameSite: 'None',
-          // credentials: 'include',
           body: JSON.stringify(productData),
         },
       )
@@ -178,7 +181,7 @@ function ProductDetailPage({ data }) {
                   e.key === 'whats_included_text' && (
                     <div className="flex items-center justify-start gap-2">
                       <p className="font-semibold">{`What's Included:`}</p>
-                      {/* <p className="line-clamp-1">{e.value}</p> */}
+                      <p className="line-clamp-1">Box & Papers</p>
                     </div>
                   )
                 )

@@ -125,6 +125,7 @@ export async function getServerSideProps(context) {
       'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?per_page=20',
       {
         method: 'get',
+        credentials: 'include',
         headers: {
           'Content-Type': 'text/plain',
           Authorization: 'Basic ' + btoa(username + ':' + password),

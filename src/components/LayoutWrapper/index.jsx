@@ -18,6 +18,7 @@ function LayoutWrapper({ children }) {
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18',
         {
           method: 'get',
+          // credentials: 'include',
           headers: {
             'Content-Type': 'text/plain',
             Authorization: 'Basic ' + btoa(username + ':' + password),

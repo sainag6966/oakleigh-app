@@ -74,12 +74,12 @@ export async function getServerSideProps(context) {
           // Authorization: 'Basic ' + btoa(username + ':' + password),
           // Authorization: `Bearer ${nonce}`,
           // Authorization: `Bearer ${nonce}`,
-          Cookie:
-            'wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea=t_16d949e4b202a375cf1af9e85cce4e%257C%257C1704440878%257C%257C1704437278%257C%257C284262df850ecf68420b695b5fbc5eab',
+          // Cookie:
+          //   'wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea=t_16d949e4b202a375cf1af9e85cce4e%257C%257C1704440878%257C%257C1704437278%257C%257C284262df850ecf68420b695b5fbc5eab',
           // 'Access-Control-Allow-Origin': 'your-client-origin',
           // 'Access-Control-Allow-Credentials': true,
         },
-        // credentials: 'same-origin',
+        credentials: 'include',
         // withCredentials: true,
       },
     )
