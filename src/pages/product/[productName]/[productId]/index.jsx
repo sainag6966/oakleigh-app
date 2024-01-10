@@ -9,6 +9,7 @@ import ApplePayButton from '@/reuseComps/ApplePayButton'
 import SmallPromiseBlock from '@/components/ContentBlocks/SmallPromiseBlock'
 import ProductMeta from '@/components/ProductMeta'
 import CustomVimeoPlayer from '@/reuseComps/CustomVimeoPlayer'
+import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 
 function ProductDetailPage({ data }) {
@@ -18,6 +19,8 @@ function ProductDetailPage({ data }) {
   const [loadingToast, setLoadingToast] = useState(false)
   const [isBasketOpen, setIsBasketOpen] = useState(false)
   const [nonce, setNonce] = useState('')
+  const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+
   const vimeoVideoId = '884473540'
   const requiredMeta = [
     'product_year',
@@ -128,9 +131,9 @@ function ProductDetailPage({ data }) {
     }
   }
   return (
-    <main className="flex h-auto w-full flex-col items-center justify-between gap-[50px] px-10 pt-[25px] text-footerBg dxl:px-[141px]">
+    <main className="flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] dxl:px-[141px]">
       <nav aria-label="Breadcrumb" role="navigation" className="w-full">
-        <nav className="flex w-full list-none gap-1 font-sans text-[15px]">
+        <nav className="flex w-full list-none gap-1 font-sans text-display-1 lg:text-[15px]">
           <li>
             <a>BREADCRUMB</a>
           </li>
@@ -147,7 +150,7 @@ function ProductDetailPage({ data }) {
               return (
                 <figure
                   key={index}
-                  className="relative h-[280px] w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
+                  className="relative h-[204px] w-[172px] lg:h-[280px] lg:w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
                 >
                   <ImageComp src={image.src} alt={'productImg'} />
                 </figure>
@@ -155,7 +158,7 @@ function ProductDetailPage({ data }) {
             })}
           </section>
           <section className="flex flex-1 flex-col gap-5 font-sans dxl:gap-[30px]">
-            <h1 className="font-cormorant text-display-11 xl:text-display-12 dxl:text-display-14">
+            <h1 className="font-cormorant text-display-12 dxl:text-display-14">
               {name}
             </h1>
             <h5 className="text-display-3 font-semibold xl:text-display-17 dxl:text-display-11">
@@ -220,10 +223,10 @@ function ProductDetailPage({ data }) {
             <SmallPromiseBlock />
           </section>
         </section>
-        <section className="h-[452px] w-[804px]">
+        {/* <section className="h-[452px] w-[804px]">
           <CustomVimeoPlayer videoId={vimeoVideoId} width={804} height={452} />
         </section>
-        <ProductMeta />
+        <ProductMeta /> */}
       </section>
       {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
       <div className="h-auto w-full">

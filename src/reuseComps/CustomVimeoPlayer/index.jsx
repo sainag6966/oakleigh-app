@@ -47,7 +47,7 @@ const CustomVimeoPlayer = ({ videoId, width, height }) => {
       <section id="player-element" className="relative">
         <section
           id="playPauseButton"
-          className="absolute bottom-5 left-7  z-[1] flex items-center justify-center gap-4 text-display-11 text-textPrimary"
+          className="absolute bottom-5 left-7  z-[1] flex cursor-pointer items-center justify-center gap-4 text-display-11 text-textPrimary"
           onClick={setPlayPause}
         >
           <section className="flex h-10 w-10 items-center justify-center rounded-[20px] border-2 border-textPrimary">
