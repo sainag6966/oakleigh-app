@@ -47,11 +47,20 @@ function ProductDetailPage({ data }) {
     //   },
     // )
     const getNouce = async () => {
+      const loginToken = localStorage.getItem('loginToken')
+      console.log(loginToken, '!!! logintoken')
+      const headers = {}
+
+      // Check if loginToken is available
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
       try {
         const response = await fetch(
           'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
           {
             method: 'get',
+            headers,
           },
         )
 

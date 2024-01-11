@@ -7,7 +7,7 @@ function YourBasket() {
   useEffect(() => {
     const fetchData = async () => {
       const nonce = localStorage.getItem('nonce')
-      console.log(nonce, '!!!')
+      console.log(nonce, '!!! nonce')
       try {
         const response = await fetch(
           'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
@@ -21,7 +21,7 @@ function YourBasket() {
           },
         )
         const data = await response.json()
-        console.log(data, '!!!')
+        console.log(data, '!!! data')
         setData(newData)
       } catch (error) {
         console.error('Error fetching data:', error)

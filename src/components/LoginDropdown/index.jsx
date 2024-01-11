@@ -35,6 +35,7 @@ function LoginDropdown({ handleSuccessfulLogin }) {
         if (token) {
           handleSuccessfulLogin()
           router.push('/profile-page')
+          localStorage.setItem('loginToken', token)
         }
         console.log('Signup successful!')
       } else {
