@@ -145,14 +145,23 @@ function ProductDetailPage({ data }) {
       </nav>
       <section className="flex h-auto w-full flex-col gap-[70px]">
         <section className="flex h-auto w-full flex-col items-start justify-between gap-8 lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
-          <section className="grid-rows-auto flex-1.3 grid grid-cols-2 gap-4 dxl:gap-[30px]">
+          <section className="grid-rows-auto grid flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
             {imageList.map((image, index) => {
               return (
                 <figure
                   key={index}
-                  className="relative h-[204px] w-[172px] lg:h-[280px] lg:w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
+                  // className="aspect-[3/4] lg:h-[280px] lg:w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
+                  className="aspect-[3/4]"
                 >
-                  <ImageComp src={image.src} alt={'productImg'} />
+                  {/* <ImageComp src={image.src} alt={'productImg'} /> */}
+                  <Image
+                    src={image.src}
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    objectFit="contain"
+                    className="h-full w-full"
+                  />
                 </figure>
               )
             })}
