@@ -92,7 +92,7 @@ function ProductDetail({ productData }) {
       <section className="flex h-auto w-full flex-col gap-[26px]">
         {productData.map((item, index) => {
           return (
-            <section className="flex h-auto w-full gap-11">
+            <section key={index} className="flex h-auto w-full gap-11">
               <figure
                 key={index}
                 className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] flex-1"
