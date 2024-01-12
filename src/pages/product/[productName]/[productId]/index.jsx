@@ -1,6 +1,7 @@
 import Toast from '@/reuseComps/ToastMessage'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import Cookies from 'js-cookie'
 import BasketDrawer from '@/components/BasketDrawer'
 import InstallmentButton from '@/reuseComps/InstallmentButton'
@@ -35,24 +36,12 @@ function ProductDetailPage({ data }) {
   const productPrice = data?.price
 
   useEffect(() => {
-    // Cookies.set('woocommerce_items_in_cart', '1', { expires: 7 })
-    // Cookies.set('woocommerce_cart_hash', 'e6c0eb6d73b547652811d739079d2a10', {
-    //   expires: 7,
-    // })
-    // Cookies.set(
-    //   'wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea',
-    //   't_9ca03c2ca695bcb83142cc77df4d18%7C%7C1704522677%7C%7C1704519077%7C%7Cf1ee9b509af174e8e332660dc2b0108a',
-    //   {
-    //     expires: 7,
-    //   },
-    // )
     const getNouce = async () => {
       const loginToken = localStorage.getItem('loginToken')
       console.log(loginToken, '!!! logintoken')
       const headers = {}
-
-      // Check if loginToken is available
       if (loginToken) {
+        // Check if loginToken is available
         headers['Authorization'] = `Bearer ${loginToken}`
       }
       try {
@@ -88,8 +77,18 @@ function ProductDetailPage({ data }) {
     const productId = String(data?.id)
     const quantity = '1'
     const productData = { id: productId, quantity: quantity }
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+    const loginToken = localStorage.getItem('loginToken')
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Wc-Store-Api-Nonce': nonce,
+    }
+
+    // Check if loginToken is available
+    if (loginToken) {
+      headers['Authorization'] = `Bearer ${loginToken}`
+    }
+
     try {
       //   const username = 'oakleighcdadevel'
       //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
@@ -98,17 +97,7 @@ function ProductDetailPage({ data }) {
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/add-item',
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Nonce: nonce,
-            // Authorization: `Bearer ${token}`,
-            // Authorization: 'Basic ' + btoa(username + ':' + password),
-          },
-          // params: {
-          //   inSecure: 'cool',
-          //   SameSite: 'Strict',
-          // },
-          // withCredentials: true,
+          headers,
           credentials: 'include',
           body: JSON.stringify(productData),
         },
@@ -154,35 +143,14 @@ function ProductDetailPage({ data }) {
       </nav>
       <section className="flex h-auto w-full flex-col gap-[70px]">
         <section className="flex h-auto w-full flex-col items-start justify-between gap-8 lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
-          <section className="grid-rows-auto grid flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
-            {imageList.map((image, index) => {
-              return (
-                <figure
-                  key={index}
-                  // className="aspect-[3/4] lg:h-[280px] lg:w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
-                  className="aspect-[3/4]"
-                >
-                  {/* <ImageComp src={image.src} alt={'productImg'} /> */}
-                  <Image
-                    src={image.src}
-                    width="0"
-                    height="0"
-                    sizes="100vw"
-                    objectFit="contain"
-                    className="h-full w-full"
-                  />
-                </figure>
-              )
-            })}
-          </section>
-          <section className="flex flex-1 flex-col gap-5 font-sans dxl:gap-[30px]">
+          <section className="flex flex-1 flex-col gap-5 font-sans lg:order-2 dxl:gap-[30px]">
             <h1 className="font-cormorant text-display-12 dxl:text-display-14">
               {name}
             </h1>
-            <h5 className="text-display-3 font-semibold xl:text-display-17 dxl:text-display-11">
+            <h5 className="text-display-10 font-semibold xl:text-display-17 dxl:text-display-11">
               £{price}
             </h5>
-            <section className="flex items-center justify-between border-y-[1px] border-search py-5 text-[11px] xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
+            <section className="flex flex-col items-start justify-between border-0 border-search text-[11px] lg:flex-row lg:items-center lg:border-y-[1px] lg:py-5 xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
               {requiredMetaData.map((e) => {
                 return (
                   e.key === 'product_reference' && (
@@ -240,20 +208,33 @@ function ProductDetailPage({ data }) {
             </section>
             <SmallPromiseBlock />
           </section>
+          <section className="grid-rows-auto grid flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
+            {imageList.map((image, index) => {
+              return (
+                <figure
+                  key={index}
+                  // className="aspect-[3/4] lg:h-[280px] lg:w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
+                  className="aspect-[3/4]"
+                >
+                  <ProgressiveImageComp src={image.src} alt={'productImage'} />
+                </figure>
+              )
+            })}
+          </section>
         </section>
         {/* <section className="h-[452px] w-[804px]">
           <CustomVimeoPlayer videoId={vimeoVideoId} width={804} height={452} />
         </section>
         <ProductMeta /> */}
       </section>
-      {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
+      {/* {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
       <div className="h-auto w-full">
         <Toast
           message={toastMessage}
           showToast={showToast}
           setShowToast={setShowToast}
         />
-      </div>
+      </div> */}
       {isBasketOpen && (
         <BasketDrawer
           imageSrc={imgSrc}

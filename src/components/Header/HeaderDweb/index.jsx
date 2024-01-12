@@ -5,6 +5,7 @@ import LoginDropdown from '@/components/LoginDropdown'
 import SearchDropdown from '@/components/SearchDropdown'
 import LoginPage from '../../LoginAndSignup/LoginPage'
 import { useState } from 'react'
+import { isLoggedIn } from '@/utils/auth'
 import BasketDrawer from '@/components/BasketDrawer'
 import BrandDropdown from '@/components/BrandDropdown'
 
@@ -57,6 +58,10 @@ function HeaderDweb({ data }) {
     document.body.classList.add('no-scroll')
     setOpenBrandDropdown(false)
     if (icon === 'account') {
+      if (isLoggedIn()) {
+        router.push('/profile-page')
+        return
+      }
       if (openLoginModal) {
         document.body.classList.remove('no-scroll')
       }

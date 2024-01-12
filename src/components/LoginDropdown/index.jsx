@@ -33,11 +33,10 @@ function LoginDropdown({ handleSuccessfulLogin }) {
         const responseData = await response.json() // Parse the response body as JSON
         const token = responseData.token
         if (token) {
+          localStorage.setItem('loginToken', token)
           handleSuccessfulLogin()
           router.push('/profile-page')
-          localStorage.setItem('loginToken', token)
         }
-        console.log('Signup successful!')
       } else {
         // Handle errors
         console.error('Signup failed')

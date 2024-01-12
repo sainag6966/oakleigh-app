@@ -1,5 +1,131 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
+
+function BreadCrumb() {
+  return (
+    <nav aria-label="Breadcrumb" role="navigation" className="w-full">
+      <nav className="flex w-full list-none gap-1 font-sans text-display-1">
+        <li>
+          <a>BREADCRUMB</a>
+        </li>
+        <li>/</li>
+        <li>
+          <a>BREADCRUMB</a>
+        </li>
+      </nav>
+    </nav>
+  )
+}
+
+function BasketHead() {
+  return (
+    <section className="flex h-auto w-full items-center justify-between gap-2">
+      <section className="flex-1 text-display-12">Your Basket</section>
+      <section className="relative flex h-[42px] w-full flex-1 font-sans">
+        <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
+        <div className="absolute right-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary lg:w-[99.5%]" />
+        <div className="absolute bottom-[3px] left-[1%] right-[1%] h-[36px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:left-[0.5%] lg:right-[0.5%] lg:w-[99%]" />
+        <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary">
+          Checkout Securely
+        </div>
+      </section>
+    </section>
+  )
+}
+
+function ProductDetail({ productData }) {
+  const handleRemoveItem = async (item) => {
+    const loginToken = localStorage.getItem('loginToken')
+    const nonce = localStorage.getItem('nonce')
+    const itemKey = item?.key
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Wc-Store-Api-Nonce': nonce,
+    }
+
+    // Check if loginToken is available
+    if (loginToken) {
+      headers['Authorization'] = `Bearer ${loginToken}`
+    }
+
+    try {
+      //   const username = 'oakleighcdadevel'
+      //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
+      // setLoadingToast(true)
+      const response = await fetch(
+        `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/remove-item?key=${itemKey}`,
+        {
+          method: 'POST',
+          headers,
+          credentials: 'include',
+        },
+      )
+
+      if (response.ok) {
+        // Handle success (e.g., redirect to a success page)
+        // const data = await response.json()
+        // const cartKey = data?.cart_key
+        // localStorage.setItem('cartKey', cartKey)
+        // setIsBasketOpen(true)
+        // setShowToast(true)
+        // setLoadingToast(false)
+        // setToastMessage('Item has been added to the basket')
+        console.log('Signup successful!')
+      } else {
+        console.error(
+          'Failed to add item to the basket. Status:',
+          response.status,
+        )
+        // setShowToast(true)
+        // setLoadingToast(false)
+        // setToastMessage('Failed to add item to the basket')
+        const errorData = await response.json() // You can log or inspect the error details
+        console.error('Error Details:', errorData)
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    }
+  }
+  return (
+    <section className="flex h-auto w-full flex-col gap-5 border-y-[1.2px] border-y-search py-[30px]">
+      <section className="flex h-auto w-full flex-col gap-[26px]">
+        {productData.map((item, index) => {
+          return (
+            <section className="flex h-auto w-full gap-11">
+              <figure
+                key={index}
+                className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] flex-1"
+              >
+                <ProgressiveImageComp
+                  src={item?.images[1]?.src}
+                  alt={'productImage'}
+                />
+              </figure>
+              <section className="flex flex-1 flex-col gap-2">
+                <p className="text-display-11">{item?.name}</p>
+                <p className="font-sans text-display-16">
+                  £{item?.prices?.regular_price}
+                </p>
+                <p
+                  className="mt-4 font-sans text-display-4"
+                  onClick={() => {
+                    handleRemoveItem(item)
+                  }}
+                >
+                  <u>Remove Item</u>
+                </p>
+              </section>
+            </section>
+          )
+        })}
+        <section className="h-auto w-full py-[30px] font-sans">
+          <u>Continue Shopping</u>
+        </section>
+      </section>
+    </section>
+  )
+}
 
 function YourBasket() {
   const [data, setData] = useState([])
@@ -7,22 +133,26 @@ function YourBasket() {
   useEffect(() => {
     const fetchData = async () => {
       const nonce = localStorage.getItem('nonce')
-      console.log(nonce, '!!! nonce')
+      const loginToken = localStorage.getItem('loginToken')
+      const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+
+      // Check if loginToken is available
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
       try {
+        // const username = 'lejac53041@tanlanav.com'
+        // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
         const response = await fetch(
           'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
           {
             method: 'get',
-            headers: {
-              'Content-Type': 'text/plain',
-              Nonce: nonce,
-            },
+            headers,
             credentials: 'include',
           },
         )
-        const data = await response.json()
-        console.log(data, '!!! data')
-        setData(newData)
+        const responseData = await response.json()
+        setData(responseData)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
@@ -31,11 +161,11 @@ function YourBasket() {
   }, [])
 
   return (
-    <div>
-      {data?.map((e) => {
-        return e?.id
-      })}
-    </div>
+    <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px]">
+      <BreadCrumb />
+      <BasketHead />
+      <ProductDetail productData={data} />
+    </main>
   )
 }
 export default YourBasket
