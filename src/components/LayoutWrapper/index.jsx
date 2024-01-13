@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Footer from '../Footer'
 import FooterTop from '../Footer/FooterTop'
 import Header from '../Header'
+import { getNonce } from '@/utils/nonce'
 import { useMediaQuery } from 'react-responsive'
 
 function LayoutWrapper({ children }) {
@@ -29,6 +30,7 @@ function LayoutWrapper({ children }) {
       setItem(headerData)
     }
     getData()
+    getNonce()
   }, [])
 
   // useEffect(() => {

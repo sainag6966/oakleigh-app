@@ -168,6 +168,7 @@ module.exports = {
         filterBorder: '#EDE9E5',
         colorBlack: '#000000',
         metaBorder: '#EAEAEA',
+        orderSummaryBorder: '#CDC1B6',
       },
     },
   },

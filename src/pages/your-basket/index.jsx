@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
+import CountrySelector from '@/reuseComps/CountrySelector'
 
 function BreadCrumb() {
   return (
@@ -87,8 +89,9 @@ function ProductDetail({ productData }) {
       console.error('Error:', error)
     }
   }
+
   return (
-    <section className="flex h-auto w-full flex-col gap-5 border-y-[1.2px] border-y-search py-[30px]">
+    <section className="flex h-auto w-full flex-col gap-5 border-t-[1.2px] border-y-search pt-[30px]">
       <section className="flex h-auto w-full flex-col gap-[26px]">
         {productData.map((item, index) => {
           return (
@@ -119,9 +122,122 @@ function ProductDetail({ productData }) {
             </section>
           )
         })}
-        <section className="h-auto w-full py-[30px] font-sans">
+        <section className="flex h-auto w-full items-center justify-start border-y-[1.2px] border-y-search py-[30px] font-sans">
           <u>Continue Shopping</u>
         </section>
+      </section>
+    </section>
+  )
+}
+
+function OrderSummary() {
+  const copyRightIcons = '/Images/copyRightImg.svg'
+  const handleSubmit = () => {}
+  const handleChange = () => {}
+  const price = '£13,000.00'
+  return (
+    <section className="flex h-auto w-full flex-col gap-[30px]">
+      <section className="flex h-auto w-full flex-col bg-search p-[30px] text-footerBg">
+        <p className="pb-[25px] text-display-11">Order Summary</p>
+        <section className="border-orderSummaryBorder border-y-[1px] pb-[25px] pt-[10px] font-sans">
+          <p className="text-display-5">Promotion Code</p>
+          <section className="h-auto w-full">
+            <form className="flex h-auto w-full gap-5" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                // id="first_name"
+                name="first_name"
+                value=""
+                placeholder="ENTER CODE"
+                onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-3 py-2 font-sans text-display-3 text-black"
+              />
+              <div className="relative flex h-[41px] w-[110px] font-sans text-display-4">
+                <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
+                <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
+                <button
+                  type="submit"
+                  className="relative flex w-full items-center justify-center"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </section>
+        </section>
+        <section className="flex h-auto w-full flex-col gap-[15px] py-[25px] font-sans">
+          <section className="flex items-center justify-between text-display-5 leading-tight">
+            <p>Subtotal (1 Item)</p>
+            <p>{price}</p>
+          </section>
+          <section className="flex items-center justify-between text-display-3 leading-tight">
+            <p>Promotion Code</p>
+            <section className="flex items-center gap-2 text-display-1 leading-tight">
+              <p>
+                <u>X Remove</u>
+              </p>
+              <p className="text-display-3">-£100.00</p>
+            </section>
+          </section>
+          <section className="flex items-center justify-between text-display-3 leading-tight">
+            <p>Delivery</p>
+            <p>£0.00</p>
+          </section>
+        </section>
+        <section className="border-orderSummaryBorder flex h-auto w-full items-center justify-between border-t-[1px] pt-[25px] font-sans text-display-16">
+          <p>Order Total</p>
+          <p>{price}</p>
+        </section>
+      </section>
+      <section className="relative flex h-[42px] w-full font-sans">
+        <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
+        <div className="absolute right-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary lg:w-[99.5%]" />
+        <div className="absolute bottom-[3px] left-[1%] right-[1%] h-[36px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:left-[0.5%] lg:right-[0.5%] lg:w-[99%]" />
+        <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary">
+          Checkout Securely
+        </div>
+      </section>
+      <section className="flex h-auto w-full items-center justify-center">
+        <NextImage
+          src={copyRightIcons}
+          width="234"
+          height="37"
+          alt="copyRight"
+        />
+      </section>
+    </section>
+  )
+}
+
+function Delivery() {
+  const handleSubmit = () => {}
+  const handleChange = () => {}
+  return (
+    <section className="flex h-auto w-full flex-col gap-5">
+      <p className="text-display-11">Delivery</p>
+      <CountrySelector />
+      <section className="h-auto w-full">
+        <form className="flex h-auto w-full gap-5" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            // id="first_name"
+            name="first_name"
+            value=""
+            placeholder="ENTER POSTCODE"
+            onChange={handleChange}
+            className="h-[41px] w-full flex-1 appearance-none rounded border bg-search px-3 py-2 font-sans text-display-3 text-black"
+          />
+          <div className="relative flex h-[41px] w-[110px] font-sans text-display-4">
+            <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
+            <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
+            <button
+              type="submit"
+              className="relative flex w-full items-center justify-center"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
       </section>
     </section>
   )
@@ -165,6 +281,8 @@ function YourBasket() {
       <BreadCrumb />
       <BasketHead />
       <ProductDetail productData={data} />
+      <Delivery />
+      <OrderSummary />
     </main>
   )
 }

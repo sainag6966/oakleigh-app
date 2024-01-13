@@ -4,6 +4,7 @@ import Image from 'next/image'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import Cookies from 'js-cookie'
 import BasketDrawer from '@/components/BasketDrawer'
+import { getNonce } from '@/utils/nonce'
 import InstallmentButton from '@/reuseComps/InstallmentButton'
 import ImageComp from '@/reuseComps/ImageComp'
 import ApplePayButton from '@/reuseComps/ApplePayButton'
@@ -35,49 +36,16 @@ function ProductDetailPage({ data }) {
   const imageList = data?.images
   const productPrice = data?.price
 
-  useEffect(() => {
-    const getNouce = async () => {
-      const loginToken = localStorage.getItem('loginToken')
-      console.log(loginToken, '!!! logintoken')
-      const headers = {}
-      if (loginToken) {
-        // Check if loginToken is available
-        headers['Authorization'] = `Bearer ${loginToken}`
-      }
-      try {
-        const response = await fetch(
-          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
-          {
-            method: 'get',
-            headers,
-          },
-        )
-
-        if (response.ok) {
-          const data = await response.json()
-          const nonceid = data?.Nonce
-          localStorage.setItem('nonce', nonceid)
-          setNonce(nonceid)
-        } else {
-          console.error(
-            'Failed to add item to the basket. Status:',
-            response.status,
-          )
-          const errorData = await response.json()
-          console.error('Error Details:', errorData)
-        }
-      } catch (error) {
-        console.error('Error:', error)
-      }
-    }
-    getNouce()
-  }, [])
+  // useEffect(() => {
+  //   getNonce()
+  // }, [])
 
   const handleAddToBasket = async () => {
     const productId = String(data?.id)
     const quantity = '1'
     const productData = { id: productId, quantity: quantity }
     const loginToken = localStorage.getItem('loginToken')
+    const nonce = localStorage.getItem('nonce')
 
     const headers = {
       'Content-Type': 'application/json',

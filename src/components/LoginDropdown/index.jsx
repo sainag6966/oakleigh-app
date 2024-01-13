@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { getNonce } from '@/utils/nonce'
 
 function LoginDropdown({ handleSuccessfulLogin }) {
   const [formData, setFormData] = useState({
@@ -35,6 +36,7 @@ function LoginDropdown({ handleSuccessfulLogin }) {
         if (token) {
           localStorage.setItem('loginToken', token)
           handleSuccessfulLogin()
+          getNonce()
           router.push('/profile-page')
         }
       } else {

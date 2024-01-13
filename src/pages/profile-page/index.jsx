@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router'
+import { getNonce } from '@/utils/nonce'
 
 function ProfilePage() {
   const router = useRouter()
 
   const handleLogout = () => {
     localStorage.removeItem('loginToken')
+    getNonce()
     router.push('/')
   }
 
