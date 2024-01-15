@@ -36,6 +36,7 @@ function HeaderDweb({ data }) {
   })
 
   const handleMenuClick = (item) => {
+    console.log(item, '!!!')
     setOpenLoginModal(false)
     setOpenSearchModal(false)
     document.body.classList.remove('no-scroll')
@@ -45,6 +46,22 @@ function HeaderDweb({ data }) {
       if (openBrandDropdown) {
         document.body.classList.remove('no-scroll')
       }
+      return
+    }
+    if (item?.title?.rendered === 'New In') {
+      router.push('new-in')
+      return
+    }
+    if (item?.title?.rendered === 'Collectors Choice') {
+      router.push('collectors-choice')
+      return
+    }
+    if (item?.title?.rendered === 'Vintage Watches') {
+      router.push('vintage-watches')
+      return
+    }
+    if (item?.title?.rendered === 'Online Only') {
+      router.push('online-only')
       return
     }
     setOpenBrandDropdown(false)

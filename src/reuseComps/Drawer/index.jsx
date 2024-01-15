@@ -40,6 +40,22 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
       setOpenBrandDrawer(true)
       return
     }
+    if (item === 'New In') {
+      router.push('new-in')
+      return
+    }
+    if (item === 'Collectors Choice') {
+      router.push('collectors-choice')
+      return
+    }
+    if (item === 'Vintage Watches') {
+      router.push('vintage-watches')
+      return
+    }
+    if (item?.title?.rendered === 'Online Only') {
+      router.push('online-only')
+      return
+    }
     router.push('/Product-Listing')
     closeDrawer()
   }
