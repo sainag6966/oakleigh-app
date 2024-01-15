@@ -2,11 +2,12 @@ import React, { useRef, useEffect, useState } from 'react'
 import Vimeo from '@vimeo/player'
 import ImageComp from '../ImageComp'
 
-const CustomVimeoPlayer = ({ videoId, width, height }) => {
+const CustomVimeoPlayer = ({ getVimeoId, width, height }) => {
   const playerRef = useRef(null)
   const [play, setPlay] = useState(false)
   const playIcon = '/Images/playIcon.svg'
   const pauseIcon = '/Images/pauseIcon.svg'
+  const videoId = getVimeoId()
 
   const setPlayPause = () => {
     setPlay(!play)

@@ -36,7 +36,7 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
   ]
 
   const handleMenuClick = (item) => {
-    if ('Shop By Brand') {
+    if (item === 'Shop By Brand') {
       setOpenBrandDrawer(true)
       return
     }

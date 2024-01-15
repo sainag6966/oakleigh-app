@@ -89,6 +89,14 @@ function HeaderDweb({ data }) {
 
   const handleSuccessfulLogin = () => {
     setOpenLoginModal(!openLoginModal)
+    document.body.classList.remove('no-scroll')
+  }
+
+  const handleCreateAcc = () => {
+    router.push('/sign-up').then(() => {
+      setOpenLoginModal(!openLoginModal)
+      document.body.classList.remove('no-scroll')
+    })
   }
 
   const handleLogoClick = () => {
@@ -190,7 +198,10 @@ function HeaderDweb({ data }) {
         </div>
       </div>
       {openLoginModal && (
-        <LoginDropdown handleSuccessfulLogin={handleSuccessfulLogin} />
+        <LoginDropdown
+          handleSuccessfulLogin={handleSuccessfulLogin}
+          handleCreateAcc={handleCreateAcc}
+        />
       )}
       {openSearchModal && (
         <SearchDropdown setOpenSearchModal={setOpenSearchModal} />

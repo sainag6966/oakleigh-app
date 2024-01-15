@@ -10,7 +10,7 @@ function SignupPage() {
         <div className="text-display-9 sm:text-display-12 xl:text-display-14 dxl:text-display-15">
           LOGIN OR CREATE AN ACCOUNT
         </div>
-        <div className="w-full text-center font-sans text-[10px] font-light xl:text-display-3 dxl:text-display-6">
+        <div className="w-full text-center font-sans text-display-1 xl:text-display-3 dxl:text-display-6">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
@@ -25,7 +25,7 @@ function SignupPage() {
             <p className="text-display-17 sm:text-display-11 xl:text-display-12 dxl:text-display-13">
               New Customers
             </p>
-            <p className="h-auto w-full font-sans text-[10px] font-light sm:text-display-1 xl:text-display-3 dxl:text-display-6">
+            <p className="h-auto w-full font-sans sm:text-display-1 xl:text-display-3 dxl:text-display-6">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua
@@ -36,12 +36,12 @@ function SignupPage() {
             <div className="text-display-17 sm:text-display-11 xl:text-display-12 dxl:text-display-13">
               Already Have An Account?
             </div>
-            <p className="font-sans text-[10px] font-light sm:text-display-1 xl:text-display-3 dxl:text-display-6">
+            <p className="font-sans sm:text-display-1 xl:text-display-3 dxl:text-display-6">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua.
             </p>
-            <div className="relative flex h-8 w-[120px] font-sans text-display-1 sm:h-[40px] sm:w-[150px] sm:text-display-4 xl:h-[53px] xl:w-[220px] xl:text-display-17">
+            <div className="relative flex h-8 w-[120px] cursor-pointer font-sans text-display-1 sm:h-[40px] sm:w-[150px] sm:text-display-4 xl:h-[53px] xl:w-[220px] xl:text-display-17">
               <div className="absolute bottom-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[217px]"></div>
               <div className="absolute right-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[217px]"></div>
               <div className="relative flex w-full items-center justify-center">

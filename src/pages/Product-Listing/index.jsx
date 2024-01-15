@@ -8,37 +8,39 @@ import FiltersMweb from '@/reuseComps/FiltersMweb'
 
 const ProductListing = ({ data }) => {
   const router = useRouter()
-  // const [data, setData] = useState([])
-  const [page, setPage] = useState(1)
+  const [clientData, setClientData] = useState(data)
+  const [page, setPage] = useState(2)
   const [loading, setLoading] = useState(false)
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const loadButton = loading ? 'Loading Data...' : 'Load More Watches'
 
   // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true)
-  //     try {
-  //       const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
-  //       const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
-  //       const response = await axios.get(
-  //         `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?page=${page}`,
-  //         {
-  //           headers: {
-  //             'Content-Type': 'text/plain',
-  //             Authorization: 'Basic ' + btoa(username + ':' + password),
-  //           },
-  //         },
-  //       )
-  //       const newData = response.data
+  const fetchData = async () => {
+    setPage((prevPage) => prevPage + 1)
+    setLoading(true)
+    try {
+      const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
+      const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
+      const response = await axios.get(
+        `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?page=${page}`,
+        {
+          headers: {
+            'Content-Type': 'text/plain',
+            Authorization: 'Basic ' + btoa(username + ':' + password),
+          },
+        },
+      )
+      const newData = response.data
 
-  //       // Assuming the API response has a property called 'items' containing the data
-  //       setData((prevData) => [...prevData, ...newData])
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error)
-  //     } finally {
-  //       setLoading(false)
-  //     }
-  //   }
-  //   fetchData()
+      // Assuming the API response has a property called 'items' containing the data
+      setClientData((prevData) => [...prevData, ...newData])
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   // }, [page])
 
   const handleProductClick = (item) => {
@@ -46,7 +48,7 @@ const ProductListing = ({ data }) => {
   }
 
   const handleLoadMore = () => {
-    setPage((prevPage) => prevPage + 1)
+    fetchData()
   }
 
   return (
@@ -55,7 +57,7 @@ const ProductListing = ({ data }) => {
         {isDesktop ? <Filters /> : <FiltersMweb />}
         <div className="h-auto w-full flex-col items-center justify-center">
           <div className="grid h-auto w-full grid-cols-1 items-center gap-[18px] gap-y-[50px] lg:grid-cols-3 txl:gap-[50px]">
-            {data?.map(
+            {clientData?.map(
               (item, index) =>
                 item.status === 'publish' && (
                   <div
@@ -79,7 +81,7 @@ const ProductListing = ({ data }) => {
                       <p className="line-clamp-1 max-w-[400px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
                         {item.name}
                       </p>
-                      <p>{item.stock_status}</p>
+                      {/* <p>{item.stock_status}</p> */}
                       <p className="font-sans text-display-3 dxl:text-display-6">
                         2019, box and papers
                       </p>
@@ -104,11 +106,11 @@ const ProductListing = ({ data }) => {
             )}
           </div>
           <button
-            className="mt-[48px] w-full text-display-9"
+            className="mt-[48px] w-full font-sans text-display-9"
             onClick={handleLoadMore}
             disabled={loading}
           >
-            <u>Load More Watches</u>
+            <u>{loadButton}</u>
           </button>
         </div>
       </div>

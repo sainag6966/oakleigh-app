@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { getNonce } from '@/utils/nonce'
 import { useMediaQuery } from 'react-responsive'
 
-function LoginDropdown({ handleSuccessfulLogin }) {
+function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -18,6 +18,7 @@ function LoginDropdown({ handleSuccessfulLogin }) {
       [name]: value,
     }))
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -68,7 +69,7 @@ function LoginDropdown({ handleSuccessfulLogin }) {
           <p className="text-display-11 xl:text-display-13">
             Registered Customers
           </p>
-          <p className="h-auto w-full font-sans text-display-3 xl:text-display-6">
+          <p className="h-auto w-full font-sans text-display-3 dxl:text-display-6">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua
@@ -122,19 +123,24 @@ function LoginDropdown({ handleSuccessfulLogin }) {
           <div className="text-display-11 xl:text-display-13">
             Don’t Have An Account?
           </div>
-          <p className="font-sans text-display-3 xl:text-display-6">
+          <p className="font-sans text-display-3 dxl:text-display-6">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua.
           </p>
-          <p className="font-sans text-display-3 xl:text-display-6">
+          <p className="font-sans text-display-3 dxl:text-display-6">
             Takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
             sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
             invidunt ut labore et dolore. Tempor invidunt ut labore et dolore
             magna aliquyam erat, sed diam voluptua.
           </p>
-          <div className="relative flex h-[40px] w-[160px] font-sans text-display-4 xl:h-[53px] xl:w-[235px] xl:text-display-17">
-            <div className="absolute bottom-0 h-[37px] w-[157px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[232px]"></div>
+          <div
+            className="relative flex h-[40px] w-[160px] font-sans text-display-4 xl:h-[53px] xl:w-[235px] xl:text-display-17"
+            onClick={() => {
+              handleCreateAcc()
+            }}
+          >
+            <div className="absolute bottom-0 h-[37px] w-[157px] cursor-pointer border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[232px]"></div>
             <div className="absolute right-0 h-[37px] w-[157px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[232px]"></div>
             <div className="relative flex w-full items-center justify-center">
               Create An Account

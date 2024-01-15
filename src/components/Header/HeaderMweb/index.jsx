@@ -33,6 +33,13 @@ function HeaderMweb({ data }) {
     closeDrawer()
   }
 
+  const handleCreateAcc = () => {
+    router.push('/sign-up').then(() => {
+      setOpenLoginModal(!openLoginModal)
+      document.body.classList.remove('no-scroll')
+    })
+  }
+
   return (
     <>
       <div className="flex h-[98px] w-full items-center justify-between px-9 py-[30px]">
@@ -66,7 +73,10 @@ function HeaderMweb({ data }) {
         data={data}
       />
       {openLoginModal && (
-        <LoginDropdown handleSuccessfulLogin={handleSuccessfulLogin} />
+        <LoginDropdown
+          handleSuccessfulLogin={handleSuccessfulLogin}
+          handleCreateAcc={handleCreateAcc}
+        />
       )}
     </>
   )

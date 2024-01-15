@@ -15,6 +15,7 @@ import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 
 function ProductDetailPage({ data }) {
+  console.log(data, '!!!')
   const { price, name } = data
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
@@ -22,12 +23,13 @@ function ProductDetailPage({ data }) {
   const [isBasketOpen, setIsBasketOpen] = useState(false)
   const [nonce, setNonce] = useState('')
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
-
-  const vimeoVideoId = '884473540'
+  const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
+  const isxLargeScreen = useMediaQuery({ query: '(min-width:1680px)' })
   const requiredMeta = [
     'product_year',
     'whats_included_text',
     'product_reference',
+    '_jet_woo_product_vimeo_video_url',
   ]
   const requiredMetaData = data?.meta_data?.filter((item) => {
     return requiredMeta.includes(item?.key)
@@ -36,6 +38,16 @@ function ProductDetailPage({ data }) {
   const imageList = data?.images
   const productPrice = data?.price
 
+  const getVimeoId = () => {
+    const urlObject = requiredMetaData.filter((e) => {
+      return e?.key === '_jet_woo_product_vimeo_video_url'
+    })
+    const vimeoUrl = urlObject[0]?.value
+    const regex = /vimeo\.com\/(\d+)\?/
+    const match = vimeoUrl?.match(regex)
+    const vimeoVideoId = match && match[1]
+    return vimeoVideoId
+  }
   // useEffect(() => {
   //   getNonce()
   // }, [])
@@ -190,10 +202,14 @@ function ProductDetailPage({ data }) {
             })}
           </section>
         </section>
-        {/* <section className="h-[452px] w-[804px]">
-          <CustomVimeoPlayer videoId={vimeoVideoId} width={804} height={452} />
+        <section className="h-full w-full">
+          <CustomVimeoPlayer
+            getVimeoId={getVimeoId}
+            width={isxLargeScreen ? 804 : isLargeScreen ? 600 : 400}
+            height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 240}
+          />
         </section>
-        <ProductMeta /> */}
+        <ProductMeta />
       </section>
       {/* {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
       <div className="h-auto w-full">
