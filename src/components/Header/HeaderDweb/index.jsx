@@ -55,6 +55,14 @@ function HeaderDweb({ data }) {
     if (icon === 'divider') {
       return
     }
+    if (icon === 'basket') {
+      document.body.classList.remove('no-scroll')
+      router.push('/your-basket')
+      setOpenLoginModal(false)
+      setOpenSearchModal(false)
+      setOpenBrandDropdown(false)
+      return
+    }
     document.body.classList.add('no-scroll')
     setOpenBrandDropdown(false)
     if (icon === 'account') {
@@ -77,17 +85,18 @@ function HeaderDweb({ data }) {
       setOpenSearchModal(!openSearchModal)
       return
     }
-    if (icon === 'basket') {
-      setIsBasketOpen(true)
-      setOpenLoginModal(false)
-      setOpenSearchModal(false)
-      document.body.classList.add('no-scroll')
-      return
-    }
   }
 
   const handleSuccessfulLogin = () => {
     setOpenLoginModal(!openLoginModal)
+  }
+
+  const handleLogoClick = () => {
+    document.body.classList.remove('no-scroll')
+    setOpenLoginModal(false)
+    setOpenSearchModal(false)
+    setOpenBrandDropdown(false)
+    router.push('/')
   }
 
   return (
@@ -95,9 +104,7 @@ function HeaderDweb({ data }) {
       <div className="relative flex h-[98px] w-full items-center justify-between gap-6 px-9 py-[30px] xl:px-16 dxl:h-40 dxl:px-[132px] dxl:py-[45px]">
         <div
           className="h-auto w-40 cursor-pointer xl:w-48 dxl:w-[300px]"
-          onClick={() => {
-            router.push('/')
-          }}
+          onClick={handleLogoClick}
         >
           <Image
             src={oakleighLogo}

@@ -188,7 +188,9 @@ const SignupForm = () => {
               onChange={handleChange}
               className="mr-2 leading-tight"
             />
-            <span className="text-sm">Sign up to Oakleigh Watches updates</span>
+            <span className="text-display-3 xl:text-display-6">
+              Sign up to Oakleigh Watches updates
+            </span>
           </label>
         </div>
         {validationError && (
@@ -196,9 +198,9 @@ const SignupForm = () => {
             Password and Confirm Password does not match
           </p>
         )}
-        <div className="relative flex h-[53px] w-[220px] font-sans text-display-17">
-          <div className="absolute bottom-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
-          <div className="absolute right-0 h-[50px] w-[217px] border-[0.5px] border-textSecondary"></div>
+        <div className="relative flex h-[40px] w-[150px] font-sans text-display-4 xl:h-[53px] xl:w-[220px] xl:text-display-17">
+          <div className="absolute bottom-0 h-[37px] w-[147px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[217px]"></div>
+          <div className="absolute right-0 h-[37px] w-[147px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[217px]"></div>
           <button
             type="submit"
             className="relative flex w-full items-center justify-center"

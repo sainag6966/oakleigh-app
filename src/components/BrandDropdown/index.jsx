@@ -16,7 +16,6 @@ function BrandDropdown() {
     'Tudor',
     'Panera',
     'Oris',
-    'something',
   ]
   return (
     <div className="absolute z-[1] h-full w-full border-t-[1px] border-colorBlack bg-colorBlack bg-opacity-75">
@@ -26,7 +25,7 @@ function BrandDropdown() {
             return (
               <p
                 key={index}
-                className="xl:text-display-10 w-[120px] xl:w-[172px] dxl:w-[248px]  dxl:text-display-12"
+                className="w-[120px] xl:w-[172px] xl:text-display-10 dxl:w-[248px]  dxl:text-display-12"
               >
                 {e}
               </p>
