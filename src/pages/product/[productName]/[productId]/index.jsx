@@ -15,7 +15,6 @@ import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 
 function ProductDetailPage({ data }) {
-  console.log(data, '!!!')
   const { price, name } = data
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
@@ -48,11 +47,41 @@ function ProductDetailPage({ data }) {
     const vimeoVideoId = match && match[1]
     return vimeoVideoId
   }
-  // useEffect(() => {
-  //   getNonce()
-  // }, [])
+  useEffect(() => {
+    const getNonce = async () => {
+      const loginToken = localStorage.getItem('loginToken')
+      const headers = {}
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
+      try {
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
+          {
+            method: 'get',
+            headers,
+          },
+        )
+
+        if (response.ok) {
+          const data = await response.json()
+          const nonceid = data?.Nonce
+          setNonce(nonceid)
+          // localStorage.setItem('nonce', nonceid)
+        } else {
+          const errorData = await response.json()
+        }
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    }
+    getNonce()
+  }, [])
 
   const handleAddToBasket = async () => {
+    if (showToast || loadingToast) {
+      return
+    }
     const productId = String(data?.id)
     const quantity = '1'
     const productData = { id: productId, quantity: quantity }
@@ -89,10 +118,9 @@ function ProductDetailPage({ data }) {
         const cartKey = data?.cart_key
         localStorage.setItem('cartKey', cartKey)
         setIsBasketOpen(true)
-        setShowToast(true)
+        // setShowToast(true)
         setLoadingToast(false)
-        setToastMessage('Item has been added to the basket')
-        console.log('Signup successful!')
+        // setToastMessage('Item has been added to the basket')
       } else {
         console.error(
           'Failed to add item to the basket. Status:',
@@ -102,10 +130,12 @@ function ProductDetailPage({ data }) {
         setLoadingToast(false)
         setToastMessage('Failed to add item to the basket')
         const errorData = await response.json() // You can log or inspect the error details
-        console.error('Error Details:', errorData)
       }
     } catch (error) {
       console.error('Error:', error)
+      setShowToast(true)
+      setLoadingToast(false)
+      setToastMessage('Failed to add item to the basket')
     }
   }
   return (
@@ -162,17 +192,29 @@ function ProductDetailPage({ data }) {
                 )
               })}
             </section>
-            <section
-              className="relative flex h-[53px] w-full"
-              onClick={handleAddToBasket}
-            >
-              <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
-              <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />
-              <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-[47px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:w-[99%]" />
-              <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
-                Add To Basket
+            {nonce && (
+              <section
+                className="relative flex h-[53px] w-full"
+                onClick={handleAddToBasket}
+              >
+                <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
+                <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />
+                <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-[47px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:w-[99%]" />
+                <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
+                  Add To Basket
+                </div>
+              </section>
+            )}
+            {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
+            {showToast && (
+              <div className="h-auto w-full">
+                <Toast
+                  message={toastMessage}
+                  showToast={showToast}
+                  setShowToast={setShowToast}
+                />
               </div>
-            </section>
+            )}
             <section className="flex h-auto w-full items-center justify-between gap-2 xl:gap-5 txl:gap-[30px]">
               <div className="flex-1 ">
                 <InstallmentButton />
@@ -211,14 +253,6 @@ function ProductDetailPage({ data }) {
         </section>
         <ProductMeta />
       </section>
-      {/* {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
-      <div className="h-auto w-full">
-        <Toast
-          message={toastMessage}
-          showToast={showToast}
-          setShowToast={setShowToast}
-        />
-      </div> */}
       {isBasketOpen && (
         <BasketDrawer
           imageSrc={imgSrc}

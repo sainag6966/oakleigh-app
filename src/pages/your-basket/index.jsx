@@ -139,7 +139,7 @@ function OrderSummary() {
     <section className="flex h-auto w-full flex-col gap-[30px]">
       <section className="flex h-auto w-full flex-col bg-search p-[30px] text-footerBg">
         <p className="pb-[25px] text-display-11">Order Summary</p>
-        <section className="border-orderSummaryBorder border-y-[1px] pb-[25px] pt-[10px] font-sans">
+        <section className="border-y-[1px] border-orderSummaryBorder pb-[25px] pt-[10px] font-sans">
           <p className="text-display-5">Promotion Code</p>
           <section className="h-auto w-full">
             <form className="flex h-auto w-full gap-5" onSubmit={handleSubmit}>
@@ -184,7 +184,7 @@ function OrderSummary() {
             <p>£0.00</p>
           </section>
         </section>
-        <section className="border-orderSummaryBorder flex h-auto w-full items-center justify-between border-t-[1px] pt-[25px] font-sans text-display-16">
+        <section className="flex h-auto w-full items-center justify-between border-t-[1px] border-orderSummaryBorder pt-[25px] font-sans text-display-16">
           <p>Order Total</p>
           <p>{price}</p>
         </section>

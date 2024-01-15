@@ -40,6 +40,7 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
       setOpenBrandDrawer(true)
       return
     }
+    closeDrawer()
     if (item === 'New In') {
       router.push('new-in')
       return
@@ -57,7 +58,6 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
       return
     }
     router.push('/Product-Listing')
-    closeDrawer()
   }
 
   const handleBasket = () => {
