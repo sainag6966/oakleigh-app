@@ -1,15 +1,17 @@
+import { useRef, useState } from 'react'
 import SimpleSlider from '@/reuseComps/Slider'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
-import { useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styles from '../../../../src/styles/slider.module.css'
 
 function VipAdBlock() {
-  const vipIcon = '/Images/Sample/vipBlock1.svg'
   const sliderRef = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const vipIcon = '/Images/Sample/vipBlock1.svg'
   const slidesToShow = 2
   const navButtons = false
 
@@ -19,22 +21,15 @@ function VipAdBlock() {
     speed: 500,
     slidesToShow: isDesktop ? slidesToShow : 1,
     slidesToScroll: 1,
-    appendDots: (dots) => (
-      <div
-        style={{
-          position: 'relative',
-          display: 'block',
-          marginTop: '20px',
-          top: '0px',
-        }}
-      >
-        {dots.map((dot, index) => (
-          <span key={index} className="custom-dot">
-            {dot}
-          </span>
-        ))}
-      </div>
+    customPaging: (i) => (
+      <span
+        className={`${styles['custom-dot']} ${
+          i === currentSlide ? styles.active : ''
+        }`}
+        onClick={() => sliderRef.current.slickGoTo(i)}
+      ></span>
     ),
+    beforeChange: (current, next) => setCurrentSlide(next),
   }
   const trayData = [
     {
@@ -76,7 +71,7 @@ function VipAdBlock() {
                 return (
                   <div
                     key={index}
-                    className="flex h-auto w-full flex-col px-0 lg:px-1"
+                    className="mb-[30px] flex h-auto w-full flex-col px-0 lg:mb-[0px] lg:px-1"
                   >
                     <div className="relative flex h-[428px] w-full flex-col items-center justify-between dxl:h-[526px]">
                       <Image

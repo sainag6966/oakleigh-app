@@ -1,13 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import SimpleSlider from '@/reuseComps/Slider'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import styles from '../../../../src/styles/slider.module.css'
 import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive'
 
 function SliderBlock() {
   const sliderRef = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   const slidesToShow = 3
   const navButtons = true
@@ -18,22 +20,15 @@ function SliderBlock() {
     speed: 500,
     slidesToShow: isDesktop ? slidesToShow : 1,
     slidesToScroll: 1,
-    appendDots: (dots) => (
-      <div
-        style={{
-          position: 'relative',
-          display: 'block',
-          marginTop: '20px',
-          top: '0px',
-        }}
-      >
-        {dots.map((dot, index) => (
-          <span key={index} className="custom-dot">
-            {dot}
-          </span>
-        ))}
-      </div>
+    customPaging: (i) => (
+      <span
+        className={`${styles['custom-dot']} ${
+          i === currentSlide ? styles.active : ''
+        }`}
+        onClick={() => sliderRef.current.slickGoTo(i)}
+      ></span>
     ),
+    beforeChange: (current, next) => setCurrentSlide(next),
   }
   const trayData = [
     {
@@ -114,7 +109,7 @@ function SliderBlock() {
                     </p>
                   )}
                   {e.buttonTitle && (
-                    <div className="relative flex h-[42px] w-[138px] xl:h-[53px] xl:w-[174px]">
+                    <div className="relative mb-[30px] flex h-[42px] w-[138px] lg:mb-[0px] xl:h-[53px] xl:w-[174px]">
                       <div className="absolute bottom-0 h-[39px] w-[135px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[171px]"></div>
                       <div className="absolute right-0 h-[39px] w-[135px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[171px]"></div>
                       <div className="relative flex w-full items-center justify-center font-sans text-display-4 xl:text-display-17">
