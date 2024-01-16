@@ -113,7 +113,7 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
                   Login
                 </button>
               </div>
-              <p className="font-sans text-display-1 xl:text-display-17">
+              <p className="cursor-pointer font-sans text-display-1 xl:text-display-17">
                 <u>Forgotten Your Password?</u>
               </p>
             </div>
@@ -135,12 +135,12 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
             magna aliquyam erat, sed diam voluptua.
           </p>
           <div
-            className="relative flex h-[40px] w-[160px] font-sans text-display-4 xl:h-[53px] xl:w-[235px] xl:text-display-17"
+            className="relative flex h-[40px] w-[160px] cursor-pointer font-sans text-display-4 xl:h-[53px] xl:w-[235px] xl:text-display-17"
             onClick={() => {
               handleCreateAcc()
             }}
           >
-            <div className="absolute bottom-0 h-[37px] w-[157px] cursor-pointer border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[232px]"></div>
+            <div className="absolute bottom-0 h-[37px] w-[157px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[232px]"></div>
             <div className="absolute right-0 h-[37px] w-[157px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[232px]"></div>
             <div className="relative flex w-full items-center justify-center">
               Create An Account

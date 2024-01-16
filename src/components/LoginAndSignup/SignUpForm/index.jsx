@@ -1,6 +1,7 @@
 // pages/signup.js
 
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const SignupForm = () => {
   const [firstNameError, setFirstNameError] = useState('')
@@ -9,6 +10,7 @@ const SignupForm = () => {
   const [passwordError, setPasswordError] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [validationError, setValidationError] = useState(false)
+  const router = useRouter()
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -100,6 +102,7 @@ const SignupForm = () => {
       if (response.ok) {
         // Handle success (e.g., redirect to a success page)
         console.log('Signup successful!')
+        router.push('/')
       } else {
         // Handle errors
         console.error('Signup failed')

@@ -15,12 +15,13 @@ import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 
 function ProductDetailPage({ data }) {
-  const { price, name } = data
+  const { price, name, stock_status } = data
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [loadingToast, setLoadingToast] = useState(false)
   const [isBasketOpen, setIsBasketOpen] = useState(false)
   const [nonce, setNonce] = useState('')
+  const stockStatus = stock_status === 'instock'
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const isxLargeScreen = useMediaQuery({ query: '(min-width:1680px)' })
@@ -128,8 +129,8 @@ function ProductDetailPage({ data }) {
         )
         setShowToast(true)
         setLoadingToast(false)
-        setToastMessage('Failed to add item to the basket')
-        const errorData = await response.json() // You can log or inspect the error details
+        const errorData = await response.json()
+        setToastMessage(errorData?.message) // You can log or inspect the error details
       }
     } catch (error) {
       console.error('Error:', error)
@@ -157,9 +158,13 @@ function ProductDetailPage({ data }) {
             <h1 className="font-cormorant text-display-12 dxl:text-display-14">
               {name}
             </h1>
-            <h5 className="text-display-10 font-semibold xl:text-display-17 dxl:text-display-11">
-              £{price}
-            </h5>
+            {stockStatus ? (
+              <h5 className="text-display-10 font-semibold xl:text-display-17 dxl:text-display-11">
+                £{price}
+              </h5>
+            ) : (
+              <p>Sold</p>
+            )}
             <section className="flex flex-col items-start justify-between border-0 border-search text-[11px] lg:flex-row lg:items-center lg:border-y-[1px] lg:py-5 xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
               {requiredMetaData.map((e) => {
                 return (
@@ -192,7 +197,7 @@ function ProductDetailPage({ data }) {
                 )
               })}
             </section>
-            {nonce && (
+            {nonce && stockStatus && (
               <section
                 className="relative flex h-[53px] w-full"
                 onClick={handleAddToBasket}

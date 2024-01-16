@@ -245,6 +245,8 @@ function Delivery() {
 
 function YourBasket() {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false)
+  const emptyCart = data?.length === 0
 
   useEffect(() => {
     const fetchData = async () => {
@@ -257,6 +259,7 @@ function YourBasket() {
         headers['Authorization'] = `Bearer ${loginToken}`
       }
       try {
+        setLoading(true)
         // const username = 'lejac53041@tanlanav.com'
         // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
         const response = await fetch(
@@ -268,6 +271,9 @@ function YourBasket() {
           },
         )
         const responseData = await response.json()
+        if (responseData) {
+          setLoading(false)
+        }
         setData(responseData)
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -280,6 +286,16 @@ function YourBasket() {
     <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px]">
       <BreadCrumb />
       <BasketHead />
+      {loading && (
+        <div className="flex h-auto w-full items-center justify-center text-display-12">
+          Loading Data...
+        </div>
+      )}
+      {emptyCart && loading === false && (
+        <div className="flex h-auto w-full items-center justify-center text-display-12">
+          Your Cart is Empty
+        </div>
+      )}
       <ProductDetail productData={data} />
       <Delivery />
       <OrderSummary />
