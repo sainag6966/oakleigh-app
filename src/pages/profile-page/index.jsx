@@ -3,10 +3,35 @@ import { getNonce } from '@/utils/nonce'
 
 function ProfilePage() {
   const router = useRouter()
+  const getCheck = async () => {
+    try {
+      console.log('getcheck')
+      const response = await fetch(
+        'http://localhost/oakleigh/wp-json/custom/v1/clear-cart',
+        {
+          method: 'post',
+          credentials: 'include',
+          // headers,
+        },
+      )
 
+      if (response.ok) {
+        console.log(response, 'getcheck')
+        // const data = await response.json()
+        // const nonceid = data?.Nonce
+        // setNonce(nonceid)
+        // localStorage.setItem('nonce', nonceid)
+      } else {
+        const errorData = await response.json()
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    }
+  }
   const handleLogout = () => {
     localStorage.removeItem('loginToken')
     getNonce()
+    getCheck()
     router.push('/')
   }
 

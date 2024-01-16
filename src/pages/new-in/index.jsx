@@ -22,7 +22,7 @@ const ProductListing = ({ data }) => {
   //       const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
   //       const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
   //       const response = await axios.get(
-  //         `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?page=${page}`,
+  //         `http://localhost/oakleigh/wp-json/wc/v3/products?page=${page}`,
   //         {
   //           headers: {
   //             'Content-Type': 'text/plain',
@@ -122,7 +122,7 @@ export async function getServerSideProps(context) {
     const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
     const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
     const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/products?category=122',
+      'http://localhost/oakleigh/wp-json/wc/store/v1/products?category=122',
       {
         method: 'get',
         // credentials: 'include',

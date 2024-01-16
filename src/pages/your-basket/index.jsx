@@ -56,7 +56,7 @@ function ProductDetail({ productData }) {
       //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
       // setLoadingToast(true)
       const response = await fetch(
-        `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/remove-item?key=${itemKey}`,
+        `http://localhost/oakleigh/wp-json/wc/store/v1/cart/remove-item?key=${itemKey}`,
         {
           method: 'POST',
           headers,
@@ -263,7 +263,7 @@ function YourBasket() {
         // const username = 'lejac53041@tanlanav.com'
         // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
         const response = await fetch(
-          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
+          'http://localhost/oakleigh/wp-json/wc/store/v1/cart/items',
           {
             method: 'get',
             headers,
@@ -312,7 +312,7 @@ export default YourBasket
 //     const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
 //     const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
 //     const response = await fetch(
-//       'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
+//       'http://localhost/oakleigh/wp-json/wc/store/v1/cart/items',
 //       {
 //         method: 'get',
 //         headers: {

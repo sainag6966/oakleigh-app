@@ -6,7 +6,7 @@ export const getNonce = async () => {
   }
   try {
     const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
+      'http://localhost/oakleigh/wp-json/wp/v2/wc-nonce',
       {
         method: 'get',
         headers,

@@ -7,6 +7,7 @@ import Filters from '@/reuseComps/Filters'
 import FiltersMweb from '@/reuseComps/FiltersMweb'
 
 const ProductListing = ({ data }) => {
+  console.log(data, '!!')
   const router = useRouter()
   const [clientData, setClientData] = useState(data)
   const [page, setPage] = useState(2)
@@ -22,7 +23,7 @@ const ProductListing = ({ data }) => {
       const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
       const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
       const response = await axios.get(
-        `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?page=${page}`,
+        `http://localhost/oakleigh/wp-json/wc/v3/products?page=${page}`,
         {
           headers: {
             'Content-Type': 'text/plain',
@@ -59,24 +60,24 @@ const ProductListing = ({ data }) => {
           <div className="grid h-auto w-full grid-cols-1 items-center gap-[18px] gap-y-[50px] lg:grid-cols-3 txl:gap-[50px]">
             {clientData?.map(
               (item, index) =>
-                item.status === 'publish' && (
+                item.status !== 'publish' && (
                   <div
                     key={index}
                     className="flex grow-[1] flex-col items-center justify-center"
                   >
-                    <div
+                    {/* <div
                       className="relative h-[420px] w-full lg:h-[298px] lg:w-[195px] xl:h-[340px] xl:w-[260px] dxl:h-[400px] dxl:w-[320px] txl:h-[462px] txl:w-[389px]"
                       key={item.id}
                     >
                       <Image
-                        src={item.images[0]?.src}
+                        src={item?.images[0]?.src}
                         layout="fill"
                         alt="AdBlock"
                         objectFit="cover"
                         quality={100}
                         style={{ objectPosition: 'center' }}
                       />
-                    </div>
+                    </div> */}
                     <div className="mt-6 flex flex-col items-center justify-center gap-[2px] xl:gap-1 dxl:gap-[6px] txl:gap-2">
                       <p className="line-clamp-1 max-w-[400px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
                         {item.name}
@@ -124,7 +125,7 @@ export async function getServerSideProps(context) {
     const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
     const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
     const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?per_page=20',
+      'http://localhost/oakleigh/wp-json/wc/store/v1/products',
       {
         method: 'get',
         credentials: 'include',

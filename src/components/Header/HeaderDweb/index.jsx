@@ -22,7 +22,7 @@ function HeaderDweb({ data }) {
   const dividerLine = '/Images/dividerLine.svg'
   const pointingArrow = '/Images/pointingArrowUp.svg'
   const productImage =
-    'https://oakleigh.cda-development3.co.uk/cms/wp-content/uploads/2023/12/1x1-3746.jpg'
+    'http://localhost/oakleigh/wp-content/uploads/2023/12/1x1-3746.jpg'
   const productName = 'Zenith Defy EL Primero 2I Or Two'
   const imgArr = [
     { title: 'search', url: searchIcon },

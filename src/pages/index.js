@@ -65,7 +65,7 @@ export async function getServerSideProps(context) {
     const username = 'oakleighcdadevel'
     const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
     const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/pages/55?acf_format=standard',
+      'http://localhost/oakleigh/wp-json/wp/v2/pages/55?acf_format=standard',
       {
         method: 'get',
         headers: {

@@ -31,23 +31,23 @@ function ProductDetailPage({ data }) {
     'product_reference',
     '_jet_woo_product_vimeo_video_url',
   ]
-  const requiredMetaData = data?.meta_data?.filter((item) => {
-    return requiredMeta.includes(item?.key)
-  })
+  // const requiredMetaData = data?.meta_data?.filter((item) => {
+  //   return requiredMeta.includes(item?.key)
+  // })
   const imgSrc = data?.images[0]?.src
   const imageList = data?.images
   const productPrice = data?.price
 
-  const getVimeoId = () => {
-    const urlObject = requiredMetaData.filter((e) => {
-      return e?.key === '_jet_woo_product_vimeo_video_url'
-    })
-    const vimeoUrl = urlObject[0]?.value
-    const regex = /vimeo\.com\/(\d+)\?/
-    const match = vimeoUrl?.match(regex)
-    const vimeoVideoId = match && match[1]
-    return vimeoVideoId
-  }
+  // const getVimeoId = () => {
+  //   const urlObject = requiredMetaData.filter((e) => {
+  //     return e?.key === '_jet_woo_product_vimeo_video_url'
+  //   })
+  //   const vimeoUrl = urlObject[0]?.value
+  //   const regex = /vimeo\.com\/(\d+)\?/
+  //   const match = vimeoUrl?.match(regex)
+  //   const vimeoVideoId = match && match[1]
+  //   return vimeoVideoId
+  // }
   useEffect(() => {
     const getNonce = async () => {
       const loginToken = localStorage.getItem('loginToken')
@@ -57,7 +57,7 @@ function ProductDetailPage({ data }) {
       }
       try {
         const response = await fetch(
-          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
+          'http://localhost/oakleigh/wp-json/wp/v2/wc-nonce',
           {
             method: 'get',
             headers,
@@ -104,7 +104,7 @@ function ProductDetailPage({ data }) {
       //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
       setLoadingToast(true)
       const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/add-item',
+        'http://localhost/oakleigh/wp-json/wc/store/v1/cart/add-item',
         {
           method: 'POST',
           headers,
@@ -165,7 +165,7 @@ function ProductDetailPage({ data }) {
             ) : (
               <p>Sold</p>
             )}
-            <section className="flex flex-col items-start justify-between border-0 border-search text-[11px] lg:flex-row lg:items-center lg:border-y-[1px] lg:py-5 xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
+            {/* <section className="flex flex-col items-start justify-between border-0 border-search text-[11px] lg:flex-row lg:items-center lg:border-y-[1px] lg:py-5 xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
               {requiredMetaData.map((e) => {
                 return (
                   e.key === 'product_reference' && (
@@ -196,8 +196,8 @@ function ProductDetailPage({ data }) {
                   )
                 )
               })}
-            </section>
-            {nonce && stockStatus && (
+            </section> */}
+            {nonce && (
               <section
                 className="relative flex h-[53px] w-full"
                 onClick={handleAddToBasket}
@@ -235,7 +235,7 @@ function ProductDetailPage({ data }) {
             </section>
             <SmallPromiseBlock />
           </section>
-          <section className="grid-rows-auto grid flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
+          {/* <section className="grid-rows-auto grid flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
             {imageList.map((image, index) => {
               return (
                 <figure
@@ -247,15 +247,15 @@ function ProductDetailPage({ data }) {
                 </figure>
               )
             })}
-          </section>
+          </section> */}
         </section>
-        <section className="h-full w-full">
+        {/* <section className="h-full w-full">
           <CustomVimeoPlayer
             getVimeoId={getVimeoId}
             width={isxLargeScreen ? 804 : isLargeScreen ? 600 : 400}
             height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 240}
           />
-        </section>
+        </section> */}
         <ProductMeta />
       </section>
       {isBasketOpen && (
@@ -335,15 +335,15 @@ export async function getServerSideProps(context) {
   const { params } = context
   const { productId } = params
   try {
-    const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
-    const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
+    // const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
+    // const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
     const response = await fetch(
-      `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products/${productId}`,
+      `http://localhost/oakleigh/wp-json/wc/store/v1/products/${productId}`,
       {
         method: 'get',
         headers: {
           'Content-Type': 'text/plain',
-          Authorization: 'Basic ' + btoa(username + ':' + password),
+          // Authorization: 'Basic ' + btoa(username + ':' + password),
         },
       },
     )

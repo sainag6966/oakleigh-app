@@ -16,7 +16,7 @@ function LayoutWrapper({ children }) {
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18',
+        'http://localhost/oakleigh/wp-json/wp/v2/menu-items?menus=18',
         {
           method: 'get',
           // credentials: 'include',
@@ -50,7 +50,7 @@ function LayoutWrapper({ children }) {
   //     // console.log('!!', cookieValue)
   //     try {
   //       const response = await fetch(
-  //         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
+  //         'http://localhost/oakleigh/wp-json/wc/store/v1/cart/items',
   //         {
   //           method: 'get',
   //           headers: {
@@ -78,7 +78,7 @@ function LayoutWrapper({ children }) {
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=108',
+        'http://localhost/oakleigh/wp-json/wp/v2/menu-items?menus=108',
         {
           method: 'get',
           headers: {

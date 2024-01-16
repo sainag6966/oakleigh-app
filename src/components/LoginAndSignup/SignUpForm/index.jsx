@@ -88,7 +88,7 @@ const SignupForm = () => {
       const username = 'oakleighcdadevel'
       const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
       const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/users',
+        'http://localhost/oakleigh/wp-json/wp/v2/users',
         {
           method: 'POST',
           headers: {

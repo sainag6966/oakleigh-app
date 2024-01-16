@@ -23,7 +23,7 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
     e.preventDefault()
     try {
       const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/jwt-auth/v1/token',
+        'http://localhost/oakleigh/wp-json/jwt-auth/v1/token',
         {
           method: 'POST',
           headers: {

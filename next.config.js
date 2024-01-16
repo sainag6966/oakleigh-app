@@ -13,9 +13,10 @@ module.exports = {
       {
         protocol: 'https',
         hostname: '**',
+        domains: ['localhost'],
         // port: '',
         // pathname: '**',
       },
     ],
   },
-};
+}
