@@ -1,10 +1,11 @@
 import SignupForm from '../../components/LoginAndSignup/SignUpForm'
+import Breadcrumbs from '@/components/BreadCrumbs'
 
 function SignupPage() {
   return (
     <div className="flex h-auto w-full flex-col items-center justify-between gap-2 px-6 pt-4 text-footerBg sm:gap-4 sm:px-12 xl:gap-8 xl:px-[92px] xl:pt-[25px] dxl:gap-[58px] dxl:px-[141px]">
       <div className="w-full font-sans text-[10px] sm:text-display-1 xl:text-[15px]">
-        BREADCRUMB / BREADCRUMB
+        <Breadcrumbs />
       </div>
       <div className="flex h-auto w-full flex-col items-center justify-between gap-3 sm:gap-4 xl:gap-7 dxl:gap-10">
         <div className="text-display-9 sm:text-display-12 xl:text-display-14 dxl:text-display-15">

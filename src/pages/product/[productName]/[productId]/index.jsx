@@ -11,6 +11,7 @@ import ApplePayButton from '@/reuseComps/ApplePayButton'
 import SmallPromiseBlock from '@/components/ContentBlocks/SmallPromiseBlock'
 import ProductMeta from '@/components/ProductMeta'
 import CustomVimeoPlayer from '@/reuseComps/CustomVimeoPlayer'
+import Breadcrumbs from '@/components/BreadCrumbs'
 import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 import Spinner from '@/reuseComps/Spinner'
@@ -144,13 +145,14 @@ function ProductDetailPage({ data }) {
     <main className="flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] dxl:px-[141px]">
       <nav aria-label="Breadcrumb" role="navigation" className="w-full">
         <nav className="flex w-full list-none gap-1 font-sans text-display-1 lg:text-[15px]">
-          <li>
+          {/* <li>
             <a>BREADCRUMB</a>
           </li>
           <li>/</li>
           <li>
             <a>BREADCRUMB</a>
-          </li>
+          </li> */}
+          <Breadcrumbs />
         </nav>
       </nav>
       <section className="flex h-auto w-full flex-col gap-[70px]">
