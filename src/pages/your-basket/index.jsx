@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import CountrySelector from '@/reuseComps/CountrySelector'
+import Spinner from '@/reuseComps/Spinner'
 
 function BreadCrumb() {
   return (
@@ -245,7 +246,7 @@ function Delivery() {
 
 function YourBasket() {
   const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const emptyCart = data?.length === 0
 
   useEffect(() => {
@@ -276,6 +277,7 @@ function YourBasket() {
         }
         setData(responseData)
       } catch (error) {
+        setLoading(false)
         console.error('Error fetching data:', error)
       }
     }
@@ -285,20 +287,31 @@ function YourBasket() {
   return (
     <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px]">
       <BreadCrumb />
-      <BasketHead />
-      {loading && (
+      {loading ? (
+        <section className="flex h-auto w-full items-center justify-center">
+          <Spinner width={50} height={50} />
+        </section>
+      ) : !emptyCart ? (
         <div className="flex h-auto w-full items-center justify-center text-display-12">
-          Loading Data...
+          Your Cart is Empty
         </div>
+      ) : (
+        <section>
+          {' '}
+          <BasketHead />
+          <ProductDetail productData={data} />
+          <Delivery />
+          <OrderSummary />
+        </section>
       )}
-      {emptyCart && loading === false && (
+      {/* {emptyCart && loading === false && (
         <div className="flex h-auto w-full items-center justify-center text-display-12">
           Your Cart is Empty
         </div>
       )}
       <ProductDetail productData={data} />
       <Delivery />
-      <OrderSummary />
+      <OrderSummary /> */}
     </main>
   )
 }

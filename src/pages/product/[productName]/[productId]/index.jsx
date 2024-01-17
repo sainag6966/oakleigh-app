@@ -13,6 +13,7 @@ import ProductMeta from '@/components/ProductMeta'
 import CustomVimeoPlayer from '@/reuseComps/CustomVimeoPlayer'
 import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
+import Spinner from '@/reuseComps/Spinner'
 
 function ProductDetailPage({ data }) {
   const { price, name, stock_status } = data
@@ -210,7 +211,13 @@ function ProductDetailPage({ data }) {
                 </div>
               </section>
             )}
-            {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
+            {loadingToast && (
+              <section className="flex items-center justify-start gap-2">
+                {' '}
+                <Spinner width={30} height={30} />{' '}
+                <p>Adding item to the Basket... Please Wait...</p>
+              </section>
+            )}
             {showToast && (
               <div className="h-auto w-full">
                 <Toast

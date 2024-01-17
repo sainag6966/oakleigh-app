@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
+import Spinner from '@/reuseComps/Spinner'
 import Filters from '@/reuseComps/Filters'
 import FiltersMweb from '@/reuseComps/FiltersMweb'
 
@@ -12,7 +13,6 @@ const ProductListing = ({ data }) => {
   const [page, setPage] = useState(2)
   const [loading, setLoading] = useState(false)
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
-  const loadButton = loading ? 'Loading Data...' : 'Load More Watches'
 
   // useEffect(() => {
   const fetchData = async () => {
@@ -105,13 +105,20 @@ const ProductListing = ({ data }) => {
                 ),
             )}
           </div>
-          <button
-            className="mt-[48px] w-full font-sans text-display-9"
-            onClick={handleLoadMore}
-            disabled={loading}
-          >
-            <u>{loadButton}</u>
-          </button>
+          {!loading ? (
+            <button
+              className="mt-[48px] w-full font-sans text-display-9"
+              onClick={handleLoadMore}
+              disabled={loading}
+            >
+              <u>Load More Watches</u>
+            </button>
+          ) : (
+            <section className="mt-[48px] flex h-auto w-full items-center justify-center">
+              {' '}
+              <Spinner width={50} height={50} />
+            </section>
+          )}
         </div>
       </div>
     </div>
