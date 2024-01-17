@@ -73,7 +73,7 @@ function BasketDrawer({
               </div>
             </div>
             <div
-              className="relative flex h-[53px] w-full"
+              className="relative flex h-[53px] w-full cursor-pointer"
               onClick={() => {
                 router.push('/your-basket')
               }}
@@ -85,7 +85,12 @@ function BasketDrawer({
               </div>
             </div>
             <u>
-              <p className="flex w-full items-center justify-center text-display-17">
+              <p
+                className="flex w-full cursor-pointer items-center justify-center text-display-17"
+                onClick={() => {
+                  router.push('/Product-Listing')
+                }}
+              >
                 Continue Shopping
               </p>
             </u>

@@ -200,7 +200,7 @@ function ProductDetailPage({ data }) {
             </section>
             {nonce && stockStatus && (
               <section
-                className="relative flex h-[53px] w-full"
+                className="relative flex h-[53px] w-full cursor-pointer"
                 onClick={handleAddToBasket}
               >
                 <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />

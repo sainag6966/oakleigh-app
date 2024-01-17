@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import CountrySelector from '@/reuseComps/CountrySelector'
+import { useRouter } from 'next/router'
 import Spinner from '@/reuseComps/Spinner'
 
 function BreadCrumb() {
@@ -23,7 +24,7 @@ function BreadCrumb() {
 
 function BasketHead() {
   return (
-    <section className="flex h-auto w-full items-center justify-between gap-2">
+    <section className="mb-8 flex h-auto w-full items-center justify-between gap-2">
       <section className="flex-1 text-display-12">Your Basket</section>
       <section className="relative flex h-[42px] w-full flex-1 font-sans">
         <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
@@ -37,7 +38,11 @@ function BasketHead() {
   )
 }
 
-function ProductDetail({ productData }) {
+function ProductDetail({ productData, handleRemoveCta }) {
+  const [removing, setRemoving] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(false)
+  const router = useRouter()
+
   const handleRemoveItem = async (item) => {
     const loginToken = localStorage.getItem('loginToken')
     const nonce = localStorage.getItem('nonce')
@@ -53,6 +58,8 @@ function ProductDetail({ productData }) {
     }
 
     try {
+      setSelectedItem(item)
+      setRemoving(true)
       //   const username = 'oakleighcdadevel'
       //   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
       // setLoadingToast(true)
@@ -66,23 +73,14 @@ function ProductDetail({ productData }) {
       )
 
       if (response.ok) {
-        // Handle success (e.g., redirect to a success page)
-        // const data = await response.json()
-        // const cartKey = data?.cart_key
-        // localStorage.setItem('cartKey', cartKey)
-        // setIsBasketOpen(true)
-        // setShowToast(true)
-        // setLoadingToast(false)
-        // setToastMessage('Item has been added to the basket')
+        handleRemoveCta()
+        setRemoving(false)
         console.log('Signup successful!')
       } else {
         console.error(
           'Failed to add item to the basket. Status:',
           response.status,
         )
-        // setShowToast(true)
-        // setLoadingToast(false)
-        // setToastMessage('Failed to add item to the basket')
         const errorData = await response.json() // You can log or inspect the error details
         console.error('Error Details:', errorData)
       }
@@ -111,19 +109,32 @@ function ProductDetail({ productData }) {
                 <p className="font-sans text-display-16">
                   £{item?.prices?.regular_price}
                 </p>
-                <p
-                  className="mt-4 font-sans text-display-4"
-                  onClick={() => {
-                    handleRemoveItem(item)
-                  }}
-                >
-                  <u>Remove Item</u>
-                </p>
+                <section className="mt-4 cursor-pointer font-sans text-display-4">
+                  {removing && selectedItem?.id === item?.id ? (
+                    <section className="flex gap-2">
+                      <Spinner width={25} height={25} />
+                      <p>Removing Item...</p>
+                    </section>
+                  ) : (
+                    <u
+                      onClick={() => {
+                        handleRemoveItem(item)
+                      }}
+                    >
+                      Remove Item
+                    </u>
+                  )}
+                </section>
               </section>
             </section>
           )
         })}
-        <section className="flex h-auto w-full items-center justify-start border-y-[1.2px] border-y-search py-[30px] font-sans">
+        <section
+          className="flex h-auto w-full cursor-pointer items-center justify-start border-y-[1.2px] border-y-search py-[30px] font-sans"
+          onClick={() => {
+            router.push('/Product-Listing')
+          }}
+        >
           <u>Continue Shopping</u>
         </section>
       </section>
@@ -247,7 +258,12 @@ function Delivery() {
 function YourBasket() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
+  const [removeItem, setRemoveItem] = useState(false)
   const emptyCart = data?.length === 0
+
+  const handleRemoveCta = () => {
+    setRemoveItem(!removeItem)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -282,7 +298,7 @@ function YourBasket() {
       }
     }
     fetchData()
-  }, [])
+  }, [removeItem])
 
   return (
     <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px]">
@@ -291,7 +307,7 @@ function YourBasket() {
         <section className="flex h-auto w-full items-center justify-center">
           <Spinner width={50} height={50} />
         </section>
-      ) : !emptyCart ? (
+      ) : emptyCart ? (
         <div className="flex h-auto w-full items-center justify-center text-display-12">
           Your Cart is Empty
         </div>
@@ -299,7 +315,7 @@ function YourBasket() {
         <section>
           {' '}
           <BasketHead />
-          <ProductDetail productData={data} />
+          <ProductDetail productData={data} handleRemoveCta={handleRemoveCta} />
           <Delivery />
           <OrderSummary />
         </section>
