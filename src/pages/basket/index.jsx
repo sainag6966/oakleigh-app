@@ -160,7 +160,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
   const handleRemoveCoupon = async () => {
     const nonce = localStorage.getItem('nonce')
     const loginToken = localStorage.getItem('loginToken')
-    const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+    const headers = { 'Content-Type': 'application/json', Nonce: nonce }
 
     // Check if loginToken is available
     if (loginToken) {
@@ -199,7 +199,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
     }
     const nonce = localStorage.getItem('nonce')
     const loginToken = localStorage.getItem('loginToken')
-    const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+    const headers = { 'Content-Type': 'application/json', Nonce: nonce }
 
     // Check if loginToken is available
     if (loginToken) {
