@@ -338,12 +338,15 @@ function OrderSummary({ productData, handleRemoveCta }) {
 
 function Delivery({ handleRemoveCta, productData }) {
   const [countryCode, setCountryCode] = useState('')
-  const [postCode, setPostCode] = useState('')
+
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [addingDeliveryInfo, setAddingDeliveryInfo] = useState(false)
   const selectedCountry = productData?.shipping_address?.country
-  let enteredPostalCode = productData?.shipping_address?.postcode
+  const enteredPostalCode = productData?.shipping_address?.postcode
+  const [postCode, setPostCode] = useState(
+    enteredPostalCode ? enteredPostalCode : '',
+  )
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -352,7 +355,6 @@ function Delivery({ handleRemoveCta, productData }) {
   }
 
   const handleSubmit = async (e) => {
-    console.log(postCode, '!!')
     e.preventDefault()
     // if (
     //   (!selectedCountry || !enteredPostalCode) &&
@@ -362,6 +364,13 @@ function Delivery({ handleRemoveCta, productData }) {
     //   setToastMessage('Please enter/select required fields')
     //   return
     // }
+    if ((!countryCode && !selectedCountry) || !postCode) {
+      {
+        setShowToast(true)
+        setToastMessage('Please enter/select required fields')
+        return
+      }
+    }
     const nonce = localStorage.getItem('nonce')
     const loginToken = localStorage.getItem('loginToken')
     const headers = { 'Content-Type': 'application/json', Nonce: nonce }
