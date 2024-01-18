@@ -61,7 +61,7 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
   }
 
   const handleBasket = () => {
-    router.push('/your-basket')
+    router.push('/basket')
     closeDrawer()
   }
 

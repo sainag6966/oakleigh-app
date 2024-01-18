@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import CountrySelector from '@/reuseComps/CountrySelector'
@@ -78,18 +78,10 @@ function ProductDetail({ productData, handleRemoveCta }) {
       if (response.ok) {
         handleRemoveCta()
         setRemoving(false)
-        console.log('Signup successful!')
       } else {
-        console.error(
-          'Failed to add item to the basket. Status:',
-          response.status,
-        )
         const errorData = await response.json() // You can log or inspect the error details
-        console.error('Error Details:', errorData)
       }
-    } catch (error) {
-      console.error('Error:', error)
-    }
+    } catch (error) {}
   }
 
   return (
@@ -163,6 +155,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
   const couponCode = productData?.coupons[0]?.code
   const isCouponAvailable = productData?.coupons?.length
   const couponDiscount = productData?.coupons[0]?.totals?.total_discount || '0'
+  const deliveryRate = productData?.totals?.total_shipping
 
   const handleRemoveCoupon = async () => {
     const nonce = localStorage.getItem('nonce')
@@ -194,14 +187,16 @@ function OrderSummary({ productData, handleRemoveCta }) {
         // setLoading(false)
       }
       // setData(responseData)
-    } catch (error) {
-      // setLoading(false)
-      console.error('Error fetching data:', error)
-    }
+    } catch (error) {}
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!coupon) {
+      setPromoToast(true)
+      setPromoToastMsg('Please enter the Coupon code')
+      return
+    }
     const nonce = localStorage.getItem('nonce')
     const loginToken = localStorage.getItem('loginToken')
     const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
@@ -221,22 +216,18 @@ function OrderSummary({ productData, handleRemoveCta }) {
         },
       )
       const responseData = await response.json()
-      console.log(responseData, '!! res')
       if (responseData) {
         setAddingPromo(false)
         if (!responseData?.discount_type) {
           setPromoToast(true)
-          setPromoToastMsg(responseData?.message)
+          setPromoToastMsg('Please enter a valid Coupon code')
           return
         }
         handleRemoveCta()
       }
-      // setData(responseData)
-    } catch (error) {
-      // setLoading(false)
-      console.error('Error fetching data:', error)
-    }
+    } catch (error) {}
   }
+
   const handleChange = (e) => {
     e.preventDefault()
     const { value } = e?.target
@@ -258,7 +249,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
                 value={coupon}
                 placeholder="ENTER CODE"
                 onChange={handleChange}
-                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-3 py-2 font-sans text-display-3 text-black"
+                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-7 py-2 font-sans text-display-3 text-black"
               />
               <div className="relative flex h-[41px] w-[110px] cursor-pointer font-sans text-display-4">
                 <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
@@ -302,7 +293,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
               onClick={handleRemoveCoupon}
             >
               {isCouponAvailable ? (
-                <p>
+                <p className="cursor-pointer">
                   <u>X Remove</u>
                 </p>
               ) : null}
@@ -317,7 +308,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
           )}
           <section className="flex items-center justify-between text-display-3 leading-tight">
             <p>Delivery</p>
-            <p>£0.00</p>
+            <p>£{deliveryRate}.00</p>
           </section>
         </section>
         <section className="flex h-auto w-full items-center justify-between border-t-[1px] border-orderSummaryBorder pt-[25px] font-sans text-display-16">
@@ -345,23 +336,89 @@ function OrderSummary({ productData, handleRemoveCta }) {
   )
 }
 
-function Delivery() {
-  const handleSubmit = () => {}
-  const handleChange = () => {}
+function Delivery({ handleRemoveCta, productData }) {
+  const [countryCode, setCountryCode] = useState('')
+  const [postCode, setPostCode] = useState('')
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [addingDeliveryInfo, setAddingDeliveryInfo] = useState(false)
+  const selectedCountry = productData?.shipping_address?.country
+  let enteredPostalCode = productData?.shipping_address?.postcode
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    const { value } = e?.target
+    setPostCode(value)
+  }
+
+  const handleSubmit = async (e) => {
+    console.log(postCode, '!!')
+    e.preventDefault()
+    // if (
+    //   (!selectedCountry || !enteredPostalCode) &&
+    //   (!countryCode || !postCode)
+    // ) {
+    //   setShowToast(true)
+    //   setToastMessage('Please enter/select required fields')
+    //   return
+    // }
+    const nonce = localStorage.getItem('nonce')
+    const loginToken = localStorage.getItem('loginToken')
+    const headers = { 'Content-Type': 'application/json', Nonce: nonce }
+    const postData = {
+      shipping_address: {
+        country: String(countryCode ? countryCode : selectedCountry),
+        postcode: String(postCode),
+      },
+    }
+
+    // Check if loginToken is available
+    if (loginToken) {
+      headers['Authorization'] = `Bearer ${loginToken}`
+    }
+    try {
+      setAddingDeliveryInfo(true)
+      const response = await fetch(
+        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/update-customer',
+        {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(postData),
+          credentials: 'include',
+        },
+      )
+      const responseData = await response.json()
+
+      if (responseData) {
+        if (responseData?.data?.status === 400) {
+          setAddingDeliveryInfo(false)
+          setShowToast(true)
+          setToastMessage('Please enter Valid Postcode')
+          return
+        }
+        setAddingDeliveryInfo(false)
+        handleRemoveCta()
+      }
+    } catch (error) {}
+  }
+
   return (
     <section className="flex h-auto w-full flex-col gap-5">
       <p className="text-display-11">Delivery</p>
-      <CountrySelector />
+      <CountrySelector
+        setCountryCode={setCountryCode}
+        selectedCountry={selectedCountry}
+      />
       <section className="h-auto w-full">
         <form className="flex h-auto w-full gap-5" onSubmit={handleSubmit}>
           <input
             type="text"
-            // id="first_name"
+            id="first_name"
             name="first_name"
-            value=""
+            value={postCode}
             placeholder="ENTER POSTCODE"
             onChange={handleChange}
-            className="h-[41px] w-full flex-1 appearance-none rounded border bg-search px-3 py-2 font-sans text-display-3 text-black"
+            className="h-[41px] w-full flex-1 appearance-none rounded border bg-search px-7 py-2 font-sans text-display-3 text-black"
           />
           <div className="relative flex h-[41px] w-[110px] font-sans text-display-4">
             <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
@@ -375,6 +432,21 @@ function Delivery() {
           </div>
         </form>
       </section>
+      {addingDeliveryInfo && (
+        <section className="mt-4 flex gap-2">
+          <Spinner width={25} height={25} />
+          <p>Adding Delivery Info...</p>
+        </section>
+      )}
+      {showToast && (
+        <div className="mt-3 h-auto w-full">
+          <Toast
+            message={toastMessage}
+            showToast={showToast}
+            setShowToast={setShowToast}
+          />
+        </div>
+      )}
     </section>
   )
 }
@@ -418,7 +490,6 @@ function YourBasket() {
         setData(responseData)
       } catch (error) {
         setLoading(false)
-        console.error('Error fetching data:', error)
       }
     }
     fetchData()
@@ -444,7 +515,7 @@ function YourBasket() {
             productData={data?.items}
             handleRemoveCta={handleRemoveCta}
           />
-          <Delivery />
+          <Delivery productData={data} handleRemoveCta={handleRemoveCta} />
           <OrderSummary productData={data} handleRemoveCta={handleRemoveCta} />
         </section>
       )}
@@ -452,53 +523,3 @@ function YourBasket() {
   )
 }
 export default YourBasket
-
-// export async function getServerSideProps(context) {
-//   // const { params } = context
-//   // const { productId } = params
-//   const nonce = 'c84710b9fe'
-//   try {
-//     const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
-//     const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
-//     const response = await fetch(
-//       'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/items',
-//       {
-//         method: 'get',
-//         headers: {
-//           'Content-Type': 'text/plain',
-//           Nonce: nonce,
-//           // Authorization: 'Basic ' + btoa(username + ':' + password),
-//           // Authorization: `Bearer ${nonce}`,
-//           // Authorization: `Bearer ${nonce}`,
-//           // Cookie:
-//           //   'wp_woocommerce_session_16faeead23a0c92f8535a8c8627dd6ea=t_16d949e4b202a375cf1af9e85cce4e%257C%257C1704440878%257C%257C1704437278%257C%257C284262df850ecf68420b695b5fbc5eab',
-//           // 'Access-Control-Allow-Origin': 'your-client-origin',
-//           // 'Access-Control-Allow-Credentials': true,
-//         },
-//         credentials: 'include',
-//         // withCredentials: true,
-//       },
-//     )
-//     if (!response.ok) {
-//       // Handle non-successful responses (e.g., 404, 500)
-//       console.error(`API request failed with status ${response.status}`)
-//       return {
-//         notFound: true,
-//       }
-//     }
-//     const data = await response.json()
-//     return {
-//       props: {
-//         data,
-//       },
-//     }
-//   } catch (error) {
-//     // Handle network errors or other exceptions
-//     console.error('Error fetching data from API:', error)
-//     return {
-//       props: {
-//         data: null,
-//       },
-//     }
-//   }
-// }

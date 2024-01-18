@@ -1,13 +1,25 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
-function CountrySelector() {
+function CountrySelector({ setCountryCode, selectedCountry }) {
   const [value, setValue] = useState('')
   const options = useMemo(() => countryList().getData(), [])
 
-  const changeHandler = (value) => {
-    setValue(value)
+  useEffect(() => {
+    // When selectedCountry changes, update the value based on the country code
+    if (selectedCountry) {
+      const selectedOption = options.find(
+        (option) => option.value === selectedCountry,
+      )
+      setValue(selectedOption || '') // Set to empty string if the country code is not found
+    }
+  }, [selectedCountry, options])
+
+  const changeHandler = (selectedOption) => {
+    const countryCode = selectedOption?.value
+    setCountryCode(countryCode)
+    setValue(selectedOption)
   }
 
   const customStyles = {
@@ -41,7 +53,7 @@ function CountrySelector() {
   return (
     <Select
       options={options}
-      value={value}
+      value={value ? value : selectedCountry}
       onChange={changeHandler}
       className="h-auto w-full font-sans text-display-3" // Make the Select component full width
       classNamePrefix="tw-select" // Prefix for generated class names

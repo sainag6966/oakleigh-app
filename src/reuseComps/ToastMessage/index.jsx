@@ -13,7 +13,7 @@ const Toast = ({ message, showToast, setShowToast }) => {
 
   return (
     <div
-      className={`relative rounded-md bg-black p-4 text-white ${
+      className={`relative rounded-md bg-black p-4 font-sans text-white ${
         showToast ? 'visible' : 'invisible'
       }`}
     >

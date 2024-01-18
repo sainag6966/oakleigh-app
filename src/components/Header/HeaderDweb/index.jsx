@@ -74,7 +74,7 @@ function HeaderDweb({ data }) {
     }
     if (icon === 'basket') {
       document.body.classList.remove('no-scroll')
-      router.push('/your-basket')
+      router.push('/basket')
       setOpenLoginModal(false)
       setOpenSearchModal(false)
       setOpenBrandDropdown(false)

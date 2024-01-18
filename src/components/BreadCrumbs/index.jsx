@@ -8,32 +8,29 @@ const Breadcrumbs = () => {
   const { query, asPath } = router
   const urlString = asPath || ''
   const pathArray = urlString.split('/').filter(Boolean)
-
-  // Extract the path segments from the query object
-  const pathSegments = query.slug || []
-  console.log(pathArray, '!! bread')
+  const uppercasedArray = pathArray.map((str) => str.toUpperCase())
 
   // Render the breadcrumbs
   return (
-    <section className="w-full font-sans text-[10px] sm:text-display-1 xl:text-[15px]">
-      <p>
-        <Link href="/">HOME</Link>
-        {pathArray.map((segment, index) => (
-          <span key={index}>
-            {' / '}
-            <Link href={`/${pathArray.slice(0, index + 1).join('/')}`}>
-              {segment}
-            </Link>
-          </span>
-        ))}
-      </p>
+    <section className="w-full font-sans text-display-1 xl:text-[15px]">
+      {/* <p> */}
+      <Link href="/">HOME</Link>
+      {uppercasedArray.map((segment, index) => (
+        <span key={index}>
+          {' / '}
+          <Link
+            href={`/${pathArray.slice(0, index + 1).join('/')}`}
+            className={`${
+              uppercasedArray.length === index + 1 ? 'font-bold' : 'font-normal'
+            }`}
+          >
+            {segment}
+          </Link>
+        </span>
+      ))}
+      {/* </p> */}
     </section>
   )
-}
-{
-  /* <div className="w-full font-sans text-[10px] sm:text-display-1 xl:text-[15px]">
-<Breadcrumbs />
-</div> */
 }
 
 export default Breadcrumbs
