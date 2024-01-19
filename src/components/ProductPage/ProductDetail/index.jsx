@@ -1,17 +1,17 @@
 function ProductDetail({ name, price, requiredMetaData, stockStatus }) {
   return (
-    <section>
+    <section className="flex h-auto w-full flex-col gap-[15px] font-sans">
       <h1 className="font-cormorant text-display-12 dxl:text-display-14">
         {name}
       </h1>
       {stockStatus ? (
         <h5 className="text-display-10 font-semibold xl:text-display-17 dxl:text-display-11">
-          £{price}
+          <div dangerouslySetInnerHTML={{ __html: price }} />
         </h5>
       ) : (
         <p>Sold</p>
       )}
-      <section className="flex flex-col items-start justify-between gap-4 border-0 border-search text-[11px] lg:flex-row lg:items-center lg:gap-0 lg:border-y-[1px] lg:py-5 xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
+      <section className="mt-[15px] flex flex-col items-start justify-between gap-4 border-0 border-search text-[11px] lg:flex-row lg:items-center lg:gap-0 lg:border-y-[1px] lg:py-5 xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
         {requiredMetaData.map((e) => {
           return (
             e.key === 'product_reference' && (

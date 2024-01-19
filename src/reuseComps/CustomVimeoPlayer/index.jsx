@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import Vimeo from '@vimeo/player'
 import ImageComp from '../ImageComp'
+import ProgressiveImageComp from '../ProgressiveImageComp'
 
 const CustomVimeoPlayer = ({ getVimeoId, width, height }) => {
   const playerRef = useRef(null)
@@ -48,15 +49,22 @@ const CustomVimeoPlayer = ({ getVimeoId, width, height }) => {
       <section id="player-element" className="relative">
         <section
           id="playPauseButton"
-          className="absolute bottom-5 left-7  z-[1] flex cursor-pointer items-center justify-center gap-4 text-display-11 text-textPrimary"
+          className="absolute bottom-[12px] left-[17px] z-[1] flex  cursor-pointer items-center justify-center gap-4 text-display-11 text-textPrimary lg:bottom-5 lg:left-7"
           onClick={setPlayPause}
         >
-          <section className="flex h-10 w-10 items-center justify-center rounded-[20px] border-2 border-textPrimary">
-            <figure className="relative h-3 w-3">
-              <ImageComp src={play ? pauseIcon : playIcon} alt={'play/pause'} />
+          <section className="flex h-8 w-8 items-center justify-center rounded-[20px] border-[1px] border-textPrimary lg:h-10 lg:w-10">
+            <figure
+              className={`relative ${play ? 'ml-0' : 'ml-[2px]'} h-3 w-3`}
+            >
+              <ProgressiveImageComp
+                src={play ? pauseIcon : playIcon}
+                alt={'play/pause'}
+              />
             </figure>
           </section>
-          <button id="playPauseButton">{play ? 'PAUSE' : 'PLAY'}</button>
+          <button id="playPauseButton" className="text-display-9">
+            {play ? 'PAUSE' : 'PLAY'}
+          </button>
         </section>
       </section>
     </main>

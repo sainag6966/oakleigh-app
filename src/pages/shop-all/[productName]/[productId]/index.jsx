@@ -12,7 +12,7 @@ import Spinner from '@/reuseComps/Spinner'
 import Toast from '@/reuseComps/ToastMessage'
 
 function ProductDetailPage({ data }) {
-  const { price, name, stock_status } = data
+  const { price, price_html, name, stock_status } = data
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [loadingToast, setLoadingToast] = useState(false)
@@ -144,12 +144,12 @@ function ProductDetailPage({ data }) {
         </nav>
       </nav>
       <section className="flex h-auto w-full flex-col gap-[70px]">
-        <section className="flex h-auto w-full flex-col items-start justify-between gap-8 lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
-          <section className="flex h-auto w-full flex-col gap-3">
+        <section className="flex h-auto w-full flex-col items-start justify-between gap-[30px] lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
+          <section className="flex h-auto w-full flex-col gap-[30px]">
             {!isDesktop && (
               <ProductDetail
                 name={name}
-                price={price}
+                price={price_html}
                 requiredMetaData={requiredMetaData}
                 stockStatus={stockStatus}
               />
@@ -170,11 +170,11 @@ function ProductDetailPage({ data }) {
               <CustomVimeoPlayer
                 getVimeoId={getVimeoId}
                 width={isxLargeScreen ? 804 : isLargeScreen ? 600 : 288}
-                height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 172}
+                height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 170}
               />
             </section>
           </section>
-          <section className="flex flex-1 flex-col gap-5 font-sans dxl:gap-[30px]">
+          <section className="flex w-full flex-1 flex-col gap-6 font-sans dxl:gap-[30px]">
             {isDesktop && (
               <ProductDetail
                 name={name}
@@ -212,7 +212,7 @@ function ProductDetailPage({ data }) {
                 />
               </div>
             )}
-            <section className="flex h-auto w-full flex-col items-center justify-between gap-4 lg:flex-row lg:gap-2 xl:gap-5 txl:gap-[30px]">
+            <section className="flex h-auto w-full flex-col items-center justify-between gap-6 lg:flex-row lg:gap-2 xl:gap-5 txl:gap-[30px]">
               <div className="w-full flex-1 ">
                 <InstallmentButton />
               </div>
@@ -220,12 +220,14 @@ function ProductDetailPage({ data }) {
                 <ApplePayButton />
               </div>
             </section>
-            <section className="h-auto w-full">
-              <p className="text-display-1 xl:text-display-3 dxl:text-display-6">
+            <section className="h-auto w-full border-b-[1px] border-search pb-[30px]">
+              <p className="text-display-3 xl:text-display-3 dxl:text-display-6">
                 Lorem ipsum dolor sit amet finance <u>website link here</u>
               </p>
             </section>
-            <SmallPromiseBlock />
+            <section className="mt-[40px] h-auto w-full">
+              <SmallPromiseBlock />
+            </section>
           </section>
         </section>
         {/* <ProductMeta /> */}
