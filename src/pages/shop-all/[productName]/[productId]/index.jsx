@@ -1,20 +1,15 @@
-import Toast from '@/reuseComps/ToastMessage'
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
+import { useMediaQuery } from 'react-responsive'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
-import Cookies from 'js-cookie'
+import ProductDetail from '@/components/ProductPage/ProductDetail'
 import BasketDrawer from '@/components/BasketDrawer'
-import { getNonce } from '@/utils/nonce'
 import InstallmentButton from '@/reuseComps/InstallmentButton'
-import ImageComp from '@/reuseComps/ImageComp'
 import ApplePayButton from '@/reuseComps/ApplePayButton'
 import SmallPromiseBlock from '@/components/ContentBlocks/SmallPromiseBlock'
-import ProductMeta from '@/components/ProductMeta'
 import CustomVimeoPlayer from '@/reuseComps/CustomVimeoPlayer'
 import Breadcrumbs from '@/components/BreadCrumbs'
-import { useMediaQuery } from 'react-responsive'
-import axios from 'axios'
 import Spinner from '@/reuseComps/Spinner'
+import Toast from '@/reuseComps/ToastMessage'
 
 function ProductDetailPage({ data }) {
   const { price, name, stock_status } = data
@@ -145,69 +140,57 @@ function ProductDetailPage({ data }) {
     <main className="flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] dxl:px-[141px]">
       <nav aria-label="Breadcrumb" role="navigation" className="w-full">
         <nav className="flex w-full list-none gap-1 font-sans text-display-1 lg:text-[15px]">
-          {/* <li>
-            <a>BREADCRUMB</a>
-          </li>
-          <li>/</li>
-          <li>
-            <a>BREADCRUMB</a>
-          </li> */}
           <Breadcrumbs />
         </nav>
       </nav>
       <section className="flex h-auto w-full flex-col gap-[70px]">
         <section className="flex h-auto w-full flex-col items-start justify-between gap-8 lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
-          <section className="flex flex-1 flex-col gap-5 font-sans lg:order-2 dxl:gap-[30px]">
-            <h1 className="font-cormorant text-display-12 dxl:text-display-14">
-              {name}
-            </h1>
-            {stockStatus ? (
-              <h5 className="text-display-10 font-semibold xl:text-display-17 dxl:text-display-11">
-                £{price}
-              </h5>
-            ) : (
-              <p>Sold</p>
+          <section className="flex h-auto w-full flex-col gap-3">
+            {!isDesktop && (
+              <ProductDetail
+                name={name}
+                price={price}
+                requiredMetaData={requiredMetaData}
+                stockStatus={stockStatus}
+              />
             )}
-            <section className="flex flex-col items-start justify-between border-0 border-search text-[11px] lg:flex-row lg:items-center lg:border-y-[1px] lg:py-5 xl:text-display-3 dxl:py-[30px] dxl:text-display-6">
-              {requiredMetaData.map((e) => {
+            <section className="grid-rows-auto grid h-auto w-full flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
+              {imageList.map((image, index) => {
                 return (
-                  e.key === 'product_reference' && (
-                    <div className="flex items-center justify-start gap-1 dxl:gap-2">
-                      <p className="font-semibold">Ref No:</p>
-                      <p>{e.value}</p>
-                    </div>
-                  )
-                )
-              })}
-              {requiredMetaData.map((e) => {
-                return (
-                  e.key === 'product_year' && (
-                    <div className="flex items-center justify-start gap-2">
-                      <p className="font-semibold">Year:</p>
-                      <p>{e.value}</p>
-                    </div>
-                  )
-                )
-              })}
-              {requiredMetaData.map((e) => {
-                return (
-                  e.key === 'whats_included_text' && (
-                    <div className="flex items-center justify-start gap-2">
-                      <p className="font-semibold">{`What's Included:`}</p>
-                      <p className="line-clamp-1">Box & Papers</p>
-                    </div>
-                  )
+                  <figure key={index} className="aspect-[3/4]">
+                    <ProgressiveImageComp
+                      src={image.src}
+                      alt={'productImage'}
+                    />
+                  </figure>
                 )
               })}
             </section>
+            <section className="h-full w-full">
+              <CustomVimeoPlayer
+                getVimeoId={getVimeoId}
+                width={isxLargeScreen ? 804 : isLargeScreen ? 600 : 288}
+                height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 172}
+              />
+            </section>
+          </section>
+          <section className="flex flex-1 flex-col gap-5 font-sans dxl:gap-[30px]">
+            {isDesktop && (
+              <ProductDetail
+                name={name}
+                price={price}
+                requiredMetaData={requiredMetaData}
+                stockStatus={stockStatus}
+              />
+            )}
             {nonce && stockStatus && (
               <section
-                className="relative flex h-[53px] w-full cursor-pointer"
+                className="relative flex h-[42px] w-full cursor-pointer lg:h-[53px]"
                 onClick={handleAddToBasket}
               >
-                <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
-                <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />
-                <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-[47px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:w-[99%]" />
+                <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:h-[50px] lg:w-[99.5%]" />
+                <div className="absolute right-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary lg:h-[50px] lg:w-[99.5%]" />
+                <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-9 w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:h-[47px] lg:w-[99%]" />
                 <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
                   Add To Basket
                 </div>
@@ -229,11 +212,11 @@ function ProductDetailPage({ data }) {
                 />
               </div>
             )}
-            <section className="flex h-auto w-full items-center justify-between gap-2 xl:gap-5 txl:gap-[30px]">
-              <div className="flex-1 ">
+            <section className="flex h-auto w-full flex-col items-center justify-between gap-4 lg:flex-row lg:gap-2 xl:gap-5 txl:gap-[30px]">
+              <div className="w-full flex-1 ">
                 <InstallmentButton />
               </div>
-              <div>
+              <div className="h-auto w-full">
                 <ApplePayButton />
               </div>
             </section>
@@ -244,24 +227,8 @@ function ProductDetailPage({ data }) {
             </section>
             <SmallPromiseBlock />
           </section>
-          <section className="grid-rows-auto grid flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
-            {imageList.map((image, index) => {
-              return (
-                <figure key={index} className="aspect-[3/4]">
-                  <ProgressiveImageComp src={image.src} alt={'productImage'} />
-                </figure>
-              )
-            })}
-          </section>
         </section>
-        <section className="h-full w-full">
-          <CustomVimeoPlayer
-            getVimeoId={getVimeoId}
-            width={isxLargeScreen ? 804 : isLargeScreen ? 600 : 400}
-            height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 240}
-          />
-        </section>
-        <ProductMeta />
+        {/* <ProductMeta /> */}
       </section>
       {isBasketOpen && (
         <BasketDrawer
@@ -273,65 +240,6 @@ function ProductDetailPage({ data }) {
         />
       )}
     </main>
-    // <div className="relative flex h-auto w-full flex-col gap-4">
-    //   <p>product name : {data?.name}</p>
-    //   <img className="h-60 w-80" src={imgSrc}></img>
-    //   <button
-    //     onClick={handleAddToBasket}
-    //     className="flex h-[20px] w-[150px] items-center justify-center border-[2px] border-black bg-orange-300 p-4"
-    //   >
-    //     Add To Basket
-    //   </button>
-    //   {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
-    //   <div className="h-auto w-full">
-    //     <Toast
-    //       message={toastMessage}
-    //       showToast={showToast}
-    //       setShowToast={setShowToast}
-    //     />
-    //   </div>
-    //   <p>product name : {data?.name}</p>
-    //   <img className="h-60 w-80" src={imgSrc}></img>
-    //   <button
-    //     onClick={handleAddToBasket}
-    //     className="flex h-[20px] w-[150px] items-center justify-center border-[2px] border-black bg-orange-300 p-4"
-    //   >
-    //     Add To Basket
-    //   </button>
-    //   {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
-    //   <div className="h-auto w-full">
-    //     <Toast
-    //       message={toastMessage}
-    //       showToast={showToast}
-    //       setShowToast={setShowToast}
-    //     />
-    //   </div>
-    //   <p>product name : {data?.name}</p>
-    //   <img className="h-60 w-80" src={imgSrc}></img>
-    //   <button
-    //     onClick={handleAddToBasket}
-    //     className="flex h-[20px] w-[150px] items-center justify-center border-[2px] border-black bg-orange-300 p-4"
-    //   >
-    //     Add To Basket
-    //   </button>
-    //   {loadingToast && <p>Adding item to the Basket... Please Wait...</p>}
-    //   <div className="h-auto w-full">
-    //     <Toast
-    //       message={toastMessage}
-    //       showToast={showToast}
-    //       setShowToast={setShowToast}
-    //     />
-    //   </div>
-    //   {isBasketOpen && (
-    //     <BasketDrawer
-    //       imageSrc={imgSrc}
-    //       productName={data?.name}
-    //       productPrice={productPrice}
-    //       setIsBasketOpen={setIsBasketOpen}
-    //       isFromHeader={false}
-    //     />
-    //   )}
-    // </div>
   )
 }
 export default ProductDetailPage

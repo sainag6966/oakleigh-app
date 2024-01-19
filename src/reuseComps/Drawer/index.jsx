@@ -53,11 +53,11 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
       router.push('vintage-watches')
       return
     }
-    if (item?.title?.rendered === 'Online Only') {
+    if (item === 'Online Only') {
       router.push('online-only')
       return
     }
-    router.push('/Product-Listing')
+    router.push('/shop-all')
   }
 
   const handleBasket = () => {

@@ -44,7 +44,7 @@ const ProductListing = ({ data }) => {
   // }, [page])
 
   const handleProductClick = (item) => {
-    router.push(`product/${item.slug}/${item.id}`)
+    router.push(`shop-all/${item.slug}/${item.id}`)
   }
 
   const handleLoadMore = () => {

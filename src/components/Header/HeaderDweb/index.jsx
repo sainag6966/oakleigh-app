@@ -36,7 +36,6 @@ function HeaderDweb({ data }) {
   })
 
   const handleMenuClick = (item) => {
-    console.log(item, '!!!')
     setOpenLoginModal(false)
     setOpenSearchModal(false)
     document.body.classList.remove('no-scroll')
@@ -65,7 +64,7 @@ function HeaderDweb({ data }) {
       return
     }
     setOpenBrandDropdown(false)
-    router.push('/Product-Listing')
+    router.push('/shop-all')
   }
 
   const handleIconClick = (icon) => {
