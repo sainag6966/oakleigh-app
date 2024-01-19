@@ -1,32 +1,47 @@
-import NextImage from "@/reuseComps/NextImage";
-import Image from "next/image";
+import NextImage from '@/reuseComps/NextImage'
+import Image from 'next/image'
+import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
+import { useState } from 'react'
 function BrandWidget() {
+  const [expandBrands, setExpandBrands] = useState(false)
+  const buttonText = expandBrands ? 'Collapse' : 'View All Brands'
   const data = [
-    "/Images/Sample/brand1.svg",
-    "/Images/Sample/brand2.svg",
-    "/Images/Sample/brand3.svg",
-    "/Images/Sample/brand4.svg",
-    "/Images/Sample/brand5.svg",
-  ];
+    '/Images/Sample/brand1.svg',
+    '/Images/Sample/brand2.svg',
+    '/Images/Sample/brand3.svg',
+    '/Images/Sample/brand4.svg',
+    '/Images/Sample/brand5.svg',
+    '/Images/Sample/brand3.svg',
+    '/Images/Sample/brand4.svg',
+    '/Images/Sample/brand5.svg',
+  ]
   return (
-    <div className="w-full h-auto px-[80px] pt-[100px] flex justify-between items-center">
-      {data.map((e, index) => {
-        return (
-          <div key={index} className="min-w-20 max-w-[150px] h-auto">
-            <Image
-              src={e}
-              width="5"
-              height="2"
-              layout="responsive"
-              alt="brandLogo"
-            />
-          </div>
-        );
-      })}
-      <u>
-        <p>View All Brands</p>
+    <section className="flex h-auto w-full flex-col items-center justify-between gap-[50px] px-[72px] pt-[60px]">
+      <section
+        className={`flex ${
+          expandBrands ? 'h-auto' : 'h-[140px]'
+        } w-full flex-wrap items-center justify-start gap-10 overflow-hidden`}
+      >
+        {data.map((e, index) => {
+          return (
+            <section
+              key={index}
+              className="flex aspect-[16/9] max-w-[85px] flex-auto items-center justify-center"
+            >
+              <ProgressiveImageComp src={e} alt="brandLogo" />
+            </section>
+          )
+        })}
+      </section>
+      <u
+        className="font-sans text-display-4"
+        onClick={() => {
+          setExpandBrands(!expandBrands)
+        }}
+      >
+        <p>{buttonText}</p>
       </u>
-    </div>
-  );
+    </section>
+  )
 }
-export default BrandWidget;
+export default BrandWidget

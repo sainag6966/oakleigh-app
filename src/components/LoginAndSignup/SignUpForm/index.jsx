@@ -100,8 +100,6 @@ const SignupForm = () => {
       )
 
       if (response.ok) {
-        // Handle success (e.g., redirect to a success page)
-        console.log('Signup successful!')
         router.push('/')
       } else {
         // Handle errors

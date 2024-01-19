@@ -247,11 +247,7 @@ function ProductDetailPage({ data }) {
           <section className="grid-rows-auto grid flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
             {imageList.map((image, index) => {
               return (
-                <figure
-                  key={index}
-                  // className="aspect-[3/4] lg:h-[280px] lg:w-[220px] xl:h-[380px] xl:w-[320px] dxl:h-[458px] dxl:w-[387px]"
-                  className="aspect-[3/4]"
-                >
+                <figure key={index} className="aspect-[3/4]">
                   <ProgressiveImageComp src={image.src} alt={'productImage'} />
                 </figure>
               )

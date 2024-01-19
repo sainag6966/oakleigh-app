@@ -13,7 +13,6 @@ const Breadcrumbs = () => {
   // Render the breadcrumbs
   return (
     <section className="w-full font-sans text-display-1 xl:text-[15px]">
-      {/* <p> */}
       <Link href="/">HOME</Link>
       {uppercasedArray.map((segment, index) => (
         <span key={index}>
@@ -28,7 +27,6 @@ const Breadcrumbs = () => {
           </Link>
         </span>
       ))}
-      {/* </p> */}
     </section>
   )
 }
