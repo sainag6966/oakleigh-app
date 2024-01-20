@@ -162,7 +162,7 @@ function ProductDetailPage({ data }) {
             <section className="h-full w-full">
               <CustomVimeoPlayer
                 getVimeoId={getVimeoId}
-                width={isxLargeScreen ? 804 : isLargeScreen ? 600 : 288}
+                width={isxLargeScreen ? 804 : isLargeScreen ? 540 : 288}
                 height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 170}
               />
             </section>

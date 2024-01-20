@@ -16,35 +16,31 @@ const CustomVimeoPlayer = ({ getVimeoId, width, height }) => {
 
   useEffect(() => {
     // Initialize Vimeo player
-    if (typeof window !== 'undefined') {
-      const actualWidth = window?.innerWidth - 36 * 2
+    playerRef.current = new Vimeo('player-element', {
+      id: videoId,
+      autopause: false, // Disable auto-pause on other players
+      controls: false,
+      width: width, // Set the width of the player
+      height: height,
+    })
 
-      playerRef.current = new Vimeo('player-element', {
-        id: videoId,
-        autopause: false, // Disable auto-pause on other players
-        controls: false,
-        width: actualWidth, // Set the width of the player
-        // height: height,
+    // Set up custom play/pause button
+    const playPauseButton = document.getElementById('playPauseButton')
+
+    playPauseButton.addEventListener('click', () => {
+      playerRef.current.getPaused().then((paused) => {
+        if (paused) {
+          playerRef.current.play()
+        } else {
+          playerRef.current.pause()
+        }
       })
+    })
 
-      // Set up custom play/pause button
-      const playPauseButton = document.getElementById('playPauseButton')
-
-      playPauseButton.addEventListener('click', () => {
-        playerRef.current.getPaused().then((paused) => {
-          if (paused) {
-            playerRef.current.play()
-          } else {
-            playerRef.current.pause()
-          }
-        })
-      })
-
-      // Cleanup on component unmount
-      return () => {
-        playerRef.current.destroy()
-        playPauseButton.removeEventListener('click', () => {})
-      }
+    // Cleanup on component unmount
+    return () => {
+      playerRef.current.destroy()
+      playPauseButton.removeEventListener('click', () => {})
     }
   }, [videoId])
 
