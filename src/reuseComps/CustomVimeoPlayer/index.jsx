@@ -3,18 +3,20 @@ import Vimeo from '@vimeo/player'
 import ImageComp from '../ImageComp'
 import ProgressiveImageComp from '../ProgressiveImageComp'
 
-const CustomVimeoPlayer = ({ getVimeoId, width, height }) => {
+const CustomVimeoPlayer = ({ getVimeoId, width, height, videoId }) => {
   const playerRef = useRef(null)
   const [play, setPlay] = useState(false)
   const playIcon = '/Images/playIcon.svg'
   const pauseIcon = '/Images/pauseIcon.svg'
-  const videoId = getVimeoId()
+  // const videoId = getVimeoId()
 
   const setPlayPause = () => {
     setPlay(!play)
   }
 
   useEffect(() => {
+    playerRef.current && playerRef.current.destroy()
+    // playPauseButton && playPauseButton.removeEventListener('click', () => {})
     // Initialize Vimeo player
     playerRef.current = new Vimeo('player-element', {
       id: videoId,

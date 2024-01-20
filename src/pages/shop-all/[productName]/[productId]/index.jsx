@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import ProductDetail from '@/components/ProductPage/ProductDetail'
+import ProductMeta from '@/components/ProductMeta'
 import BasketDrawer from '@/components/BasketDrawer'
 import InstallmentButton from '@/reuseComps/InstallmentButton'
 import ApplePayButton from '@/reuseComps/ApplePayButton'
@@ -159,13 +160,14 @@ function ProductDetailPage({ data }) {
                 )
               })}
             </section>
-            <section className="h-full w-full">
+            {/* <section className="h-full w-full">
               <CustomVimeoPlayer
                 getVimeoId={getVimeoId}
+                videoId={'246115326'}
                 width={isxLargeScreen ? 804 : isLargeScreen ? 540 : 288}
                 height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 170}
               />
-            </section>
+            </section> */}
           </section>
           <section className="flex w-full flex-1 flex-col gap-6 font-sans dxl:gap-[30px]">
             {isDesktop && <ProductDetail data={data} />}
@@ -199,10 +201,10 @@ function ProductDetailPage({ data }) {
               </div>
             )}
             <section className="flex h-auto w-full flex-col items-center justify-between gap-6 lg:flex-row lg:gap-2 xl:gap-5 txl:gap-[30px]">
-              <div className="w-full flex-1 ">
+              <div className="order-2 w-full flex-1 lg:order-1 ">
                 <InstallmentButton />
               </div>
-              <div className="h-auto w-full">
+              <div className="h-auto w-full lg:order-2">
                 <ApplePayButton />
               </div>
             </section>
@@ -216,7 +218,7 @@ function ProductDetailPage({ data }) {
             </section>
           </section>
         </section>
-        {/* <ProductMeta /> */}
+        <ProductMeta data={data} />
       </section>
       {isBasketOpen && (
         <BasketDrawer
