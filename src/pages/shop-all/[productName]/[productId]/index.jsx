@@ -42,7 +42,7 @@ function ProductDetailPage({ data }) {
     const vimeoUrl = urlObject[0]?.value
     const regex = /vimeo\.com\/(\d+)\?/
     const match = vimeoUrl?.match(regex)
-    const vimeoVideoId = match && match[1]
+    const vimeoVideoId = (match && match[1]) || '246115326'
     return vimeoVideoId
   }
   useEffect(() => {
@@ -146,14 +146,7 @@ function ProductDetailPage({ data }) {
       <section className="flex h-auto w-full flex-col gap-[70px]">
         <section className="flex h-auto w-full flex-col items-start justify-between gap-[30px] lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
           <section className="flex h-auto w-full flex-col gap-[30px]">
-            {!isDesktop && (
-              <ProductDetail
-                name={name}
-                price={price_html}
-                requiredMetaData={requiredMetaData}
-                stockStatus={stockStatus}
-              />
-            )}
+            {!isDesktop && <ProductDetail data={data} />}
             <section className="grid-rows-auto grid h-auto w-full flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
               {imageList.map((image, index) => {
                 return (
@@ -175,14 +168,7 @@ function ProductDetailPage({ data }) {
             </section>
           </section>
           <section className="flex w-full flex-1 flex-col gap-6 font-sans dxl:gap-[30px]">
-            {isDesktop && (
-              <ProductDetail
-                name={name}
-                price={price}
-                requiredMetaData={requiredMetaData}
-                stockStatus={stockStatus}
-              />
-            )}
+            {isDesktop && <ProductDetail data={data} />}
             {nonce && stockStatus && (
               <section
                 className="relative flex h-[42px] w-full cursor-pointer lg:h-[53px]"
