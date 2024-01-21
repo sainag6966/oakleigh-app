@@ -34,6 +34,7 @@ function BasketHead() {
 function ProductDetail({ productData, handleRemoveCta }) {
   const [removing, setRemoving] = useState(false)
   const [selectedItem, setSelectedItem] = useState(false)
+  const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const router = useRouter()
 
   const handleRemoveItem = async (item) => {
@@ -75,15 +76,20 @@ function ProductDetail({ productData, handleRemoveCta }) {
   }
 
   return (
-    <section className="flex h-auto w-full flex-col gap-5 border-t-[1.2px] border-y-search pt-[30px]">
+    <section className="flex h-auto w-full flex-col gap-5 border-t-[1.2px] border-y-search pt-[30px] xl:gap-[30px] xl:pt-[20px]">
+      {isLargeScreen && (
+        <section className="flex h-auto w-full justify-between border-b-[1.2px] border-y-search pb-5 font-sans text-display-17">
+          <p>Product</p>
+        </section>
+      )}
       <section className="flex h-auto w-full flex-col gap-[26px]">
         {productData.map((item, index) => {
           return (
-            <section key={index} className="flex h-auto w-full gap-2">
-              <section className="h-auto w-full flex-1">
+            <section key={index} className="flex h-auto w-full gap-2 xl:gap-10">
+              <section className="h-auto w-full flex-1 xl:max-w-[134px]">
                 <figure
                   key={index}
-                  className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] sm:max-h-[270px] sm:max-w-[230px]"
+                  className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] sm:max-h-[270px] sm:max-w-[230px] xl:max-w-[134px]"
                 >
                   <ProgressiveImageComp
                     src={item?.images[1]?.src}
@@ -91,14 +97,19 @@ function ProductDetail({ productData, handleRemoveCta }) {
                   />
                 </figure>
               </section>
-              <section className="flex flex-1 flex-col items-start gap-2 break-words">
-                <p className="text-display-11 [overflow-wrap:anywhere]">
+              <section className="flex flex-1 flex-col items-start gap-2 break-words xl:flex-row xl:items-center xl:justify-between">
+                <p className="text-display-11 [overflow-wrap:anywhere] xl:max-w-[274px]">
                   {item?.name}
                 </p>
-                <p className="font-sans text-display-16">
+                <p className="relative font-sans text-display-16">
                   £{item?.prices?.regular_price}
+                  {isLargeScreen && index === 0 && (
+                    <p className="absolute left-0 top-[-160px] text-display-17">
+                      Total
+                    </p>
+                  )}
                 </p>
-                <section className="mt-4 cursor-pointer font-sans text-display-4">
+                <section className="mt-4 cursor-pointer font-sans text-display-4 lg:mt-0">
                   {removing && selectedItem?.id === item?.id ? (
                     <section className="flex gap-2">
                       <Spinner width={25} height={25} />
@@ -224,7 +235,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
   }
 
   return (
-    <section className="mt-2 flex h-auto w-full flex-col gap-[30px]">
+    <section className="mt-2 flex h-auto w-full flex-col gap-[30px] lg:mt-0 xl:max-w-[400px]">
       <section className="flex h-auto w-full flex-col bg-search p-[30px] text-footerBg">
         <p className="pb-[25px] text-display-11">Order Summary</p>
         <section className="border-y-[1px] border-orderSummaryBorder pb-[25px] pt-[10px] font-sans">
@@ -401,7 +412,7 @@ function Delivery({ handleRemoveCta, productData }) {
   }
 
   return (
-    <section className="flex h-auto w-full flex-col gap-5">
+    <section className="flex h-auto w-full flex-col gap-5 lg:max-w-[526px]">
       <p className="text-display-11">Delivery</p>
       <CountrySelector
         setCountryCode={setCountryCode}
@@ -495,7 +506,7 @@ function YourBasket() {
   }, [removeItem])
 
   return (
-    <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px] xl:px-[64px]">
+    <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px] xl:px-[64px] dxl:px-[132px]">
       <Breadcrumbs />
       {loading ? (
         <section className="flex h-auto w-full items-center justify-center">
@@ -509,12 +520,19 @@ function YourBasket() {
         <section className="flex h-auto w-full flex-col gap-6">
           {' '}
           <BasketHead />
-          <ProductDetail
-            productData={data?.items}
-            handleRemoveCta={handleRemoveCta}
-          />
-          <Delivery productData={data} handleRemoveCta={handleRemoveCta} />
-          <OrderSummary productData={data} handleRemoveCta={handleRemoveCta} />
+          <section className="flex h-auto w-full flex-col gap-6 lg:flex-row">
+            <section className="flex h-auto w-full flex-col gap-6">
+              <ProductDetail
+                productData={data?.items}
+                handleRemoveCta={handleRemoveCta}
+              />
+              <Delivery productData={data} handleRemoveCta={handleRemoveCta} />
+            </section>
+            <OrderSummary
+              productData={data}
+              handleRemoveCta={handleRemoveCta}
+            />
+          </section>
         </section>
       )}
     </main>
