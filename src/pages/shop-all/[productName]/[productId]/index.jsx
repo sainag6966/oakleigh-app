@@ -21,6 +21,7 @@ function ProductDetailPage({ data }) {
   const [nonce, setNonce] = useState('')
   const stockStatus = stock_status === 'instock'
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const isTablet = useMediaQuery({ query: '(min-width:600px)' })
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const isxLargeScreen = useMediaQuery({ query: '(min-width:1680px)' })
   const requiredMeta = [
@@ -164,8 +165,12 @@ function ProductDetailPage({ data }) {
               <CustomVimeoPlayer
                 getVimeoId={getVimeoId}
                 videoId={'246115326'}
-                width={isxLargeScreen ? 804 : isLargeScreen ? 540 : 288}
-                height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 170}
+                width={
+                  isxLargeScreen ? 804 : isDesktop ? 400 : isTablet ? 528 : 288
+                }
+                height={
+                  isxLargeScreen ? 452 : isDesktop ? 230 : isTablet ? 300 : 170
+                }
               />
             </section>
           </section>
@@ -176,10 +181,10 @@ function ProductDetailPage({ data }) {
                 className="relative flex h-[42px] w-full cursor-pointer lg:h-[53px]"
                 onClick={handleAddToBasket}
               >
-                <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:h-[50px] lg:w-[99.5%]" />
-                <div className="absolute right-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary lg:h-[50px] lg:w-[99.5%]" />
-                <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-9 w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:h-[47px] lg:w-[99%]" />
-                <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
+                <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary sm:w-[99.5%] lg:h-[50px]" />
+                <div className="absolute right-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary sm:w-[99.5%] lg:h-[50px]" />
+                <div className="absolute bottom-[3px] left-[1%] right-[1%] h-9 w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[0.5%] sm:right-[0.5%] sm:w-[99%] lg:h-[47px]" />
+                <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary xl:text-display-17">
                   Add To Basket
                 </div>
               </section>
@@ -200,11 +205,11 @@ function ProductDetailPage({ data }) {
                 />
               </div>
             )}
-            <section className="flex h-auto w-full flex-col items-center justify-between gap-6 lg:gap-2 xl:flex-row xl:gap-5 txl:gap-[30px]">
-              <div className="order-2 w-full flex-1 lg:order-1 ">
+            <section className="flex h-auto w-full flex-col items-center justify-between gap-6 xl:flex-row xl:gap-5 txl:gap-[30px]">
+              <div className="order-2 w-full xl:order-1 ">
                 <InstallmentButton />
               </div>
-              <div className="h-auto w-full lg:order-2">
+              <div className="h-auto w-full xl:order-2">
                 <ApplePayButton />
               </div>
             </section>

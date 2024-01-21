@@ -80,7 +80,7 @@ module.exports = {
         'display-10': [
           '1.25rem',
           {
-            fontWeight: '400',
+            fontWeight: '600',
             lineHeight: '2.125rem',
             letterSpacing: '0rem',
           },

@@ -5,11 +5,11 @@ function ProductDetail({ data }) {
 
   return (
     <section className="flex h-auto w-full flex-col gap-[15px] font-sans">
-      <h1 className="font-cormorant text-display-12 dxl:text-display-14">
+      <h1 className="font-cormorant text-display-12 xl:text-display-13 dxl:text-display-14">
         {data?.name}
       </h1>
       {stockStatus ? (
-        <h5 className="text-display-10 font-semibold xl:text-display-17 dxl:text-display-11">
+        <h5 className="text-display-10 font-semibold xl:text-display-10 dxl:text-[25px]">
           £{price}
         </h5>
       ) : (
