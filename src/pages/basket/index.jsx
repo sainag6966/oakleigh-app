@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { use, useEffect, useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import CountrySelector from '@/reuseComps/CountrySelector'
@@ -8,34 +9,23 @@ import Toast from '@/reuseComps/ToastMessage'
 import Spinner from '@/reuseComps/Spinner'
 import Breadcrumbs from '@/components/BreadCrumbs'
 
-// function BreadCrumb() {
-//   return (
-//     <nav aria-label="Breadcrumb" role="navigation" className="w-full">
-//       <nav className="flex w-full list-none gap-1 font-sans text-display-1">
-//         {/* <li>
-//           <a>BREADCRUMB</a>
-//         </li>
-//         <li>/</li>
-//         <li>
-//           <a>BREADCRUMB</a>
-//         </li> */}
-//         <Breadcrumbs />
-//       </nav>
-//     </nav>
-//   )
-// }
-
 function BasketHead() {
+  const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   return (
     <section className="flex h-auto w-full items-center justify-between gap-2">
-      <section className="flex-1 text-display-12">Your Basket</section>
-      <section className="relative flex h-[42px] w-full flex-1 font-sans">
-        <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
-        <div className="absolute right-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary lg:w-[99.5%]" />
-        <div className="absolute bottom-[3px] left-[1%] right-[1%] h-[36px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:left-[0.5%] lg:right-[0.5%] lg:w-[99%]" />
-        <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary">
-          Checkout Securely
-        </div>
+      {isDesktop && <section className="h-auto w-full flex-1" />}
+      <section className="flex-1 text-display-12 lg:flex lg:justify-center">
+        Your Basket
+      </section>
+      <section className="flex h-auto w-full flex-1 justify-end">
+        <section className="relative flex h-[42px] w-full font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]">
+          <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] lg:w-[99.5%] dxl:h-[50px]" />
+          <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] lg:w-[99.5%] dxl:h-[50px]" />
+          <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] lg:left-[0.5%] lg:right-[0.5%] lg:w-[99%] dxl:h-[47px]" />
+          <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary">
+            Checkout Securely
+          </div>
+        </section>
       </section>
     </section>
   )
@@ -89,20 +79,19 @@ function ProductDetail({ productData, handleRemoveCta }) {
       <section className="flex h-auto w-full flex-col gap-[26px]">
         {productData.map((item, index) => {
           return (
-            <section
-              key={index}
-              className="flex h-auto w-full gap-[10%] sm:gap-11"
-            >
-              <figure
-                key={index}
-                className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] flex-1"
-              >
-                <ProgressiveImageComp
-                  src={item?.images[1]?.src}
-                  alt={'productImage'}
-                />
-              </figure>
-              <section className="flex flex-1 flex-col gap-2 break-words">
+            <section key={index} className="flex h-auto w-full gap-2">
+              <section className="h-auto w-full flex-1">
+                <figure
+                  key={index}
+                  className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] sm:max-h-[270px] sm:max-w-[230px]"
+                >
+                  <ProgressiveImageComp
+                    src={item?.images[1]?.src}
+                    alt={'productImage'}
+                  />
+                </figure>
+              </section>
+              <section className="flex flex-1 flex-col items-start gap-2 break-words">
                 <p className="text-display-11 [overflow-wrap:anywhere]">
                   {item?.name}
                 </p>
@@ -316,11 +305,11 @@ function OrderSummary({ productData, handleRemoveCta }) {
           <p>{totalPrice}.00</p>
         </section>
       </section>
-      <section className="relative flex h-[42px] w-full font-sans">
-        <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
-        <div className="absolute right-0 h-[39px] w-[99%] border-[0.8px] border-textSecondary lg:w-[99.5%]" />
-        <div className="absolute bottom-[3px] left-[1%] right-[1%] h-[36px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:left-[0.5%] lg:right-[0.5%] lg:w-[99%]" />
-        <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary">
+      <section className="relative flex h-[42px] w-full font-sans lg:h-[53px]">
+        <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary sm:w-[99.5%] lg:h-[50px]" />
+        <div className="absolute right-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary sm:w-[99.5%] lg:h-[50px]" />
+        <div className="absolute bottom-[3px] left-[1%] right-[1%] h-9 w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[0.5%] sm:right-[0.5%] sm:w-[99%] lg:h-[47px]" />
+        <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary xl:text-display-17">
           Checkout Securely
         </div>
       </section>
@@ -506,7 +495,7 @@ function YourBasket() {
   }, [removeItem])
 
   return (
-    <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px]">
+    <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px] xl:px-[64px]">
       <Breadcrumbs />
       {loading ? (
         <section className="flex h-auto w-full items-center justify-center">
