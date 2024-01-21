@@ -135,7 +135,7 @@ function Faqs() {
                   handleLabelClick(e)
                 }}
               >
-                <p className="text-display-9 lg:text-display-12">
+                <p className="text-display-9 leading-normal lg:text-display-12">
                   {e?.question}
                 </p>
                 <div className="relative z-[1] flex min-h-[8px] min-w-[14px] items-center justify-center">

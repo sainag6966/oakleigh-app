@@ -146,7 +146,7 @@ function ProductDetailPage({ data }) {
       </nav>
       <section className="flex h-auto w-full flex-col gap-[70px]">
         <section className="flex h-auto w-full flex-col items-start justify-between gap-[30px] lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
-          <section className="flex h-auto w-full flex-col gap-[30px]">
+          <section className="flex h-auto w-full flex-col gap-[30px] lg:flex-1">
             {!isDesktop && <ProductDetail data={data} />}
             <section className="grid-rows-auto grid h-auto w-full flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
               {imageList.map((image, index) => {
@@ -169,7 +169,7 @@ function ProductDetailPage({ data }) {
               />
             </section>
           </section>
-          <section className="flex w-full flex-1 flex-col gap-6 font-sans dxl:gap-[30px]">
+          <section className="flex w-full flex-col gap-6 font-sans lg:flex-1 dxl:gap-[30px]">
             {isDesktop && <ProductDetail data={data} />}
             {nonce && stockStatus && (
               <section
@@ -200,7 +200,7 @@ function ProductDetailPage({ data }) {
                 />
               </div>
             )}
-            <section className="flex h-auto w-full flex-col items-center justify-between gap-6 lg:flex-row lg:gap-2 xl:gap-5 txl:gap-[30px]">
+            <section className="flex h-auto w-full flex-col items-center justify-between gap-6 lg:gap-2 xl:flex-row xl:gap-5 txl:gap-[30px]">
               <div className="order-2 w-full flex-1 lg:order-1 ">
                 <InstallmentButton />
               </div>
