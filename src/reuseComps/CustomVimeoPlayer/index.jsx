@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
 import Vimeo from '@vimeo/player'
-import ImageComp from '../ImageComp'
 import ProgressiveImageComp from '../ProgressiveImageComp'
 
 const CustomVimeoPlayer = ({ getVimeoId, width, height, videoId }) => {
@@ -8,7 +7,10 @@ const CustomVimeoPlayer = ({ getVimeoId, width, height, videoId }) => {
   const [play, setPlay] = useState(false)
   const playIcon = '/Images/playIcon.svg'
   const pauseIcon = '/Images/pauseIcon.svg'
-  // const videoId = getVimeoId()
+
+  // Generate unique IDs for each instance
+  const playerElementId = `player-element-${videoId}`
+  const playPauseButtonId = `playPauseButton-${videoId}`
 
   const setPlayPause = () => {
     setPlay(!play)
@@ -16,16 +18,16 @@ const CustomVimeoPlayer = ({ getVimeoId, width, height, videoId }) => {
 
   useEffect(() => {
     // Initialize Vimeo player
-    playerRef.current = new Vimeo('player-element', {
+    playerRef.current = new Vimeo(playerElementId, {
       id: videoId,
-      autopause: false, // Disable auto-pause on other players
+      autopause: false,
       controls: false,
-      width: width, // Set the width of the player
+      width: width,
       height: height,
     })
 
     // Set up custom play/pause button
-    const playPauseButton = document.getElementById('playPauseButton')
+    const playPauseButton = document.getElementById(playPauseButtonId)
 
     playPauseButton.addEventListener('click', () => {
       playerRef.current.getPaused().then((paused) => {
@@ -42,14 +44,14 @@ const CustomVimeoPlayer = ({ getVimeoId, width, height, videoId }) => {
       playerRef.current.destroy()
       playPauseButton.removeEventListener('click', () => {})
     }
-  }, [videoId])
+  }, [videoId, playerElementId, playPauseButtonId])
 
   return (
     <main className="relative h-full w-full">
-      <section id="player-element" className="relative">
+      <section id={playerElementId} className="relative">
         <section
-          id="playPauseButton"
-          className="absolute bottom-[12px] left-[17px] z-[1] flex  cursor-pointer items-center justify-center gap-4 text-display-11 text-textPrimary lg:bottom-5 lg:left-7"
+          id={playPauseButtonId}
+          className="absolute bottom-[12px] left-[17px] z-[1] flex cursor-pointer items-center justify-center gap-4 text-display-11 text-textPrimary lg:bottom-5 lg:left-7"
           onClick={setPlayPause}
         >
           <section className="flex h-8 w-8 items-center justify-center rounded-[20px] border-[1px] border-textPrimary lg:h-10 lg:w-10">
@@ -62,9 +64,7 @@ const CustomVimeoPlayer = ({ getVimeoId, width, height, videoId }) => {
               />
             </figure>
           </section>
-          <button id="playPauseButton" className="text-display-9">
-            {play ? 'PAUSE' : 'PLAY'}
-          </button>
+          <button className="text-display-9">{play ? 'PAUSE' : 'PLAY'}</button>
         </section>
       </section>
     </main>

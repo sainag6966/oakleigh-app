@@ -72,7 +72,7 @@ function WhyWeLove() {
       <section className="h-full w-full">
         <CustomVimeoPlayer
           getVimeoId={getVimeoId}
-          videoId={'246115326'}
+          videoId={'310209874'}
           width={isxLargeScreen ? 804 : isLargeScreen ? 540 : 288}
           height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 170}
         />
