@@ -22,13 +22,6 @@ function LayoutWrapper({ children }) {
   const restrictedPath = hideHeaderPaths.includes(asPath)
 
   useEffect(() => {
-    if (restrictedPath) {
-      setIsHeaderVisible(false)
-      setIsFooterVisible(false)
-    } else {
-      setIsHeaderVisible(true)
-      setIsFooterVisible(true)
-    }
     const getData = async () => {
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18',
@@ -45,6 +38,16 @@ function LayoutWrapper({ children }) {
     }
     getData()
     getNonce()
+  }, [])
+
+  useEffect(() => {
+    if (restrictedPath) {
+      setIsHeaderVisible(false)
+      setIsFooterVisible(false)
+    } else {
+      setIsHeaderVisible(true)
+      setIsFooterVisible(true)
+    }
   }, [asPath])
 
   useEffect(() => {

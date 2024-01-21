@@ -15,8 +15,6 @@ const CustomVimeoPlayer = ({ getVimeoId, width, height, videoId }) => {
   }
 
   useEffect(() => {
-    playerRef.current && playerRef.current.destroy()
-    // playPauseButton && playPauseButton.removeEventListener('click', () => {})
     // Initialize Vimeo player
     playerRef.current = new Vimeo('player-element', {
       id: videoId,

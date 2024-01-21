@@ -13,7 +13,7 @@ import Spinner from '@/reuseComps/Spinner'
 import Toast from '@/reuseComps/ToastMessage'
 
 function ProductDetailPage({ data }) {
-  const { price, price_html, name, stock_status } = data
+  const { price = '', price_html, name, stock_status } = data
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [loadingToast, setLoadingToast] = useState(false)
@@ -160,14 +160,14 @@ function ProductDetailPage({ data }) {
                 )
               })}
             </section>
-            {/* <section className="h-full w-full">
+            <section className="h-full w-full">
               <CustomVimeoPlayer
                 getVimeoId={getVimeoId}
                 videoId={'246115326'}
                 width={isxLargeScreen ? 804 : isLargeScreen ? 540 : 288}
                 height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 170}
               />
-            </section> */}
+            </section>
           </section>
           <section className="flex w-full flex-1 flex-col gap-6 font-sans dxl:gap-[30px]">
             {isDesktop && <ProductDetail data={data} />}

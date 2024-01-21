@@ -9,22 +9,28 @@ const Breadcrumbs = () => {
   const urlString = asPath || ''
   const pathArray = urlString.split('/').filter(Boolean)
   const uppercasedArray = pathArray.map((str) => str.toUpperCase())
+  const shopAllRoute = uppercasedArray.slice(0, -1)
+  const routeArr = pathArray.includes('shop-all')
+    ? shopAllRoute
+    : uppercasedArray
 
   // Render the breadcrumbs
   return (
     <section className="w-full font-sans text-display-1 xl:text-[15px]">
       <Link href="/">HOME</Link>
-      {uppercasedArray.map((segment, index) => (
+      {routeArr.map((segment, index) => (
         <span key={index}>
           {' / '}
-          <Link
-            href={`/${pathArray.slice(0, index + 1).join('/')}`}
-            className={`${
-              uppercasedArray.length === index + 1 ? 'font-bold' : 'font-normal'
-            }`}
-          >
-            {segment}
-          </Link>
+          {routeArr.length === index + 1 ? (
+            <span className="font-bold">{segment}</span>
+          ) : (
+            <Link
+              href={`/${pathArray.slice(0, index + 1).join('/')}`}
+              className="font-normal"
+            >
+              {segment}
+            </Link>
+          )}
         </span>
       ))}
     </section>
