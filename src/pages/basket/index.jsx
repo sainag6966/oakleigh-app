@@ -14,7 +14,7 @@ function BasketHead() {
   return (
     <section className="flex h-auto w-full items-center justify-between gap-2">
       {isDesktop && <section className="h-auto w-full flex-1" />}
-      <section className="flex-1 text-display-12 lg:flex lg:justify-center">
+      <section className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15">
         Your Basket
       </section>
       <section className="flex h-auto w-full flex-1 justify-end">
@@ -22,7 +22,7 @@ function BasketHead() {
           <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] lg:w-[99.5%] dxl:h-[50px]" />
           <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] lg:w-[99.5%] dxl:h-[50px]" />
           <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] lg:left-[0.5%] lg:right-[0.5%] lg:w-[99%] dxl:h-[47px]" />
-          <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary">
+          <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
             Checkout Securely
           </div>
         </section>
@@ -89,7 +89,7 @@ function ProductDetail({ productData, handleRemoveCta }) {
               <section className="h-auto w-full flex-1 xl:max-w-[134px]">
                 <figure
                   key={index}
-                  className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] sm:max-h-[270px] sm:max-w-[230px] xl:max-w-[134px]"
+                  className="aspect-[3/4] max-h-[164px] min-w-[138px] max-w-[138px] sm:max-h-[270px] sm:max-w-[230px] xl:max-w-[138px]"
                 >
                   <ProgressiveImageComp
                     src={item?.images[1]?.src}
@@ -98,7 +98,7 @@ function ProductDetail({ productData, handleRemoveCta }) {
                 </figure>
               </section>
               <section className="flex flex-1 flex-col items-start gap-2 break-words xl:flex-row xl:items-center xl:justify-between">
-                <p className="text-display-11 [overflow-wrap:anywhere] xl:max-w-[274px]">
+                <p className="text-display-11 [overflow-wrap:anywhere] xl:max-w-[274px] dxl:text-display-12">
                   {item?.name}
                 </p>
                 <p className="relative font-sans text-display-16">
@@ -109,7 +109,7 @@ function ProductDetail({ productData, handleRemoveCta }) {
                     </p>
                   )}
                 </p>
-                <section className="mt-4 cursor-pointer font-sans text-display-4 lg:mt-0">
+                <section className="mt-4 cursor-pointer font-sans text-display-4 lg:mt-0 xl:text-display-17">
                   {removing && selectedItem?.id === item?.id ? (
                     <section className="flex gap-2">
                       <Spinner width={25} height={25} />
@@ -130,7 +130,7 @@ function ProductDetail({ productData, handleRemoveCta }) {
           )
         })}
         <section
-          className="flex h-auto w-full cursor-pointer items-center justify-start border-y-[1.2px] border-y-search py-[30px] font-sans"
+          className="flex h-auto w-full cursor-pointer items-center justify-start border-y-[1.2px] border-y-search py-[30px] font-sans text-display-4 xl:text-display-17"
           onClick={() => {
             router.push('/Product-Listing')
           }}
@@ -235,11 +235,15 @@ function OrderSummary({ productData, handleRemoveCta }) {
   }
 
   return (
-    <section className="mt-2 flex h-auto w-full flex-col gap-[30px] lg:mt-0 xl:max-w-[400px]">
-      <section className="flex h-auto w-full flex-col bg-search p-[30px] text-footerBg">
-        <p className="pb-[25px] text-display-11">Order Summary</p>
-        <section className="border-y-[1px] border-orderSummaryBorder pb-[25px] pt-[10px] font-sans">
-          <p className="text-display-5">Promotion Code</p>
+    <section className="mt-2 flex h-auto w-full flex-col gap-[30px] lg:mt-0 xl:max-w-[400px] dxl:min-w-[527px] dxl:max-w-[527px]">
+      <section className="flex h-auto w-full flex-col bg-search p-[30px] text-footerBg dxl:p-[50px]">
+        <p className="pb-[25px] text-display-11 dxl:pb-[30px] dxl:text-display-13">
+          Order Summary
+        </p>
+        <section className="border-y-[1px] border-orderSummaryBorder pb-[25px] pt-[10px] font-sans dxl:pb-[30px] dxl:pt-5">
+          <p className="text-display-5 dxl:pb-5 dxl:text-display-16">
+            Promotion Code
+          </p>
           <section className="h-auto w-full">
             <form className="flex h-auto w-full gap-5" onSubmit={handleSubmit}>
               <input
@@ -249,11 +253,11 @@ function OrderSummary({ productData, handleRemoveCta }) {
                 value={coupon}
                 placeholder="ENTER CODE"
                 onChange={handleChange}
-                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-7 py-2 font-sans text-display-3 text-black"
+                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-7 py-2 font-sans text-display-3 text-black dxl:h-[53px] dxl:text-display-6"
               />
-              <div className="relative flex h-[41px] w-[110px] cursor-pointer font-sans text-display-4">
-                <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
-                <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
+              <div className="relative flex h-[41px] w-[110px] cursor-pointer font-sans text-display-4 dxl:h-[53px] dxl:w-[150px] dxl:text-display-17">
+                <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[50px] dxl:w-[147px]"></div>
+                <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[50px] dxl:w-[147px]"></div>
                 <button
                   type="submit"
                   className="relative flex w-full items-center justify-center"
@@ -280,13 +284,13 @@ function OrderSummary({ productData, handleRemoveCta }) {
           </section>
         </section>
         <section className="flex h-auto w-full flex-col gap-[15px] py-[25px] font-sans">
-          <section className="flex items-center justify-between text-display-5 leading-tight">
+          <section className="flex items-center justify-between text-display-5 leading-tight dxl:text-display-16">
             <p>
               Subtotal ({productData?.items?.length} {itemText})
             </p>
             <p>{price}.00</p>
           </section>
-          <section className="flex items-center justify-between text-display-3 leading-tight">
+          <section className="flex items-center justify-between text-display-3 leading-tight dxl:text-display-6">
             <p>Promotion Code</p>
             <section
               className="flex items-center gap-2 text-display-1 leading-tight"
@@ -297,7 +301,9 @@ function OrderSummary({ productData, handleRemoveCta }) {
                   <u>X Remove</u>
                 </p>
               ) : null}
-              <p className="text-display-3">-£{couponDiscount}.00</p>
+              <p className="text-display-3 dxl:text-display-6">
+                -£{couponDiscount}.00
+              </p>
             </section>
           </section>
           {removingPromo && (
@@ -306,12 +312,12 @@ function OrderSummary({ productData, handleRemoveCta }) {
               <p>Removing Promo Code...</p>
             </section>
           )}
-          <section className="flex items-center justify-between text-display-3 leading-tight">
+          <section className="flex items-center justify-between text-display-3 leading-tight dxl:text-display-6">
             <p>Delivery</p>
             <p>£{deliveryRate}.00</p>
           </section>
         </section>
-        <section className="flex h-auto w-full items-center justify-between border-t-[1px] border-orderSummaryBorder pt-[25px] font-sans text-display-16">
+        <section className="flex h-auto w-full items-center justify-between border-t-[1px] border-orderSummaryBorder pt-[25px] font-sans text-display-16 dxl:text-display-10">
           <p>Order Total</p>
           <p>{totalPrice}.00</p>
         </section>
@@ -427,11 +433,11 @@ function Delivery({ handleRemoveCta, productData }) {
             value={postCode}
             placeholder="ENTER POSTCODE"
             onChange={handleChange}
-            className="h-[41px] w-full flex-1 appearance-none rounded border bg-search px-7 py-2 font-sans text-display-3 text-black"
+            className="h-[41px] w-full flex-1 appearance-none rounded border bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
           />
-          <div className="relative flex h-[41px] w-[110px] font-sans text-display-4">
-            <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
-            <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary"></div>
+          <div className="relative flex h-[41px] w-[110px] font-sans text-display-4 dxl:h-[50px] dxl:w-[150px] dxl:text-display-17">
+            <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
+            <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
             <button
               type="submit"
               className="relative flex w-full items-center justify-center"
@@ -506,7 +512,7 @@ function YourBasket() {
   }, [removeItem])
 
   return (
-    <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px] xl:px-[64px] dxl:px-[132px]">
+    <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px] xl:gap-10 xl:px-[64px] dxl:gap-14 dxl:px-[132px]">
       <Breadcrumbs />
       {loading ? (
         <section className="flex h-auto w-full items-center justify-center">
@@ -517,7 +523,7 @@ function YourBasket() {
           Your Cart is Empty
         </div>
       ) : (
-        <section className="flex h-auto w-full flex-col gap-6">
+        <section className="xl flex h-auto w-full flex-col gap-6 xl:gap-[50px]">
           {' '}
           <BasketHead />
           <section className="flex h-auto w-full flex-col gap-6 lg:flex-row">

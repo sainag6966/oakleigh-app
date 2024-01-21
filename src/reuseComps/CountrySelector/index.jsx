@@ -55,7 +55,7 @@ function CountrySelector({ setCountryCode, selectedCountry }) {
       options={options}
       value={value ? value : selectedCountry}
       onChange={changeHandler}
-      className="h-auto w-full font-sans text-display-3" // Make the Select component full width
+      className="h-auto w-full font-sans text-display-3 dxl:text-display-6" // Make the Select component full width
       classNamePrefix="tw-select" // Prefix for generated class names
       //   classes={customStyles}
       styles={{ ...customStyles, ...customFocusStyles }}
