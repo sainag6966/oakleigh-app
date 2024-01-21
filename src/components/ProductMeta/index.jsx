@@ -23,7 +23,7 @@ function DescAndSpec({ data }) {
   return (
     <section className="flex h-auto w-full flex-col gap-[30px] pt-[30px] font-sans lg:gap-9 lg:pt-9">
       <section>
-        <p className="text-start text-display-3 lg:text-display-6">
+        <p className="text-start text-display-3 xl:text-display-6">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua. At vero eos et accusam et justo duo
@@ -33,10 +33,10 @@ function DescAndSpec({ data }) {
         {specs.map((item) => {
           return (
             <section className="flex h-auto w-full items-center justify-between gap-5">
-              <section className="flex-1 text-display-5 leading-none">
+              <section className="flex-1 text-display-5 leading-none xl:text-display-16">
                 {item}:
               </section>
-              <section className="flex h-auto w-full flex-1 items-center justify-start text-display-3 leading-none">
+              <section className="flex h-auto w-full flex-1 items-center justify-start text-display-3 leading-none xl:text-display-6">
                 Something
               </section>
             </section>
@@ -49,6 +49,7 @@ function DescAndSpec({ data }) {
 
 function WhyWeLove() {
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const isTablet = useMediaQuery({ query: '(min-width:600px)' })
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const isxLargeScreen = useMediaQuery({ query: '(min-width:1680px)' })
   const label =
@@ -68,13 +69,35 @@ function WhyWeLove() {
 
   return (
     <section className="flex h-auto w-full flex-col gap-[30px] pt-[30px]">
-      <section className="font-sans text-display-3">{label}</section>
+      <section className="font-sans text-display-3 xl:text-display-6">
+        {label}
+      </section>
       <section className="h-full w-full">
         <CustomVimeoPlayer
           getVimeoId={getVimeoId}
           videoId={'310209874'}
-          width={isxLargeScreen ? 804 : isLargeScreen ? 540 : 288}
-          height={isxLargeScreen ? 452 : isLargeScreen ? 320 : 170}
+          width={
+            isxLargeScreen
+              ? 804
+              : isLargeScreen
+                ? 552
+                : isDesktop
+                  ? 400
+                  : isTablet
+                    ? 528
+                    : 288
+          }
+          height={
+            isxLargeScreen
+              ? 452
+              : isLargeScreen
+                ? 320
+                : isDesktop
+                  ? 230
+                  : isTablet
+                    ? 300
+                    : 170
+          }
         />
       </section>
     </section>
@@ -83,7 +106,7 @@ function WhyWeLove() {
 
 function DeliveryAndReturns() {
   return (
-    <section className="flex h-auto w-full flex-col gap-[30px] pt-[30px] font-sans text-display-3">
+    <section className="flex h-auto w-full flex-col gap-[30px] pt-[30px] font-sans text-display-3 xl:text-display-6">
       <section>
         <b>Delivery</b> - Lorem ipsum dolor sit amet, consetetur sadipscing
         elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
@@ -153,7 +176,9 @@ function Faqs() {
                 </div>
               </section>
               {e?.question === labelClicked && (
-                <section className="font-sans">{e?.answer}</section>
+                <section className="font-sans text-display-3 xl:text-display-6">
+                  {e?.answer}
+                </section>
               )}
             </section>
           )
@@ -179,7 +204,7 @@ function AboutOakleigh() {
         </section>
       </section>
       <section>
-        <p>
+        <p className="text-display-3 xl:text-display-6">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
@@ -198,7 +223,7 @@ function AboutOakleigh() {
 function Sustainability() {
   const img1 = '/Images/Sample/twoAdBlock1.svg'
   return (
-    <section className="flex h-auto w-full flex-col gap-[30px] pt-[30px] font-sans text-display-3">
+    <section className="flex h-auto w-full flex-col gap-[30px] pt-[30px] font-sans text-display-3 xl:text-display-6">
       <section className="flex h-auto w-full">
         <ProgressiveImageComp src={img1} alt={'img'} />
       </section>
@@ -264,7 +289,7 @@ function ProductMeta({ data }) {
         return (
           <section
             key={index}
-            className="h-auto w-full border-y-[1px] border-metaBorder py-[30px]"
+            className="h-auto w-full cursor-pointer border-y-[1px] border-metaBorder py-[30px]"
           >
             <section
               className="flex items-center justify-between"
@@ -272,7 +297,7 @@ function ProductMeta({ data }) {
                 handleLabelClick(e)
               }}
             >
-              <p className="line-clamp-1 text-display-11 lg:text-display-12">
+              <p className="line-clamp-1 text-display-11 xl:text-display-12">
                 {e}
               </p>
               <div className="relative flex h-[8px] w-[14px] items-center justify-center">

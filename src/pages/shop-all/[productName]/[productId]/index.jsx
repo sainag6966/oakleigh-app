@@ -139,7 +139,7 @@ function ProductDetailPage({ data }) {
     }
   }
   return (
-    <main className="flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] dxl:px-[141px]">
+    <main className="flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] xl:px-[64px] dxl:px-[141px]">
       <nav aria-label="Breadcrumb" role="navigation" className="w-full">
         <nav className="flex w-full list-none gap-1 font-sans text-display-1 lg:text-[15px]">
           <Breadcrumbs />
@@ -166,10 +166,26 @@ function ProductDetailPage({ data }) {
                 getVimeoId={getVimeoId}
                 videoId={'246115326'}
                 width={
-                  isxLargeScreen ? 804 : isDesktop ? 400 : isTablet ? 528 : 288
+                  isxLargeScreen
+                    ? 804
+                    : isLargeScreen
+                      ? 552
+                      : isDesktop
+                        ? 400
+                        : isTablet
+                          ? 528
+                          : 288
                 }
                 height={
-                  isxLargeScreen ? 452 : isDesktop ? 230 : isTablet ? 300 : 170
+                  isxLargeScreen
+                    ? 452
+                    : isLargeScreen
+                      ? 320
+                      : isDesktop
+                        ? 230
+                        : isTablet
+                          ? 300
+                          : 170
                 }
               />
             </section>
@@ -209,7 +225,7 @@ function ProductDetailPage({ data }) {
               <div className="order-2 w-full xl:order-1 ">
                 <InstallmentButton />
               </div>
-              <div className="h-auto w-full xl:order-2">
+              <div className="dxl:min-[150px] dxl-max-auto h-auto w-full xl:order-2 xl:min-w-[150px] xl:max-w-[150px]">
                 <ApplePayButton />
               </div>
             </section>
