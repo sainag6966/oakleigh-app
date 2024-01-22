@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
+import AvailabilityBadge from '@/reuseComps/AvailabilityBadge'
 import ProductDetail from '@/components/ProductPage/ProductDetail'
+import SoldBlock from '@/components/ProductPage/SoldBlock'
 import ProductMeta from '@/components/ProductMeta'
 import BasketDrawer from '@/components/BasketDrawer'
 import InstallmentButton from '@/reuseComps/InstallmentButton'
@@ -13,13 +15,14 @@ import Spinner from '@/reuseComps/Spinner'
 import Toast from '@/reuseComps/ToastMessage'
 
 function ProductDetailPage({ data }) {
-  const { price = '', price_html, name, stock_status } = data
+  const { price = '', price_html, name, stock_status = '' } = data
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [loadingToast, setLoadingToast] = useState(false)
   const [isBasketOpen, setIsBasketOpen] = useState(false)
   const [nonce, setNonce] = useState('')
-  const stockStatus = stock_status === 'instock'
+  const isInStock = stock_status === 'instock'
+  const outOfStock = stock_status === 'outofstock'
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   const isTablet = useMediaQuery({ query: '(min-width:600px)' })
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
@@ -47,6 +50,7 @@ function ProductDetailPage({ data }) {
     const vimeoVideoId = (match && match[1]) || '246115326'
     return vimeoVideoId
   }
+
   useEffect(() => {
     const getNonce = async () => {
       const loginToken = localStorage.getItem('loginToken')
@@ -152,11 +156,16 @@ function ProductDetailPage({ data }) {
             <section className="grid-rows-auto grid h-auto w-full flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
               {imageList.map((image, index) => {
                 return (
-                  <figure key={index} className="aspect-[3/4]">
+                  <figure key={index} className="relative aspect-[3/4]">
                     <ProgressiveImageComp
                       src={image.src}
                       alt={'productImage'}
                     />
+                    {index === 0 && (
+                      <section className="absolute left-[50%] top-0 h-auto w-auto -translate-x-1/2">
+                        <AvailabilityBadge status={'SOLD'} />
+                      </section>
+                    )}
                   </figure>
                 )
               })}
@@ -192,7 +201,8 @@ function ProductDetailPage({ data }) {
           </section>
           <section className="flex w-full flex-col gap-6 font-sans lg:flex-1 dxl:gap-[30px]">
             {isDesktop && <ProductDetail data={data} />}
-            {nonce && stockStatus && (
+            {outOfStock && <SoldBlock />}
+            {/* {nonce && isInStock && (
               <section
                 className="relative flex h-[42px] w-full cursor-pointer lg:h-[53px]"
                 onClick={handleAddToBasket}
@@ -233,7 +243,7 @@ function ProductDetailPage({ data }) {
               <p className="text-display-3 xl:text-display-3 dxl:text-display-6">
                 Lorem ipsum dolor sit amet finance <u>website link here</u>
               </p>
-            </section>
+            </section> */}
             <section className="mt-[40px] h-auto w-full">
               <SmallPromiseBlock />
             </section>
