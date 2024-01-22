@@ -169,6 +169,7 @@ module.exports = {
         colorBlack: '#000000',
         metaBorder: '#EAEAEA',
         orderSummaryBorder: '#CDC1B6',
+        reservedColor: '#C4C4C4',
       },
     },
   },

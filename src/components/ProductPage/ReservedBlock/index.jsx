@@ -41,8 +41,8 @@ function ReservedBlock() {
           </div>
         </form>
       </section>
-      <section className="flex h-auto w-full items-center justify-start gap-2">
-        <section className="h-3 w-3">
+      <section className="flex h-auto w-full items-center justify-start gap-2 dxl:gap-4">
+        <section className="h-3 w-3 dxl:h-4 dxl:w-4">
           <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} />
         </section>
 
