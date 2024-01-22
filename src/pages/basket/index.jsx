@@ -19,9 +19,9 @@ function BasketHead() {
       </section>
       <section className="flex h-auto w-full flex-1 justify-end">
         <section className="relative flex h-[42px] w-full font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]">
-          <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] lg:w-[99.5%] dxl:h-[50px]" />
-          <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] lg:w-[99.5%] dxl:h-[50px]" />
-          <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] lg:left-[0.5%] lg:right-[0.5%] lg:w-[99%] dxl:h-[47px]" />
+          <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
+          <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />
+          <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] dxl:h-[47px]" />
           <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
             Checkout Securely
           </div>
@@ -253,7 +253,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
                 value={coupon}
                 placeholder="ENTER CODE"
                 onChange={handleChange}
-                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-7 py-2 font-sans text-display-3 text-black dxl:h-[53px] dxl:text-display-6"
+                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-4 py-2 font-sans text-display-1 text-black sm:px-7 dxl:h-[53px] dxl:text-display-6"
               />
               <div className="relative flex h-[41px] w-[110px] cursor-pointer font-sans text-display-4 dxl:h-[53px] dxl:w-[150px] dxl:text-display-17">
                 <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[50px] dxl:w-[147px]"></div>
@@ -322,7 +322,10 @@ function OrderSummary({ productData, handleRemoveCta }) {
           <p>{totalPrice}.00</p>
         </section>
       </section>
-      <section className="relative flex h-[42px] w-full font-sans lg:h-[53px]">
+      <section
+        className="relative flex h-[42px] font-sans
+        lg:m-auto lg:h-[53px] lg:w-[90%]"
+      >
         <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary sm:w-[99.5%] lg:h-[50px]" />
         <div className="absolute right-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary sm:w-[99.5%] lg:h-[50px]" />
         <div className="absolute bottom-[3px] left-[1%] right-[1%] h-9 w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[0.5%] sm:right-[0.5%] sm:w-[99%] lg:h-[47px]" />

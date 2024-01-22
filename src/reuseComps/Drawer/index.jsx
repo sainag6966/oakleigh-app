@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import Divider from '../Divider'
 import NextImage from '../NextImage'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import ProgressiveImageComp from '../ProgressiveImageComp'
 
 const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
@@ -42,19 +40,19 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
     }
     closeDrawer()
     if (item === 'New In') {
-      router.push('new-in')
+      router.push('/new-in')
       return
     }
     if (item === 'Collectors Choice') {
-      router.push('collectors-choice')
+      router.push('/collectors-choice')
       return
     }
     if (item === 'Vintage Watches') {
-      router.push('vintage-watches')
+      router.push('/vintage-watches')
       return
     }
     if (item === 'Online Only') {
-      router.push('online-only')
+      router.push('/online-only')
       return
     }
     router.push('/shop-all')

@@ -48,19 +48,19 @@ function HeaderDweb({ data }) {
       return
     }
     if (item?.title?.rendered === 'New In') {
-      router.push('new-in')
+      router.push('/new-in')
       return
     }
     if (item?.title?.rendered === 'Collectors Choice') {
-      router.push('collectors-choice')
+      router.push('/collectors-choice')
       return
     }
     if (item?.title?.rendered === 'Vintage Watches') {
-      router.push('vintage-watches')
+      router.push('/vintage-watches')
       return
     }
     if (item?.title?.rendered === 'Online Only') {
-      router.push('online-only')
+      router.push('/online-only')
       return
     }
     setOpenBrandDropdown(false)
