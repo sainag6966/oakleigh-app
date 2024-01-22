@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import AvailabilityBadge from '@/reuseComps/AvailabilityBadge'
+import AvailabilityBlock from '@/components/ProductPage/AvailabilityBlock'
 import VipOnlyBlock from '@/components/ProductPage/VipOnlyBlock'
 import ProductDetail from '@/components/ProductPage/ProductDetail'
 import SoldBlock from '@/components/ProductPage/SoldBlock'
@@ -22,7 +23,6 @@ function ProductDetailPage({ data }) {
   const [toastMessage, setToastMessage] = useState('')
   const [loadingToast, setLoadingToast] = useState(false)
   const [isBasketOpen, setIsBasketOpen] = useState(false)
-  const [isAvailable, setIsAvailable] = useState(false)
   const [nonce, setNonce] = useState('')
   const isInStock = stock_status === 'instock'
   const outOfStock = stock_status === 'outofstock'
@@ -30,6 +30,7 @@ function ProductDetailPage({ data }) {
   const isTablet = useMediaQuery({ query: '(min-width:600px)' })
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const isxLargeScreen = useMediaQuery({ query: '(min-width:1680px)' })
+  const showAvailability = !isDesktop && acf?.availability === 'Available'
   const requiredMeta = [
     'product_year',
     'whats_included_text',
@@ -43,22 +44,6 @@ function ProductDetailPage({ data }) {
   const imageList = data?.images
   const modifiedImageList = imageList.length > 0 && imageList.slice(1)
   const productPrice = data?.price
-
-  const getRespectiveBlock = () => {
-    if (outOfStock) {
-      return <SoldBlock />
-    }
-    if (acf?.availability === 'Reserved') {
-      return <ReservedBlock />
-    }
-    if (acf?.availability === 'Available') {
-      setIsAvailable(true)
-      return
-    }
-    if (acf?.availability === 'VIP Only') {
-      return <VipOnlyBlock data={acf} />
-    }
-  }
 
   const getVimeoId = () => {
     const urlObject = requiredMetaData.filter((e) => {
@@ -162,6 +147,31 @@ function ProductDetailPage({ data }) {
       setToastMessage('Failed to add item to the basket')
     }
   }
+
+  const getRespectiveBlock = () => {
+    if (outOfStock) {
+      return <SoldBlock />
+    }
+    if (acf?.availability === 'Reserved') {
+      return <ReservedBlock />
+    }
+    if (acf?.availability === 'Available') {
+      return (
+        <AvailabilityBlock
+          nonce={nonce}
+          handleAddToBasket={handleAddToBasket}
+          loadingToast={loadingToast}
+          showToast={showToast}
+          toastMessage={toastMessage}
+          setShowToast={setShowToast}
+        />
+      )
+    }
+    if (acf?.availability === 'VIP Only') {
+      return <VipOnlyBlock data={acf} />
+    }
+  }
+
   return (
     <main className="flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] xl:px-[64px] dxl:px-[141px]">
       <nav aria-label="Breadcrumb" role="navigation" className="w-full">
@@ -173,6 +183,9 @@ function ProductDetailPage({ data }) {
         <section className="flex h-auto w-full flex-col items-start justify-between gap-[30px] lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
           <section className="flex h-auto w-full flex-col gap-[30px] lg:flex-1">
             {!isDesktop && <ProductDetail data={data} />}
+            {!isDesktop &&
+              acf?.availability !== 'Available' &&
+              getRespectiveBlock()}
             <section className="grid-rows-auto grid h-auto w-full flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
               {modifiedImageList.map((image, index) => {
                 return (
@@ -221,8 +234,8 @@ function ProductDetailPage({ data }) {
           </section>
           <section className="flex w-full flex-col gap-6 font-sans lg:flex-1 dxl:gap-[30px]">
             {isDesktop && <ProductDetail data={data} />}
-            {getRespectiveBlock()}
-            {isAvailable && (
+            {(isDesktop || showAvailability) && getRespectiveBlock()}
+            {/* {isAvailable && (
               <section>
                 {nonce && (
                   <section
@@ -270,7 +283,7 @@ function ProductDetailPage({ data }) {
                   <SmallPromiseBlock />
                 </section>
               </section>
-            )}
+            )} */}
           </section>
         </section>
         <ProductMeta data={data} />

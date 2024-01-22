@@ -16,7 +16,7 @@ function ReservedBlock() {
   }
 
   return (
-    <section className="flex h-auto w-full flex-col items-start justify-between gap-6 xl:gap-5 txl:gap-[30px]">
+    <section className="flex h-auto w-full flex-col items-start justify-between gap-6 font-sans xl:gap-5 txl:gap-[30px]">
       <p className="flex text-display-3 xl:text-display-6">{label}</p>
       <section className="flex h-auto w-full flex-col lg:flex-row">
         <form className="flex h-auto w-full gap-5" onSubmit={handleSubmit}>
