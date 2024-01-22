@@ -14,6 +14,19 @@ function BasketDrawer({
     setIsBasketOpen(false)
     document.body.classList.remove('no-scroll')
   }
+
+  const handleViewBasket = () => {
+    setIsBasketOpen(false)
+    router.push('/basket')
+    document.body.classList.remove('no-scroll')
+  }
+
+  const handleContinueShop = () => {
+    setIsBasketOpen(false)
+    router.push('/shop-all')
+    document.body.classList.remove('no-scroll')
+  }
+
   return (
     <div
       className="absolute left-0 top-0 z-[1]
@@ -74,9 +87,7 @@ function BasketDrawer({
             </div>
             <div
               className="relative flex h-[53px] w-full cursor-pointer"
-              onClick={() => {
-                router.push('/basket')
-              }}
+              onClick={handleViewBasket}
             >
               <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]"></div>
               <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]"></div>
@@ -87,9 +98,7 @@ function BasketDrawer({
             <u>
               <p
                 className="flex w-full cursor-pointer items-center justify-center text-display-17"
-                onClick={() => {
-                  router.push('/Product-Listing')
-                }}
+                onClick={handleContinueShop}
               >
                 Continue Shopping
               </p>

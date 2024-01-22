@@ -127,6 +127,7 @@ function ProductDetailPage({ data }) {
         const cartKey = data?.cart_key
         localStorage.setItem('cartKey', cartKey)
         setIsBasketOpen(true)
+        document.body.classList.add('no-scroll')
         // setShowToast(true)
         setLoadingToast(false)
         // setToastMessage('Item has been added to the basket')
