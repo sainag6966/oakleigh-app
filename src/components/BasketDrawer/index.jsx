@@ -29,10 +29,10 @@ function BasketDrawer({
 
   return (
     <div
-      className="absolute left-0 top-0 z-[1]
-       h-screen w-full overflow-y-scroll bg-colorBlack bg-opacity-75 dxl:top-0"
+      className="fixed left-0 top-0 z-[1]
+       h-full w-full overflow-y-scroll bg-colorBlack bg-opacity-75 dxl:top-0"
     >
-      <div className="absolute right-0 top-0 z-[2] flex min-h-screen w-auto max-w-[360px] flex-col items-start bg-textPrimary text-footerBg sm:max-w-[480px] lg:max-w-[817px]">
+      <div className="fixed right-0 top-0 z-[2] flex min-h-screen w-auto max-w-[360px] flex-col items-start bg-textPrimary text-footerBg sm:max-w-[480px] lg:max-w-[817px]">
         <div className="flex items-center justify-between gap-5 self-stretch bg-footerBg px-[32px] py-[32px] text-textPrimary lg:gap-20 lg:px-[80px] dxl:px-[140px] dxl:py-[52px]">
           <p className="text-display-11 lg:text-display-13 dxl:text-display-14 ">
             {headingText}

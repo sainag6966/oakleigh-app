@@ -174,7 +174,7 @@ function ProductDetailPage({ data }) {
   }
 
   return (
-    <main className="flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] xl:px-[64px] dxl:px-[141px]">
+    <main className="relative flex h-auto w-full flex-col items-center justify-between gap-[25px] px-9 pt-[14px] text-footerBg lg:gap-[50px] lg:pt-[25px] xl:px-[64px] dxl:px-[141px]">
       <nav aria-label="Breadcrumb" role="navigation" className="w-full">
         <nav className="flex w-full list-none gap-1 font-sans text-display-1 lg:text-[15px]">
           <Breadcrumbs />
