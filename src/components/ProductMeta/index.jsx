@@ -6,19 +6,19 @@ import CustomVimeoPlayer from '@/reuseComps/CustomVimeoPlayer'
 
 function DescAndSpec({ data }) {
   const specs = [
-    'What’s Included',
-    'Brand',
-    'Model',
-    'Year',
-    'Reference Number',
-    'Dial Colour',
-    'Bracelet Size',
-    'Case Material',
-    'Diameter',
-    'Bracelet/Strap',
-    'Condition',
-    'Movement Calibre',
-    'Movement Type',
+    { key: 'What’s Included', value: 'Box & Papers' },
+    { key: 'Brand', value: 'Breitling' },
+    { key: 'Model', value: 'M2004' },
+    { key: 'Year', value: '2023' },
+    { key: 'Reference Number', value: 'A3239' },
+    { key: 'Dial Colour', value: 'white' },
+    { key: 'Bracelet Size', value: '44' },
+    { key: 'Case Material', value: 'Stainless Steel' },
+    { key: 'Diameter', value: '45mm' },
+    { key: 'Bracelet/Strap', value: 'Leather' },
+    { key: 'Condition', value: 'Unworn' },
+    { key: 'Movement Calibre', value: 'Breitling 32' },
+    { key: 'Movement Type', value: 'Automatic' },
   ]
   return (
     <section className="flex h-auto w-full flex-col gap-[30px] pt-[30px] font-sans lg:gap-9 lg:pt-9">
@@ -29,15 +29,18 @@ function DescAndSpec({ data }) {
           sed diam voluptua. At vero eos et accusam et justo duo
         </p>
       </section>
-      <section className="flex h-auto w-full flex-col gap-5">
-        {specs.map((item) => {
+      <section className="flex h-auto w-full flex-col gap-5  lg:max-h-[250px] lg:flex-wrap xl:max-h-[400px]">
+        {specs.map((item, index) => {
           return (
-            <section className="flex h-auto w-full items-center justify-between gap-5">
+            <section
+              key={index}
+              className="flex h-auto w-full items-center justify-between gap-5 lg:w-1/2"
+            >
               <section className="flex-1 text-display-5 leading-none xl:text-display-16">
-                {item}:
+                {item?.key}:
               </section>
               <section className="flex h-auto w-full flex-1 items-center justify-start text-display-3 leading-none xl:text-display-6">
-                Something
+                {item?.value}
               </section>
             </section>
           )
@@ -121,19 +124,12 @@ function DeliveryAndReturns() {
   )
 }
 
-function Faqs() {
+function Faqs({ data }) {
+  const { acf } = data
   const [labelClicked, setLabelClicked] = useState('')
   const upArrowIcon = '/Images/upArrowSmall.svg'
   const downArrowIcon = '/Images/downArrowSmall.svg'
-  const faqData = [
-    {
-      question:
-        'WHAT IS THE ADVANTAGE OF BUYING A WATCH FROM OAKLEIGH LUXURY WATCHES?',
-      answer: 'Lorem ipsum dolor sit amet, consetetur',
-    },
-    { question: 'a', answer: 'a' },
-    { question: 'b', answer: 'b' },
-  ]
+  const faqData = acf?.faqs
 
   const handleLabelClick = (label) => {
     if (label?.question === labelClicked) {
