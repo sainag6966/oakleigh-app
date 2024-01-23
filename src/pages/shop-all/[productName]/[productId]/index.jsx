@@ -30,7 +30,9 @@ function ProductDetailPage({ data }) {
   const isTablet = useMediaQuery({ query: '(min-width:600px)' })
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const isxLargeScreen = useMediaQuery({ query: '(min-width:1680px)' })
-  const showAvailability = !isDesktop && acf?.availability === 'Available'
+  const showSoldMweb = acf?.availability !== 'Available' || outOfStock
+  const showAvailability =
+    !isDesktop && acf?.availability === 'Available' && !showSoldMweb
   const requiredMeta = [
     'product_year',
     'whats_included_text',
@@ -184,9 +186,7 @@ function ProductDetailPage({ data }) {
         <section className="flex h-auto w-full flex-col items-start justify-between gap-[30px] lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
           <section className="flex h-auto w-full flex-col gap-[30px] lg:flex-1">
             {!isDesktop && <ProductDetail data={data} />}
-            {!isDesktop &&
-              acf?.availability !== 'Available' &&
-              getRespectiveBlock()}
+            {!isDesktop && showSoldMweb && getRespectiveBlock()}
             <section className="grid-rows-auto grid h-auto w-full flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
               {modifiedImageList.map((image, index) => {
                 return (
