@@ -10,11 +10,17 @@ import Spinner from '@/reuseComps/Spinner'
 import Breadcrumbs from '@/components/BreadCrumbs'
 
 function BasketHead() {
+  const router = useRouter()
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   return (
     <section className="flex h-auto w-full items-center justify-between gap-2">
       {isDesktop && <section className="h-auto w-full flex-1" />}
-      <section className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15">
+      <section
+        className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15"
+        onClick={() => {
+          router.push('/basket/checkoutPage')
+        }}
+      >
         Your Basket
       </section>
       <section className="flex h-auto w-full flex-1 justify-end">
