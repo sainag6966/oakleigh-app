@@ -58,36 +58,36 @@ function ProductDetailPage({ data }) {
     return vimeoVideoId
   }
 
-  // useEffect(() => {
-  //   const getNonce = async () => {
-  //     const loginToken = localStorage.getItem('loginToken')
-  //     const headers = {}
-  //     if (loginToken) {
-  //       headers['Authorization'] = `Bearer ${loginToken}`
-  //     }
-  //     try {
-  //       const response = await fetch(
-  //         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
-  //         {
-  //           method: 'get',
-  //           headers,
-  //         },
-  //       )
+  useEffect(() => {
+    const getNonce = async () => {
+      const loginToken = localStorage.getItem('loginToken')
+      const headers = {}
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
+      try {
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
+          {
+            method: 'get',
+            headers,
+          },
+        )
 
-  //       if (response.ok) {
-  //         const data = await response.json()
-  //         const nonceid = data?.Nonce
-  //         setNonce(nonceid)
-  //         // localStorage.setItem('nonce', nonceid)
-  //       } else {
-  //         const errorData = await response.json()
-  //       }
-  //     } catch (error) {
-  //       console.error('Error:', error)
-  //     }
-  //   }
-  //   getNonce()
-  // }, [])
+        if (response.ok) {
+          const data = await response.json()
+          const nonceid = data?.Nonce
+          setNonce(nonceid)
+          // localStorage.setItem('nonce', nonceid)
+        } else {
+          const errorData = await response.json()
+        }
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    }
+    getNonce()
+  }, [])
 
   const handleAddToBasket = async () => {
     if (showToast || loadingToast) {
