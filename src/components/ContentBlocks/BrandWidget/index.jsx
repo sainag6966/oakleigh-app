@@ -1,10 +1,15 @@
+import { useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import NextImage from '@/reuseComps/NextImage'
 import Image from 'next/image'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
-import { useState } from 'react'
+
 function BrandWidget() {
   const [expandBrands, setExpandBrands] = useState(false)
-  const buttonText = expandBrands ? 'Collapse' : 'View All Brands'
+  const buttonText = 'View All Brands'
+  const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
+  const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const isTablet = useMediaQuery({ query: '(min-width:600px)' })
   const data = [
     '/Images/Sample/brand1.svg',
     '/Images/Sample/brand2.svg',
@@ -15,32 +20,40 @@ function BrandWidget() {
     '/Images/Sample/brand4.svg',
     '/Images/Sample/brand5.svg',
   ]
+  const arraySlice = isLargeScreen
+    ? data.slice(0, 5)
+    : isDesktop
+      ? data.slice(0, 4)
+      : isTablet
+        ? data.slice(0, 8)
+        : data.slice(0, 4)
+  const workArray = expandBrands ? data : arraySlice
   return (
-    <section className="flex h-auto w-full flex-col items-center justify-between gap-[50px] px-[72px] pt-[60px]">
+    <section className="flex h-auto w-full flex-col items-center justify-between gap-[50px] px-[80px] pt-[60px] lg:flex-row lg:pt-[100px] dxl:px-[140px] dxl:pt-[140px]">
       <section
-        className={`flex ${
-          expandBrands ? 'h-auto' : 'h-[140px]'
-        } w-full flex-wrap items-center justify-start gap-10 overflow-hidden`}
+        className="grid-rows-auto grid h-auto w-full
+        grid-cols-2 gap-16 sm:grid-cols-4 lg:gap-20 xl:grid-cols-5 dxl:gap-28"
       >
-        {data.map((e, index) => {
+        {workArray.map((e, index) => {
           return (
-            <section
-              key={index}
-              className="flex aspect-[16/9] max-w-[85px] flex-auto items-center justify-center"
-            >
+            <section key={index} className="aspect-[16/9]">
               <ProgressiveImageComp src={e} alt="brandLogo" />
             </section>
           )
         })}
       </section>
-      <u
-        className="font-sans text-display-4"
-        onClick={() => {
-          setExpandBrands(!expandBrands)
-        }}
-      >
-        <p>{buttonText}</p>
-      </u>
+      {!expandBrands && (
+        <u
+          className="w-[160px] cursor-pointer font-sans text-display-4 xl:text-display-17"
+          onClick={() => {
+            setExpandBrands(!expandBrands)
+          }}
+        >
+          <p className="flex w-full items-center justify-center">
+            {buttonText}
+          </p>
+        </u>
+      )}
     </section>
   )
 }

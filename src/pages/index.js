@@ -11,6 +11,7 @@ import AboutBlock from '@/components/ContentBlocks/AboutBlock'
 import PromiseBlock from '@/components/ContentBlocks/PromiseBlock'
 import VipAdBlock from '@/components/ContentBlocks/VipAdBlock'
 import SliderBlock from '@/components/ContentBlocks/SliderBlock'
+import BrandWidget from '@/components/ContentBlocks/BrandWidget'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +29,8 @@ export default function Home({ data }) {
         ) : (
           <UspBlock trayData={tray} />
         )
+      case 'brand_widget':
+        return <BrandWidget trayData={tray} />
       case 'ad_block':
         return <TwoAdBlock trayData={tray} />
       case 'product_slider':

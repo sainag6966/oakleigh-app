@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 const PasswordProtection = ({ children }) => {
   const [password, setPassword] = useState('')
-  const [isPasswordCorrect, setIsPasswordCorrect] = useState(true)
-  const correctPassword = 'oakleighpass' // Replace with your atruectual password
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false)
+  const correctPassword = '' // Replace with your atruectual password
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -30,6 +30,7 @@ const PasswordProtection = ({ children }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="border-[2px] border-black"
+          autoFocus
         />
       </label>
       <button
