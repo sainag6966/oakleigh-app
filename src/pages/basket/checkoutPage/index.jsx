@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import Breadcrumbs from '@/components/BreadCrumbs'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import ExpressCheckout from './ExpressCheckout'
+import PaymentModes from '@/components/CheckOut/PaymentModes'
 
 function checkoutPage() {
   const oakleighLogo = '/Images/oakleighLogo.svg'
@@ -157,6 +158,7 @@ function checkoutPage() {
       >
         Proceed To Payment
       </button>
+      <PaymentModes />
     </main>
   )
 }

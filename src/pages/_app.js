@@ -3,7 +3,11 @@ import LayoutWrapper from '@/components/LayoutWrapper'
 import PasswordProtection from '@/components/PasswordProtected'
 import '@/styles/globals.css'
 import NextNProgress from 'nextjs-progressbar'
-
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+const stripePromise = loadStripe(
+  'pk_test_51IdGbhGLGyyBwMWYc5xmFlYPVXQ6RK0TfPmi2f0MfSxqM8A9SOtJ0b89jgcmsgYCWA0e5UMcuUAXvT0lAAVVr6XZ00xDjpyMtg',
+)
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -17,16 +21,18 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/Images/fav.svg" type="image/svg+xml" />
       </Head>
       <PasswordProtection>
-        <LayoutWrapper>
-          <NextNProgress
-            color="#CDAA72"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={2}
-            options={{ showSpinner: false }}
-          />
-          <Component {...pageProps} />
-        </LayoutWrapper>
+        <Elements stripe={stripePromise}>
+          <LayoutWrapper>
+            <NextNProgress
+              color="#CDAA72"
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={2}
+              options={{ showSpinner: false }}
+            />
+            <Component {...pageProps} />
+          </LayoutWrapper>
+        </Elements>
       </PasswordProtection>
     </>
   )

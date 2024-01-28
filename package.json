@@ -9,6 +9,8 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.4.0",
     "@vimeo/player": "^2.20.1",
     "axios": "^1.6.2",
     "js-cookie": "^3.0.5",
