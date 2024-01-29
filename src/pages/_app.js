@@ -19,6 +19,11 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
         <link rel="icon" href="/Images/fav.svg" type="image/svg+xml" />
+        <script
+          type="text/javascript"
+          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+          async
+        ></script>
       </Head>
       <PasswordProtection>
         <Elements stripe={stripePromise}>

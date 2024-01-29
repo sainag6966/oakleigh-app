@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import { useMediaQuery } from 'react-responsive'
+import TrustBox from '@/components/TrustPilot'
 import HeaderBanner from '../components/ContentBlocks/HeaderBanner'
 import UspBlock from '../components/ContentBlocks/UspBlock'
 import TwoAdBlock from '../components/ContentBlocks/TwoAdBlock'
@@ -52,6 +53,7 @@ export default function Home({ data }) {
 
   return (
     <main className="h-auto w-full">
+      <TrustBox />
       {trayData ? (
         trayData.map((tray) => {
           return getTrays(tray)

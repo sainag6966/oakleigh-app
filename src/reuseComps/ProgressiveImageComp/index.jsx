@@ -9,7 +9,8 @@ function ProgressiveImageComp({ src, alt }) {
       height="0"
       sizes="100vw"
       objectFit="contain"
-      className="h-full w-full mix-blend-overlay"
+      // className="h-full w-full mix-blend-overlay"
+      className="h-full w-full"
     />
   )
 }
