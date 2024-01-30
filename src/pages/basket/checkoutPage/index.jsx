@@ -8,7 +8,7 @@ import Toast from '@/reuseComps/ToastMessage'
 import PaymentModes from '@/components/CheckOut/PaymentModes'
 import { useStripe } from '@stripe/react-stripe-js'
 
-function checkoutPage() {
+function CheckoutPage() {
   const stripe = useStripe()
   const router = useRouter()
   const [stripeData, setStripeData] = useState({})
@@ -275,4 +275,4 @@ function checkoutPage() {
     </main>
   )
 }
-export default checkoutPage
+export default CheckoutPage
