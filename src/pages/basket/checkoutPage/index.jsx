@@ -8,12 +8,11 @@ import Toast from '@/reuseComps/ToastMessage'
 import PaymentModes from '@/components/CheckOut/PaymentModes'
 import { useStripe } from '@stripe/react-stripe-js'
 
-const stripe = useStripe()
-
 function checkoutPage() {
+  const stripe = useStripe()
+  const router = useRouter()
   const [stripeData, setStripeData] = useState({})
   const [showToast, setShowToast] = useState(false)
-  const router = useRouter()
   const [paymentCompleted, setPaymentCompleted] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const oakleighLogo = '/Images/oakleighLogo.svg'
