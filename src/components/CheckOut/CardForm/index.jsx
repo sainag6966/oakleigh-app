@@ -3,7 +3,7 @@ import { useElements } from '@stripe/react-stripe-js'
 import { CardNumberElement } from '@stripe/react-stripe-js'
 import { CardCvcElement } from '@stripe/react-stripe-js'
 import { CardExpiryElement } from '@stripe/react-stripe-js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const options = {
   style: {
@@ -22,7 +22,7 @@ const options = {
   },
 }
 
-function CardForm() {
+function CardForm({ getStripeResponse }) {
   const [cardNumberValid, setCardNumberValid] = useState(false)
   const [cardExpValid, setCardexpValid] = useState(false)
   const [cardCvvValid, setCardCvvValid] = useState(false)
@@ -31,11 +31,148 @@ function CardForm() {
   const [cardCvvError, setCardCvvError] = useState(false)
   const stripe = useStripe()
   const elements = useElements()
+
+  const ownerObj = {
+    billing_address: {
+      first_name: 'Peter',
+      last_name: 'Venkman',
+      company: '',
+      address_1: '550 Central Park West',
+      address_2: 'Corner Penthouse Spook Central',
+      city: 'New York',
+      state: 'NY',
+      postcode: '10023',
+      country: 'US',
+      email: 'admin@example.com',
+      phone: '555-2368',
+    },
+    shipping_address: {
+      first_name: 'Peter',
+      last_name: 'Venkman',
+      company: '',
+      address_1: '550 Central Park West',
+      address_2: 'Corner Penthouse Spook Central',
+      city: 'New York',
+      state: 'NY',
+      postcode: '10023',
+      country: 'US',
+    },
+    customer_note: 'Test notes on order.',
+    create_account: false,
+    payment_method: 'cheque',
+    payment_data: [],
+    extensions: {
+      'some-extension-name': {
+        'some-data-key': 'some data value',
+      },
+    },
+  }
+
+  const handleCardFormSubmitForm = async (event) => {
+    // event.preventDefault();
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet. Make sure to disable
+      // form submission until Stripe.js has loaded.
+      return
+    }
+    const payload = await stripe.createPaymentMethod({
+      type: 'card',
+      card: elements.getElement(CardNumberElement),
+    })
+    // setPayLoadState(payload)
+    const ownerInfo = {
+      owner: {
+        name: ownerObj.billing_address.first_name, //needed cart api here
+        address: {
+          line1: ownerObj.billing_address.address_1,
+          line2: ownerObj.billing_address.address_2,
+          city: ownerObj.billing_address.city,
+          postal_code: ownerObj.billing_address.postcode,
+          country: ownerObj.billing_address.country,
+        },
+        phone: ownerObj.billing_address.phone,
+        email: ownerObj.billing_address.email,
+      },
+    }
+
+    const stripResonse = await stripe
+      .createSource(elements.getElement(CardNumberElement), ownerInfo)
+      .then(function (response) {
+        if (response && response.error) {
+          setCardNumberError(response.error.message)
+        } else {
+          let checkout = {
+            payment_method: 'stripe',
+            payment_data: [
+              {
+                key: 'stripe_source',
+                value: response.source.id,
+              },
+              {
+                key: 'paymentRequestType',
+                value: 'card',
+              },
+              {
+                key: 'wc-stripe-new-payment-method',
+                value: false,
+              },
+              {
+                key: 'billing_email',
+                value:
+                  ownerObj && ownerObj.billing_address.email
+                    ? ownerObj.billing_address.email
+                    : 'Guest',
+              },
+              {
+                key: 'billing_first_name',
+                value:
+                  ownerObj && ownerObj.billing_address.first_name
+                    ? ownerObj.billing_address.first_name
+                    : '',
+              },
+              {
+                key: 'billing_last_name',
+                value:
+                  ownerObj && ownerObj.billing_address.last_name
+                    ? ownerObj.billing_address.last_name
+                    : '',
+              },
+            ],
+          }
+          getStripeResponse(checkout)
+          // let data = []
+          // data['stripe'] = stripe
+          // setPaymentSuccessData(data)
+          // dispatch(updateCheckout(checkout));
+          // dispatch(updateStripeToken(checkout));
+          // dispatch(getStripeToken(response.source.id));
+        }
+      })
+  }
+
+  useEffect(() => {
+    cardNumberValid &&
+      cardExpValid &&
+      cardCvvValid &&
+      ownerObj.billing_address.first_name &&
+      ownerObj.billing_address.postcode &&
+      handleCardFormSubmitForm()
+  }, [cardNumberValid, cardExpValid, cardCvvValid, ownerObj])
+
+  // useEffect(() => {
+  //   if (cardClear) {
+  //     elements.getElement(CardNumberElement).clear()
+  //     elements.getElement(CardExpiryElement).clear()
+  //     elements.getElement(CardCvcElement).clear()
+  //   }
+  // }, [cardClear])
+
   return (
     <>
       <form>
         <label>
           Card number <span className="red-star">*</span>
+          <p>check div</p>
           <CardNumberElement
             options={options}
             // onReady={() => {
