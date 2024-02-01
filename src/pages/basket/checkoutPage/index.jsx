@@ -19,23 +19,23 @@ function CheckoutPage() {
 
   const ownerObj = {
     billing_address: {
-      first_name: 'Peter',
-      last_name: 'Venkman',
+      first_name: 'Pikachu',
+      last_name: 'Pika',
       company: '',
-      address_1: '550 Central Park West',
+      address_1: '880 southern Park gate',
       address_2: 'Corner Penthouse Spook Central',
       city: 'New York',
       state: 'NY',
       postcode: '10023',
       country: 'US',
-      email: 'admin@example.com',
-      phone: '555-2368',
+      email: 'pikachu@gmail.com',
+      phone: '555-2369',
     },
     shipping_address: {
-      first_name: 'Peter',
-      last_name: 'Venkman',
+      first_name: 'Pikachu',
+      last_name: 'Pika',
       company: '',
-      address_1: '550 Central Park West',
+      address_1: '880 southern Park gate',
       address_2: 'Corner Penthouse Spook Central',
       city: 'New York',
       state: 'NY',
@@ -44,7 +44,7 @@ function CheckoutPage() {
     },
     customer_note: 'Test notes on order.',
     create_account: false,
-    payment_method: 'cheque',
+    payment_method: 'stripe',
     payment_data: [],
     extensions: {
       'some-extension-name': {
@@ -117,7 +117,6 @@ function CheckoutPage() {
           'cms/cms',
           'cms',
         )
-      console.log(verificationLink, '!! res str')
       if (clientSecret) {
         // const { stripe } = await paymentSuccessData
 
@@ -130,7 +129,6 @@ function CheckoutPage() {
           })
 
           if (nextAction && nextAction.paymentIntent) {
-            console.log(nextAction.paymentIntent.status, '!! res str')
             if (isSuccessful(nextAction.paymentIntent)) {
               processOrder(result)
               verificationLink && axios.get(verificationLink)
@@ -162,7 +160,6 @@ function CheckoutPage() {
       let result = data
       let clientSecret = result?.payment_result?.payment_details?.[2]?.value
       if (result.payment_method === 'stripe' && clientSecret) {
-        console.log('!! res res')
         stripeProcess(result)
       } else {
         processOrder(result)
@@ -184,7 +181,7 @@ function CheckoutPage() {
     }
     try {
       const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/checkout',
+        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/checkout',
         {
           method: 'POST',
           headers,
@@ -233,9 +230,9 @@ function CheckoutPage() {
         )
         const responseData = await response.json()
         if (responseData) {
+          // setData(responseData)
           // setLoading(false)
         }
-        setData(responseData)
         if (!responseData.ok) {
           // Handle non-successful responses (e.g., 404, 500)
           console.error(`API request failed with status ${response.status}`)
@@ -249,7 +246,12 @@ function CheckoutPage() {
 
   return (
     <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 pt-[34px]">
-      <figure className="max-h-[34px] max-w-[180px]">
+      <figure
+        className="max-h-[34px] max-w-[180px]"
+        onClick={() => {
+          router.push('/')
+        }}
+      >
         <ProgressiveImageComp src={oakleighLogo} alt={'oakleighlogo'} />
       </figure>
       <section>
