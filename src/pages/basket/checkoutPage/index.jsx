@@ -103,7 +103,7 @@ function CheckoutPage() {
         //setSuccessMessage(true)
         //setCreateOrderStatus(true)
         //setOrderId(result.data.order_id)
-        router.push('/checkout/order-received/' + result.order_id)
+        // router.push('/checkout/order-received/' + result.order_id)
       } else {
         setShowToast(true)
         setToastMessage('Payment Failed Please Try Again')
