@@ -19,7 +19,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home({ data }) {
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   const trayData = data?.acf?.flexible_listing
-
+  console.log('Environment:', process.env.NODE_ENV)
   function getTrays(tray) {
     switch (tray.acf_fc_layout) {
       case 'header_banner':

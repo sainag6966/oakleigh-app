@@ -1,17 +1,17 @@
+import { nonceUrl } from './urls'
+
 export const getNonce = async () => {
   const loginToken = localStorage.getItem('loginToken')
+  const url = nonceUrl
   const headers = {}
   if (loginToken) {
     headers['Authorization'] = `Bearer ${loginToken}`
   }
   try {
-    const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wc-nonce',
-      {
-        method: 'get',
-        headers,
-      },
-    )
+    const response = await fetch(url, {
+      method: 'get',
+      headers,
+    })
 
     if (response.ok) {
       const data = await response.json()
