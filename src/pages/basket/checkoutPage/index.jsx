@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Breadcrumbs from '@/components/BreadCrumbs'
+import ExpressCheckout from '@/components/CheckOut/ExpressCheckout'
+import ShippingAddress from '@/components/CheckOut/ShippingAddress'
+import CheckoutLogin from '@/components/CheckOut/CheckoutLogin'
 import axios from 'axios'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
-import ExpressCheckout from './ExpressCheckout'
 import Toast from '@/reuseComps/ToastMessage'
 import PaymentModes from '@/components/CheckOut/PaymentModes'
 import { useStripe } from '@stripe/react-stripe-js'
+import CheckoutItems from '@/components/CheckOut/CheckoutItems'
 
 function CheckoutPage() {
   const stripe = useStripe()
@@ -245,9 +248,9 @@ function CheckoutPage() {
   }, [])
 
   return (
-    <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 pt-[34px]">
+    <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 py-[34px] lg:gap-8 lg:px-12 lg:py-[50px] xl:px-16 dxl:px-[143px] dxl:pb-[150px]">
       <figure
-        className="max-h-[34px] max-w-[180px]"
+        className="max-h-[34px] max-w-[180px] dxl:min-h-[60px] dxl:min-w-[304px]"
         onClick={() => {
           router.push('/')
         }}
@@ -257,8 +260,22 @@ function CheckoutPage() {
       <section>
         <Breadcrumbs />
       </section>
-      <ExpressCheckout />
-      <PaymentModes getStripeResponse={getStripeResponse} />
+      <section className="flex h-auto w-full flex-col gap-4 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
+        <section className="self-stretch bg-search lg:order-2 lg:flex-1">
+          <CheckoutItems />
+        </section>
+        <section className="flex flex-col gap-6 lg:order-1 lg:flex-1">
+          <ExpressCheckout />
+          <section className="flex w-full items-center justify-between gap-4 font-sans text-orderSummaryBorder">
+            <hr className="w-full text-orderSummaryBorder" />
+            <p className="text-display-3">OR</p>
+            <hr className="w-full text-orderSummaryBorder" />
+          </section>
+          <CheckoutLogin />
+          <ShippingAddress />
+        </section>
+      </section>
+      {/* <PaymentModes getStripeResponse={getStripeResponse} />
       <button
         className="border-[1px] bg-orange-500 p-2"
         onClick={handlePayment}
@@ -273,7 +290,7 @@ function CheckoutPage() {
             setShowToast={setShowToast}
           />
         </div>
-      )}
+      )} */}
     </main>
   )
 }

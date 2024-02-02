@@ -121,7 +121,7 @@ const SignupForm = () => {
             value={formData.first_name}
             placeholder="First Name*"
             onChange={handleChange}
-            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 font-sans text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
+            className="focus:shadow-outline h-[50px] w-full appearance-none border px-3 py-2 font-sans text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
           {firstNameError && (
             <p className="mt-1 text-sm text-red-500">{firstNameError}</p>
@@ -135,7 +135,7 @@ const SignupForm = () => {
             value={formData.last_name}
             placeholder="Last Name*"
             onChange={handleChange}
-            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
+            className="focus:shadow-outline h-[50px] w-full appearance-none border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
           {lastNameError && (
             <p className="mt-1 text-sm text-red-500">{lastNameError}</p>
@@ -149,7 +149,7 @@ const SignupForm = () => {
             placeholder="Email address*"
             value={formData.email}
             onChange={handleChange}
-            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
+            className="focus:shadow-outline h-[50px] w-full appearance-none border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
           {emailError && (
             <p className="mt-1 text-sm text-red-500">{emailError}</p>
@@ -163,7 +163,7 @@ const SignupForm = () => {
             placeholder="Password*"
             value={formData.password}
             onChange={handleChange}
-            className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
+            className="focus:shadow-outline h-[50px] w-full appearance-none border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
           {passwordError && (
             <p className="mt-1 text-sm text-red-500">{passwordError}</p>
@@ -177,7 +177,7 @@ const SignupForm = () => {
             placeholder="Confirm Password*"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="focus:shadow-outline h-full w-full appearance-none rounded border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
+            className="focus:shadow-outline h-full w-full appearance-none border px-3 py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
           />
         </div>
         <div className="">

@@ -15,16 +15,16 @@ function BasketHead() {
   return (
     <section className="flex h-auto w-full items-center justify-between gap-2">
       {isDesktop && <section className="h-auto w-full flex-1" />}
-      <section
-        className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15"
-        onClick={() => {
-          router.push('/basket/checkoutPage')
-        }}
-      >
+      <section className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15">
         Your Basket
       </section>
       <section className="flex h-auto w-full flex-1 justify-end">
-        <section className="relative flex h-[42px] w-full font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]">
+        <section
+          className="relative flex h-[42px] w-full font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
+          onClick={() => {
+            router.push('/basket/checkoutPage')
+          }}
+        >
           <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
           <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />
           <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] dxl:h-[47px]" />
