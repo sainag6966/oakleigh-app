@@ -182,11 +182,10 @@ function ProductDetailPage({ data }) {
           <Breadcrumbs />
         </nav>
       </nav>
-      <section className="flex h-auto w-full flex-col gap-[70px]">
+      <section className="flex h-auto w-full flex-col gap-[26px] lg:gap-[70px]">
         <section className="flex h-auto w-full flex-col items-start justify-between gap-[30px] lg:flex-row xl:gap-12 dxl:gap-20 txl:gap-[168px]">
           <section className="flex h-auto w-full flex-col gap-[30px] lg:flex-1">
             {!isDesktop && <ProductDetail data={data} />}
-            {!isDesktop && showSoldMweb && getRespectiveBlock()}
             <section className="grid-rows-auto grid h-auto w-full flex-1 grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:gap-[30px]">
               {modifiedImageList.map((image, index) => {
                 return (
@@ -207,7 +206,7 @@ function ProductDetailPage({ data }) {
             <section className="h-full w-full">
               <CustomVimeoPlayer
                 getVimeoId={getVimeoId}
-                videoId={'246115326'}
+                videoId={'449787858'}
                 width={
                   isxLargeScreen
                     ? 804
@@ -231,11 +230,12 @@ function ProductDetailPage({ data }) {
                           : 170
                 }
               />
-            </section>
+            </section>{' '}
+            <section> {!isDesktop && getRespectiveBlock()}</section>
           </section>
           <section className="flex w-full flex-col gap-6 font-sans lg:flex-1 dxl:gap-[30px]">
             {isDesktop && <ProductDetail data={data} />}
-            {(isDesktop || showAvailability) && getRespectiveBlock()}
+            {isDesktop && getRespectiveBlock()}
             {/* {isAvailable && (
               <section>
                 {nonce && (

@@ -16,7 +16,7 @@ function AvailabilityBlock({
     <>
       {nonce && (
         <section
-          className="relative flex h-[42px] w-full cursor-pointer lg:h-[53px]"
+          className="relative flex h-[42px] w-full cursor-pointer font-sans lg:h-[53px]"
           onClick={() => {
             handleAddToBasket()
           }}
@@ -45,7 +45,7 @@ function AvailabilityBlock({
           />
         </div>
       )}
-      <section className="flex h-auto w-full flex-col items-center justify-between gap-6 xl:flex-row xl:gap-5 txl:gap-[30px]">
+      <section className="mt-6 flex h-auto w-full flex-col items-center justify-between gap-6 lg:mt-0 xl:flex-row xl:gap-5 txl:gap-[30px]">
         <div className="order-2 w-full xl:order-1 ">
           <InstallmentButton />
         </div>
@@ -53,8 +53,8 @@ function AvailabilityBlock({
           <ApplePayButton />
         </div>
       </section>
-      <section className="h-auto w-full border-b-[1px] border-search pb-[30px]">
-        <p className="text-display-3 xl:text-display-3 dxl:text-display-6">
+      <section className="mt-[30px] h-auto w-full border-b-[1px] border-search pb-[30px] lg:mt-0">
+        <p className="font-sans text-display-3 xl:text-display-3 dxl:text-display-6">
           Lorem ipsum dolor sit amet finance <u>website link here</u>
         </p>
       </section>

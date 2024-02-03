@@ -138,7 +138,7 @@ function ProductDetail({ productData, handleRemoveCta }) {
         <section
           className="flex h-auto w-full cursor-pointer items-center justify-start border-y-[1.2px] border-y-search py-[30px] font-sans text-display-4 xl:text-display-17"
           onClick={() => {
-            router.push('/Product-Listing')
+            router.push('/shop-all')
           }}
         >
           <u>Continue Shopping</u>

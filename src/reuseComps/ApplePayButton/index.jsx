@@ -4,7 +4,7 @@ import ProgressiveImageComp from '../ProgressiveImageComp'
 function ApplePayButton() {
   const appleIconSrc = '/Images/appleIcon.svg'
   return (
-    <section className="flex w-full items-center justify-center gap-1 bg-colorBlack p-1 text-textPrimary lg:p-3 xl:p-[10px]">
+    <section className="flex w-full items-center justify-center gap-1 bg-colorBlack p-1 font-sans text-textPrimary lg:p-3 xl:p-[10px]">
       <p className="text-center text-display-1 font-semibold xl:text-display-4 dxl:text-display-6">
         Pay with
       </p>
