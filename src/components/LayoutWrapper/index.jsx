@@ -10,7 +10,7 @@ function LayoutWrapper({ children }) {
   const router = useRouter()
   const { asPath } = router
   const [item, setItem] = useState([])
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false)
   const [isFooterVisible, setIsFooterVisible] = useState(true)
   const [footerItem, setFooterItem] = useState([])
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
@@ -18,7 +18,7 @@ function LayoutWrapper({ children }) {
   const username = 'oakleighcdadevel'
   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
 
-  const hideHeaderPaths = ['/basket/checkoutPage']
+  const hideHeaderPaths = ['/basket/checkoutPage', '/']
   const restrictedPath = hideHeaderPaths.includes(asPath)
 
   useEffect(() => {

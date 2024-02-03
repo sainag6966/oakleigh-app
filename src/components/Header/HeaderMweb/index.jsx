@@ -2,6 +2,7 @@ import { useState } from 'react'
 import NextImage from '../../../reuseComps/NextImage'
 import Drawer from '../../../reuseComps/Drawer'
 import { useRouter } from 'next/router'
+import { isLoggedIn } from '@/utils/auth'
 import LoginDropdown from '@/components/LoginDropdown'
 
 function HeaderMweb({ data }) {
@@ -28,9 +29,13 @@ function HeaderMweb({ data }) {
   }
 
   const handleLoginModal = () => {
+    closeDrawer()
+    if (isLoggedIn()) {
+      router.push('/profile-page')
+      return
+    }
     document.body.classList.add('no-scroll')
     setOpenLoginModal(!openLoginModal)
-    closeDrawer()
   }
 
   const handleCreateAcc = () => {

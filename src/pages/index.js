@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import { useMediaQuery } from 'react-responsive'
+import Header from '@/components/Header'
 import TrustBox from '@/components/TrustPilot'
 import HeaderBanner from '../components/ContentBlocks/HeaderBanner'
 import UspBlock from '../components/ContentBlocks/UspBlock'
@@ -16,7 +17,7 @@ import BrandWidget from '@/components/ContentBlocks/BrandWidget'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ data }) {
+export default function Home({ data, headerData }) {
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   const trayData = data?.acf?.flexible_listing
   console.log('Environment:', process.env.NODE_ENV)
@@ -53,6 +54,7 @@ export default function Home({ data }) {
 
   return (
     <main className="h-auto w-full">
+      <Header data={headerData} isHeaderVisible={true} />
       <TrustBox />
       {trayData ? (
         trayData.map((tray) => {
@@ -79,17 +81,32 @@ export async function getServerSideProps(context) {
         },
       },
     )
-    if (!response.ok) {
+
+    const headerRes = await fetch(
+      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18',
+      {
+        method: 'get',
+        headers: {
+          'Content-Type': 'text/plain',
+          Authorization: 'Basic ' + btoa(username + ':' + password),
+        },
+      },
+    )
+
+    if (!response.ok || !headerRes.ok) {
       // Handle non-successful responses (e.g., 404, 500)
       console.error(`API request failed with status ${response.status}`)
       return {
         notFound: true,
       }
     }
+
     const data = await response.json()
+    const headerData = await headerRes.json()
     return {
       props: {
         data,
+        headerData,
       },
     }
   } catch (error) {

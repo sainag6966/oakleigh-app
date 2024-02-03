@@ -1,9 +1,11 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 function TwoAdBlock({ trayData }) {
   const data = trayData?.ad_list
+  const router = useRouter()
 
   return (
-    <div className="dxl:pt-[120px] dxl:px-[140px] dxl:gap-[30px] flex h-auto w-full flex-wrap justify-between gap-[25px] px-[37px] pt-[60px] lg:flex-nowrap lg:px-20 lg:pt-[100px]">
+    <div className="flex h-auto w-full flex-wrap justify-between gap-[25px] px-[37px] pt-[60px] lg:flex-nowrap lg:px-20 lg:pt-[100px] dxl:gap-[30px] dxl:px-[140px] dxl:pt-[120px]">
       {data.map((e, index) => {
         return (
           <div
@@ -19,12 +21,17 @@ function TwoAdBlock({ trayData }) {
               style={{ objectPosition: 'center' }}
               className="mix-blend-overlay"
             />
-            <div className="absolute bottom-6 flex w-full flex-col items-center gap-2 text-textPrimary">
-              <span className="dxl:text-display-13 text-display-11">
+            <div
+              className="absolute bottom-6 flex w-full flex-col items-center gap-2 text-textPrimary"
+              onClick={() => {
+                router.push('/shop-all')
+              }}
+            >
+              <span className="text-display-11 dxl:text-display-13">
                 {e.ab_title}
               </span>
               <u>
-                <span className="dxl:text-display-17 font-sans text-display-4">
+                <span className="font-sans text-display-4 dxl:text-display-17">
                   {e.ab_button_title}
                 </span>
               </u>

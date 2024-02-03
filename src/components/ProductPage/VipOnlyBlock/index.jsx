@@ -21,7 +21,8 @@ function VipOnlyBlock({ data }) {
           {CtaLabel}
         </div>
       </section>
-      <div className="relative mt-[30px] flex w-full flex-col items-center justify-center gap-3 bg-uspBlockBackground px-10 py-6 xl:mt-[60px] xl:gap-6 xl:px-[76px] xl:py-10">
+      <section className="h-auto w-full border-[1px] border-search"></section>
+      <div className="relative mt-[26px] flex w-full flex-col items-center justify-center gap-3 bg-uspBlockBackground px-10 py-6 xl:mt-[60px] xl:gap-6 xl:px-[76px] xl:py-10">
         <section className="flex h-auto w-full flex-col items-start justify-center gap-2 sm:flex-row sm:items-center  sm:gap-6 xl:gap-5">
           <img
             src={vipIcon}
