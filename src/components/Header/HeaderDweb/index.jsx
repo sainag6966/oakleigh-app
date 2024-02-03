@@ -47,6 +47,7 @@ function HeaderDweb({ data }) {
       }
       return
     }
+    setOpenBrandDropdown(false)
     if (item?.title?.rendered === 'New In') {
       router.push('/new-in')
       return
@@ -63,7 +64,6 @@ function HeaderDweb({ data }) {
       router.push('/online-only')
       return
     }
-    setOpenBrandDropdown(false)
     router.push('/shop-all')
   }
 

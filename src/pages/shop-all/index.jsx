@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import Link from 'next/link'
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
 import Spinner from '@/reuseComps/Spinner'
@@ -64,7 +65,8 @@ const ProductListing = ({ data }) => {
                     key={index}
                     className="flex grow-[1] flex-col items-center justify-center"
                   >
-                    <div
+                    <Link
+                      href={`shop-all/${item.slug}/${item.id}`}
                       className="relative h-[420px] w-full lg:h-[298px] lg:w-[195px] xl:h-[340px] xl:w-[260px] dxl:h-[400px] dxl:w-[320px] txl:h-[462px] txl:w-[389px]"
                       key={item.id}
                     >
@@ -76,7 +78,7 @@ const ProductListing = ({ data }) => {
                         quality={100}
                         style={{ objectPosition: 'center' }}
                       />
-                    </div>
+                    </Link>
                     <div className="mt-6 flex flex-col items-center justify-center gap-[2px] xl:gap-1 dxl:gap-[6px] txl:gap-2">
                       <p className="line-clamp-1 max-w-[400px] text-display-4 xl:max-w-[260px] xl:text-display-17 dxl:max-w-[320px] txl:max-w-[389px] txl:text-display-12">
                         {item.name}
@@ -92,14 +94,12 @@ const ProductListing = ({ data }) => {
                     <div className="relative flex h-[49px] w-[143px] xl:h-[53px] xl:w-[175px]">
                       <div className="absolute bottom-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
                       <div className="absolute right-0 h-[46px] w-[140px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
-                      <div
-                        onClick={() => {
-                          handleProductClick(item)
-                        }}
+                      <Link
+                        href={`shop-all/${item.slug}/${item.id}`}
                         className="relative flex w-full cursor-pointer items-center justify-center font-sans text-display-4 xl:text-display-17"
                       >
                         View Watch
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 ),

@@ -11,7 +11,7 @@ const Drawer = ({ isOpen, closeDrawer, data, direction, handleLoginModal }) => {
   const searchIcon = '/Images/searchIcon.svg'
   const accountIcon = '/Images/accountIcon.svg'
   const dwebAccountIcon = '/Images/dwebAccountIcon.svg'
-  const filterData = data.filter((e) => {
+  const filterData = data?.filter((e) => {
     const skipMenu = ['Divider', 'My account', 'Basket']
     return !skipMenu.includes(e.title.rendered)
   })

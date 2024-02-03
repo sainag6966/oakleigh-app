@@ -63,7 +63,7 @@ function BasketDrawer({
                 {productName}
               </p>
               <p className="font-sans text-display-4 font-semibold lg:text-display-16">
-                £ {productPrice}
+                £{productPrice}
               </p>
               <u>
                 <p className="mt-[10px] font-sans text-display-4 lg:text-display-17">
