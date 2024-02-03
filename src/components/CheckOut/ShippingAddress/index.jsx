@@ -1,20 +1,23 @@
 import CountrySelector from '@/reuseComps/CountrySelector'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
-function ShippingAddress() {
+function ShippingAddress({ address }) {
   const [countryCode, setCountryCode] = useState('')
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    address: '',
-    apartment: '',
-    city: '',
-    post_code: '',
-    phone: '',
-  })
+  // const [formData, setFormData] = useState({
+  //   first_name: '',
+  //   last_name: '',
+  //   address: '',
+  //   apartment: '',
+  //   city: '',
+  //   post_code: '',
+  //   phone: '',
+  // })
+  const [formData, setFormData] = useState({})
   const leftIcon = '/Images/leftArrow.svg'
-
+  useEffect(() => {
+    setFormData(address)
+  }, [address])
   const handleChange = (e) => {
     e.preventDefault
   }
@@ -32,7 +35,7 @@ function ShippingAddress() {
               type="text"
               id="first_name"
               name="first_name"
-              value={formData.first_name}
+              value={formData?.first_name || ''}
               placeholder="First Name*"
               onChange={handleChange}
               className="selection: h-[40px] w-full appearance-none bg-search  px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
@@ -41,7 +44,7 @@ function ShippingAddress() {
               type="text"
               id="last_name"
               name="last_name"
-              value={formData.last_name}
+              value={formData?.last_name || ''}
               placeholder="Last Name*"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
@@ -52,7 +55,7 @@ function ShippingAddress() {
               type="text"
               id="address"
               name="address"
-              value={formData.last_name}
+              value={formData?.last_name || ''}
               placeholder="Address*"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
@@ -63,7 +66,7 @@ function ShippingAddress() {
               type="text"
               id="apartment"
               name="apartment"
-              value={formData.last_name}
+              value={formData?.last_name || ''}
               placeholder="Apartment, Suite, Etc.(Optional)"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
@@ -74,7 +77,7 @@ function ShippingAddress() {
               type="text"
               id="city"
               name="city"
-              value={formData.last_name}
+              value={formData?.last_name || ''}
               placeholder="City"
               onChange={handleChange}
               className="h-[40px] w-full appearance-none bg-search px-3 py-2  text-display-3 leading-tight focus:shadow dxl:h-[50px] dxl:text-display-6"
@@ -83,7 +86,7 @@ function ShippingAddress() {
               type="text"
               id="post_code"
               name="post_code"
-              value={formData.last_name}
+              value={formData?.last_name || ''}
               placeholder="Postcode*"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
@@ -94,7 +97,7 @@ function ShippingAddress() {
               type="text"
               id="phone"
               name="phone"
-              value={formData.last_name}
+              value={formData?.last_name || ''}
               placeholder="Phone*"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"

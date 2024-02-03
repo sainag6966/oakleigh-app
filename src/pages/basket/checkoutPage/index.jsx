@@ -15,10 +15,12 @@ function CheckoutPage() {
   const stripe = useStripe()
   const router = useRouter()
   const [stripeData, setStripeData] = useState({})
+  const [orderData, setOrderData] = useState({})
   const [showToast, setShowToast] = useState(false)
   const [paymentCompleted, setPaymentCompleted] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const oakleighLogo = '/Images/oakleighLogo.svg'
+  const shippingAddress = orderData?.shipping_address
 
   const ownerObj = {
     billing_address: {
@@ -233,6 +235,7 @@ function CheckoutPage() {
         )
         const responseData = await response.json()
         if (responseData) {
+          setOrderData(responseData)
           // setData(responseData)
           // setLoading(false)
         }
@@ -272,7 +275,7 @@ function CheckoutPage() {
             <hr className="w-full text-orderSummaryBorder" />
           </section>
           <CheckoutLogin />
-          <ShippingAddress />
+          <ShippingAddress address={shippingAddress} />
         </section>
       </section>
       {/* <PaymentModes getStripeResponse={getStripeResponse} />
