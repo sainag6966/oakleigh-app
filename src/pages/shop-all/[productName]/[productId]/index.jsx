@@ -31,6 +31,7 @@ function ProductDetailPage({ data }) {
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const isxLargeScreen = useMediaQuery({ query: '(min-width:1680px)' })
   const showSoldMweb = acf?.availability !== 'Available' || outOfStock
+  const availability = acf?.availability
   const showAvailability =
     !isDesktop && acf?.availability === 'Available' && !showSoldMweb
   const requiredMeta = [
@@ -155,10 +156,10 @@ function ProductDetailPage({ data }) {
     if (outOfStock) {
       return <SoldBlock />
     }
-    if (acf?.availability === 'Reserved') {
+    if (availability === 'Reserved') {
       return <ReservedBlock />
     }
-    if (acf?.availability === 'Available') {
+    if (availability === 'Available') {
       return (
         <AvailabilityBlock
           nonce={nonce}
@@ -170,7 +171,7 @@ function ProductDetailPage({ data }) {
         />
       )
     }
-    if (acf?.availability === 'VIP Only') {
+    if (availability === 'VIP Only') {
       return <VipOnlyBlock data={acf} />
     }
   }
@@ -194,11 +195,13 @@ function ProductDetailPage({ data }) {
                       src={image.src}
                       alt={'productImage'}
                     />
-                    {/* {index === 0 && (
+                    {index === 0 && (
                       <section className="absolute left-[50%] top-0 h-auto w-auto -translate-x-1/2">
-                        <AvailabilityBadge status={'SOLD'} />
+                        <AvailabilityBadge
+                          status={outOfStock ? 'Sold' : availability}
+                        />
                       </section>
-                    )} */}
+                    )}
                   </figure>
                 )
               })}
