@@ -241,7 +241,9 @@ function Sustainability() {
 }
 
 function ProductMeta({ data }) {
-  const [labelClicked, setLabelClicked] = useState('')
+  const [labelClicked, setLabelClicked] = useState(
+    'DESCRIPTION & SPECIFICATION',
+  )
   const metaArr = [
     'DESCRIPTION & SPECIFICATION',
     'Why We Love It',

@@ -8,7 +8,10 @@ const Breadcrumbs = () => {
   const { query, asPath } = router
   const urlString = asPath || ''
   const pathArray = urlString.split('/').filter(Boolean)
-  const uppercasedArray = pathArray.map((str) => str.toUpperCase())
+  // const uppercasedArray = pathArray.map((str) => str.toUpperCase())
+  const uppercasedArray = pathArray.map(
+    (str) => str.charAt(0).toUpperCase() + str.slice(1),
+  )
   const shopAllRoute = uppercasedArray.slice(0, -1)
   const routeArr = pathArray.includes('shop-all')
     ? shopAllRoute
@@ -17,7 +20,7 @@ const Breadcrumbs = () => {
   // Render the breadcrumbs
   return (
     <section className="w-full font-sans text-display-1 xl:text-[15px]">
-      <Link href="/">HOME</Link>
+      <Link href="/">Home</Link>
       {routeArr.map((segment, index) => (
         <span key={index}>
           {' / '}
