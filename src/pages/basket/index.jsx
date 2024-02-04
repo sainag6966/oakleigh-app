@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import axios from 'axios'
-import { use, useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import CountrySelector from '@/reuseComps/CountrySelector'
-import { useRouter } from 'next/router'
 import Toast from '@/reuseComps/ToastMessage'
 import Spinner from '@/reuseComps/Spinner'
 import Breadcrumbs from '@/components/BreadCrumbs'
@@ -12,6 +12,7 @@ import Breadcrumbs from '@/components/BreadCrumbs'
 function BasketHead() {
   const router = useRouter()
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+
   return (
     <section className="flex h-auto w-full items-center justify-between gap-2">
       {isDesktop && <section className="h-auto w-full flex-1" />}
@@ -37,8 +38,9 @@ function BasketHead() {
   )
 }
 
-function ProductDetail({ productData, handleRemoveCta }) {
+function ProductDetail({ productData, setIsCartEmpty }) {
   const [removing, setRemoving] = useState(false)
+  const [products, setProducts] = useState(productData)
   const [selectedItem, setSelectedItem] = useState(false)
   const isLargeScreen = useMediaQuery({ query: '(min-width:1280px)' })
   const router = useRouter()
@@ -71,12 +73,17 @@ function ProductDetail({ productData, handleRemoveCta }) {
           credentials: 'include',
         },
       )
-
       if (response.ok) {
-        handleRemoveCta()
+        const filterRemovedItems = products.filter((e) => {
+          return e.id !== item.id
+        })
+        if (!filterRemovedItems.length) {
+          setIsCartEmpty(true)
+        }
+        setProducts(filterRemovedItems)
         setRemoving(false)
       } else {
-        const errorData = await response.json() // You can log or inspect the error details
+        const errorData = await response.json()
       }
     } catch (error) {}
   }
@@ -89,7 +96,7 @@ function ProductDetail({ productData, handleRemoveCta }) {
         </section>
       )}
       <section className="flex h-auto w-full flex-col gap-[26px]">
-        {productData.map((item, index) => {
+        {products.map((item, index) => {
           return (
             <section key={index} className="flex h-auto w-full gap-2 xl:gap-10">
               <section className="h-auto w-full flex-1 xl:max-w-[134px]">
@@ -148,7 +155,7 @@ function ProductDetail({ productData, handleRemoveCta }) {
   )
 }
 
-function OrderSummary({ productData, handleRemoveCta }) {
+function OrderSummary({ productData }) {
   const [coupon, setCoupon] = useState('')
   const [promoToast, setPromoToast] = useState(false)
   const [promoToastMsg, setPromoToastMsg] = useState('')
@@ -168,16 +175,11 @@ function OrderSummary({ productData, handleRemoveCta }) {
     const loginToken = localStorage.getItem('loginToken')
     const headers = { 'Content-Type': 'application/json', Nonce: nonce }
 
-    // Check if loginToken is available
     if (loginToken) {
       headers['Authorization'] = `Bearer ${loginToken}`
     }
     try {
       setRemovingPromo(true)
-      // setLoading(true)
-
-      // const username = 'lejac53041@tanlanav.com'
-      // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
       const response = await fetch(
         `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/coupons?code=${coupon}`,
         {
@@ -189,10 +191,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
       const responseData = await response.json()
       if (responseData) {
         setRemovingPromo(false)
-        handleRemoveCta()
-        // setLoading(false)
       }
-      // setData(responseData)
     } catch (error) {}
   }
 
@@ -229,7 +228,6 @@ function OrderSummary({ productData, handleRemoveCta }) {
           setPromoToastMsg('Please enter a valid Coupon code')
           return
         }
-        handleRemoveCta()
       }
     } catch (error) {}
   }
@@ -351,7 +349,7 @@ function OrderSummary({ productData, handleRemoveCta }) {
   )
 }
 
-function Delivery({ handleRemoveCta, productData }) {
+function Delivery({ productData }) {
   const [countryCode, setCountryCode] = useState('')
 
   const [showToast, setShowToast] = useState(false)
@@ -421,7 +419,6 @@ function Delivery({ handleRemoveCta, productData }) {
           return
         }
         setAddingDeliveryInfo(false)
-        handleRemoveCta()
       }
     } catch (error) {}
   }
@@ -478,12 +475,7 @@ function Delivery({ handleRemoveCta, productData }) {
 function YourBasket() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
-  const [removeItem, setRemoveItem] = useState(false)
-  const emptyCart = data?.length === 0
-
-  const handleRemoveCta = () => {
-    setRemoveItem(!removeItem)
-  }
+  const [isCartEmpty, setIsCartEmpty] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -491,7 +483,6 @@ function YourBasket() {
       const loginToken = localStorage.getItem('loginToken')
       const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
 
-      // Check if loginToken is available
       if (loginToken) {
         headers['Authorization'] = `Bearer ${loginToken}`
       }
@@ -518,7 +509,7 @@ function YourBasket() {
     }
     fetchData()
     window.scrollTo(0, 0)
-  }, [removeItem])
+  }, [])
 
   return (
     <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px] xl:gap-10 xl:px-[64px] dxl:gap-14 dxl:px-[132px]">
@@ -527,7 +518,7 @@ function YourBasket() {
         <section className="flex h-auto w-full items-center justify-center">
           <Spinner width={50} height={50} />
         </section>
-      ) : emptyCart ? (
+      ) : !data.items.length || isCartEmpty ? (
         <div className="flex h-auto w-full items-center justify-center text-display-12">
           Your Cart is Empty
         </div>
@@ -539,14 +530,11 @@ function YourBasket() {
             <section className="flex h-auto w-full flex-col gap-6">
               <ProductDetail
                 productData={data?.items}
-                handleRemoveCta={handleRemoveCta}
+                setIsCartEmpty={setIsCartEmpty}
               />
-              <Delivery productData={data} handleRemoveCta={handleRemoveCta} />
+              <Delivery productData={data} />
             </section>
-            <OrderSummary
-              productData={data}
-              handleRemoveCta={handleRemoveCta}
-            />
+            <OrderSummary productData={data} />
           </section>
         </section>
       )}
