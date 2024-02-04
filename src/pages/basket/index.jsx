@@ -155,20 +155,58 @@ function ProductDetail({ productData, setIsCartEmpty }) {
   )
 }
 
-function OrderSummary({ productData }) {
+function OrderSummary({ isPostcodeEntered }) {
   const [coupon, setCoupon] = useState('')
+  const [productData, setProductData] = useState({})
   const [promoToast, setPromoToast] = useState(false)
   const [promoToastMsg, setPromoToastMsg] = useState('')
   const [addingPromo, setAddingPromo] = useState(false)
   const [removingPromo, setRemovingPromo] = useState(false)
+  const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const copyRightIcons = '/Images/copyRightImg.svg'
-  const itemText = productData?.items.length === 1 ? 'item' : 'items'
+  const itemText = productData?.items?.length === 1 ? 'item' : 'items'
   const price = productData?.totals?.total_items
   const totalPrice = productData?.totals?.total_price
-  const couponCode = productData?.coupons[0]?.code
+  // const couponCode = productData?.coupons[0]?.code
   const isCouponAvailable = productData?.coupons?.length
-  const couponDiscount = productData?.coupons[0]?.totals?.total_discount || '0'
+  const couponDiscount = productData?.coupons?.length
+    ? productData?.coupons[0]?.totals?.total_discount
+    : '0'
   const deliveryRate = productData?.totals?.total_shipping
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const nonce = localStorage.getItem('nonce')
+      const loginToken = localStorage.getItem('loginToken')
+      const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
+      try {
+        // setLoading(true)
+        // const username = 'lejac53041@tanlanav.com'
+        // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart',
+          {
+            method: 'get',
+            headers,
+            credentials: 'include',
+          },
+        )
+        const responseData = await response.json()
+        if (responseData) {
+          // setLoading(false)
+          setProductData(responseData)
+        }
+      } catch (error) {
+        // setLoading(false)
+      }
+    }
+    fetchData()
+    window.scrollTo(0, 0)
+  }, [addOrRemovePromo, isPostcodeEntered])
 
   const handleRemoveCoupon = async () => {
     const nonce = localStorage.getItem('nonce')
@@ -191,6 +229,7 @@ function OrderSummary({ productData }) {
       const responseData = await response.json()
       if (responseData) {
         setRemovingPromo(false)
+        setAddOrRemovePromo(!addOrRemovePromo)
       }
     } catch (error) {}
   }
@@ -223,6 +262,7 @@ function OrderSummary({ productData }) {
       const responseData = await response.json()
       if (responseData) {
         setAddingPromo(false)
+        setAddOrRemovePromo(!addOrRemovePromo)
         if (!responseData?.discount_type) {
           setPromoToast(true)
           setPromoToastMsg('Please enter a valid Coupon code')
@@ -349,9 +389,8 @@ function OrderSummary({ productData }) {
   )
 }
 
-function Delivery({ productData }) {
+function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
   const [countryCode, setCountryCode] = useState('')
-
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [addingDeliveryInfo, setAddingDeliveryInfo] = useState(false)
@@ -419,6 +458,7 @@ function Delivery({ productData }) {
           return
         }
         setAddingDeliveryInfo(false)
+        setIsPostcodeEntered(!isPostcodeEntered)
       }
     } catch (error) {}
   }
@@ -476,6 +516,7 @@ function YourBasket() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [isCartEmpty, setIsCartEmpty] = useState(false)
+  const [isPostcodeEntered, setIsPostcodeEntered] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -532,9 +573,16 @@ function YourBasket() {
                 productData={data?.items}
                 setIsCartEmpty={setIsCartEmpty}
               />
-              <Delivery productData={data} />
+              <Delivery
+                productData={data}
+                setIsPostcodeEntered={setIsPostcodeEntered}
+                isPostcodeEntered={isPostcodeEntered}
+              />
             </section>
-            <OrderSummary productData={data} />
+            <OrderSummary
+              productData={data}
+              isPostcodeEntered={isPostcodeEntered}
+            />
           </section>
         </section>
       )}

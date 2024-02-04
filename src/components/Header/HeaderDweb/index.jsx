@@ -191,7 +191,7 @@ function HeaderDweb({ data }) {
                     objectFit="contain"
                     quality={100}
                     style={{ objectPosition: 'center' }}
-                    className="mix-blend-overlay"
+                    // className="mix-blend-overlay"
                   />
                 </div>
                 {(openLoginModal && e.title === 'account') ||
@@ -204,7 +204,7 @@ function HeaderDweb({ data }) {
                       objectFit="contain"
                       quality={100}
                       style={{ objectPosition: 'center' }}
-                      className="mix-blend-overlay"
+                      // className="mix-blend-overlay"
                     />
                   </div>
                 ) : null}
