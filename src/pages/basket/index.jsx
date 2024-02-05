@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { priceFormatter } from '@/utils/formatPrice'
 import { useMediaQuery } from 'react-responsive'
 import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
@@ -17,7 +18,7 @@ function BasketHead() {
     <section className="flex h-auto w-full items-center justify-between gap-2">
       {isDesktop && <section className="h-auto w-full flex-1" />}
       <section className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15">
-        Your Basket
+        YOUR BASKET
       </section>
       <section className="flex h-auto w-full flex-1 justify-end">
         <section
@@ -115,7 +116,8 @@ function ProductDetail({ productData, setIsCartEmpty }) {
                   {item?.name}
                 </p>
                 <p className="relative font-sans text-display-16">
-                  £{item?.prices?.regular_price}
+                  {item?.prices?.regular_price &&
+                    priceFormatter(item?.prices?.regular_price, true)}
                   {isLargeScreen && index === 0 && (
                     <p className="absolute left-0 top-[-160px] text-display-17">
                       Total
@@ -166,7 +168,11 @@ function OrderSummary({ isPostcodeEntered }) {
   const copyRightIcons = '/Images/copyRightImg.svg'
   const itemText = productData?.items?.length === 1 ? 'item' : 'items'
   const price = productData?.totals?.total_items
+  const subTotal =
+    price && priceFormatter(productData?.totals?.total_items, false)
   const totalPrice = productData?.totals?.total_price
+  const orderTotal =
+    totalPrice && priceFormatter(productData?.totals?.total_price, false)
   // const couponCode = productData?.coupons[0]?.code
   const isCouponAvailable = productData?.coupons?.length
   const couponDiscount = productData?.coupons?.length
@@ -205,7 +211,6 @@ function OrderSummary({ isPostcodeEntered }) {
       }
     }
     fetchData()
-    window.scrollTo(0, 0)
   }, [addOrRemovePromo, isPostcodeEntered])
 
   const handleRemoveCoupon = async () => {
@@ -295,9 +300,9 @@ function OrderSummary({ isPostcodeEntered }) {
                 id="first_name"
                 name="first_name"
                 value={coupon}
-                placeholder="ENTER CODE"
+                placeholder="Enter Code"
                 onChange={handleChange}
-                className="h-[41px] w-full flex-1 appearance-none rounded border bg-textPrimary px-4 py-2 font-sans text-display-1 text-black sm:px-7 dxl:h-[53px] dxl:text-display-6"
+                className="h-[41px] w-full flex-1 appearance-none bg-textPrimary px-4 py-2 font-sans text-display-1 text-footerBg focus:outline-none sm:px-7 dxl:h-[53px] dxl:text-display-6"
               />
               <div className="relative flex h-[41px] w-[110px] cursor-pointer font-sans text-display-4 dxl:h-[53px] dxl:w-[150px] dxl:text-display-17">
                 <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[50px] dxl:w-[147px]"></div>
@@ -332,7 +337,7 @@ function OrderSummary({ isPostcodeEntered }) {
             <p>
               Subtotal ({productData?.items?.length} {itemText})
             </p>
-            <p>{price}.00</p>
+            <p>{subTotal}</p>
           </section>
           <section className="flex items-center justify-between text-display-3 leading-tight dxl:text-display-6">
             <p>Promotion Code</p>
@@ -363,7 +368,7 @@ function OrderSummary({ isPostcodeEntered }) {
         </section>
         <section className="flex h-auto w-full items-center justify-between border-t-[1px] border-orderSummaryBorder pt-[25px] font-sans text-display-16 dxl:text-display-10">
           <p>Order Total</p>
-          <p>{totalPrice}.00</p>
+          <p>{orderTotal}</p>
         </section>
       </section>
       <section
@@ -559,7 +564,7 @@ function YourBasket() {
         <section className="flex h-auto w-full items-center justify-center">
           <Spinner width={50} height={50} />
         </section>
-      ) : !data.items.length || isCartEmpty ? (
+      ) : !data?.items?.length || isCartEmpty ? (
         <div className="flex h-auto w-full items-center justify-center text-display-12">
           Your Cart is Empty
         </div>

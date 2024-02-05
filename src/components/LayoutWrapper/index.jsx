@@ -19,7 +19,9 @@ function LayoutWrapper({ children }) {
   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
 
   const hideHeaderPaths = ['/basket/checkoutPage', '/']
-  const restrictedPath = hideHeaderPaths.includes(asPath)
+  const hideFooterPaths = ['/basket/checkoutPage']
+  const restrictedHeaderPath = hideHeaderPaths.includes(asPath)
+  const restrictedFooterPath = hideFooterPaths.includes(asPath)
 
   useEffect(() => {
     const getData = async () => {
@@ -41,11 +43,14 @@ function LayoutWrapper({ children }) {
   }, [])
 
   useEffect(() => {
-    if (restrictedPath) {
+    if (restrictedHeaderPath) {
       setIsHeaderVisible(false)
-      setIsFooterVisible(false)
     } else {
       setIsHeaderVisible(true)
+    }
+    if (restrictedFooterPath) {
+      setIsFooterVisible(false)
+    } else {
       setIsFooterVisible(true)
     }
   }, [asPath])
