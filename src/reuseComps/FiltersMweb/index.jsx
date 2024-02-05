@@ -1,88 +1,91 @@
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image'
+import { useState } from 'react'
 
 function FiltersMweb() {
-  const [showFilters, setShowFilters] = useState(false);
-  const plusIcon = "/Images/plusIcon.svg";
-  const minusIcon = "/Images/minusIcon.svg";
-  const headerIcon = showFilters ? minusIcon : plusIcon;
-  const [clickedLink, setClickedLink] = useState("");
-  const [linkData, setLinkData] = useState([]);
-  const [accor, setAccor] = useState(false);
+  const [showFilters, setShowFilters] = useState(false)
+  const plusIcon = '/Images/plusIcon.svg'
+  const minusIcon = '/Images/minusIcon.svg'
+  const headerIcon = showFilters ? minusIcon : plusIcon
+  const [clickedLink, setClickedLink] = useState('')
+  const [linkData, setLinkData] = useState([])
+  const [accor, setAccor] = useState(false)
   const data1 = [
-    "Gender",
-    "Model",
+    'Gender',
+    'Model',
     "What's Included",
-    "Condition",
-    "Availability",
-  ];
-  const gender = ["Men's Watches", "Women's Watches", "Unisex Watches"];
-  const model = ["Model", "Model", "Model", "Model", "Model", "Model"];
-  const whatsIncluded = ["Full Set", "Box And Papers", "With Box"];
-  const condition = ["Unworn", "Excellent", "Very Good"];
-  const availability = ["Avaliable", "Reserved", "Coming Soon", "Sold"];
+    'Condition',
+    'Availability',
+  ]
+  const gender = ["Men's Watches", "Women's Watches", 'Unisex Watches']
+  const model = ['Model', 'Model', 'Model', 'Model', 'Model', 'Model']
+  const whatsIncluded = ['Full Set', 'Box And Papers', 'With Box']
+  const condition = ['Unworn', 'Excellent', 'Very Good']
+  const availability = ['Avaliable', 'Reserved', 'Coming Soon', 'Sold']
 
   const handleAcor = (link) => {
-    setAccor(true);
+    setAccor(true)
     switch (link) {
-      case "Gender":
-        setClickedLink(link);
-        setLinkData(gender);
-        break;
-      case "Model":
-        setClickedLink(link);
-        setLinkData(model);
-        break;
+      case 'Gender':
+        setClickedLink(link)
+        setLinkData(gender)
+        break
+      case 'Model':
+        setClickedLink(link)
+        setLinkData(model)
+        break
       case "What's Included":
-        setClickedLink(link);
-        setLinkData(whatsIncluded);
-        break;
-      case "Condition":
-        setClickedLink(link);
-        setLinkData(condition);
-        break;
-      case "Availability":
-        setClickedLink(link);
-        setLinkData(availability);
-        break;
+        setClickedLink(link)
+        setLinkData(whatsIncluded)
+        break
+      case 'Condition':
+        setClickedLink(link)
+        setLinkData(condition)
+        break
+      case 'Availability':
+        setClickedLink(link)
+        setLinkData(availability)
+        break
       default:
-        return "";
+        return ''
     }
-  };
+  }
 
   const handleClose = (link) => {
-    setAccor(false);
-  };
+    setAccor(false)
+  }
 
   const handleFilterWindow = () => {
-    setShowFilters(!showFilters);
-  };
+    setShowFilters(!showFilters)
+  }
 
   return (
-    <div className="w-full h-auto flex flex-col gap-4 justify-center items-center">
+    <div className="flex h-auto w-full flex-col items-center justify-center gap-4">
       <div className="flex gap-2 bg-search p-3" onClick={handleFilterWindow}>
         <Image src={headerIcon} width={16} height={16} alt="plusIcon" />
         <div className="text-display-11">Filter By Category</div>
       </div>
       {showFilters && (
-        <div className="w-full h-auto text-black flex items-center flex-col gap-[60px]">
-          <div className="flex flex-col items-center justify-center w-full h-auto">
+        <div className="flex h-auto w-full flex-col items-center gap-[60px] text-black">
+          <div className="flex h-auto w-full flex-col items-center justify-center">
             {data1.map((link, index) => {
               return (
                 <div key={index} className="flex flex-col items-center">
                   <div
-                    className="flex gap-2 justify-center items-center"
+                    className="flex items-center justify-center gap-2"
                     key={index}
                   >
                     <div className="text-display-9 tracking-normal">{link}</div>
                     {accor && link === clickedLink ? (
-                      <div onClick={handleClose} className="text-[25px] mb-[3px]">
+                      <div
+                        onClick={handleClose}
+                        className="mb-[3px] text-[25px]"
+                      >
                         -
                       </div>
                     ) : (
                       <div
                         onClick={() => handleAcor(link)}
-                        className="text-[25px] mb-[3px]"
+                        className="mb-[3px] text-[25px]"
                       >
                         +
                       </div>
@@ -93,26 +96,36 @@ function FiltersMweb() {
                       link === clickedLink &&
                       linkData.map((e, index) => {
                         return (
-                          <div key={index} className="flex items-center justify-start space-x-4">
-                            <label className="flex justify-center items-center gap-[18px]">
+                          <div
+                            key={index}
+                            className="flex items-center justify-start space-x-4"
+                          >
+                            <label className="flex items-center justify-center gap-[18px]">
                               <input
                                 type="checkbox"
-                                className="w-3 h-3 xl:w-5 xl:h-5"
+                                className="h-3 w-3 xl:h-5 xl:w-5"
                               />
                               <p className="text-display-6">{e}</p>
                             </label>
                           </div>
-                        );
+                        )
                       })}
                   </div>
                 </div>
-              );
+              )
             })}
           </div>
         </div>
       )}
-      {showFilters && <div className="bg-black text-textPrimary font-sans p-2 text-display-3" onClick={handleFilterWindow}>Apply Filters</div>}
+      {showFilters && (
+        <div
+          className="bg-black p-2 font-sans text-display-3 text-textPrimary"
+          onClick={handleFilterWindow}
+        >
+          Apply Filters
+        </div>
+      )}
     </div>
-  );
+  )
 }
-export default FiltersMweb;
+export default FiltersMweb
