@@ -6,52 +6,69 @@ function FiltersMweb() {
   const plusIcon = '/Images/plusIcon.svg'
   const minusIcon = '/Images/minusIcon.svg'
   const headerIcon = showFilters ? minusIcon : plusIcon
+  const [selectedFilter, setSelectedFilter] = useState([])
   const [clickedLink, setClickedLink] = useState('')
   const [linkData, setLinkData] = useState([])
   const [accor, setAccor] = useState(false)
   const data1 = [
-    'Gender',
-    'Model',
-    "What's Included",
-    'Condition',
-    'Availability',
+    {
+      filter: 'Gender',
+      data: ["Men's Watches", "Women's Watches", 'Unisex Watches'],
+    },
+    {
+      filter: 'Model',
+      data: ['Model', 'Model', 'Model', 'Model', 'Model', 'Model'],
+    },
+    {
+      filter: "What's Included",
+      data: ['Full Set', 'Box And Papers', 'With Box'],
+    },
+    { filter: 'Condition', data: ['Unworn', 'Excellent', 'Very Good'] },
+    {
+      filter: 'Availability',
+      data: ['Avaliable', 'Reserved', 'Coming Soon', 'Sold'],
+    },
   ]
-  const gender = ["Men's Watches", "Women's Watches", 'Unisex Watches']
-  const model = ['Model', 'Model', 'Model', 'Model', 'Model', 'Model']
-  const whatsIncluded = ['Full Set', 'Box And Papers', 'With Box']
-  const condition = ['Unworn', 'Excellent', 'Very Good']
-  const availability = ['Avaliable', 'Reserved', 'Coming Soon', 'Sold']
+  // const gender = ["Men's Watches", "Women's Watches", 'Unisex Watches']
+  // const model =
+  // const whatsIncluded = ['Full Set', 'Box And Papers', 'With Box']
+  // const condition = ['Unworn', 'Excellent', 'Very Good']
+  // const availability = ['Avaliable', 'Reserved', 'Coming Soon', 'Sold']
 
   const handleAcor = (link) => {
-    setAccor(true)
-    switch (link) {
-      case 'Gender':
-        setClickedLink(link)
-        setLinkData(gender)
-        break
-      case 'Model':
-        setClickedLink(link)
-        setLinkData(model)
-        break
-      case "What's Included":
-        setClickedLink(link)
-        setLinkData(whatsIncluded)
-        break
-      case 'Condition':
-        setClickedLink(link)
-        setLinkData(condition)
-        break
-      case 'Availability':
-        setClickedLink(link)
-        setLinkData(availability)
-        break
-      default:
-        return ''
-    }
+    setSelectedFilter((prev) => [...prev, link?.filter])
+    // setAccor(true)
+    // switch (link) {
+    //   case 'Gender':
+    //     setClickedLink(link)
+    //     setLinkData(gender)
+    //     break
+    //   case 'Model':
+    //     setClickedLink(link)
+    //     setLinkData(model)
+    //     break
+    //   case "What's Included":
+    //     setClickedLink(link)
+    //     setLinkData(whatsIncluded)
+    //     break
+    //   case 'Condition':
+    //     setClickedLink(link)
+    //     setLinkData(condition)
+    //     break
+    //   case 'Availability':
+    //     setClickedLink(link)
+    //     setLinkData(availability)
+    //     break
+    //   default:
+    //     return ''
+    // }
   }
 
   const handleClose = (link) => {
-    setAccor(false)
+    const closeFilter = selectedFilter.filter((e) => {
+      return e !== link?.filter
+    })
+    setSelectedFilter(closeFilter)
   }
 
   const handleFilterWindow = () => {
@@ -74,10 +91,14 @@ function FiltersMweb() {
                     className="flex items-center justify-center gap-2"
                     key={index}
                   >
-                    <div className="text-display-9 tracking-normal">{link}</div>
-                    {accor && link === clickedLink ? (
+                    <div className="text-display-9 tracking-normal">
+                      {link?.filter}
+                    </div>
+                    {selectedFilter.includes(link?.filter) ? (
                       <div
-                        onClick={handleClose}
+                        onClick={() => {
+                          handleClose(link)
+                        }}
                         className="mb-[3px] text-[25px]"
                       >
                         -
@@ -92,9 +113,8 @@ function FiltersMweb() {
                     )}
                   </div>
                   <div className="flex flex-col items-start justify-center gap-[6px]">
-                    {accor &&
-                      link === clickedLink &&
-                      linkData.map((e, index) => {
+                    {selectedFilter.includes(link?.filter) &&
+                      link?.data.map((e, index) => {
                         return (
                           <div
                             key={index}
