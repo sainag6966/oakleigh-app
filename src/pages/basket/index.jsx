@@ -24,7 +24,7 @@ function BasketHead() {
         <section
           className="relative flex h-[42px] w-full font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
           onClick={() => {
-            router.push('/basket/checkoutPage')
+            router.push('/basket/checkout')
           }}
         >
           <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />

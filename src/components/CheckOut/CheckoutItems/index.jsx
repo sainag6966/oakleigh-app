@@ -49,7 +49,7 @@ function CheckoutItems() {
         <section className="flex items-center justify-between text-display-5 leading-tight dxl:text-display-16">
           <p>
             {/* Subtotal ({productData?.items?.length} {itemText}) */}
-            Subtotal
+            Subtotal (1 Item)
           </p>
           {/* <p>{price}.00</p> */}
           <p>.00</p>

@@ -18,8 +18,8 @@ function LayoutWrapper({ children }) {
   const username = 'oakleighcdadevel'
   const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
 
-  const hideHeaderPaths = ['/basket/checkoutPage', '/']
-  const hideFooterPaths = ['/basket/checkoutPage']
+  const hideHeaderPaths = ['/basket/checkout', '/', '/basket/checkout/shipping']
+  const hideFooterPaths = ['/basket/checkout', '/basket/checkout/shipping']
   const restrictedHeaderPath = hideHeaderPaths.includes(asPath)
   const restrictedFooterPath = hideFooterPaths.includes(asPath)
 
