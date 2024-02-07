@@ -1,9 +1,18 @@
-import CountrySelector from '@/reuseComps/CountrySelector'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import CountrySelector from '@/reuseComps/CountrySelector'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
-function ShippingAddress({ address }) {
+function ShippingAddress({ address, basketData }) {
   const [countryCode, setCountryCode] = useState('')
+  const [firstNameError, setFirstNameError] = useState('')
+  const [lastNameError, setLastNameError] = useState('')
+  const [addressError, setAddressError] = useState('')
+  const [cityError, setCityError] = useState('')
+  const [postCodeError, setPostCodeError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+  const selectedCountry = basketData?.shipping_address?.country
   // const [formData, setFormData] = useState({
   //   first_name: '',
   //   last_name: '',
@@ -15,93 +24,212 @@ function ShippingAddress({ address }) {
   // })
   const [formData, setFormData] = useState({})
   const leftIcon = '/Images/leftArrow.svg'
+
   useEffect(() => {
     setFormData(address)
   }, [address])
+
   const handleChange = (e) => {
+    e.preventDefault
+    const { name, value, type, checked } = e.target
+    if (name === 'first_name') {
+      if (!value) {
+        setFirstNameError('First name is required')
+      } else if (!/^[a-zA-Z]+$/.test(value)) {
+        setFirstNameError('Please enter only alphabets')
+      } else {
+        setFirstNameError('')
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+    if (name === 'last_name') {
+      if (!value) {
+        setLastNameError('Last name is required')
+      } else if (!/^[a-zA-Z]+$/.test(value)) {
+        setLastNameError('Please enter only alphabets')
+      } else {
+        setLastNameError('')
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+    if (name === 'address_1') {
+      if (!value) {
+        setAddressError('Address is required')
+      } else {
+        setAddressError('')
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+    if (name === 'address_2') {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+    if (name === 'city') {
+      if (!value) {
+        setCityError('City info required')
+      } else if (!/^[a-zA-Z]+$/.test(value)) {
+        setCityError('Please enter only alphabets')
+      } else {
+        setCityError('')
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+    if (name === 'postcode') {
+      if (!value) {
+        setPostCodeError('Postcode is required')
+      } else {
+        setPostCodeError('')
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+    if (name === 'phone') {
+      if (!value) {
+        setPhoneError('Phone Number is required')
+      } else if (!/^[0-9]+$/.test(value)) {
+        setPhoneError('Please enter only Numbers')
+      } else {
+        setPhoneError('')
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault
   }
 
   return (
     <section className="flex w-full flex-col gap-4 dxl:mt-[30px] dxl:gap-5">
       <p className="text-display-11 dxl:text-display-12">Shipping Address</p>
-      <section className="w-full dxl:mt-[5px]">
-        <CountrySelector setCountryCode={setCountryCode} selectedCountry={''} />
-      </section>
       <section className="h-auto w-full">
-        <form className="flex w-full flex-col gap-3 font-sans lg:gap-5">
-          <section className="flex h-auto w-full flex-col gap-3 sm:flex-row lg:gap-5">
-            <input
-              type="text"
-              id="first_name"
-              name="first_name"
-              value={formData?.first_name || ''}
-              placeholder="First Name*"
-              onChange={handleChange}
-              className="selection: h-[40px] w-full appearance-none bg-search  px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
-            />
-            <input
-              type="text"
-              id="last_name"
-              name="last_name"
-              value={formData?.last_name || ''}
-              placeholder="Last Name*"
-              onChange={handleChange}
-              className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+        <form
+          className="flex w-full flex-col gap-3 font-sans lg:gap-5"
+          onSubmit={handleSubmit}
+        >
+          <section className="w-full dxl:mt-[5px]">
+            <CountrySelector
+              setCountryCode={setCountryCode}
+              selectedCountry={selectedCountry}
             />
           </section>
-          <section>
+          <section className="flex h-auto w-full flex-col gap-3 sm:flex-row lg:gap-5">
+            <section className="h-auto flex-1">
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={formData?.first_name || ''}
+                placeholder="First Name*"
+                onChange={handleChange}
+                className="selection: h-[40px] w-full appearance-none bg-search  px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+              />
+              {firstNameError && (
+                <p className="mt-1 text-sm text-red-500">{firstNameError}</p>
+              )}
+            </section>
+            <section className="h-auto flex-1">
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                value={formData?.last_name || ''}
+                placeholder="Last Name*"
+                onChange={handleChange}
+                className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+              />
+              {lastNameError && (
+                <p className="mt-1 text-sm text-red-500">{lastNameError}</p>
+              )}
+            </section>
+          </section>
+          <section className="h-auto">
             <input
               type="text"
               id="address"
-              name="address"
-              value={formData?.last_name || ''}
+              name="address_1"
+              value={formData?.address_1 || ''}
               placeholder="Address*"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
             />
+            {addressError && (
+              <p className="mt-1 text-sm text-red-500">{addressError}</p>
+            )}
           </section>
           <section>
             <input
               type="text"
-              id="apartment"
-              name="apartment"
-              value={formData?.last_name || ''}
+              id="address_2"
+              name="address_2"
+              value={formData?.address_2 || ''}
               placeholder="Apartment, Suite, Etc.(Optional)"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
             />
           </section>
           <section className="flex h-auto w-full flex-col gap-3 sm:flex-row lg:gap-5">
-            <input
-              type="text"
-              id="city"
-              name="city"
-              value={formData?.last_name || ''}
-              placeholder="City"
-              onChange={handleChange}
-              className="h-[40px] w-full appearance-none bg-search px-3 py-2  text-display-3 leading-tight focus:shadow dxl:h-[50px] dxl:text-display-6"
-            />
-            <input
-              type="text"
-              id="post_code"
-              name="post_code"
-              value={formData?.last_name || ''}
-              placeholder="Postcode*"
-              onChange={handleChange}
-              className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
-            />
+            <section className="h-auto flex-1">
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={formData?.city || ''}
+                placeholder="City*"
+                onChange={handleChange}
+                className="h-[40px] w-full appearance-none bg-search px-3 py-2  text-display-3 leading-tight focus:shadow dxl:h-[50px] dxl:text-display-6"
+              />
+              {cityError && (
+                <p className="mt-1 text-sm text-red-500">{cityError}</p>
+              )}
+            </section>
+            <section className="h-auto flex-1">
+              <input
+                type="text"
+                id="post_code"
+                name="postcode"
+                value={formData?.postcode || ''}
+                placeholder="Postcode*"
+                onChange={handleChange}
+                className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+              />
+              {postCodeError && (
+                <p className="mt-1 text-sm text-red-500">{postCodeError}</p>
+              )}
+            </section>
           </section>
           <section>
             <input
               type="text"
               id="phone"
               name="phone"
-              value={formData?.last_name || ''}
+              value={formData?.phone || ''}
               placeholder="Phone*"
               onChange={handleChange}
               className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
             />
+            {phoneError && (
+              <p className="mt-1 text-sm text-red-500">{phoneError}</p>
+            )}
           </section>
         </form>
       </section>
@@ -110,12 +238,15 @@ function ShippingAddress({ address }) {
           <section className="h-3 w-3 dxl:mt-[3px] dxl:h-4 dxl:w-4">
             <ProgressiveImageComp src={leftIcon} alt="left" />
           </section>
-          <p className="font-sans text-display-4 dxl:text-display-17">
-            <u>Return To Basket</u>
-          </p>
+          <Link href="/basket">
+            <p className="font-sans text-display-4 dxl:text-display-17">
+              <u>Return To Basket</u>
+            </p>
+          </Link>
         </section>
         <section
           className="relative mt-1 flex h-[42px] w-full flex-1 font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
+          role="button"
           onClick={() => {
             router.push('/basket/checkoutPage')
           }}
@@ -123,8 +254,8 @@ function ShippingAddress({ address }) {
           <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
           <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />
           <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] dxl:h-[47px]" />
-          <div className="relative flex w-full items-center justify-center text-display-4 text-textPrimary dxl:text-display-17">
-            Checkout Securely
+          <div className="relative flex w-full items-center justify-center text-display-1 text-textPrimary dxl:text-display-17">
+            Continue To Shipping
           </div>
         </section>
       </section>

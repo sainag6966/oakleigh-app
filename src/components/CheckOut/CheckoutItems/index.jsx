@@ -1,26 +1,44 @@
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
+import { priceFormatter } from '@/utils/formatPrice'
 
-function CheckoutItems() {
+function CheckoutItems({ basketData }) {
+  const cartItems = basketData?.items
+  const price = basketData?.totals?.total_items
+  const deliveryValue = priceFormatter(basketData?.totals?.total_shipping, true)
   const imgSrc =
     'https://oakleigh.cda-development3.co.uk/cms/wp-content/uploads/2024/01/1x1-4158.jpg'
+  const subTotal =
+    price && priceFormatter(basketData?.totals?.total_items, true)
+  const totalPrice = basketData?.totals?.total_price
+  const orderTotal =
+    totalPrice && priceFormatter(basketData?.totals?.total_price, true)
 
   return (
-    <section className="flex h-auto w-full flex-col gap-5 p-5 font-sans sm:p-8 lg:p-8 dxl:pl-[75px] dxl:pr-[140px]">
-      <section className="flex items-center justify-between">
-        <section className="flex h-auto w-full items-center gap-2 sm:gap-4 lg:gap-2 dxl:gap-5">
-          <figure
-            // key={index}
-            className="aspect-[3/4] max-h-[100px] min-w-[80px] max-w-[80px] xl:max-w-[138px] dxl:max-h-[135px] dxl:min-w-[113px]"
-          >
-            <ProgressiveImageComp src={imgSrc} alt={'productImage'} />
-          </figure>
-          <p className="font-cormorant text-display-1 leading-normal sm:text-display-4 dxl:text-display-9">
-            Zenith Defy EL Primero 21
-          </p>
-        </section>
-        <section className="text-display-extra dxl:text-display-16">
-          £13,000.00
-        </section>
+    <section className="flex h-auto w-full flex-col gap-5 p-5 font-sans sm:p-8 lg:p-8 dxl:pl-[75px] dxl:pr-[120px]">
+      <section className="flex h-auto w-full flex-col gap-3">
+        {cartItems?.map((e) => {
+          return (
+            <section className="flex items-center justify-between">
+              <section className="flex h-auto w-full items-center gap-2 sm:gap-4 lg:gap-2 dxl:gap-5">
+                <figure
+                  // key={index}
+                  className="aspect-[3/4] max-h-[100px] min-w-[80px] max-w-[80px] xl:max-w-[138px] dxl:max-h-[135px] dxl:min-w-[113px]"
+                >
+                  <ProgressiveImageComp
+                    src={e?.images[1]?.src}
+                    alt={'productImage'}
+                  />
+                </figure>
+                <p className="font-cormorant text-display-1 leading-normal sm:text-display-4 dxl:text-display-9">
+                  {e?.name}
+                </p>
+              </section>
+              <section className="text-display-extra dxl:text-display-16">
+                {priceFormatter(e?.prices?.price, true)}
+              </section>
+            </section>
+          )
+        })}
       </section>
       <section>
         <form className="flex h-auto w-full gap-5">
@@ -49,20 +67,20 @@ function CheckoutItems() {
         <section className="flex items-center justify-between text-display-5 leading-tight dxl:text-display-16">
           <p>
             {/* Subtotal ({productData?.items?.length} {itemText}) */}
-            Subtotal (1 Item)
+            Subtotal ({cartItems?.length} Item)
           </p>
           {/* <p>{price}.00</p> */}
-          <p>.00</p>
+          <p>{subTotal}</p>
         </section>
         <section className="flex items-center justify-between text-display-3 leading-tight dxl:text-display-6">
           <p>Delivery</p>
           {/* <p>£{deliveryRate}.00</p> */}
-          <p>£00</p>
+          {deliveryValue ? deliveryValue : <p>Calculated at next step</p>}
         </section>
         <section className="flex h-auto w-full items-center justify-between font-sans text-display-16 leading-tight dxl:text-display-10">
           <p>Order Total</p>
           {/* <p>{totalPrice}.00</p> */}
-          <p>.00</p>
+          <p>{orderTotal}</p>
         </section>
       </section>
     </section>

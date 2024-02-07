@@ -77,7 +77,12 @@ function BasketDrawer({
             <p className="text-display-17 font-semibold">£ {productPrice}</p>
           </div>
           <div className="flex flex-col gap-[20px] pb-[176px] pt-[32px] font-sans lg:gap-[30px] dxl:pt-[50px]">
-            <div className="relative flex h-[53px] w-full">
+            <div
+              className="relative flex h-[53px] w-full"
+              onClick={() => {
+                router.push('/basket/checkout')
+              }}
+            >
               <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
               <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />
               <div className="lg:left-[0.5%]left-[1%] absolute bottom-[3px] right-[1%] h-[47px] w-[98%] border-b-[0.5px] border-l-[0.5px] border-textPrimary lg:right-[0.5%] lg:w-[99%]" />

@@ -19,7 +19,7 @@ function TwoAdBlock({ trayData }) {
               objectFit="cover"
               quality={100}
               style={{ objectPosition: 'center' }}
-              className="mix-blend-overlay"
+              // className="mix-blend-overlay"
             />
             <div
               className="absolute bottom-6 flex w-full flex-col items-center gap-2 text-textPrimary"

@@ -10,6 +10,7 @@ import Toast from '@/reuseComps/ToastMessage'
 import PaymentModes from '@/components/CheckOut/PaymentModes'
 import { useStripe } from '@stripe/react-stripe-js'
 import CheckoutItems from '@/components/CheckOut/CheckoutItems'
+import LoginDropdown from '@/components/LoginDropdown'
 
 function CheckoutPage() {
   const stripe = useStripe()
@@ -17,10 +18,12 @@ function CheckoutPage() {
   const [stripeData, setStripeData] = useState({})
   const [orderData, setOrderData] = useState({})
   const [showToast, setShowToast] = useState(false)
+  const [basketData, setBasketData] = useState([])
   const [paymentCompleted, setPaymentCompleted] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [openLoginModal, setOpenLoginModal] = useState(false)
   const oakleighLogo = '/Images/oakleighLogo.svg'
-  const shippingAddress = orderData?.shipping_address
+  const shippingAddress = basketData?.shipping_address
 
   const ownerObj = {
     billing_address: {
@@ -211,13 +214,63 @@ function CheckoutPage() {
     }
   }
 
+  const handleSuccessfulLogin = () => {
+    setOpenLoginModal(!openLoginModal)
+    document.body.classList.remove('no-scroll')
+  }
+
+  const handleCreateAcc = () => {
+    router.push('/sign-up').then(() => {
+      setOpenLoginModal(!openLoginModal)
+      document.body.classList.remove('no-scroll')
+    })
+  }
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const nonce = localStorage.getItem('nonce')
+  //     const loginToken = localStorage.getItem('loginToken')
+  //     const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+
+  //     // Check if loginToken is available
+  //     if (loginToken) {
+  //       headers['Authorization'] = `Bearer ${loginToken}`
+  //     }
+  //     try {
+  //       // setLoading(true)
+  //       // const username = 'lejac53041@tanlanav.com'
+  //       // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
+  //       const response = await fetch(
+  //         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/checkout',
+  //         {
+  //           method: 'get',
+  //           headers,
+  //           credentials: 'include',
+  //         },
+  //       )
+  //       const responseData = await response.json()
+  //       if (responseData) {
+  //         // setOrderData(responseData)
+  //         // setData(responseData)
+  //         // setLoading(false)
+  //       }
+  //       if (!responseData.ok) {
+  //         // Handle non-successful responses (e.g., 404, 500)
+  //         console.error(`API request failed with status ${response.status}`)
+  //       }
+  //     } catch (error) {
+  //       // setLoading(false)
+  //     }
+  //   }
+  //   fetchData()
+  // }, [])
+
   useEffect(() => {
     const fetchData = async () => {
       const nonce = localStorage.getItem('nonce')
       const loginToken = localStorage.getItem('loginToken')
       const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
 
-      // Check if loginToken is available
       if (loginToken) {
         headers['Authorization'] = `Bearer ${loginToken}`
       }
@@ -226,7 +279,7 @@ function CheckoutPage() {
         // const username = 'lejac53041@tanlanav.com'
         // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
         const response = await fetch(
-          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/checkout',
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart',
           {
             method: 'get',
             headers,
@@ -235,13 +288,8 @@ function CheckoutPage() {
         )
         const responseData = await response.json()
         if (responseData) {
-          setOrderData(responseData)
-          // setData(responseData)
           // setLoading(false)
-        }
-        if (!responseData.ok) {
-          // Handle non-successful responses (e.g., 404, 500)
-          console.error(`API request failed with status ${response.status}`)
+          setBasketData(responseData)
         }
       } catch (error) {
         // setLoading(false)
@@ -265,7 +313,7 @@ function CheckoutPage() {
       </section>
       <section className="flex h-auto w-full flex-col gap-4 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
         <section className="self-stretch bg-search lg:order-2 lg:flex-1">
-          <CheckoutItems />
+          <CheckoutItems basketData={basketData} />
         </section>
         <section className="flex flex-col gap-6 lg:order-1 lg:flex-1">
           <ExpressCheckout />
@@ -274,10 +322,16 @@ function CheckoutPage() {
             <p className="text-display-3">OR</p>
             <hr className="w-full text-orderSummaryBorder" />
           </section>
-          <CheckoutLogin />
-          <ShippingAddress address={shippingAddress} />
+          <CheckoutLogin setOpenLoginModal={setOpenLoginModal} />
+          <ShippingAddress address={shippingAddress} basketData={basketData} />
         </section>
       </section>
+      {openLoginModal && (
+        <LoginDropdown
+          handleSuccessfulLogin={handleSuccessfulLogin}
+          handleCreateAcc={handleCreateAcc}
+        />
+      )}
       {/* <PaymentModes getStripeResponse={getStripeResponse} />
       <button
         className="border-[1px] bg-orange-500 p-2"

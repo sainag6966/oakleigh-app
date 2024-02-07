@@ -20,7 +20,7 @@ function BasketHead() {
       <section className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15">
         YOUR BASKET
       </section>
-      <section className="flex h-auto w-full flex-1 justify-end">
+      <section className="flex h-auto w-full flex-1 justify-end" role="button">
         <section
           className="relative flex h-[42px] w-full font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
           onClick={() => {
@@ -117,7 +117,7 @@ function ProductDetail({ productData, setIsCartEmpty }) {
                 </p>
                 <p className="relative font-sans text-display-16">
                   {item?.prices?.regular_price &&
-                    priceFormatter(item?.prices?.regular_price, true)}
+                    priceFormatter(item?.prices?.regular_price, false)}
                   {isLargeScreen && index === 0 && (
                     <p className="absolute left-0 top-[-160px] text-display-17">
                       Total
@@ -169,10 +169,10 @@ function OrderSummary({ isPostcodeEntered }) {
   const itemText = productData?.items?.length === 1 ? 'item' : 'items'
   const price = productData?.totals?.total_items
   const subTotal =
-    price && priceFormatter(productData?.totals?.total_items, false)
+    price && priceFormatter(productData?.totals?.total_items, true)
   const totalPrice = productData?.totals?.total_price
   const orderTotal =
-    totalPrice && priceFormatter(productData?.totals?.total_price, false)
+    totalPrice && priceFormatter(productData?.totals?.total_price, true)
   // const couponCode = productData?.coupons[0]?.code
   const isCouponAvailable = productData?.coupons?.length
   const couponDiscount = productData?.coupons?.length
