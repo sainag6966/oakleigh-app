@@ -3,10 +3,18 @@ import CheckBox from '@/reuseComps/CheckBox'
 import { isLoggedIn } from '@/utils/auth'
 import LoginDropdown from '@/components/LoginDropdown'
 
-function CheckoutLogin({ setOpenLoginModal }) {
-  const [email, setEmail] = useState('')
-  const [emailError, setEmailError] = useState('')
+function CheckoutLogin({
+  setOpenLoginModal,
+  setEmail,
+  setEmailError,
+  email,
+  emailError,
+  basketData,
+}) {
+  // const [email, setEmail] = useState('')
+  // const [emailError, setEmailError] = useState('')
   const [isChecked, setIsChecked] = useState(false)
+  const initialEmail = basketData?.billing_address?.email
   const isUserLoggedIn = isLoggedIn()
 
   const handleChange = (e) => {
@@ -50,7 +58,7 @@ function CheckoutLogin({ setOpenLoginModal }) {
             type="text"
             id="first_name"
             name="first_name"
-            value={email}
+            value={initialEmail ? initialEmail : email}
             placeholder="Email Address*"
             onChange={handleChange}
             className="h-[41px] w-full flex-1 appearance-none border bg-search px-7 py-2 font-sans text-display-3 text-footerBg dxl:h-[50px] dxl:text-display-6"

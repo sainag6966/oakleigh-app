@@ -1,12 +1,48 @@
+import { useEffect, useState } from 'react'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import Breadcrumbs from '@/components/BreadCrumbs'
 import CheckoutItems from '@/components/CheckOut/CheckoutItems'
 import ShippingPage from '@/components/CheckOut/ShippingPage'
 import CheckBox from '@/reuseComps/CheckBox'
+import Link from 'next/link'
 
 function Shipping() {
+  const [basketData, setBasketData] = useState([])
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const leftIcon = '/Images/leftArrow.svg'
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const nonce = localStorage.getItem('nonce')
+      const loginToken = localStorage.getItem('loginToken')
+      const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
+      try {
+        // setLoading(true)
+        // const username = 'lejac53041@tanlanav.com'
+        // const password = 'GPYM l0x4 kojE iW1e 2JhR Enj2'
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart',
+          {
+            method: 'get',
+            headers,
+            credentials: 'include',
+          },
+        )
+        const responseData = await response.json()
+        if (responseData) {
+          // setLoading(false)
+          setBasketData(responseData)
+        }
+      } catch (error) {
+        // setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 py-[34px] lg:gap-8 lg:px-12 lg:pb-0 lg:pt-[50px] xl:px-16 dxl:px-[143px]">
@@ -23,10 +59,10 @@ function Shipping() {
       </section>
       <section className="flex h-auto w-full flex-col gap-8 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
         <section className="self-stretch bg-search lg:order-2 lg:flex-1">
-          <CheckoutItems />
+          <CheckoutItems basketData={basketData} />
         </section>
         <section className="flex flex-col gap-4 lg:flex-1 lg:pb-64 dxl:gap-[50px]">
-          <ShippingPage />
+          <ShippingPage basketData={basketData} />
           <section className="flex w-full flex-col gap-4 font-sans dxl:gap-[25px]">
             <p className="font-cormorant text-display-11 dxl:text-display-12">
               Shipping Method
@@ -50,9 +86,11 @@ function Shipping() {
                 <section className="h-3 w-3 dxl:mt-[3px] dxl:h-4 dxl:w-4">
                   <ProgressiveImageComp src={leftIcon} alt="left" />
                 </section>
-                <p className="font-sans text-display-4 leading-4 dxl:text-display-17">
-                  <u>Return To Contact Information</u>
-                </p>
+                <Link href={'/basket/checkout'}>
+                  <p className="font-sans text-display-4 leading-4 dxl:text-display-17">
+                    <u>Return To Contact Information</u>
+                  </p>
+                </Link>
               </section>
               <section
                 className="relative mt-1 flex h-[42px] w-full flex-1 font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"

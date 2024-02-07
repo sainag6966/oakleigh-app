@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Toast from '@/reuseComps/ToastMessage'
 import Link from 'next/link'
 import CountrySelector from '@/reuseComps/CountrySelector'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
-function ShippingAddress({ address, basketData }) {
+function ShippingAddress({ address, basketData, email, emailError }) {
+  const router = useRouter()
   const [countryCode, setCountryCode] = useState('')
   const [firstNameError, setFirstNameError] = useState('')
   const [lastNameError, setLastNameError] = useState('')
@@ -12,6 +14,9 @@ function ShippingAddress({ address, basketData }) {
   const [cityError, setCityError] = useState('')
   const [postCodeError, setPostCodeError] = useState('')
   const [phoneError, setPhoneError] = useState('')
+  const [formError, setFormError] = useState('')
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
   const selectedCountry = basketData?.shipping_address?.country
   // const [formData, setFormData] = useState({
   //   first_name: '',
@@ -114,18 +119,87 @@ function ShippingAddress({ address, basketData }) {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleContinueShiping = async (e) => {
     e.preventDefault
+    if (
+      !formData?.first_name ||
+      !formData?.last_name ||
+      !formData?.address_1 ||
+      !formData?.city ||
+      !formData?.postcode ||
+      !formData?.phone
+    ) {
+      setShowToast(true)
+      setToastMessage('Please fill all the requied fields marked as *')
+      return
+    }
+    if (emailError || !email) {
+      setShowToast(true)
+      setToastMessage('Please fill the Email address')
+    }
+    const nonce = localStorage.getItem('nonce')
+    const loginToken = localStorage.getItem('loginToken')
+    const headers = { 'Content-Type': 'application/json', Nonce: nonce }
+    const postData = {
+      billing_address: {
+        email: String(email),
+        country: String(countryCode ? countryCode : selectedCountry),
+        postcode: String(formData?.postCode),
+        first_name: String(formData?.first_name),
+        last_name: String(formData?.last_name),
+        address_1: String(formData?.address_1),
+        address_2: String(formData?.address_2),
+        city: String(formData?.city),
+        postcode: String(formData?.postcode),
+        phone: String(formData?.phone),
+      },
+      shipping_address: {
+        country: String(countryCode ? countryCode : selectedCountry),
+        postcode: String(formData?.postCode),
+        first_name: String(formData?.first_name),
+        last_name: String(formData?.last_name),
+        address_1: String(formData?.address_1),
+        address_2: String(formData?.address_2),
+        city: String(formData?.city),
+        postcode: String(formData?.postcode),
+        phone: String(formData?.phone),
+      },
+    }
+    if (loginToken) {
+      headers['Authorization'] = `Bearer ${loginToken}`
+    }
+    try {
+      // setAddingDeliveryInfo(true)
+      const response = await fetch(
+        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/update-customer',
+        {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(postData),
+          credentials: 'include',
+        },
+      )
+      const responseData = await response.json()
+
+      if (responseData) {
+        if (responseData?.data?.status === 400) {
+          // setAddingDeliveryInfo(false)
+          // setShowToast(true)
+          // setToastMessage('Please enter Valid Postcode')
+          return
+        }
+        router.push('/basket/checkout/shipping')
+        // setAddingDeliveryInfo(false)
+        // setIsPostcodeEntered(!isPostcodeEntered)
+      }
+    } catch (error) {}
   }
 
   return (
     <section className="flex w-full flex-col gap-4 dxl:mt-[30px] dxl:gap-5">
       <p className="text-display-11 dxl:text-display-12">Shipping Address</p>
       <section className="h-auto w-full">
-        <form
-          className="flex w-full flex-col gap-3 font-sans lg:gap-5"
-          onSubmit={handleSubmit}
-        >
+        <form className="flex w-full flex-col gap-3 font-sans lg:gap-5">
           <section className="w-full dxl:mt-[5px]">
             <CountrySelector
               setCountryCode={setCountryCode}
@@ -233,6 +307,13 @@ function ShippingAddress({ address, basketData }) {
           </section>
         </form>
       </section>
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          showToast={showToast}
+          setShowToast={setShowToast}
+        />
+      )}
       <section className="flex h-auto w-full items-center justify-between dxl:mt-[10px]">
         <section className="flex flex-1 items-center justify-start gap-[2px]">
           <section className="h-3 w-3 dxl:mt-[3px] dxl:h-4 dxl:w-4">
@@ -247,9 +328,7 @@ function ShippingAddress({ address, basketData }) {
         <section
           className="relative mt-1 flex h-[42px] w-full flex-1 font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
           role="button"
-          onClick={() => {
-            router.push('/basket/checkoutPage')
-          }}
+          onClick={handleContinueShiping}
         >
           <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
           <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />

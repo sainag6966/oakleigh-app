@@ -22,6 +22,8 @@ function CheckoutPage() {
   const [paymentCompleted, setPaymentCompleted] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [openLoginModal, setOpenLoginModal] = useState(false)
+  const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState('')
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const shippingAddress = basketData?.shipping_address
 
@@ -322,8 +324,20 @@ function CheckoutPage() {
             <p className="text-display-3">OR</p>
             <hr className="w-full text-orderSummaryBorder" />
           </section>
-          <CheckoutLogin setOpenLoginModal={setOpenLoginModal} />
-          <ShippingAddress address={shippingAddress} basketData={basketData} />
+          <CheckoutLogin
+            setOpenLoginModal={setOpenLoginModal}
+            setEmail={setEmail}
+            setEmailError={setEmailError}
+            email={email}
+            emailError={emailError}
+            basketData={basketData}
+          />
+          <ShippingAddress
+            address={shippingAddress}
+            basketData={basketData}
+            email={email}
+            emailError={emailError}
+          />
         </section>
       </section>
       {openLoginModal && (

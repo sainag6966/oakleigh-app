@@ -1,10 +1,12 @@
-function ShippingPage() {
-  const shippingDetail = [
-    '42 Wilbury Way',
-    'Hitchin',
-    'Hertfordshire',
-    'SG4 0AP',
-  ]
+import Link from 'next/link'
+
+function ShippingPage({ basketData }) {
+  const emailId = basketData?.billing_address?.email
+  const address1 = basketData?.shipping_address?.address_1
+  const address2 = basketData?.shipping_address?.address_2
+  const city = basketData?.shipping_address?.city
+  const postCode = basketData?.shipping_address?.postcode
+  const shippingDetail = [address1, address2, city, postCode]
   return (
     <section className="h-auto w-full border-[1px] border-orderSummaryBorder p-5 font-sans dxl:p-[30px]">
       <section className="flex items-center justify-between border-b-[1px] border-orderSummaryBorder pb-3 dxl:pb-[30px]">
@@ -12,12 +14,14 @@ function ShippingPage() {
           {' '}
           <p className="text-display-3 dxl:text-display-6">Contact</p>
           <p className="ml-[14px] text-display-extra sm:ml-[22px] sm:text-display-5  sm:leading-5 dxl:text-display-16">
-            test@cda.group
+            {emailId}
           </p>
         </section>
-        <p className="text-display-4 dxl:text-display-17">
-          <u>Change</u>
-        </p>
+        <Link href={'/basket/checkout'}>
+          <p className="text-display-4 dxl:text-display-17">
+            <u>Change</u>
+          </p>
+        </Link>
       </section>
       <section className="flex items-start justify-between gap-2 pt-3 dxl:pb-[30px] dxl:pt-[30px]">
         <section className="flex items-start justify-start dxl:gap-[50px]">
@@ -33,9 +37,11 @@ function ShippingPage() {
             })}
           </section>
         </section>
-        <p className="mt-1 text-display-4 leading-none dxl:text-display-17 dxl:leading-none">
-          <u>Change</u>
-        </p>
+        <Link href={'/basket/checkout'}>
+          <p className="mt-1 text-display-4 leading-none dxl:text-display-17 dxl:leading-none">
+            <u>Change</u>
+          </p>
+        </Link>
       </section>
       <section className="mt-3 flex items-start justify-between gap-2 border-t-[1px] border-orderSummaryBorder pt-3 dxl:pt-[30px]">
         <section className="flex items-start justify-start dxl:gap-[50px]">

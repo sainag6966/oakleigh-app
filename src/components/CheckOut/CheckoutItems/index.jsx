@@ -4,7 +4,9 @@ import { priceFormatter } from '@/utils/formatPrice'
 function CheckoutItems({ basketData }) {
   const cartItems = basketData?.items
   const price = basketData?.totals?.total_items
-  const deliveryValue = priceFormatter(basketData?.totals?.total_shipping, true)
+  const deliveryValue = basketData?.totals?.total_shipping
+  const deliveryFormatVal =
+    deliveryValue && priceFormatter(basketData?.totals?.total_shipping, true)
   const imgSrc =
     'https://oakleigh.cda-development3.co.uk/cms/wp-content/uploads/2024/01/1x1-4158.jpg'
   const subTotal =
@@ -75,7 +77,11 @@ function CheckoutItems({ basketData }) {
         <section className="flex items-center justify-between text-display-3 leading-tight dxl:text-display-6">
           <p>Delivery</p>
           {/* <p>£{deliveryRate}.00</p> */}
-          {deliveryValue ? deliveryValue : <p>Calculated at next step</p>}
+          {deliveryFormatVal ? (
+            deliveryFormatVal
+          ) : (
+            <p>Calculated at next step</p>
+          )}
         </section>
         <section className="flex h-auto w-full items-center justify-between font-sans text-display-16 leading-tight dxl:text-display-10">
           <p>Order Total</p>
