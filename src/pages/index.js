@@ -54,7 +54,7 @@ export default function Home({ data, headerData }) {
   return (
     <main className="h-auto w-full">
       <Header data={headerData} isHeaderVisible={true} />
-      <TrustBox />
+      {/* <TrustBox /> */}
       {trayData ? (
         trayData.map((tray) => {
           return getTrays(tray)

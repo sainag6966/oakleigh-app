@@ -104,8 +104,9 @@ function HeaderDweb({ data }) {
   }
 
   const handleSuccessfulLogin = () => {
-    setOpenLoginModal(!openLoginModal)
     document.body.classList.remove('no-scroll')
+    router.push('/profile-page')
+    setOpenLoginModal(!openLoginModal)
   }
 
   const handleCreateAcc = () => {

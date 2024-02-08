@@ -24,8 +24,9 @@ function HeaderMweb({ data }) {
 
   const handleSuccessfulLogin = () => {
     document.body.classList.remove('no-scroll')
-    setOpenLoginModal(!openLoginModal)
     closeDrawer()
+    router.push('/profile-page')
+    setOpenLoginModal(!openLoginModal)
   }
 
   const handleLoginModal = () => {

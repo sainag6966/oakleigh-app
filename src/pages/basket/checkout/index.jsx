@@ -268,13 +268,13 @@ function CheckoutPage() {
       }
     }
     fetchData()
-  }, [])
+  }, [openLoginModal])
 
   return (
     <>
       <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 py-[34px] lg:gap-8 lg:px-12 lg:py-[50px] xl:px-16 dxl:px-[143px] dxl:pb-[150px]">
         <figure
-          className="max-h-[34px] max-w-[180px] dxl:min-h-[60px] dxl:min-w-[304px]"
+          className="max-h-[34px] max-w-[180px] cursor-pointer dxl:min-h-[60px] dxl:min-w-[304px]"
           onClick={() => {
             router.push('/')
           }}

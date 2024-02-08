@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { getNonce } from '@/utils/nonce'
 import { useMediaQuery } from 'react-responsive'
+import Spinner from '@/reuseComps/Spinner'
 
 function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
     password: '',
   })
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
   const router = useRouter()
 
   const handleChange = (e) => {
@@ -22,6 +24,7 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
+      setIsLoggingIn(true)
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/jwt-auth/v1/token',
         {
@@ -37,8 +40,9 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
         const responseData = await response.json() // Parse the response body as JSON
         const token = responseData.token
         if (token) {
+          setIsLoggingIn(false)
           localStorage.setItem('loginToken', token)
-          router.push('/profile-page')
+          // router.push('/profile-page')
           handleSuccessfulLogin()
           getNonce()
         }
@@ -52,7 +56,7 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
   }
 
   return (
-    <div className="absolute z-[1] h-full w-full overflow-y-scroll border-t-[1px] border-colorBlack bg-colorBlack bg-opacity-75">
+    <div className="fixed z-[1] h-full w-full overflow-y-scroll border-t-[1px] border-colorBlack bg-colorBlack bg-opacity-75">
       <div className="absolute top-0 z-[2] flex h-auto w-full flex-col items-start justify-between gap-4 bg-textPrimary px-6 pb-[100px] pt-[50px] text-footerBg sm:px-[50px] lg:flex-row lg:pb-[50px] xl:gap-8 xl:px-[80px] dxl:px-[140px]">
         {!isDesktop && (
           <p
@@ -117,6 +121,12 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
                 <u>Forgotten Your Password?</u>
               </p>
             </div>
+            {isLoggingIn && (
+              <section className="mt-0 flex gap-2">
+                <Spinner width={25} height={25} />
+                <p>Logging In please wait...</p>
+              </section>
+            )}
           </form>
         </div>
         <div className="flex w-auto max-w-[803px] flex-1 flex-col justify-between gap-4 self-stretch bg-search p-4 sm:p-6 xl:p-9 dxl:gap-7 dxl:p-[50px]">
