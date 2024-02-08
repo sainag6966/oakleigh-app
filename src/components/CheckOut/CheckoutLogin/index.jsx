@@ -15,7 +15,11 @@ function CheckoutLogin({
   // const [emailError, setEmailError] = useState('')
   const [isChecked, setIsChecked] = useState(false)
   const initialEmail = basketData?.billing_address?.email
-  const isUserLoggedIn = isLoggedIn()
+  let isUserLoggedIn = false
+
+  if (typeof window !== 'undefined') {
+    isUserLoggedIn = isLoggedIn()
+  }
 
   const handleChange = (e) => {
     e.preventDefault()
