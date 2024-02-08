@@ -158,6 +158,7 @@ function ProductDetail({ productData, setIsCartEmpty }) {
 }
 
 function OrderSummary({ isPostcodeEntered }) {
+  const router = useRouter()
   const [coupon, setCoupon] = useState('')
   const [productData, setProductData] = useState({})
   const [promoToast, setPromoToast] = useState(false)
@@ -374,6 +375,10 @@ function OrderSummary({ isPostcodeEntered }) {
       <section
         className="relative flex h-[42px] font-sans
         lg:m-auto lg:h-[53px] lg:w-[90%]"
+        role="button"
+        onClick={() => {
+          router.push('/basket/checkout')
+        }}
       >
         <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary sm:w-[99.5%] lg:h-[50px]" />
         <div className="absolute right-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary sm:w-[99.5%] lg:h-[50px]" />

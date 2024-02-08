@@ -27,45 +27,9 @@ function CheckoutPage() {
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const shippingAddress = basketData?.shipping_address
 
-  const ownerObj = {
-    billing_address: {
-      first_name: 'Pikachu',
-      last_name: 'Pika',
-      company: '',
-      address_1: '880 southern Park gate',
-      address_2: 'Corner Penthouse Spook Central',
-      city: 'New York',
-      state: 'NY',
-      postcode: '10023',
-      country: 'US',
-      email: 'pikachu@gmail.com',
-      phone: '555-2369',
-    },
-    shipping_address: {
-      first_name: 'Pikachu',
-      last_name: 'Pika',
-      company: '',
-      address_1: '880 southern Park gate',
-      address_2: 'Corner Penthouse Spook Central',
-      city: 'New York',
-      state: 'NY',
-      postcode: '10023',
-      country: 'US',
-    },
-    customer_note: 'Test notes on order.',
-    create_account: false,
-    payment_method: 'stripe',
-    payment_data: [],
-    extensions: {
-      'some-extension-name': {
-        'some-data-key': 'some data value',
-      },
-    },
-  }
-
   const formArr = {
-    billing_address: ownerObj.billing_address,
-    shipping_address: ownerObj.shipping_address,
+    billing_address: basketData.billing_address,
+    shipping_address: basketData.shipping_address,
     // create_account: values.create_account && values.create_account[0],
     create_account: false,
     customer_note: 'place order',

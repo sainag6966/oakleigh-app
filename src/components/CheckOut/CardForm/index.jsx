@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 const options = {
   style: {
     base: {
-      fontSize: '25px',
+      fontSize: '15px',
       color: '#31325F',
       letterSpacing: '0.025em',
       fontFamily: 'Source Code Pro, monospace',
@@ -22,51 +22,63 @@ const options = {
   },
 }
 
-function CardForm({ getStripeResponse }) {
+function CardForm({ getStripeResponse, basketData }) {
+  console.log(basketData, '!! bas here')
+  const stripe = useStripe()
+  const elements = useElements()
   const [cardNumberValid, setCardNumberValid] = useState(false)
   const [cardExpValid, setCardexpValid] = useState(false)
   const [cardCvvValid, setCardCvvValid] = useState(false)
   const [cardNumberError, setCardNumberError] = useState(false)
   const [cardExpError, setCardexpError] = useState(false)
   const [cardCvvError, setCardCvvError] = useState(false)
-  const stripe = useStripe()
-  const elements = useElements()
+  const shippingAddress = basketData?.shipping_address
+  const billingAddress = basketData?.billing_address
+  const firstName = shippingAddress?.first_name
+  const lastName = shippingAddress?.last_name
+  const address1 = shippingAddress?.address_1
+  const address2 = shippingAddress?.address_2
+  const city = shippingAddress?.city
+  const postCode = shippingAddress?.postcode
+  const country = shippingAddress?.country
+  const phone = shippingAddress?.phone
+  const email = billingAddress?.email
 
-  const ownerObj = {
-    billing_address: {
-      first_name: 'Pikachu',
-      last_name: 'Pika',
-      company: '',
-      address_1: '880 southern Park gate',
-      address_2: 'Corner Penthouse Spook Central',
-      city: 'New York',
-      state: 'NY',
-      postcode: '10023',
-      country: 'US',
-      email: 'pikachu@gmail.com',
-      phone: '555-2369',
-    },
-    shipping_address: {
-      first_name: 'Pikachu',
-      last_name: 'Pika',
-      company: '',
-      address_1: '880 southern Park gate',
-      address_2: 'Corner Penthouse Spook Central',
-      city: 'New York',
-      state: 'NY',
-      postcode: '10023',
-      country: 'US',
-    },
-    customer_note: 'Test notes on order.',
-    create_account: false,
-    payment_method: 'stripe',
-    payment_data: [],
-    extensions: {
-      'some-extension-name': {
-        'some-data-key': 'some data value',
-      },
-    },
-  }
+  // const ownerObj = {
+  //   billing_address: {
+  //     first_name: 'Pikachu',
+  //     last_name: 'Pika',
+  //     company: '',
+  //     address_1: '880 southern Park gate',
+  //     address_2: 'Corner Penthouse Spook Central',
+  //     city: 'New York',
+  //     state: 'NY',
+  //     postcode: '10023',
+  //     country: 'US',
+  //     email: 'pikachu@gmail.com',
+  //     phone: '555-2369',
+  //   },
+  //   shipping_address: {
+  //     first_name: 'Pikachu',
+  //     last_name: 'Pika',
+  //     company: '',
+  //     address_1: '880 southern Park gate',
+  //     address_2: 'Corner Penthouse Spook Central',
+  //     city: 'New York',
+  //     state: 'NY',
+  //     postcode: '10023',
+  //     country: 'US',
+  //   },
+  //   customer_note: 'Test notes on order.',
+  //   create_account: false,
+  //   payment_method: 'stripe',
+  //   payment_data: [],
+  //   extensions: {
+  //     'some-extension-name': {
+  //       'some-data-key': 'some data value',
+  //     },
+  //   },
+  // }
 
   const handleCardFormSubmitForm = async (event) => {
     // event.preventDefault();
@@ -82,16 +94,16 @@ function CardForm({ getStripeResponse }) {
     // setPayLoadState(payload)
     const ownerInfo = {
       owner: {
-        name: ownerObj.billing_address.first_name, //needed cart api here
+        name: firstName, //needed cart api here
         address: {
-          line1: ownerObj.billing_address.address_1,
-          line2: ownerObj.billing_address.address_2,
-          city: ownerObj.billing_address.city,
-          postal_code: ownerObj.billing_address.postcode,
-          country: ownerObj.billing_address.country,
+          line1: address1,
+          line2: address2,
+          city: city,
+          postal_code: postCode,
+          country: country,
         },
-        phone: ownerObj.billing_address.phone,
-        email: ownerObj.billing_address.email,
+        phone: phone,
+        email: email,
       },
     }
 
@@ -118,24 +130,15 @@ function CardForm({ getStripeResponse }) {
               },
               {
                 key: 'billing_email',
-                value:
-                  ownerObj && ownerObj.billing_address.email
-                    ? ownerObj.billing_address.email
-                    : 'Guest',
+                value: email ? email : 'Guest',
               },
               {
                 key: 'billing_first_name',
-                value:
-                  ownerObj && ownerObj.billing_address.first_name
-                    ? ownerObj.billing_address.first_name
-                    : '',
+                value: firstName ? firstName : '',
               },
               {
                 key: 'billing_last_name',
-                value:
-                  ownerObj && ownerObj.billing_address.last_name
-                    ? ownerObj.billing_address.last_name
-                    : '',
+                value: lastName ? lastName : '',
               },
             ],
           }
@@ -154,10 +157,10 @@ function CardForm({ getStripeResponse }) {
     cardNumberValid &&
       cardExpValid &&
       cardCvvValid &&
-      ownerObj.billing_address.first_name &&
-      ownerObj.billing_address.postcode &&
+      firstName &&
+      postCode &&
       handleCardFormSubmitForm()
-  }, [cardNumberValid, cardExpValid, cardCvvValid, ownerObj])
+  }, [cardNumberValid, cardExpValid, cardCvvValid])
 
   // useEffect(() => {
   //   if (cardClear) {
@@ -169,11 +172,11 @@ function CardForm({ getStripeResponse }) {
 
   return (
     <>
-      <form>
+      <form className="flex flex-col gap-3">
         <label>
-          Card number <span className="red-star">*</span>
-          <p>check div</p>
           <CardNumberElement
+            className="bg-search p-2"
+            placeholder=""
             options={options}
             // onReady={() => {
             //   console.log('CardNumberElement [ready]')
@@ -194,8 +197,8 @@ function CardForm({ getStripeResponse }) {
           />
         </label>
         <label>
-          Expiry Date <span className="red-star">*</span>
           <CardExpiryElement
+            className="bg-search p-2"
             options={options}
             // onReady={() => {
             //   console.log('CardNumberElement [ready]')
@@ -216,8 +219,8 @@ function CardForm({ getStripeResponse }) {
           />
         </label>
         <label>
-          Card Code (CVC) <span className="red-star">*</span>
           <CardCvcElement
+            className="bg-search p-2"
             options={options}
             // onReady={() => {
             //   console.log('CardNumberElement [ready]')

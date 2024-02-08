@@ -7,6 +7,7 @@ function ShippingPage({ basketData }) {
   const city = basketData?.shipping_address?.city
   const postCode = basketData?.shipping_address?.postcode
   const shippingDetail = [address1, address2, city, postCode]
+
   return (
     <section className="h-auto w-full border-[1px] border-orderSummaryBorder p-5 font-sans dxl:p-[30px]">
       <section className="flex items-center justify-between border-b-[1px] border-orderSummaryBorder pb-3 dxl:pb-[30px]">

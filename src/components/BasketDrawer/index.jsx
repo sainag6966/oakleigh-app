@@ -10,6 +10,7 @@ function BasketDrawer({
   const copyRightIcons = '/Images/copyRightImg.svg'
   const headingText = isFromHeader ? 'YOUR BASKET' : 'ADDED TO BASKET'
   const router = useRouter()
+
   const handleClose = () => {
     setIsBasketOpen(false)
     document.body.classList.remove('no-scroll')
@@ -24,6 +25,12 @@ function BasketDrawer({
   const handleContinueShop = () => {
     setIsBasketOpen(false)
     router.push('/shop-all')
+    document.body.classList.remove('no-scroll')
+  }
+
+  const handleCheckout = () => {
+    setIsBasketOpen(false)
+    router.push('/basket/checkout')
     document.body.classList.remove('no-scroll')
   }
 
@@ -65,7 +72,7 @@ function BasketDrawer({
               <p className="font-sans text-display-4 font-semibold lg:text-display-16">
                 £{productPrice}
               </p>
-              <u>
+              <u className="cursor-pointer">
                 <p className="mt-[10px] font-sans text-display-4 lg:text-display-17">
                   Remove Item
                 </p>
@@ -78,10 +85,8 @@ function BasketDrawer({
           </div>
           <div className="flex flex-col gap-[20px] pb-[176px] pt-[32px] font-sans lg:gap-[30px] dxl:pt-[50px]">
             <div
-              className="relative flex h-[53px] w-full"
-              onClick={() => {
-                router.push('/basket/checkout')
-              }}
+              className="relative flex h-[53px] w-full cursor-pointer"
+              onClick={handleCheckout}
             >
               <div className="absolute bottom-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary lg:w-[99.5%]" />
               <div className="absolute right-0 h-[50px] w-[99%] border-[0.5px] border-textSecondary lg:w-[99.5%]" />
