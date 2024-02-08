@@ -83,6 +83,7 @@ function Payment() {
   const [stripeData, setStripeData] = useState({})
   const [basketData, setBasketData] = useState([])
   const [showToast, setShowToast] = useState(false)
+  const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const leftIcon = '/Images/leftArrow.svg'
@@ -272,7 +273,7 @@ function Payment() {
       }
     }
     fetchData()
-  }, [])
+  }, [addOrRemovePromo])
 
   return (
     <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 py-[34px] lg:gap-8 lg:px-12 lg:pb-0 lg:pt-[50px] xl:px-16 dxl:px-[143px]">
@@ -286,7 +287,11 @@ function Payment() {
       </section>
       <section className="flex h-auto w-full flex-col gap-8 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
         <section className="self-stretch bg-search lg:order-2 lg:flex-1">
-          <CheckoutItems basketData={basketData} />
+          <CheckoutItems
+            basketData={basketData}
+            setAddOrRemovePromo={setAddOrRemovePromo}
+            addOrRemovePromo={addOrRemovePromo}
+          />
         </section>
         <section className="flex flex-col gap-4 lg:flex-1 lg:pb-64 dxl:gap-[50px]">
           <ShippingPage basketData={basketData} />

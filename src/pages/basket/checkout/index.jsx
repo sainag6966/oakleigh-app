@@ -22,6 +22,7 @@ function CheckoutPage() {
   const [paymentCompleted, setPaymentCompleted] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [openLoginModal, setOpenLoginModal] = useState(false)
+  const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
   const oakleighLogo = '/Images/oakleighLogo.svg'
@@ -268,7 +269,7 @@ function CheckoutPage() {
       }
     }
     fetchData()
-  }, [openLoginModal])
+  }, [openLoginModal, addOrRemovePromo])
 
   return (
     <>
@@ -286,7 +287,11 @@ function CheckoutPage() {
         </section>
         <section className="flex h-auto w-full flex-col gap-4 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
           <section className="self-stretch bg-search lg:order-2 lg:flex-1">
-            <CheckoutItems basketData={basketData} />
+            <CheckoutItems
+              basketData={basketData}
+              setAddOrRemovePromo={setAddOrRemovePromo}
+              addOrRemovePromo={addOrRemovePromo}
+            />
           </section>
           <section className="flex flex-col gap-6 lg:order-1 lg:flex-1">
             <ExpressCheckout />

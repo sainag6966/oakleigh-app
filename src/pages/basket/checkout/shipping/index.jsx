@@ -8,6 +8,7 @@ import Link from 'next/link'
 
 function Shipping() {
   const [basketData, setBasketData] = useState([])
+  const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const leftIcon = '/Images/leftArrow.svg'
 
@@ -42,7 +43,7 @@ function Shipping() {
       }
     }
     fetchData()
-  }, [])
+  }, [addOrRemovePromo])
 
   return (
     <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 py-[34px] lg:gap-8 lg:px-12 lg:pb-0 lg:pt-[50px] xl:px-16 dxl:px-[143px]">
@@ -59,7 +60,11 @@ function Shipping() {
       </section>
       <section className="flex h-auto w-full flex-col gap-8 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
         <section className="self-stretch bg-search lg:order-2 lg:flex-1">
-          <CheckoutItems basketData={basketData} />
+          <CheckoutItems
+            basketData={basketData}
+            addOrRemovePromo={addOrRemovePromo}
+            setAddOrRemovePromo={setAddOrRemovePromo}
+          />
         </section>
         <section className="flex flex-col gap-4 lg:flex-1 lg:pb-64 dxl:gap-[50px]">
           <ShippingPage basketData={basketData} />
