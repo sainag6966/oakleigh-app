@@ -192,6 +192,11 @@ function CheckoutPage() {
     })
   }
 
+  const handleLoginClick = () => {
+    setOpenLoginModal(true)
+    document.body.classList.add('no-scroll')
+  }
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const nonce = localStorage.getItem('nonce')
@@ -266,52 +271,47 @@ function CheckoutPage() {
   }, [])
 
   return (
-    <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 py-[34px] lg:gap-8 lg:px-12 lg:py-[50px] xl:px-16 dxl:px-[143px] dxl:pb-[150px]">
-      <figure
-        className="max-h-[34px] max-w-[180px] dxl:min-h-[60px] dxl:min-w-[304px]"
-        onClick={() => {
-          router.push('/')
-        }}
-      >
-        <ProgressiveImageComp src={oakleighLogo} alt={'oakleighlogo'} />
-      </figure>
-      <section>
-        <Breadcrumbs />
-      </section>
-      <section className="flex h-auto w-full flex-col gap-4 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
-        <section className="self-stretch bg-search lg:order-2 lg:flex-1">
-          <CheckoutItems basketData={basketData} />
+    <>
+      <main className="relative flex h-auto w-full flex-col items-start justify-start gap-5 px-9 py-[34px] lg:gap-8 lg:px-12 lg:py-[50px] xl:px-16 dxl:px-[143px] dxl:pb-[150px]">
+        <figure
+          className="max-h-[34px] max-w-[180px] dxl:min-h-[60px] dxl:min-w-[304px]"
+          onClick={() => {
+            router.push('/')
+          }}
+        >
+          <ProgressiveImageComp src={oakleighLogo} alt={'oakleighlogo'} />
+        </figure>
+        <section>
+          <Breadcrumbs />
         </section>
-        <section className="flex flex-col gap-6 lg:order-1 lg:flex-1">
-          <ExpressCheckout />
-          <section className="flex w-full items-center justify-between gap-4 font-sans text-orderSummaryBorder">
-            <hr className="w-full text-orderSummaryBorder" />
-            <p className="text-display-3">OR</p>
-            <hr className="w-full text-orderSummaryBorder" />
+        <section className="flex h-auto w-full flex-col gap-4 lg:flex-row lg:justify-between lg:gap-10 xl:gap-16">
+          <section className="self-stretch bg-search lg:order-2 lg:flex-1">
+            <CheckoutItems basketData={basketData} />
           </section>
-          <CheckoutLogin
-            setOpenLoginModal={setOpenLoginModal}
-            setEmail={setEmail}
-            setEmailError={setEmailError}
-            email={email}
-            emailError={emailError}
-            basketData={basketData}
-          />
-          <ShippingAddress
-            address={shippingAddress}
-            basketData={basketData}
-            email={email}
-            emailError={emailError}
-          />
+          <section className="flex flex-col gap-6 lg:order-1 lg:flex-1">
+            <ExpressCheckout />
+            <section className="flex w-full items-center justify-between gap-4 font-sans text-orderSummaryBorder">
+              <hr className="w-full text-orderSummaryBorder" />
+              <p className="text-display-3">OR</p>
+              <hr className="w-full text-orderSummaryBorder" />
+            </section>
+            <CheckoutLogin
+              handleLoginClick={handleLoginClick}
+              setEmail={setEmail}
+              setEmailError={setEmailError}
+              email={email}
+              emailError={emailError}
+              basketData={basketData}
+            />
+            <ShippingAddress
+              address={shippingAddress}
+              basketData={basketData}
+              email={email}
+              emailError={emailError}
+            />
+          </section>
         </section>
-      </section>
-      {openLoginModal && (
-        <LoginDropdown
-          handleSuccessfulLogin={handleSuccessfulLogin}
-          handleCreateAcc={handleCreateAcc}
-        />
-      )}
-      {/* <PaymentModes getStripeResponse={getStripeResponse} />
+        {/* <PaymentModes getStripeResponse={getStripeResponse} />
       <button
         className="border-[1px] bg-orange-500 p-2"
         onClick={handlePayment}
@@ -327,7 +327,14 @@ function CheckoutPage() {
           />
         </div>
       )} */}
-    </main>
+      </main>
+      {openLoginModal && (
+        <LoginDropdown
+          handleSuccessfulLogin={handleSuccessfulLogin}
+          handleCreateAcc={handleCreateAcc}
+        />
+      )}
+    </>
   )
 }
 export default CheckoutPage

@@ -4,7 +4,7 @@ import { isLoggedIn } from '@/utils/auth'
 import LoginDropdown from '@/components/LoginDropdown'
 
 function CheckoutLogin({
-  setOpenLoginModal,
+  handleLoginClick,
   setEmail,
   setEmailError,
   email,
@@ -43,9 +43,7 @@ function CheckoutLogin({
             </p>
             <p
               className="cursor-pointer text-display-4 dxl:text-display-17"
-              onClick={() => {
-                setOpenLoginModal(true)
-              }}
+              onClick={handleLoginClick}
             >
               <u>Log In</u>
             </p>
