@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 const options = {
   style: {
     base: {
-      fontSize: '15px',
+      fontSize: '17px',
       color: '#31325F',
       letterSpacing: '0.025em',
       fontFamily: 'Source Code Pro, monospace',
@@ -172,10 +172,10 @@ function CardForm({ getStripeResponse, basketData }) {
 
   return (
     <>
-      <form className="flex flex-col gap-3">
+      <form className="flex flex-col gap-3 dxl:gap-5">
         <label>
           <CardNumberElement
-            className="bg-search p-2"
+            className="bg-search p-2 dxl:p-4"
             placeholder=""
             options={options}
             // onReady={() => {
@@ -198,7 +198,7 @@ function CardForm({ getStripeResponse, basketData }) {
         </label>
         <label>
           <CardExpiryElement
-            className="bg-search p-2"
+            className="bg-search p-2 dxl:p-4"
             options={options}
             // onReady={() => {
             //   console.log('CardNumberElement [ready]')
@@ -220,7 +220,7 @@ function CardForm({ getStripeResponse, basketData }) {
         </label>
         <label>
           <CardCvcElement
-            className="bg-search p-2"
+            className="bg-search p-2 dxl:p-4"
             options={options}
             // onReady={() => {
             //   console.log('CardNumberElement [ready]')

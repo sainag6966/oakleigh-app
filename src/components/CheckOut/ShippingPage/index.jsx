@@ -51,7 +51,7 @@ function ShippingPage({ basketData }) {
         <section className="flex items-start justify-start dxl:gap-[50px]">
           {' '}
           <p className="text-display-3 dxl:text-display-17">Method</p>
-          <p className="ml-2 mt-[2px] flex text-display-extra leading-5 sm:ml-4 sm:text-display-5 sm:leading-5 dxl:text-display-16">
+          <p className="ml-2 mt-[2px] flex text-display-extra leading-5 sm:ml-4 sm:text-display-5 sm:leading-5 dxl:ml-0 dxl:text-display-16">
             Royal Mail or other 24 hour courier (1–2 working days)
           </p>
         </section>

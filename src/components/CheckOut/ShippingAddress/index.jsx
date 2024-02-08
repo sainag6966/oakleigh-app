@@ -136,6 +136,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
     if (emailError || !email) {
       setShowToast(true)
       setToastMessage('Please fill the Email address')
+      return
     }
     const nonce = localStorage.getItem('nonce')
     const loginToken = localStorage.getItem('loginToken')

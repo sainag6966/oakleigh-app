@@ -58,7 +58,7 @@ function CheckoutLogin({
             type="text"
             id="first_name"
             name="first_name"
-            value={initialEmail ? initialEmail : email}
+            value={email || ''}
             placeholder="Email Address*"
             onChange={handleChange}
             className="h-[41px] w-full flex-1 appearance-none border bg-search px-7 py-2 font-sans text-display-3 text-footerBg dxl:h-[50px] dxl:text-display-6"

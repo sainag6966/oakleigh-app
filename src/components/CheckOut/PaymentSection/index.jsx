@@ -19,9 +19,9 @@ function PaymentSection({ basketData, getStripeResponse }) {
       <p className="font-sans text-display-3 dxl:text-display-6">
         All transactions are secure and encrypted
       </p>
-      <section className="h-auto w-full">
+      <section className="flex h-auto w-full flex-col gap-3 dxl:gap-6">
         <section className="flex items-center justify-between">
-          <section className="flex items-center gap-2">
+          <section className="flex items-center gap-2 dxl:gap-4">
             <CheckBox />
             <p className="text-display-5 dxl:text-display-16">Credit Card</p>
           </section>

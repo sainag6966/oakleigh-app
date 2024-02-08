@@ -256,6 +256,7 @@ function CheckoutPage() {
         if (responseData) {
           // setLoading(false)
           setBasketData(responseData)
+          setEmail(responseData?.billing_address?.email)
         }
       } catch (error) {
         // setLoading(false)
