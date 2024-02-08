@@ -374,7 +374,7 @@ function OrderSummary({ isPostcodeEntered }) {
       </section>
       <section
         className="relative flex h-[42px] font-sans
-        lg:m-auto lg:h-[53px] lg:w-[90%]"
+        lg:mx-auto lg:h-[53px] lg:w-[90%]"
         role="button"
         onClick={() => {
           router.push('/basket/checkout')
