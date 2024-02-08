@@ -4,6 +4,7 @@ import Toast from '@/reuseComps/ToastMessage'
 import Link from 'next/link'
 import CountrySelector from '@/reuseComps/CountrySelector'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
+import Spinner from '@/reuseComps/Spinner'
 
 function ShippingAddress({ address, basketData, email, emailError }) {
   const router = useRouter()
@@ -17,6 +18,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
   const [formError, setFormError] = useState('')
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const selectedCountry = basketData?.shipping_address?.country
   // const [formData, setFormData] = useState({
   //   first_name: '',
@@ -170,7 +172,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
       headers['Authorization'] = `Bearer ${loginToken}`
     }
     try {
-      // setAddingDeliveryInfo(true)
+      setLoading(true)
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/update-customer',
         {
@@ -190,6 +192,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
           return
         }
         router.push('/basket/checkout/shipping')
+        setLoading(false)
         // setAddingDeliveryInfo(false)
         // setIsPostcodeEntered(!isPostcodeEntered)
       }
@@ -314,6 +317,12 @@ function ShippingAddress({ address, basketData, email, emailError }) {
           showToast={showToast}
           setShowToast={setShowToast}
         />
+      )}
+      {loading && (
+        <section className="mt-4 flex gap-2">
+          <Spinner width={25} height={25} />
+          <p>Redirecting to shipping please wait...</p>
+        </section>
       )}
       <section className="flex h-auto w-full items-center justify-between dxl:mt-[10px]">
         <section className="flex flex-1 items-center justify-start gap-[2px]">
