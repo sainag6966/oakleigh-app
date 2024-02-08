@@ -18,9 +18,9 @@ function CheckoutItems({ basketData }) {
   return (
     <section className="flex h-auto w-full flex-col gap-5 p-5 font-sans sm:p-8 lg:p-8 dxl:pl-[75px] dxl:pr-[120px]">
       <section className="flex h-auto w-full flex-col gap-3">
-        {cartItems?.map((e) => {
+        {cartItems?.map((e, index) => {
           return (
-            <section className="flex items-center justify-between">
+            <section key={index} className="flex items-center justify-between">
               <section className="flex h-auto w-full items-center gap-2 sm:gap-4 lg:gap-2 dxl:gap-5">
                 <figure
                   // key={index}

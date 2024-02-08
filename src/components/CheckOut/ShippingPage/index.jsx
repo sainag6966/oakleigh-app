@@ -29,9 +29,12 @@ function ShippingPage({ basketData }) {
           {' '}
           <p className="text-display-3 dxl:text-display-6">Ship to</p>
           <section className="ml-[14px] flex flex-col sm:ml-[22px]">
-            {shippingDetail.map((e) => {
+            {shippingDetail.map((e, index) => {
               return (
-                <section className="text-display-extra leading-5 sm:text-display-5 sm:leading-5 dxl:text-display-16">
+                <section
+                  key={index}
+                  className="text-display-extra leading-5 sm:text-display-5 sm:leading-5 dxl:text-display-16"
+                >
                   {e}
                 </section>
               )
