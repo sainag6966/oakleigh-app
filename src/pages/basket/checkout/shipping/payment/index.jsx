@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import Toast from '@/reuseComps/ToastMessage'
 import { useStripe } from '@stripe/react-stripe-js'
@@ -9,8 +10,15 @@ import Breadcrumbs from '@/components/BreadCrumbs'
 import CheckoutItems from '@/components/CheckOut/CheckoutItems'
 import ShippingPage from '@/components/CheckOut/ShippingPage'
 import CheckBox from '@/reuseComps/CheckBox'
+import Spinner from '@/reuseComps/Spinner'
 
-function BillingBlock({ handlePayment }) {
+function BillingBlock({
+  handlePayment,
+  isPaymentProcessing,
+  showToast,
+  setShowToast,
+  message,
+}) {
   const leftIcon = '/Images/leftArrow.svg'
 
   return (
@@ -48,6 +56,19 @@ function BillingBlock({ handlePayment }) {
         transaction, on Oakleigh Watches <u>Terms & Conditions</u> and{' '}
         <u>Privacy Policy</u>.
       </p>
+      {showToast && (
+        <Toast
+          showToast={showToast}
+          setShowToast={setShowToast}
+          message={message}
+        />
+      )}
+      {isPaymentProcessing && (
+        <section className="mt-4 flex gap-2">
+          <Spinner width={25} height={25} />
+          <p>Processing your payment...</p>
+        </section>
+      )}
       <section className="flex h-auto w-full items-center justify-between dxl:mt-[5px]">
         <section className="flex flex-1 items-center justify-start gap-1">
           <section className="h-3 w-3 dxl:mt-[3px] dxl:h-4 dxl:w-4">
@@ -64,6 +85,7 @@ function BillingBlock({ handlePayment }) {
           onClick={() => {
             handlePayment()
           }}
+          role="button"
         >
           <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
           <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />
@@ -85,6 +107,7 @@ function Payment() {
   const [showToast, setShowToast] = useState(false)
   const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false)
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const leftIcon = '/Images/leftArrow.svg'
 
@@ -114,22 +137,29 @@ function Payment() {
       // }
       if (
         result.order_id &&
+        result.status == 'processing' &&
+        result.payment_method == 'stripe'
+      ) {
+        router.push('/order-received/' + result.order_id)
+      }
+      if (
+        result.order_id &&
         result.status == 'pending' &&
         result.payment_method == 'stripe'
       ) {
         //setSuccessMessage(true)
         //setCreateOrderStatus(true)
         //setOrderId(result.data.order_id)
-        router.push('/checkout/order-received/' + result.order_id)
+        router.push('/order-received/' + result.order_id)
       } else {
         setShowToast(true)
         setToastMessage('Payment Failed Please Try Again')
       }
+      setIsPaymentProcessing(false)
     }
 
     const stripeProcess = async (result) => {
       let clientSecret = result?.payment_result?.payment_details?.[2]?.value
-      console.log(clientSecret, '!!!')
       let verificationLink =
         result?.payment_result?.payment_details?.[4]?.value.replace(
           'cms/cms',
@@ -157,6 +187,7 @@ function Payment() {
             }
           } else {
             if (nextAction && nextAction.error && nextAction.error.message) {
+              setIsPaymentProcessing(false)
               // toast.error(nextAction.error.message);
               // dispatch(clearCardElement());
             } else {
@@ -216,6 +247,7 @@ function Payment() {
       headers['Authorization'] = `Bearer ${loginToken}`
     }
     try {
+      setIsPaymentProcessing(true)
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/checkout',
         {
@@ -299,7 +331,13 @@ function Payment() {
             basketData={basketData}
             getStripeResponse={getStripeResponse}
           />
-          <BillingBlock handlePayment={handlePayment} />
+          <BillingBlock
+            handlePayment={handlePayment}
+            showToast={showToast}
+            message={toastMessage}
+            setShowToast={setShowToast}
+            isPaymentProcessing={isPaymentProcessing}
+          />
         </section>
       </section>
     </main>
