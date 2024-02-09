@@ -1,5 +1,6 @@
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import Spinner from '@/reuseComps/Spinner'
+import Toast from '@/reuseComps/ToastMessage'
 import { priceFormatter } from '@/utils/formatPrice'
 import { useState } from 'react'
 
