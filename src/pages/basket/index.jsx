@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import Link from 'next/link'
 import { priceFormatter } from '@/utils/formatPrice'
 import { useMediaQuery } from 'react-responsive'
 import NextImage from '@/reuseComps/NextImage'
@@ -144,14 +145,15 @@ function ProductDetail({ productData, setIsCartEmpty }) {
             </section>
           )
         })}
-        <section
+        <Link
+          href={'/shop-all'}
           className="flex h-auto w-full cursor-pointer items-center justify-start border-y-[1.2px] border-y-search py-[30px] font-sans text-display-4 xl:text-display-17"
-          onClick={() => {
-            router.push('/shop-all')
-          }}
+          // onClick={() => {
+          //   router.push('/shop-all')
+          // }}
         >
           <u>Continue Shopping</u>
-        </section>
+        </Link>
       </section>
     </section>
   )
@@ -167,7 +169,7 @@ function OrderSummary({ isPostcodeEntered }) {
   const [removingPromo, setRemovingPromo] = useState(false)
   const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const copyRightIcons = '/Images/copyRightImg.svg'
-  const itemText = productData?.items?.length === 1 ? 'item' : 'items'
+  const itemText = productData?.items?.length === 1 ? 'Item' : 'Items'
   const price = productData?.totals?.total_items
   const subTotal =
     price && priceFormatter(productData?.totals?.total_items, true)
@@ -487,9 +489,9 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
             id="first_name"
             name="first_name"
             value={postCode}
-            placeholder="ENTER POSTCODE"
+            placeholder="Enter Postcode"
             onChange={handleChange}
-            className="h-[41px] w-full flex-1 appearance-none rounded border bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+            className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
           />
           <div className="relative flex h-[41px] w-[110px] font-sans text-display-4 dxl:h-[50px] dxl:w-[150px] dxl:text-display-17">
             <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>

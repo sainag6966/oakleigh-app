@@ -23,7 +23,6 @@ const options = {
 }
 
 function CardForm({ getStripeResponse, basketData }) {
-  console.log(basketData, '!! bas here')
   const stripe = useStripe()
   const elements = useElements()
   const [cardNumberValid, setCardNumberValid] = useState(false)
