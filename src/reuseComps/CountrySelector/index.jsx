@@ -32,10 +32,12 @@ function CountrySelector({ setCountryCode, selectedCountry }) {
       borderRadius: '0px',
       'padding-left': '20px',
       'padding-right': '20px',
+      cursor: 'pointer',
     }),
     option: (styles, { isFocused }) => ({
       'padding-left': '30px',
       backgroundColor: isFocused ? '#CDAA72' : 'white',
+      cursor: 'pointer',
     }),
     indicatorSeparator: () => ({
       display: 'none',

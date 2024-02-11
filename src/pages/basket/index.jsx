@@ -10,6 +10,7 @@ import CountrySelector from '@/reuseComps/CountrySelector'
 import Toast from '@/reuseComps/ToastMessage'
 import Spinner from '@/reuseComps/Spinner'
 import Breadcrumbs from '@/components/BreadCrumbs'
+import CheckBox from '@/reuseComps/CheckBox'
 
 function BasketHead() {
   const router = useRouter()
@@ -273,7 +274,7 @@ function OrderSummary({ isPostcodeEntered }) {
         setAddOrRemovePromo(!addOrRemovePromo)
         if (!responseData?.discount_type) {
           setPromoToast(true)
-          setPromoToastMsg('Please enter a valid Coupon code')
+          setPromoToastMsg('Please enter a valid coupon code')
           return
         }
       }
@@ -408,6 +409,8 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
   const [addingDeliveryInfo, setAddingDeliveryInfo] = useState(false)
   const selectedCountry = productData?.shipping_address?.country
   const enteredPostalCode = productData?.shipping_address?.postcode
+  const isOrderFromUk =
+    (selectedCountry === 'GB' && !countryCode) || countryCode === 'GB'
   const [postCode, setPostCode] = useState(
     enteredPostalCode ? enteredPostalCode : '',
   )
@@ -466,7 +469,7 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
         if (responseData?.data?.status === 400) {
           setAddingDeliveryInfo(false)
           setShowToast(true)
-          setToastMessage('Please enter Valid Postcode')
+          setToastMessage('Please enter valid Postcode')
           return
         }
         setAddingDeliveryInfo(false)
@@ -483,26 +486,94 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
         selectedCountry={selectedCountry}
       />
       <section className="h-auto w-full">
-        <form className="flex h-auto w-full gap-5" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            id="first_name"
-            name="first_name"
-            value={postCode}
-            placeholder="Enter Postcode"
-            onChange={handleChange}
-            className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
-          />
-          <div className="relative flex h-[41px] w-[110px] font-sans text-display-4 dxl:h-[50px] dxl:w-[150px] dxl:text-display-17">
-            <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
-            <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
-            <button
-              type="submit"
-              className="relative flex w-full items-center justify-center"
-            >
-              Submit
-            </button>
-          </div>
+        <form
+          className={`flex ${
+            isOrderFromUk ? 'flex-row' : 'flex-col'
+          } h-auto w-full gap-4 dxl:gap-5`}
+          onSubmit={handleSubmit}
+        >
+          {isOrderFromUk ? (
+            <>
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={postCode}
+                placeholder="Enter Postcode"
+                onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+              />
+              <div className="relative flex h-[41px] w-[110px] font-sans text-display-4 dxl:h-[50px] dxl:w-[150px] dxl:text-display-17">
+                <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
+                <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
+                <button
+                  type="submit"
+                  className="relative flex w-full items-center justify-center"
+                >
+                  Submit
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="h-auto w-full font-sans text-display-5 leading-normal dxl:text-display-10">
+                Shipping Address
+              </p>
+              <input
+                type="text"
+                id="address_1"
+                name="address_1"
+                value={postCode}
+                placeholder="Address Line 1*"
+                onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+              />
+              <input
+                type="text"
+                id="address_2"
+                name="address_2"
+                value={postCode}
+                placeholder="Address Line 2*"
+                onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+              />
+              <input
+                type="text"
+                id="address_3"
+                name="address_3"
+                value={postCode}
+                placeholder="Address Line 3"
+                onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+              />
+              <input
+                type="text"
+                id="village/city"
+                name="village/city"
+                value={postCode}
+                placeholder="Village / City / Town"
+                onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+              />
+              <section className="flex w-full gap-2 dxl:gap-4">
+                <CheckBox />
+                <p className="mt-[-6px] h-auto  w-full font-sans text-display-3 dxl:text-display-6">
+                  I accept all responsibility for any taxes and duties payable
+                  on import
+                </p>
+              </section>
+              <div className="relative flex h-[41px] w-[110px] font-sans text-display-4 dxl:h-[50px] dxl:w-[150px] dxl:text-display-17">
+                <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
+                <div className="absolute right-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[47px] dxl:w-[147px]"></div>
+                <button
+                  type="submit"
+                  className="relative flex w-full items-center justify-center"
+                >
+                  Submit
+                </button>
+              </div>
+            </>
+          )}
         </form>
       </section>
       {addingDeliveryInfo && (
