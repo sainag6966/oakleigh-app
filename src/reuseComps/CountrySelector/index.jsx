@@ -24,18 +24,33 @@ function CountrySelector({ setCountryCode, selectedCountry }) {
 
   const customStyles = {
     control: (provided) => ({
-      ...provided,
-      fontSize: '24px',
+      // ...provided,
+      fontSize: '14px',
+      display: 'flex',
       border: '1px solid #000000',
+      width: '100%',
       borderRadius: '0px',
-      margin: '10px',
+      'padding-left': '20px',
+      'padding-right': '20px',
+    }),
+    option: (styles, { isFocused }) => ({
+      'padding-left': '30px',
+      backgroundColor: isFocused ? '#CDAA72' : 'white',
     }),
     indicatorSeparator: () => ({
-      display: 'none', // Hide the default indicator separator
+      display: 'none',
     }),
-    dropdownIndicator: (provided) => ({
+    dropdownIndicator: (provided, { selectProps: { menuIsOpen } }) => ({
+      color: '#242B21',
+      transition: 'transform 0.3s',
+      transform: menuIsOpen ? 'rotate(-180deg)' : 'rotate(0deg)',
+      marginTop: menuIsOpen ? '6px' : '0px',
+    }),
+    menu: (provided) => ({
       ...provided,
-      color: '#242B21', // Set the color for the arrow mark
+      marginTop: '0px',
+      borderRadius: '0px',
+      border: '1px solid #000000',
     }),
   }
 
@@ -58,7 +73,7 @@ function CountrySelector({ setCountryCode, selectedCountry }) {
       className="h-auto w-full font-sans text-display-3 dxl:text-display-6" // Make the Select component full width
       classNamePrefix="tw-select" // Prefix for generated class names
       //   classes={customStyles}
-      styles={{ ...customStyles, ...customFocusStyles }}
+      styles={customStyles}
     />
   )
 }
