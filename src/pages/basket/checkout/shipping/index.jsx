@@ -67,7 +67,7 @@ function Shipping() {
           />
         </section>
         <section className="flex flex-col gap-4 lg:flex-1 lg:pb-64 dxl:gap-[50px]">
-          <ShippingPage basketData={basketData} />
+          <ShippingPage basketData={basketData} isFromShipping />
           <section className="flex w-full flex-col gap-4 font-sans dxl:gap-[25px]">
             <p className="font-cormorant text-display-11 dxl:text-display-12">
               Shipping Method

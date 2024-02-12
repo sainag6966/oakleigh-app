@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-function ShippingPage({ basketData }) {
+function ShippingPage({ basketData, isFromShipping }) {
   const emailId = basketData?.billing_address?.email
   const address1 = basketData?.shipping_address?.address_1
   const address2 = basketData?.shipping_address?.address_2
@@ -47,18 +47,20 @@ function ShippingPage({ basketData }) {
           </p>
         </Link>
       </section>
-      <section className="mt-3 flex items-start justify-between gap-2 border-t-[1px] border-orderSummaryBorder pt-3 dxl:pt-[30px]">
-        <section className="flex items-start justify-start dxl:gap-[50px]">
-          {' '}
-          <p className="text-display-3 dxl:text-display-17">Method</p>
-          <p className="ml-2 mt-[2px] flex text-display-extra leading-5 sm:ml-4 sm:text-display-5 sm:leading-5 dxl:ml-0 dxl:text-display-16">
-            Royal Mail or other 24 hour courier (1–2 working days)
+      {!isFromShipping && (
+        <section className="mt-3 flex items-start justify-between gap-2 border-t-[1px] border-orderSummaryBorder pt-3 dxl:pt-[30px]">
+          <section className="flex items-start justify-start dxl:gap-[50px]">
+            {' '}
+            <p className="text-display-3 dxl:text-display-17">Method</p>
+            <p className="ml-2 mt-[2px] flex text-display-extra leading-5 sm:ml-4 sm:text-display-5 sm:leading-5 dxl:ml-0 dxl:text-display-16">
+              Royal Mail or other 24 hour courier (1–2 working days)
+            </p>
+          </section>
+          <p className="mt-1 text-display-4 leading-none dxl:text-display-17">
+            <u>Change</u>
           </p>
         </section>
-        <p className="mt-1 text-display-4 leading-none dxl:text-display-17">
-          <u>Change</u>
-        </p>
-      </section>
+      )}
     </section>
   )
 }

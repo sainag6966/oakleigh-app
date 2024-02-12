@@ -1,33 +1,50 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
 import { priceFormatter } from '@/utils/formatPrice'
 import { useMediaQuery } from 'react-responsive'
+import { Country, State, City } from 'country-state-city'
 import NextImage from '@/reuseComps/NextImage'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import CountrySelector from '@/reuseComps/CountrySelector'
+import StateSelector from '@/reuseComps/StateSelector'
 import Toast from '@/reuseComps/ToastMessage'
 import Spinner from '@/reuseComps/Spinner'
 import Breadcrumbs from '@/components/BreadCrumbs'
 import CheckBox from '@/reuseComps/CheckBox'
+import { check } from 'prettier'
 
-function BasketHead() {
+function BasketHead({ checkout, textFieldRef }) {
   const router = useRouter()
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
 
+  const handleCheckout = () => {
+    if (!textFieldRef.current.value.trim()) {
+      textFieldRef.current.focus()
+      return
+    }
+    if (checkout) {
+      router.push('/basket/checkout')
+    }
+  }
   return (
     <section className="flex h-auto w-full items-center justify-between gap-2">
       {isDesktop && <section className="h-auto w-full flex-1" />}
       <section className="flex-1 text-display-12 lg:flex lg:justify-center xl:text-display-14 dxl:text-display-15">
         YOUR BASKET
       </section>
-      <section className="flex h-auto w-full flex-1 justify-end" role="button">
+      <section
+        className={`flex h-auto w-full ${
+          checkout
+            ? 'cursor-pointer opacity-100'
+            : 'cursor-not-allowed opacity-50'
+        } flex-1 justify-end `}
+        role="button"
+      >
         <section
           className="relative flex h-[42px] w-full font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
-          onClick={() => {
-            router.push('/basket/checkout')
-          }}
+          onClick={handleCheckout}
         >
           <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
           <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />
@@ -160,7 +177,7 @@ function ProductDetail({ productData, setIsCartEmpty }) {
   )
 }
 
-function OrderSummary({ isPostcodeEntered }) {
+function OrderSummary({ isPostcodeEntered, checkout, textFieldRef }) {
   const router = useRouter()
   const [coupon, setCoupon] = useState('')
   const [productData, setProductData] = useState({})
@@ -287,6 +304,16 @@ function OrderSummary({ isPostcodeEntered }) {
     setCoupon(value)
   }
 
+  const handleCheckout = () => {
+    if (!textFieldRef.current.value.trim()) {
+      textFieldRef.current.focus()
+      return
+    }
+    if (checkout && isPostcodeEntered) {
+      router.push('/basket/checkout')
+    }
+  }
+
   return (
     <section className="mt-2 flex h-auto w-full flex-col gap-[30px] lg:mt-0 xl:max-w-[400px] dxl:min-w-[527px] dxl:max-w-[527px]">
       <section className="flex h-auto w-full flex-col bg-search p-[30px] text-footerBg dxl:p-[50px]">
@@ -376,12 +403,14 @@ function OrderSummary({ isPostcodeEntered }) {
         </section>
       </section>
       <section
-        className="relative flex h-[42px] font-sans
-        lg:mx-auto lg:h-[53px] lg:w-[90%]"
+        className={`relative ${
+          checkout
+            ? 'cursor-pointer opacity-100'
+            : 'cursor-not-allowed opacity-50'
+        } flex h-[42px] font-sans
+        lg:mx-auto lg:h-[53px] lg:w-[90%]`}
         role="button"
-        onClick={() => {
-          router.push('/basket/checkout')
-        }}
+        onClick={handleCheckout}
       >
         <div className="absolute bottom-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary bg-textSecondary sm:w-[99.5%] lg:h-[50px]" />
         <div className="absolute right-0 h-[39px] w-[99%] border-[0.5px] border-textSecondary sm:w-[99.5%] lg:h-[50px]" />
@@ -402,64 +431,142 @@ function OrderSummary({ isPostcodeEntered }) {
   )
 }
 
-function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
+function Delivery({
+  productData,
+  setIsPostcodeEntered,
+  isPostcodeEntered,
+  isCheckoutEnable,
+  textFieldRef,
+}) {
   const [countryCode, setCountryCode] = useState('')
+  const [stateCode, setStateCode] = useState('')
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [formData, setFormData] = useState({})
+  const [formError, setFormError] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
   const [addingDeliveryInfo, setAddingDeliveryInfo] = useState(false)
   const selectedCountry = productData?.shipping_address?.country
+  const selectedState = productData?.shipping_address?.state
   const enteredPostalCode = productData?.shipping_address?.postcode
   const isOrderFromUk =
     (selectedCountry === 'GB' && !countryCode) || countryCode === 'GB'
   const [postCode, setPostCode] = useState(
     enteredPostalCode ? enteredPostalCode : '',
   )
+  const isStateSelected = stateCode || selectedState
 
   const handleChange = (e) => {
     e.preventDefault()
-    const { value } = e?.target
-    setPostCode(value)
+    const { value, type, name } = e?.target
+    if (name === 'postcode') {
+      formData.postcode = value
+      setPostCode(value)
+    }
+    if (name === 'address_1') {
+      formData.address_1 = value
+    }
+    if (name === 'address_2') {
+      formData.address_2 = value
+    }
+    if (name === 'address_3') {
+      formData.address_3 = value
+    }
+    if (name === 'village/city') {
+      formData.city = value
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // if (
-    //   (!selectedCountry || !enteredPostalCode) &&
-    //   (!countryCode || !postCode)
-    // ) {
-    //   setShowToast(true)
-    //   setToastMessage('Please enter/select required fields')
-    //   return
-    // }
-    if ((!countryCode && !selectedCountry) || !postCode) {
-      {
-        setShowToast(true)
-        setToastMessage('Please enter/select required fields')
-        return
-      }
-    }
     const nonce = localStorage.getItem('nonce')
     const loginToken = localStorage.getItem('loginToken')
     const headers = { 'Content-Type': 'application/json', Nonce: nonce }
-    const postData = {
-      shipping_address: {
-        country: String(countryCode ? countryCode : selectedCountry),
-        postcode: String(postCode),
-      },
-    }
+    if (isOrderFromUk) {
+      if ((!countryCode && !selectedCountry) || !postCode) {
+        {
+          setShowToast(true)
+          setToastMessage('Please enter/select required fields')
+          return
+        }
+      }
+      const postData = {
+        shipping_address: {
+          country: String(countryCode ? countryCode : selectedCountry),
+          postcode: String(postCode),
+        },
+      }
 
-    // Check if loginToken is available
+      // Check if loginToken is available
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
+      try {
+        setAddingDeliveryInfo(true)
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/update-customer',
+          {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(postData),
+            credentials: 'include',
+          },
+        )
+        const responseData = await response.json()
+
+        if (responseData) {
+          if (responseData?.data?.status === 400) {
+            setAddingDeliveryInfo(false)
+            setShowToast(true)
+            setToastMessage('Please enter valid Postcode')
+            return
+          }
+          setAddingDeliveryInfo(false)
+          setIsPostcodeEntered(!isPostcodeEntered)
+        }
+      } catch (error) {}
+      return
+    }
+    if (
+      Object.keys(formData).length === 0 ||
+      formData.address_1 === '' ||
+      formData.address_2 === '' ||
+      !isStateSelected
+    ) {
+      setShowToast(true)
+      setToastMessage('Please enter/select all the required fields')
+      return
+    }
+    if (!isChecked) {
+      setShowToast(true)
+      setToastMessage(
+        'Please accept responsibility for any taxes and duties payable on import',
+      )
+      return
+    }
     if (loginToken) {
       headers['Authorization'] = `Bearer ${loginToken}`
     }
+    formData.state = stateCode || selectedState
+    formData.country = countryCode || selectedCountry
+    const shippingData = {
+      shipping_address: {
+        address_1: formData?.address_1,
+        address_2: formData?.address_2,
+        address_3: formData?.address_3,
+        city: formData?.city,
+        country: formData?.country,
+        state: formData?.state,
+      },
+    }
     try {
-      setAddingDeliveryInfo(true)
+      // setAddingDeliveryInfo(true)
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/update-customer',
         {
           method: 'POST',
           headers,
-          body: JSON.stringify(postData),
+          body: JSON.stringify(shippingData),
           credentials: 'include',
         },
       )
@@ -467,16 +574,21 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
 
       if (responseData) {
         if (responseData?.data?.status === 400) {
-          setAddingDeliveryInfo(false)
-          setShowToast(true)
-          setToastMessage('Please enter valid Postcode')
+          // setAddingDeliveryInfo(false)
+          // setShowToast(true)
+          // setToastMessage('Please enter valid Postcode')
           return
         }
-        setAddingDeliveryInfo(false)
-        setIsPostcodeEntered(!isPostcodeEntered)
+        // setAddingDeliveryInfo(false)
+        // setIsPostcodeEntered(!isPostcodeEntered)
       }
     } catch (error) {}
+    return
   }
+
+  useEffect(() => {
+    isCheckoutEnable(isChecked, isOrderFromUk)
+  }, [isChecked, isOrderFromUk])
 
   return (
     <section className="flex h-auto w-full flex-col gap-5 lg:max-w-[526px]">
@@ -496,11 +608,12 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
             <>
               <input
                 type="text"
-                id="first_name"
-                name="first_name"
+                id="postcode"
+                name="postcode"
                 value={postCode}
                 placeholder="Enter Postcode"
                 onChange={handleChange}
+                ref={textFieldRef}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
               />
               <div className="relative flex h-[41px] w-[110px] font-sans text-display-4 dxl:h-[50px] dxl:w-[150px] dxl:text-display-17">
@@ -523,7 +636,7 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
                 type="text"
                 id="address_1"
                 name="address_1"
-                value={postCode}
+                value={formData.address_1}
                 placeholder="Address Line 1*"
                 onChange={handleChange}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
@@ -532,7 +645,7 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
                 type="text"
                 id="address_2"
                 name="address_2"
-                value={postCode}
+                value={formData.address_2}
                 placeholder="Address Line 2*"
                 onChange={handleChange}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
@@ -541,7 +654,7 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
                 type="text"
                 id="address_3"
                 name="address_3"
-                value={postCode}
+                value={formData.address_3}
                 placeholder="Address Line 3"
                 onChange={handleChange}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
@@ -550,13 +663,18 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
                 type="text"
                 id="village/city"
                 name="village/city"
-                value={postCode}
+                value={formData.cityOrVillage}
                 placeholder="Village / City / Town"
                 onChange={handleChange}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
               />
+              <StateSelector
+                selectedCountry={countryCode ? countryCode : selectedCountry}
+                selectedState={selectedState}
+                setStateCode={setStateCode}
+              />
               <section className="flex w-full gap-2 dxl:gap-4">
-                <CheckBox />
+                <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} />
                 <p className="mt-[-6px] h-auto  w-full font-sans text-display-3 dxl:text-display-6">
                   I accept all responsibility for any taxes and duties payable
                   on import
@@ -583,7 +701,7 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
         </section>
       )}
       {showToast && (
-        <div className="mt-3 h-auto w-full">
+        <div className="h-auto w-full">
           <Toast
             message={toastMessage}
             showToast={showToast}
@@ -597,8 +715,10 @@ function Delivery({ productData, setIsPostcodeEntered, isPostcodeEntered }) {
 
 function YourBasket() {
   const [data, setData] = useState([])
+  const textFieldRef = useRef(null)
   const [loading, setLoading] = useState(true)
   const [isCartEmpty, setIsCartEmpty] = useState(false)
+  const [checkout, setCheckout] = useState(false)
   const [isPostcodeEntered, setIsPostcodeEntered] = useState(false)
 
   useEffect(() => {
@@ -635,6 +755,11 @@ function YourBasket() {
     window.scrollTo(0, 0)
   }, [])
 
+  const isCheckoutEnable = (isCheckoutEnable, isOrderFromUk) => {
+    const checkoutReady = isCheckoutEnable || isOrderFromUk
+    return setCheckout(checkoutReady)
+  }
+
   return (
     <main className="flex h-auto w-full flex-col gap-6 px-9 pt-[14px] xl:gap-10 xl:px-[64px] dxl:gap-14 dxl:px-[132px]">
       <Breadcrumbs />
@@ -649,7 +774,7 @@ function YourBasket() {
       ) : (
         <section className="xl flex h-auto w-full flex-col gap-6 xl:gap-[50px]">
           {' '}
-          <BasketHead />
+          <BasketHead checkout={checkout} textFieldRef={textFieldRef} />
           <section className="flex h-auto w-full flex-col gap-6 lg:flex-row">
             <section className="flex h-auto w-full flex-col gap-6">
               <ProductDetail
@@ -660,11 +785,15 @@ function YourBasket() {
                 productData={data}
                 setIsPostcodeEntered={setIsPostcodeEntered}
                 isPostcodeEntered={isPostcodeEntered}
+                isCheckoutEnable={isCheckoutEnable}
+                textFieldRef={textFieldRef}
               />
             </section>
             <OrderSummary
               productData={data}
               isPostcodeEntered={isPostcodeEntered}
+              checkout={checkout}
+              textFieldRef={textFieldRef}
             />
           </section>
         </section>
