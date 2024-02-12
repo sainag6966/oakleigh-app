@@ -166,8 +166,6 @@ function Payment() {
           'cms',
         )
       if (clientSecret) {
-        // const { stripe } = await paymentSuccessData
-
         const { paymentIntent: retrievePayment } =
           await stripe.retrievePaymentIntent(clientSecret)
 
@@ -179,7 +177,26 @@ function Payment() {
           if (nextAction && nextAction.paymentIntent) {
             if (isSuccessful(nextAction.paymentIntent)) {
               processOrder(result)
-              verificationLink && axios.get(verificationLink)
+              // verificationLink && axios.get(verificationLink)
+              if (verificationLink) {
+                const nonce = localStorage.getItem('nonce')
+                const loginToken = localStorage.getItem('loginToken')
+                const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+
+                if (loginToken) {
+                  headers['Authorization'] = `Bearer ${loginToken}`
+                }
+                try {
+                  const response = await fetch(verificationLink, {
+                    method: 'get',
+                    headers,
+                    credentials: 'include',
+                  })
+                  const responseData = await response.json()
+                  if (responseData) {
+                  }
+                } catch (error) {}
+              }
             } else {
               // toast.error("Payment failed, the PaymentIntent has a status of " + nextAction.paymentIntent.status);
               // dispatch(clearCardElement());
