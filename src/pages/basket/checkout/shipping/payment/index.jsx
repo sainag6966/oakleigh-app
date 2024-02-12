@@ -183,13 +183,13 @@ function Payment() {
                 const loginToken = localStorage.getItem('loginToken')
                 const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
 
-                // if (loginToken) {
-                //   headers['Authorization'] = `Bearer ${loginToken}`
-                // }
+                if (loginToken) {
+                  headers['Authorization'] = `Bearer ${loginToken}`
+                }
                 try {
                   const response = await fetch(verificationLink, {
                     method: 'get',
-                    // headers,
+                    headers,
                     credentials: 'include',
                   })
                   const responseData = await response.json()
