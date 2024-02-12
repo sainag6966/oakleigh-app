@@ -30,7 +30,7 @@ function HeaderDweb({ data }) {
     { title: 'account', url: accountIcon },
     { title: 'basket', url: basketIcon },
   ]
-  const filterData = data.filter((e) => {
+  const filterData = data?.filter((e) => {
     const skipMenu = ['Divider', 'My account', 'Basket']
     return !skipMenu.includes(e.title.rendered)
   })
@@ -140,7 +140,7 @@ function HeaderDweb({ data }) {
           />
         </div>
         <div className="flex grow-[2] items-center justify-evenly">
-          {filterData.map((item, index) => {
+          {filterData?.map((item, index) => {
             return (
               <div key={index} className="relative">
                 <div
