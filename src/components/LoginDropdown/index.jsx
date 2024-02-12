@@ -45,36 +45,6 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
           // router.push('/profile-page')
           handleSuccessfulLogin()
           getNonce()
-          try {
-            // setIsLoggingIn(true)
-            const response = await fetch(
-              'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/wp_userLogin',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-              },
-            )
-
-            if (response.ok) {
-              // const responseData = await response.json() // Parse the response body as JSON
-              // const token = responseData.token
-              // if (token) {
-              //   setIsLoggingIn(false)
-              //   localStorage.setItem('loginToken', token)
-              //   // router.push('/profile-page')
-              //   handleSuccessfulLogin()
-              //   getNonce()
-              // }
-            } else {
-              // Handle errors
-              // console.error('Signup failed')
-            }
-          } catch (error) {
-            // console.error('Error:', error)
-          }
         }
       } else {
         // Handle errors
