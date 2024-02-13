@@ -309,7 +309,7 @@ function OrderSummary({ isPostcodeEntered, checkout, textFieldRef }) {
       textFieldRef.current.focus()
       return
     }
-    if (checkout && isPostcodeEntered) {
+    if (checkout) {
       router.push('/basket/checkout')
     }
   }
@@ -518,11 +518,16 @@ function Delivery({
           if (responseData?.data?.status === 400) {
             setAddingDeliveryInfo(false)
             setShowToast(true)
-            setToastMessage('Please enter valid Postcode')
+            setToastMessage(responseData?.data?.params?.shipping_address)
+            setPostCode('')
             return
           }
           setAddingDeliveryInfo(false)
-          setIsPostcodeEntered(!isPostcodeEntered)
+          setIsPostcodeEntered(true)
+          setShowToast(true)
+          setToastMessage(
+            'Postcode added successfully, you can proceed to checkout',
+          )
         }
       } catch (error) {}
       return
