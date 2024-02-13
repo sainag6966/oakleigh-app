@@ -43,42 +43,6 @@ function CardForm({ getStripeResponse, basketData }) {
   const phone = shippingAddress?.phone
   const email = billingAddress?.email
 
-  // const ownerObj = {
-  //   billing_address: {
-  //     first_name: 'Pikachu',
-  //     last_name: 'Pika',
-  //     company: '',
-  //     address_1: '880 southern Park gate',
-  //     address_2: 'Corner Penthouse Spook Central',
-  //     city: 'New York',
-  //     state: 'NY',
-  //     postcode: '10023',
-  //     country: 'US',
-  //     email: 'pikachu@gmail.com',
-  //     phone: '555-2369',
-  //   },
-  //   shipping_address: {
-  //     first_name: 'Pikachu',
-  //     last_name: 'Pika',
-  //     company: '',
-  //     address_1: '880 southern Park gate',
-  //     address_2: 'Corner Penthouse Spook Central',
-  //     city: 'New York',
-  //     state: 'NY',
-  //     postcode: '10023',
-  //     country: 'US',
-  //   },
-  //   customer_note: 'Test notes on order.',
-  //   create_account: false,
-  //   payment_method: 'stripe',
-  //   payment_data: [],
-  //   extensions: {
-  //     'some-extension-name': {
-  //       'some-data-key': 'some data value',
-  //     },
-  //   },
-  // }
-
   const handleCardFormSubmitForm = async (event) => {
     // event.preventDefault();
     if (!stripe || !elements) {

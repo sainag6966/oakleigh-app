@@ -590,6 +590,15 @@ function Delivery({
         state: formData?.state,
         postcode: postCode,
       },
+      billing_address: {
+        address_1: formData?.address_1,
+        address_2: formData?.address_2,
+        address_3: formData?.address_3,
+        city: formData?.city,
+        country: formData?.country,
+        state: formData?.state,
+        postcode: postCode,
+      },
     }
     try {
       setAddingDeliveryInfo(true)
