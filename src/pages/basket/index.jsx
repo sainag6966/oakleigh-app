@@ -446,6 +446,12 @@ function Delivery({
   const [formError, setFormError] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [addingDeliveryInfo, setAddingDeliveryInfo] = useState(false)
+  const [shippingAddress, setShippingAddress] = useState({
+    address_1: productData?.shipping_address?.address_1 || '',
+    address_2: productData?.shipping_address?.address_2 || '',
+    address_3: productData?.shipping_address?.address_3 || '',
+    city: productData?.shipping_address?.city || '',
+  })
   const selectedCountry = productData?.shipping_address?.country
   const selectedState = productData?.shipping_address?.state
   const enteredPostalCode = productData?.shipping_address?.postcode
@@ -462,18 +468,38 @@ function Delivery({
     if (name === 'postcode') {
       formData.postcode = value
       setPostCode(value)
+      return
     }
     if (name === 'address_1') {
-      formData.address_1 = value
+      // setShippingAddress({
+      //   address_1: value,
+      // })
+      setShippingAddress((prev) => ({
+        ...prev,
+        [name]: value,
+      }))
+      return
     }
     if (name === 'address_2') {
-      formData.address_2 = value
+      setShippingAddress((prev) => ({
+        ...prev,
+        [name]: value,
+      }))
+      return
     }
     if (name === 'address_3') {
-      formData.address_3 = value
+      setShippingAddress((prev) => ({
+        ...prev,
+        [name]: value,
+      }))
+      return
     }
     if (name === 'village/city') {
-      formData.city = value
+      setShippingAddress((prev) => ({
+        ...prev,
+        [name]: value,
+      }))
+      return
     }
   }
 
@@ -533,10 +559,10 @@ function Delivery({
       return
     }
     if (
-      Object.keys(formData).length === 0 ||
-      formData.address_1 === '' ||
-      formData.address_2 === '' ||
-      !isStateSelected
+      !shippingAddress.address_1 ||
+      !shippingAddress.address_2 ||
+      !isStateSelected ||
+      !postCode
     ) {
       setShowToast(true)
       setToastMessage('Please enter/select all the required fields')
@@ -562,10 +588,11 @@ function Delivery({
         city: formData?.city,
         country: formData?.country,
         state: formData?.state,
+        postcode: postCode,
       },
     }
     try {
-      // setAddingDeliveryInfo(true)
+      setAddingDeliveryInfo(true)
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/update-customer',
         {
@@ -579,12 +606,16 @@ function Delivery({
 
       if (responseData) {
         if (responseData?.data?.status === 400) {
-          // setAddingDeliveryInfo(false)
-          // setShowToast(true)
-          // setToastMessage('Please enter valid Postcode')
+          setAddingDeliveryInfo(false)
+          setShowToast(true)
+          setToastMessage(responseData?.data?.params?.shipping_address)
           return
         }
-        // setAddingDeliveryInfo(false)
+        setAddingDeliveryInfo(false)
+        setShowToast(true)
+        setToastMessage(
+          'Shipping address added successfully, you can proceed to checkout',
+        )
         // setIsPostcodeEntered(!isPostcodeEntered)
       }
     } catch (error) {}
@@ -641,7 +672,7 @@ function Delivery({
                 type="text"
                 id="address_1"
                 name="address_1"
-                value={formData.address_1}
+                value={shippingAddress.address_1}
                 placeholder="Address Line 1*"
                 onChange={handleChange}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
@@ -650,7 +681,7 @@ function Delivery({
                 type="text"
                 id="address_2"
                 name="address_2"
-                value={formData.address_2}
+                value={shippingAddress.address_2}
                 placeholder="Address Line 2*"
                 onChange={handleChange}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
@@ -659,7 +690,7 @@ function Delivery({
                 type="text"
                 id="address_3"
                 name="address_3"
-                value={formData.address_3}
+                value={shippingAddress.address_3}
                 placeholder="Address Line 3"
                 onChange={handleChange}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
@@ -668,9 +699,19 @@ function Delivery({
                 type="text"
                 id="village/city"
                 name="village/city"
-                value={formData.cityOrVillage}
+                value={shippingAddress.city}
                 placeholder="Village / City / Town"
                 onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+              />
+              <input
+                type="text"
+                id="postcode"
+                name="postcode"
+                value={postCode}
+                placeholder="Postcode"
+                onChange={handleChange}
+                ref={textFieldRef}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
               />
               <StateSelector
