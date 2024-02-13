@@ -43,42 +43,6 @@ function CardForm({ getStripeResponse, basketData }) {
   const phone = shippingAddress?.phone
   const email = billingAddress?.email
 
-  // const ownerObj = {
-  //   billing_address: {
-  //     first_name: 'Pikachu',
-  //     last_name: 'Pika',
-  //     company: '',
-  //     address_1: '880 southern Park gate',
-  //     address_2: 'Corner Penthouse Spook Central',
-  //     city: 'New York',
-  //     state: 'NY',
-  //     postcode: '10023',
-  //     country: 'US',
-  //     email: 'pikachu@gmail.com',
-  //     phone: '555-2369',
-  //   },
-  //   shipping_address: {
-  //     first_name: 'Pikachu',
-  //     last_name: 'Pika',
-  //     company: '',
-  //     address_1: '880 southern Park gate',
-  //     address_2: 'Corner Penthouse Spook Central',
-  //     city: 'New York',
-  //     state: 'NY',
-  //     postcode: '10023',
-  //     country: 'US',
-  //   },
-  //   customer_note: 'Test notes on order.',
-  //   create_account: false,
-  //   payment_method: 'stripe',
-  //   payment_data: [],
-  //   extensions: {
-  //     'some-extension-name': {
-  //       'some-data-key': 'some data value',
-  //     },
-  //   },
-  // }
-
   const handleCardFormSubmitForm = async (event) => {
     // event.preventDefault();
     if (!stripe || !elements) {
@@ -90,6 +54,7 @@ function CardForm({ getStripeResponse, basketData }) {
       type: 'card',
       card: elements.getElement(CardNumberElement),
     })
+
     // setPayLoadState(payload)
     const ownerInfo = {
       owner: {
@@ -105,51 +70,60 @@ function CardForm({ getStripeResponse, basketData }) {
         email: email,
       },
     }
-
-    const stripResonse = await stripe
-      .createSource(elements.getElement(CardNumberElement), ownerInfo)
-      .then(function (response) {
-        if (response && response.error) {
-          setCardNumberError(response.error.message)
-        } else {
-          let checkout = {
-            payment_method: 'stripe_cc',
-            payment_data: [
-              {
-                key: 'stripe_source',
-                value: response.source.id,
-              },
-              {
-                key: 'paymentRequestType',
-                value: 'card',
-              },
-              {
-                key: 'wc-stripe-new-payment-method',
-                value: false,
-              },
-              {
-                key: 'billing_email',
-                value: email ? email : 'Guest',
-              },
-              {
-                key: 'billing_first_name',
-                value: firstName ? firstName : '',
-              },
-              {
-                key: 'billing_last_name',
-                value: lastName ? lastName : '',
-              },
-            ],
-          }
-          getStripeResponse(checkout)
-          // let data = []
-          // data['stripe'] = stripe
-          // setPaymentSuccessData(data)
-          // dispatch(updateCheckout(checkout));
-          // dispatch(updateStripeToken(checkout));
-          // dispatch(getStripeToken(response.source.id));
-        }
-      })
+    // const { token, error } = await stripe.createToken(
+    //   elements.getElement(CardNumberElement),
+    // )
+    const paymentId = payload?.paymentMethod?.id
+    // const stripResonse = await stripe
+    //   .createSource(elements.getElement(CardNumberElement), ownerInfo)
+    //   .then(function (response) {
+    //     if (response && response.error) {
+    //       setCardNumberError(response.error.message)
+    //     } else {
+    let checkout = {
+      payment_method: 'stripe_cc',
+      payment_data: [
+        {
+          key: 'stripe_cc_token_key',
+          value: paymentId,
+        },
+        {
+          key: 'stripe_cc_save_source_key',
+          value: false,
+        },
+        { key: 'wc-stripe_cc-new-payment-method', value: false },
+        // {
+        //   key: 'paymentRequestType',
+        //   value: 'card',
+        // },
+        { key: 'payment_method', value: 'stripe_cc' },
+        // {
+        //   key: 'wc-stripe-new-payment-method',
+        //   value: false,
+        // },
+        // {
+        //   key: 'billing_email',
+        //   value: email ? email : 'Guest',
+        // },
+        // {
+        //   key: 'billing_first_name',
+        //   value: firstName ? firstName : '',
+        // },
+        // {
+        //   key: 'billing_last_name',
+        //   value: lastName ? lastName : '',
+        // },
+      ],
+    }
+    getStripeResponse(checkout)
+    // let data = []
+    // data['stripe'] = stripe
+    // setPaymentSuccessData(data)
+    // dispatch(updateCheckout(checkout));
+    // dispatch(updateStripeToken(checkout));
+    // dispatch(getStripeToken(response.source.id));
+    // }
+    // })
   }
 
   useEffect(() => {

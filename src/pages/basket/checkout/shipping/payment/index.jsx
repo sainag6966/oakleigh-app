@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import Toast from '@/reuseComps/ToastMessage'
 import { useStripe } from '@stripe/react-stripe-js'
+import { Base64 } from 'js-base64'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import PaymentSection from '@/components/CheckOut/PaymentSection'
 import Breadcrumbs from '@/components/BreadCrumbs'
@@ -107,6 +108,7 @@ function Payment() {
   const [showToast, setShowToast] = useState(false)
   const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [decodedJson, setDecodedJson] = useState({})
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false)
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const leftIcon = '/Images/leftArrow.svg'
@@ -115,7 +117,22 @@ function Payment() {
     setStripeData(data)
   }
 
-  const handleStripeProcess = (data) => {
+  const handleStripeProcess = async (data) => {
+    const redirect_url = data?.payment_result?.redirect_url
+    function parseUrlHash(url) {
+      const matches = url.match(/^#response=(.*)/)
+      if (matches && matches[1]) {
+        const decodedString = decodeURIComponent(
+          Buffer.from(matches[1], 'base64').toString('utf-8'),
+        )
+        const stringWithoutSpaces = decodedString.replace(/[^ -~]/g, '')
+        return JSON.parse(stringWithoutSpaces)
+      } else {
+        return null
+      }
+    }
+    const stripeIntentData = parseUrlHash(redirect_url)
+    const clientSecret = stripeIntentData?.client_secret
     const isSuccessful = function (paymentIntent) {
       if (paymentIntent.status == 'succeeded') {
         return true
@@ -123,12 +140,14 @@ function Payment() {
       if (paymentIntent.status == 'requires_capture') {
         return true
       }
+      if (paymentIntent.status == 'requires_confirmation') {
+        return true
+      }
       return false
     }
-    debugger
-    let redirecUrl = data?.payment_result?.redirect_url
-    const decodedString = atob(redirecUrl)
-    const decodedData = JSON.parse(decodedString)
+
+    // const decodedString = atob(redirecUrl)
+    // const decodedData = JSON.parse(decodedString)
 
     const processOrder = (result) => {
       //   setPaymentCompleted(false)
@@ -144,16 +163,16 @@ function Payment() {
         result.status == 'processing' &&
         result.payment_method == 'stripe'
       ) {
-        router.push('/order-received/' + result.order_id)
+        // router.push('/order-received/' + result.order_id)
       }
       if (
         result.order_id &&
         result.status === 'pending' &&
         result.payment_method == 'stripe_cc'
       ) {
-        //setSuccessMessage(true)
-        //setCreateOrderStatus(true)
-        //setOrderId(result.data.order_id)
+        // setSuccessMessage(true)
+        // setCreateOrderStatus(true)
+        // setOrderId(result.data.order_id)
         router.push('/order-received/' + result.order_id)
       } else {
         setShowToast(true)
@@ -163,70 +182,69 @@ function Payment() {
     }
 
     const stripeProcess = async (result) => {
-      let clientSecret = result?.payment_result?.payment_details?.[2]?.value
-      let verificationLink =
-        result?.payment_result?.payment_details?.[4]?.value.replace(
-          'cms/cms',
-          'cms',
-        )
-      // if (clientSecret) {
-      const { paymentIntent: retrievePayment } =
-        await stripe.retrievePaymentIntent()
+      // let clientSecret = result?.payment_result?.payment_details?.[2]?.value
+      // let verificationLink =
+      //   result?.payment_result?.payment_details?.[4]?.value.replace(
+      //     'cms/cms',
+      //     'cms',
+      //   )
+      if (clientSecret) {
+        // const { paymentIntent: retrievePayment } =
+        //   await stripe.retrievePaymentIntent()
+        if (stripeIntentData.status == 'requires_action') {
+          const nextAction = await stripe.handleCardAction(clientSecret)
+          if (nextAction && nextAction.paymentIntent) {
+            if (isSuccessful(nextAction.paymentIntent)) {
+              processOrder(result)
+              // verificationLink && axios.get(verificationLink)
+              // if (verificationLink) {
+              //   const nonce = localStorage.getItem('nonce')
+              //   const loginToken = localStorage.getItem('loginToken')
+              //   const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
 
-      if (retrievePayment.status == 'requires_action') {
-        const nextAction = await stripe.handleNextAction()
-
-        if (nextAction && nextAction.paymentIntent) {
-          if (isSuccessful(nextAction.paymentIntent)) {
-            processOrder(result)
-            // verificationLink && axios.get(verificationLink)
-            if (verificationLink) {
-              const nonce = localStorage.getItem('nonce')
-              const loginToken = localStorage.getItem('loginToken')
-              const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
-
-              if (loginToken) {
-                headers['Authorization'] = `Bearer ${loginToken}`
-              }
-              try {
-                const response = await fetch(verificationLink, {
-                  method: 'get',
-                  headers,
-                  credentials: 'include',
-                })
-                const responseData = await response.json()
-                if (responseData) {
-                }
-              } catch (error) {}
+              //   if (loginToken) {
+              //     headers['Authorization'] = `Bearer ${loginToken}`
+              //   }
+              //   try {
+              //     const response = await fetch(verificationLink, {
+              //       method: 'get',
+              //       headers,
+              //       credentials: 'include',
+              //     })
+              //     const responseData = await response.json()
+              //     if (responseData) {
+              //     }
+              //   } catch (error) {}
+              // }
+            } else {
+              // toast.error("Payment failed, the PaymentIntent has a status of " + nextAction.paymentIntent.status);
+              // dispatch(clearCardElement());
+              // setBtnText('Place Order')
             }
           } else {
-            // toast.error("Payment failed, the PaymentIntent has a status of " + nextAction.paymentIntent.status);
-            // dispatch(clearCardElement());
-            setBtnText('Place Order')
-          }
-        } else {
-          if (nextAction && nextAction.error && nextAction.error.message) {
-            setIsPaymentProcessing(false)
-            // toast.error(nextAction.error.message);
-            // dispatch(clearCardElement());
-          } else {
-            // dispatch(clearCardElement());
-            // toast.error("failed");
-            setBtnText('Place Order')
+            if (nextAction && nextAction.error && nextAction.error.message) {
+              setIsPaymentProcessing(false)
+              // toast.error(nextAction.error.message);
+              // dispatch(clearCardElement());
+            } else {
+              // dispatch(clearCardElement());
+              // toast.error("failed");
+              setBtnText('Place Order')
+            }
           }
         }
-      } else if (isSuccessful(retrievePayment)) {
-        processOrder(result)
-        verificationLink && axios.get(verificationLink)
-      } else {
-        // dispatch(clearCardElement());
-        // toast.error("Unhandled PaymentIntent status " + retrievePayment.status);
+        // else if (isSuccessful(retrievePayment)) {
+        //   processOrder(result)
+        //   verificationLink && axios.get(verificationLink)
+        // } else {
+        //   // dispatch(clearCardElement());
+        //   // toast.error("Unhandled PaymentIntent status " + retrievePayment.status);
+        // }
       }
-      // }
     }
     if (data?.order_id) {
       let result = data
-      let clientSecret = result?.payment_result?.payment_details?.[2]?.value
+      // let clientSecret = result?.payment_result?.payment_details?.[2]?.value
       if (result.payment_method === 'stripe_cc' && clientSecret) {
         stripeProcess(result)
       } else {
@@ -254,6 +272,7 @@ function Payment() {
   }
 
   const handlePayment = async () => {
+    // Or handle the case where the hash parameter is missing    } }
     const nonce = localStorage.getItem('nonce')
     const loginToken = localStorage.getItem('loginToken')
     const headers = {
@@ -276,7 +295,6 @@ function Payment() {
           body: JSON.stringify(formArr),
         },
       )
-
       if (response.ok) {
         const data = await response.json()
         // setPaymentCompleted(true)
