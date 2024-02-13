@@ -446,15 +446,15 @@ function Delivery({
   const [formError, setFormError] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [addingDeliveryInfo, setAddingDeliveryInfo] = useState(false)
-  const selectedCountry = productData?.shipping_address?.country
-  const selectedState = productData?.shipping_address?.state
   const enteredPostalCode = productData?.shipping_address?.postcode
-  const isOrderFromUk =
-    (selectedCountry === 'GB' && !countryCode) || countryCode === 'GB'
   const [postCode, setPostCode] = useState(
     enteredPostalCode ? enteredPostalCode : '',
   )
+  const selectedCountry = productData?.shipping_address?.country
+  const selectedState = productData?.shipping_address?.state
   const isStateSelected = stateCode || selectedState
+  const isOrderFromUk =
+    (selectedCountry === 'GB' && !countryCode) || countryCode === 'GB'
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -666,6 +666,16 @@ function Delivery({
                 value={formData.cityOrVillage}
                 placeholder="Village / City / Town"
                 onChange={handleChange}
+                className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
+              />
+              <input
+                type="text"
+                id="postcode"
+                name="postcode"
+                value={postCode}
+                placeholder="Enter Postcode"
+                onChange={handleChange}
+                ref={textFieldRef}
                 className="h-[41px] w-full flex-1 appearance-none bg-search px-7 py-2 font-sans text-display-3 text-black dxl:h-[50px] dxl:text-display-6"
               />
               <StateSelector

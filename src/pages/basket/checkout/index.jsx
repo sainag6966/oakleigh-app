@@ -36,7 +36,7 @@ function CheckoutPage() {
     customer_note: 'place order',
     payment_method: stripeData.payment_method,
     payment_data:
-      stripeData.payment_method == 'stripe' ? stripeData.payment_data : {},
+      stripeData.payment_method == 'stripe_cc' ? stripeData.payment_data : {},
     // 'terms-field': values.terms_field,
     // billing_vat_number: values.billing_address.vat_number,
     // dpd_uk_delivery_instructions: values.dpd_uk_delivery_instructions,

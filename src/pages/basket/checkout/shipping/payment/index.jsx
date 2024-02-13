@@ -125,6 +125,10 @@ function Payment() {
       }
       return false
     }
+    debugger
+    let redirecUrl = data?.payment_result?.redirect_url
+    const decodedString = atob(redirecUrl)
+    const decodedData = JSON.parse(decodedString)
 
     const processOrder = (result) => {
       //   setPaymentCompleted(false)
@@ -144,8 +148,8 @@ function Payment() {
       }
       if (
         result.order_id &&
-        result.status == 'pending' &&
-        result.payment_method == 'stripe'
+        result.status === 'pending' &&
+        result.payment_method == 'stripe_cc'
       ) {
         //setSuccessMessage(true)
         //setCreateOrderStatus(true)
@@ -165,67 +169,65 @@ function Payment() {
           'cms/cms',
           'cms',
         )
-      if (clientSecret) {
-        const { paymentIntent: retrievePayment } =
-          await stripe.retrievePaymentIntent(clientSecret)
+      // if (clientSecret) {
+      const { paymentIntent: retrievePayment } =
+        await stripe.retrievePaymentIntent()
 
-        if (retrievePayment.status == 'requires_action') {
-          const nextAction = await stripe.handleNextAction({
-            clientSecret: clientSecret,
-          })
+      if (retrievePayment.status == 'requires_action') {
+        const nextAction = await stripe.handleNextAction()
 
-          if (nextAction && nextAction.paymentIntent) {
-            if (isSuccessful(nextAction.paymentIntent)) {
-              processOrder(result)
-              // verificationLink && axios.get(verificationLink)
-              if (verificationLink) {
-                const nonce = localStorage.getItem('nonce')
-                const loginToken = localStorage.getItem('loginToken')
-                const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+        if (nextAction && nextAction.paymentIntent) {
+          if (isSuccessful(nextAction.paymentIntent)) {
+            processOrder(result)
+            // verificationLink && axios.get(verificationLink)
+            if (verificationLink) {
+              const nonce = localStorage.getItem('nonce')
+              const loginToken = localStorage.getItem('loginToken')
+              const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
 
-                if (loginToken) {
-                  headers['Authorization'] = `Bearer ${loginToken}`
-                }
-                try {
-                  const response = await fetch(verificationLink, {
-                    method: 'get',
-                    headers,
-                    credentials: 'include',
-                  })
-                  const responseData = await response.json()
-                  if (responseData) {
-                  }
-                } catch (error) {}
+              if (loginToken) {
+                headers['Authorization'] = `Bearer ${loginToken}`
               }
-            } else {
-              // toast.error("Payment failed, the PaymentIntent has a status of " + nextAction.paymentIntent.status);
-              // dispatch(clearCardElement());
-              setBtnText('Place Order')
+              try {
+                const response = await fetch(verificationLink, {
+                  method: 'get',
+                  headers,
+                  credentials: 'include',
+                })
+                const responseData = await response.json()
+                if (responseData) {
+                }
+              } catch (error) {}
             }
           } else {
-            if (nextAction && nextAction.error && nextAction.error.message) {
-              setIsPaymentProcessing(false)
-              // toast.error(nextAction.error.message);
-              // dispatch(clearCardElement());
-            } else {
-              // dispatch(clearCardElement());
-              // toast.error("failed");
-              setBtnText('Place Order')
-            }
+            // toast.error("Payment failed, the PaymentIntent has a status of " + nextAction.paymentIntent.status);
+            // dispatch(clearCardElement());
+            setBtnText('Place Order')
           }
-        } else if (isSuccessful(retrievePayment)) {
-          processOrder(result)
-          verificationLink && axios.get(verificationLink)
         } else {
-          // dispatch(clearCardElement());
-          // toast.error("Unhandled PaymentIntent status " + retrievePayment.status);
+          if (nextAction && nextAction.error && nextAction.error.message) {
+            setIsPaymentProcessing(false)
+            // toast.error(nextAction.error.message);
+            // dispatch(clearCardElement());
+          } else {
+            // dispatch(clearCardElement());
+            // toast.error("failed");
+            setBtnText('Place Order')
+          }
         }
+      } else if (isSuccessful(retrievePayment)) {
+        processOrder(result)
+        verificationLink && axios.get(verificationLink)
+      } else {
+        // dispatch(clearCardElement());
+        // toast.error("Unhandled PaymentIntent status " + retrievePayment.status);
       }
+      // }
     }
     if (data?.order_id) {
       let result = data
       let clientSecret = result?.payment_result?.payment_details?.[2]?.value
-      if (result.payment_method === 'stripe' && clientSecret) {
+      if (result.payment_method === 'stripe_cc' && clientSecret) {
         stripeProcess(result)
       } else {
         processOrder(result)
@@ -241,7 +243,7 @@ function Payment() {
     customer_note: 'place order',
     payment_method: stripeData.payment_method,
     payment_data:
-      stripeData.payment_method == 'stripe' ? stripeData.payment_data : {},
+      stripeData.payment_method == 'stripe_cc' ? stripeData.payment_data : {},
     // 'terms-field': values.terms_field,
     // billing_vat_number: values.billing_address.vat_number,
     // dpd_uk_delivery_instructions: values.dpd_uk_delivery_instructions,

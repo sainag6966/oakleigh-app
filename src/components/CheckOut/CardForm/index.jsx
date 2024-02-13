@@ -113,7 +113,7 @@ function CardForm({ getStripeResponse, basketData }) {
           setCardNumberError(response.error.message)
         } else {
           let checkout = {
-            payment_method: 'stripe',
+            payment_method: 'stripe_cc',
             payment_data: [
               {
                 key: 'stripe_source',
