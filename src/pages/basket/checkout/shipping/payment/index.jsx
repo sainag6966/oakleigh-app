@@ -243,7 +243,6 @@ function Payment() {
     payment_data:
       stripeData.payment_method == 'stripe' ? stripeData.payment_data : {},
     // 'terms-field': values.terms_field,
-    // billing_vat_number: values.billing_address.vat_number,
     // dpd_uk_delivery_instructions: values.dpd_uk_delivery_instructions,
     // currency: JSON.parse(localStorage.getItem('currentCurrency'))
     //   ? JSON.parse(localStorage.getItem('currentCurrency'))
