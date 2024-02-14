@@ -173,7 +173,7 @@ function Payment() {
         // setSuccessMessage(true)
         // setCreateOrderStatus(true)
         // setOrderId(result.data.order_id)
-        router.push('/order-received/' + result.order_id)
+        // router.push('/order-received/' + result.order_id)
       } else {
         setShowToast(true)
         setToastMessage('Payment Failed Please Try Again')
@@ -195,6 +195,44 @@ function Payment() {
           const nextAction = await stripe.handleCardAction(clientSecret)
           if (nextAction && nextAction.paymentIntent) {
             if (isSuccessful(nextAction.paymentIntent)) {
+              const url = `https://api.stripe.com/v1/payment_intents/${nextAction?.paymentIntent?.id}/confirm`
+              const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                  Authorization: `Bearer sk_test_51IdGbhGLGyyBwMWYvbPv68XECUNWoQMM1wu0lmzuOmhjqNyTLOV5V1WuoZEIjlBW5G4oTT2SOpWSmPcI4mCvqweO00ujxFotO7`,
+                },
+                // body: JSON.stringify(shippingData),
+                // credentials: 'include',
+              })
+              const responseData = await response.json()
+              if (responseData) {
+                const loginToken = localStorage.getItem('loginToken')
+                const nonce = localStorage.getItem('nonce')
+                const headers = {
+                  // 'Content-Type': 'application/json',
+                  // Nonce: nonce,
+                }
+                if (loginToken) {
+                  headers['Authorization'] = `Bearer ${loginToken}`
+                }
+                const postData = {
+                  order_id: result?.order_id,
+                  order_key: result?.order_key,
+                  stripe_cc_save_source_key: false,
+                  stripe_cc_token_key: nextAction?.paymentIntent?.id,
+                }
+                const url = `https://oakleigh.cda-development3.co.uk/cms/?wc-ajax=wc_stripe_frontend_request&path=/wc-stripe/v1/checkout/payment&order_id=${result?.order_id}&order_key=${result?.order_key}`
+
+                const res = await fetch(url, {
+                  method: 'POST',
+                  headers,
+                  // headers: {
+                  //   Authorization: `Bearer sk_test_51IdGbhGLGyyBwMWYvbPv68XECUNWoQMM1wu0lmzuOmhjqNyTLOV5V1WuoZEIjlBW5G4oTT2SOpWSmPcI4mCvqweO00ujxFotO7`,
+                  // },
+                  // body: JSON.stringify({ oakleigh: 'oakleigh' }),
+                  credentials: 'include',
+                })
+              }
               processOrder(result)
               // verificationLink && axios.get(verificationLink)
               // if (verificationLink) {
