@@ -209,7 +209,7 @@ function Payment() {
                 const loginToken = localStorage.getItem('loginToken')
                 const nonce = localStorage.getItem('nonce')
                 const headers = {
-                  // 'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
                   // Nonce: nonce,
                 }
                 if (loginToken) {
@@ -229,8 +229,8 @@ function Payment() {
                   // headers: {
                   //   Authorization: `Bearer sk_test_51IdGbhGLGyyBwMWYvbPv68XECUNWoQMM1wu0lmzuOmhjqNyTLOV5V1WuoZEIjlBW5G4oTT2SOpWSmPcI4mCvqweO00ujxFotO7`,
                   // },
-                  // body: JSON.stringify({ oakleigh: 'oakleigh' }),
-                  credentials: 'include',
+                  body: JSON.stringify({ hello: 'hello' }),
+                  // credentials: 'include',
                 })
               }
               processOrder(result)
