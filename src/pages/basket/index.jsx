@@ -496,7 +496,7 @@ function Delivery({
       }))
       return
     }
-    if (name === 'village/city') {
+    if (name === 'city') {
       setShippingAddress((prev) => ({
         ...prev,
         [name]: value,
@@ -708,8 +708,8 @@ function Delivery({
               />
               <input
                 type="text"
-                id="village/city"
-                name="village/city"
+                id="city"
+                name="city"
                 value={shippingAddress.city}
                 placeholder="Village / City / Town"
                 onChange={handleChange}
