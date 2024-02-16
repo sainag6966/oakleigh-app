@@ -176,8 +176,8 @@ function Payment() {
         // setOrderId(result.data.order_id)
         // router.push('/order-received/' + result.order_id)
       } else {
-        setShowToast(true)
-        setToastMessage('Payment Failed Please Try Again')
+        // setShowToast(true)
+        // setToastMessage('Payment Failed Please Try Again')
       }
       setIsPaymentProcessing(false)
     }
@@ -256,11 +256,15 @@ function Payment() {
               //   } catch (error) {}
               // }
             } else {
+              setShowToast(true)
+              setToastMessage('Payment failed please try again')
               // toast.error("Payment failed, the PaymentIntent has a status of " + nextAction.paymentIntent.status);
               // dispatch(clearCardElement());
               // setBtnText('Place Order')
             }
           } else {
+            setShowToast(true)
+            setToastMessage('Payment failed please try again')
             if (nextAction && nextAction.error && nextAction.error.message) {
               setIsPaymentProcessing(false)
               // toast.error(nextAction.error.message);
@@ -317,7 +321,11 @@ function Payment() {
       'Content-Type': 'application/json',
       'X-Wc-Store-Api-Nonce': nonce,
     }
-
+    if (!stripeData?.payment_method) {
+      setShowToast(true)
+      setToastMessage('Please enter required card details')
+      return
+    }
     // Check if loginToken is available
     if (loginToken) {
       headers['Authorization'] = `Bearer ${loginToken}`
@@ -340,11 +348,9 @@ function Payment() {
         // setPaymentCompleted(true)
         handleStripeProcess(data)
       } else {
-        console.error(
-          'Failed to add item to the basket. Status:',
-          response.status,
-        )
-        const errorData = await response.json()
+        setShowToast(true)
+        setToastMessage('Payment failed please try again')
+        setIsPaymentProcessing(false)
       }
     } catch (error) {
       console.error('Error:', error)

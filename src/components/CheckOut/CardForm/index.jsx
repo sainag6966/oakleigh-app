@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react'
 import { useStripe } from '@stripe/react-stripe-js'
 import { useElements } from '@stripe/react-stripe-js'
 import { CardNumberElement } from '@stripe/react-stripe-js'
 import { CardCvcElement } from '@stripe/react-stripe-js'
 import { CardExpiryElement } from '@stripe/react-stripe-js'
-import { useEffect, useState } from 'react'
+import Toast from '@/reuseComps/ToastMessage'
 
 const options = {
   style: {
@@ -28,6 +29,8 @@ function CardForm({ getStripeResponse, basketData, cardClear }) {
   const [cardNumberValid, setCardNumberValid] = useState(false)
   const [cardExpValid, setCardexpValid] = useState(false)
   const [cardCvvValid, setCardCvvValid] = useState(false)
+  const [cardSetup, setCardSetup] = useState(false)
+  const [cardSetupText, setCardSetupText] = useState('')
   const [cardNumberError, setCardNumberError] = useState(false)
   const [cardExpError, setCardexpError] = useState(false)
   const [cardCvvError, setCardCvvError] = useState(false)
@@ -50,6 +53,8 @@ function CardForm({ getStripeResponse, basketData, cardClear }) {
       // form submission until Stripe.js has loaded.
       return
     }
+    setCardSetup(true)
+    setCardSetupText('Setting up the card, please wait...')
     const payload = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardNumberElement),
@@ -74,6 +79,10 @@ function CardForm({ getStripeResponse, basketData, cardClear }) {
     //   elements.getElement(CardNumberElement),
     // )
     const paymentId = payload?.paymentMethod?.id
+    if (paymentId) {
+      setCardSetup(true)
+      setCardSetupText('Card setup is done. please proceed to payment')
+    }
     // const stripResonse = await stripe
     //   .createSource(elements.getElement(CardNumberElement), ownerInfo)
     //   .then(function (response) {
@@ -222,6 +231,15 @@ function CardForm({ getStripeResponse, basketData, cardClear }) {
           />
         </label>
       </form>
+      {cardSetup && (
+        <section className="mt-2">
+          <Toast
+            message={cardSetupText}
+            showToast={cardSetup}
+            setShowToast={setCardSetup}
+          />
+        </section>
+      )}
     </>
   )
 }
