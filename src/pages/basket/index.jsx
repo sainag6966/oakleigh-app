@@ -377,7 +377,7 @@ function OrderSummary({ isPostcodeEntered, checkout, textFieldRef }) {
               onClick={handleRemoveCoupon}
             >
               {isCouponAvailable ? (
-                <p className="cursor-pointer">
+                <p className="cursor-pointer text-[10px] sm:text-display-4 dxl:text-display-17">
                   <u>X Remove</u>
                 </p>
               ) : null}

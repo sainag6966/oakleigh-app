@@ -110,6 +110,7 @@ function Payment() {
   const [toastMessage, setToastMessage] = useState('')
   const [decodedJson, setDecodedJson] = useState({})
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false)
+  const [cardClear, setCardClear] = useState(false)
   const oakleighLogo = '/Images/oakleighLogo.svg'
   const leftIcon = '/Images/leftArrow.svg'
 
@@ -321,6 +322,7 @@ function Payment() {
     if (loginToken) {
       headers['Authorization'] = `Bearer ${loginToken}`
     }
+    setCardClear(true)
     try {
       setIsPaymentProcessing(true)
       const response = await fetch(
@@ -332,6 +334,7 @@ function Payment() {
           body: JSON.stringify(formArr),
         },
       )
+      setCardClear(false)
       if (response.ok) {
         const data = await response.json()
         // setPaymentCompleted(true)
@@ -404,6 +407,7 @@ function Payment() {
           <PaymentSection
             basketData={basketData}
             getStripeResponse={getStripeResponse}
+            cardClear={cardClear}
           />
           <BillingBlock
             handlePayment={handlePayment}

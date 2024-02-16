@@ -5,7 +5,7 @@ import PaymentModes from '@/components/CheckOut/PaymentModes'
 import CheckBox from '@/reuseComps/CheckBox'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
-function PaymentSection({ basketData, getStripeResponse }) {
+function PaymentSection({ basketData, getStripeResponse, cardClear }) {
   const stripe = useStripe()
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
@@ -33,6 +33,7 @@ function PaymentSection({ basketData, getStripeResponse }) {
           <PaymentModes
             getStripeResponse={getStripeResponse}
             basketData={basketData}
+            cardClear={cardClear}
           />
           {/* <button
             className="border-[1px] bg-orange-500 p-2"

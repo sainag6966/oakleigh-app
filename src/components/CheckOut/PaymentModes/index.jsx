@@ -6,7 +6,7 @@ import CardForm from '../CardForm'
 const stripePromise = loadStripe(
   'pk_test_51IdGbhGLGyyBwMWYc5xmFlYPVXQ6RK0TfPmi2f0MfSxqM8A9SOtJ0b89jgcmsgYCWA0e5UMcuUAXvT0lAAVVr6XZ00xDjpyMtg',
 )
-function PaymentModes({ getStripeResponse, basketData }) {
+function PaymentModes({ getStripeResponse, basketData, cardClear }) {
   const stripe = useStripe()
   return (
     <Elements stripe={stripePromise}>
@@ -20,6 +20,7 @@ function PaymentModes({ getStripeResponse, basketData }) {
                   stripe={stripe}
                   getStripeResponse={getStripeResponse}
                   basketData={basketData}
+                  cardClear={cardClear}
                   //   setPaymentSuccessData={props.setPaymentSuccessData}
                 />
               </div>

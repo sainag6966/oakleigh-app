@@ -22,7 +22,7 @@ const options = {
   },
 }
 
-function CardForm({ getStripeResponse, basketData }) {
+function CardForm({ getStripeResponse, basketData, cardClear }) {
   const stripe = useStripe()
   const elements = useElements()
   const [cardNumberValid, setCardNumberValid] = useState(false)
@@ -125,6 +125,14 @@ function CardForm({ getStripeResponse, basketData }) {
     // }
     // })
   }
+
+  useEffect(() => {
+    if (cardClear) {
+      elements.getElement(CardNumberElement).clear()
+      elements.getElement(CardExpiryElement).clear()
+      elements.getElement(CardCvcElement).clear()
+    }
+  }, [cardClear])
 
   useEffect(() => {
     cardNumberValid &&
