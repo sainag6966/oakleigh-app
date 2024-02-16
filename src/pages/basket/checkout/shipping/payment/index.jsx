@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { use, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -12,6 +12,7 @@ import CheckoutItems from '@/components/CheckOut/CheckoutItems'
 import ShippingPage from '@/components/CheckOut/ShippingPage'
 import CheckBox from '@/reuseComps/CheckBox'
 import Spinner from '@/reuseComps/Spinner'
+import OverlayWindow from '@/reuseComps/OverlayComp'
 
 function BillingBlock({
   handlePayment,
@@ -20,7 +21,12 @@ function BillingBlock({
   setShowToast,
   message,
 }) {
+  const [isOverlayOpen, setIsOverlayOpen] = useState('')
   const leftIcon = '/Images/leftArrow.svg'
+
+  const handleOverlay = (clickedLink) => {
+    setIsOverlayOpen(clickedLink)
+  }
 
   return (
     <section className="flex h-auto w-full flex-col gap-6 font-sans ">
@@ -54,9 +60,30 @@ function BillingBlock({
       <p className="text-display-3 dxl:text-display-6">
         By clicking below and completing your order, you agree to purchase your
         item(s) from Oakleigh Watches as merchant of record for this
-        transaction, on Oakleigh Watches <u>Terms & Conditions</u> and{' '}
-        <u>Privacy Policy</u>.
+        transaction, on Oakleigh Watches{' '}
+        <u
+          onClick={() => {
+            handleOverlay('terms')
+          }}
+          className="cursor-pointer"
+        >
+          Terms & Conditions
+        </u>{' '}
+        and{' '}
+        <u
+          onClick={() => {
+            handleOverlay('privacy')
+          }}
+          className="cursor-pointer"
+        >
+          Privacy Policy
+        </u>
+        .
       </p>
+      <OverlayWindow
+        isOverlayOpen={isOverlayOpen}
+        setIsOverlayOpen={setIsOverlayOpen}
+      />
       {showToast && (
         <Toast
           showToast={showToast}
