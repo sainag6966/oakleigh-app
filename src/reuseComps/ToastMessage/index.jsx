@@ -13,7 +13,7 @@ const Toast = ({ message, showToast, setShowToast }) => {
 
   return (
     <div
-      className={`relative bg-uspBlockBackground p-3 font-sans text-footerBg ${
+      className={`relative rounded-[8px] bg-uspBlockBackground p-3 font-sans text-footerBg ${
         showToast ? 'visible' : 'invisible'
       }`}
     >

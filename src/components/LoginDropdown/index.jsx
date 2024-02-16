@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { getNonce } from '@/utils/nonce'
 import { useMediaQuery } from 'react-responsive'
+import Toast from '@/reuseComps/ToastMessage'
 import Spinner from '@/reuseComps/Spinner'
 
 function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
@@ -9,12 +10,33 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
     username: '',
     password: '',
   })
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [showToast, setShowToast] = useState(false)
+  const [toastMsg, setToastMsg] = useState('')
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const router = useRouter()
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
+    if (name === 'email') {
+      if (!value) {
+        setEmailError('Email address is required')
+      } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+        setEmailError('Please enter a valid email address')
+      } else {
+        setEmailError('')
+      }
+      formData.username = value
+    }
+    if (name === 'password') {
+      if (!value) {
+        setPasswordError('Password is required')
+      } else {
+        setPasswordError('')
+      }
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -23,6 +45,11 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!formData?.username || !formData?.password || emailError) {
+      setShowToast(true)
+      setToastMsg('Please enter email address and password')
+      return
+    }
     try {
       setIsLoggingIn(true)
       const response = await fetch(
@@ -35,7 +62,13 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
           body: JSON.stringify(formData),
         },
       )
-
+      if (!response.ok) {
+        const responseData = await response.json()
+        setIsLoggingIn(false)
+        setShowToast(true)
+        setToastMsg(responseData?.message)
+        return
+      }
       if (response.ok) {
         const responseData = await response.json() // Parse the response body as JSON
         const token = responseData.token
@@ -86,13 +119,15 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
               <input
                 type="username"
                 id="username"
-                name="username"
+                name="email"
                 placeholder="Email address*"
                 value={formData.username}
                 onChange={handleChange}
                 className="focus:shadow-outline h-full w-full appearance-none rounded border px-[30px] py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
-                required
               />
+              {emailError && (
+                <p className="text-sm text-red-500">{emailError}</p>
+              )}
             </div>
             <div className="h-[50px]">
               <input
@@ -103,9 +138,26 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
                 value={formData.password}
                 onChange={handleChange}
                 className="focus:shadow-outline h-[50px] w-full appearance-none rounded border px-[30px] py-2 text-display-6 leading-tight text-gray-700 shadow focus:outline-none"
-                required
               />
+              {passwordError && (
+                <p className="text-sm text-red-500">{passwordError}</p>
+              )}
             </div>
+            {showToast && (
+              <div className="mt-1 h-auto w-full">
+                <Toast
+                  message={toastMsg}
+                  showToast={showToast}
+                  setShowToast={setShowToast}
+                />
+              </div>
+            )}
+            {isLoggingIn && (
+              <section className="mt-0 flex gap-2">
+                <Spinner width={25} height={25} />
+                <p>Logging In please wait...</p>
+              </section>
+            )}
             <div className="mt-[10px] flex w-full items-center justify-start gap-5 sm:gap-10">
               <div className="relative flex h-[40px] w-[100px] font-sans text-display-4 xl:h-[53px] xl:w-[174px] xl:text-display-17">
                 <div className="absolute bottom-0 h-[37px] w-[97px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[171px]"></div>
@@ -121,12 +173,6 @@ function LoginDropdown({ handleSuccessfulLogin, handleCreateAcc }) {
                 <u>Forgotten Your Password?</u>
               </p>
             </div>
-            {isLoggingIn && (
-              <section className="mt-0 flex gap-2">
-                <Spinner width={25} height={25} />
-                <p>Logging In please wait...</p>
-              </section>
-            )}
           </form>
         </div>
         <div className="flex w-auto max-w-[803px] flex-1 flex-col justify-between gap-4 self-stretch bg-search p-4 sm:p-6 xl:p-9 dxl:gap-7 dxl:p-[50px]">
