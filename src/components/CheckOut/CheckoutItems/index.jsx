@@ -135,8 +135,8 @@ function CheckoutItems({ basketData, setAddOrRemovePromo, addOrRemovePromo }) {
             name="first_name"
             value={coupon}
             onChange={handleChange}
-            placeholder="ENTER CODE"
-            className="h-[41px] w-full flex-1 appearance-none border bg-textPrimary px-4 py-2 font-sans text-display-3 text-black sm:px-7 dxl:h-[53px] dxl:text-display-6"
+            placeholder="Enter Code"
+            className="h-[41px] w-full flex-1 appearance-none border bg-textPrimary px-4 py-2 font-sans text-display-3 text-footerBg focus:border-none focus:outline-none focus:ring-0 sm:px-7 dxl:h-[53px] dxl:text-display-6"
           />
           <div className="relative flex h-[41px] w-[110px] cursor-pointer font-sans text-display-4 dxl:h-[53px] dxl:w-[150px] dxl:text-display-17">
             <div className="absolute bottom-0 h-[38px] w-[107px] border-[0.5px] border-textSecondary dxl:h-[50px] dxl:w-[147px]"></div>

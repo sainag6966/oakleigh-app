@@ -211,7 +211,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
             />
           </section>
           <section className="flex h-auto w-full flex-col gap-3 sm:flex-row lg:gap-5">
-            <section className="h-auto flex-1">
+            <section className="h-auto flex-1 opacity-100">
               <input
                 type="text"
                 id="first_name"
@@ -219,7 +219,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
                 value={formData?.first_name || ''}
                 placeholder="First Name*"
                 onChange={handleChange}
-                className="selection: h-[40px] w-full appearance-none bg-search  px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+                className="selection: h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
               />
               {firstNameError && (
                 <p className="mt-1 text-sm text-red-500">{firstNameError}</p>
@@ -233,7 +233,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
                 value={formData?.last_name || ''}
                 placeholder="Last Name*"
                 onChange={handleChange}
-                className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+                className="h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
               />
               {lastNameError && (
                 <p className="mt-1 text-sm text-red-500">{lastNameError}</p>
@@ -248,7 +248,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
               value={formData?.address_1 || ''}
               placeholder="Address*"
               onChange={handleChange}
-              className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+              className="h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
             />
             {addressError && (
               <p className="mt-1 text-sm text-red-500">{addressError}</p>
@@ -262,7 +262,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
               value={formData?.address_2 || ''}
               placeholder="Apartment, Suite, Etc.(Optional)"
               onChange={handleChange}
-              className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+              className="h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
             />
           </section>
           <section className="flex h-auto w-full flex-col gap-3 sm:flex-row lg:gap-5">
@@ -274,7 +274,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
                 value={formData?.city || ''}
                 placeholder="City*"
                 onChange={handleChange}
-                className="h-[40px] w-full appearance-none bg-search px-3 py-2  text-display-3 leading-tight focus:shadow dxl:h-[50px] dxl:text-display-6"
+                className="h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none  focus:shadow focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
               />
               {cityError && (
                 <p className="mt-1 text-sm text-red-500">{cityError}</p>
@@ -288,7 +288,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
                 value={formData?.postcode || ''}
                 placeholder="Postcode*"
                 onChange={handleChange}
-                className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+                className="h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
               />
               {postCodeError && (
                 <p className="mt-1 text-sm text-red-500">{postCodeError}</p>
@@ -303,7 +303,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
               value={formData?.phone || ''}
               placeholder="Phone*"
               onChange={handleChange}
-              className="focus:shadow-outline h-[40px] w-full appearance-none bg-search px-3  py-2 text-display-3 leading-tight dxl:h-[50px] dxl:text-display-6"
+              className="h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
             />
             {phoneError && (
               <p className="mt-1 text-sm text-red-500">{phoneError}</p>
