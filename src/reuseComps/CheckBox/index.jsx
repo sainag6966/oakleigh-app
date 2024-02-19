@@ -13,7 +13,7 @@ function CheckBox({ setIsChecked, isChecked }) {
     <section
       className={`h-3 w-3 border-[1px] ${
         isChecked ? 'bg-footerBg' : 'bg-none'
-      } border-textSecondary dxl:h-5 dxl:w-5`}
+      } cursor-pointer border-textSecondary dxl:h-5 dxl:w-5`}
       onClick={handleSetChecked}
     >
       {/* {isChecked && (

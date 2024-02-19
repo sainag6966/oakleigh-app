@@ -193,6 +193,17 @@ function ShippingAddress({
         postcode: String(formData?.postcode),
         phone: String(formData?.phone),
       },
+      shipping_address: {
+        country: String(countryCode ? countryCode : selectedCountry),
+        postcode: String(basketData?.shipping_address?.postCode),
+        first_name: String(basketData?.shipping_address?.first_name),
+        last_name: String(basketData?.shipping_address?.last_name),
+        address_1: String(basketData?.shipping_address?.address_1),
+        address_2: String(basketData?.shipping_address?.address_2),
+        city: String(basketData?.shipping_address?.city),
+        postcode: String(basketData?.shipping_address?.postcode),
+        phone: String(basketData?.shipping_address?.phone),
+      },
     }
     if (loginToken) {
       headers['Authorization'] = `Bearer ${loginToken}`

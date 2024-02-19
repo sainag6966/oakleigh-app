@@ -220,9 +220,9 @@ function Payment() {
       if (
         result.order_id &&
         result.status == 'processing' &&
-        result.payment_method == 'stripe'
+        result.payment_method == 'stripe_cc'
       ) {
-        // router.push('/order-received/' + result.order_id)
+        router.push('/order-received/' + result.order_id)
       }
       if (
         result.order_id &&
@@ -232,7 +232,7 @@ function Payment() {
         // setSuccessMessage(true)
         // setCreateOrderStatus(true)
         // setOrderId(result.data.order_id)
-        // router.push('/order-received/' + result.order_id)
+        router.push('/order-received/' + result.order_id)
       } else {
         // setShowToast(true)
         // setToastMessage('Payment Failed Please Try Again')
