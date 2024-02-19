@@ -9,7 +9,7 @@ function PaymentSection({ basketData, getStripeResponse, cardClear }) {
   const stripe = useStripe()
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(true)
   const gateWayIcon = '/Images/gatewayIcons.svg'
 
   return (

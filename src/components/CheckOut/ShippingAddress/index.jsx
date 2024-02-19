@@ -6,7 +6,14 @@ import CountrySelector from '@/reuseComps/CountrySelector'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import Spinner from '@/reuseComps/Spinner'
 
-function ShippingAddress({ address, basketData, email, emailError }) {
+function ShippingAddress({
+  address,
+  basketData,
+  email,
+  emailError,
+  isFromPayment,
+  isPaynowClicked,
+}) {
   const router = useRouter()
   const [countryCode, setCountryCode] = useState('')
   const [firstNameError, setFirstNameError] = useState('')
@@ -20,6 +27,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
   const [toastMessage, setToastMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const selectedCountry = basketData?.shipping_address?.country
+  const addressHeading = isFromPayment ? 'Billing Address' : 'Shipping Address'
   // const [formData, setFormData] = useState({
   //   first_name: '',
   //   last_name: '',
@@ -33,8 +41,12 @@ function ShippingAddress({ address, basketData, email, emailError }) {
   const leftIcon = '/Images/leftArrow.svg'
 
   useEffect(() => {
+    if (isFromPayment && isPaynowClicked) {
+      handleContinueShiping()
+      return
+    }
     setFormData(address)
-  }, [address])
+  }, [address, isPaynowClicked])
 
   const handleChange = (e) => {
     e.preventDefault
@@ -122,7 +134,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
   }
 
   const handleContinueShiping = async (e) => {
-    e.preventDefault
+    // e.preventDefault
     if (
       !formData?.first_name ||
       !formData?.last_name ||
@@ -135,7 +147,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
       setToastMessage('Please fill all the requied fields marked as *')
       return
     }
-    if (emailError || !email) {
+    if (!isFromPayment && (emailError || !email)) {
       setShowToast(true)
       setToastMessage('Please fill the Email address')
       return
@@ -168,17 +180,34 @@ function ShippingAddress({ address, basketData, email, emailError }) {
         phone: String(formData?.phone),
       },
     }
+    const onlyBillingData = {
+      billing_address: {
+        email: String(email),
+        country: String(countryCode ? countryCode : selectedCountry),
+        postcode: String(formData?.postCode),
+        first_name: String(formData?.first_name),
+        last_name: String(formData?.last_name),
+        address_1: String(formData?.address_1),
+        address_2: String(formData?.address_2),
+        city: String(formData?.city),
+        postcode: String(formData?.postcode),
+        phone: String(formData?.phone),
+      },
+    }
     if (loginToken) {
       headers['Authorization'] = `Bearer ${loginToken}`
     }
     try {
-      setLoading(true)
+      if (!isFromPayment) {
+        setLoading(true)
+      }
+      const finalData = isFromPayment ? onlyBillingData : postData
       const response = await fetch(
         'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart/update-customer',
         {
           method: 'POST',
           headers,
-          body: JSON.stringify(postData),
+          body: JSON.stringify(finalData),
           credentials: 'include',
         },
       )
@@ -191,7 +220,9 @@ function ShippingAddress({ address, basketData, email, emailError }) {
           // setToastMessage('Please enter Valid Postcode')
           return
         }
-        router.push('/basket/checkout/shipping')
+        if (!isFromPayment) {
+          router.push('/basket/checkout/shipping')
+        }
         setLoading(false)
         // setAddingDeliveryInfo(false)
         // setIsPostcodeEntered(!isPostcodeEntered)
@@ -201,7 +232,7 @@ function ShippingAddress({ address, basketData, email, emailError }) {
 
   return (
     <section className="flex w-full flex-col gap-4 dxl:mt-[30px] dxl:gap-5">
-      <p className="text-display-11 dxl:text-display-12">Shipping Address</p>
+      <p className="text-display-11 dxl:text-display-12">{addressHeading}</p>
       <section className="h-auto w-full">
         <form className="flex w-full flex-col gap-3 font-sans lg:gap-5">
           <section className="w-full dxl:mt-[5px]">
@@ -324,30 +355,32 @@ function ShippingAddress({ address, basketData, email, emailError }) {
           <p>Redirecting to shipping please wait...</p>
         </section>
       )}
-      <section className="flex h-auto w-full items-center justify-between dxl:mt-[10px]">
-        <section className="flex flex-1 items-center justify-start gap-[2px]">
-          <section className="h-3 w-3 dxl:mt-[3px] dxl:h-4 dxl:w-4">
-            <ProgressiveImageComp src={leftIcon} alt="left" />
+      {!isFromPayment && (
+        <section className="flex h-auto w-full items-center justify-between dxl:mt-[10px]">
+          <section className="flex flex-1 items-center justify-start gap-[2px]">
+            <section className="h-3 w-3 dxl:mt-[3px] dxl:h-4 dxl:w-4">
+              <ProgressiveImageComp src={leftIcon} alt="left" />
+            </section>
+            <Link href="/basket">
+              <p className="font-sans text-display-4 dxl:text-display-17">
+                <u>Return To Basket</u>
+              </p>
+            </Link>
           </section>
-          <Link href="/basket">
-            <p className="font-sans text-display-4 dxl:text-display-17">
-              <u>Return To Basket</u>
-            </p>
-          </Link>
+          <section
+            className="relative mt-1 flex h-[42px] w-full flex-1 font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
+            role="button"
+            onClick={handleContinueShiping}
+          >
+            <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
+            <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />
+            <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] dxl:h-[47px]" />
+            <div className="relative flex w-full items-center justify-center text-display-1 text-textPrimary dxl:text-display-17">
+              Continue To Shipping
+            </div>
+          </section>
         </section>
-        <section
-          className="relative mt-1 flex h-[42px] w-full flex-1 font-sans lg:max-w-[180px] dxl:h-[53px] dxl:max-w-[279px]"
-          role="button"
-          onClick={handleContinueShiping}
-        >
-          <div className="absolute bottom-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary bg-textSecondary sm:w-[99%] dxl:h-[50px]" />
-          <div className="absolute right-0 h-[39px] w-[98.5%] border-[0.8px] border-textSecondary sm:w-[99%] dxl:h-[50px]" />
-          <div className="absolute bottom-[3px] left-[1.5%] right-[1.5%] h-[36px] w-[97%] border-b-[0.5px] border-l-[0.5px] border-textPrimary sm:left-[1%] sm:right-[1%] sm:w-[98%] dxl:h-[47px]" />
-          <div className="relative flex w-full items-center justify-center text-display-1 text-textPrimary dxl:text-display-17">
-            Continue To Shipping
-          </div>
-        </section>
-      </section>
+      )}
     </section>
   )
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import Toast from '@/reuseComps/ToastMessage'
 import { useStripe } from '@stripe/react-stripe-js'
 import { Base64 } from 'js-base64'
+import ShippingAddress from '@/components/CheckOut/ShippingAddress'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 import PaymentSection from '@/components/CheckOut/PaymentSection'
 import Breadcrumbs from '@/components/BreadCrumbs'
@@ -20,6 +21,8 @@ function BillingBlock({
   showToast,
   setShowToast,
   message,
+  basketData,
+  isPaynowClicked,
 }) {
   const [isOverlayOpen, setIsOverlayOpen] = useState('')
   const [isShippingAddress, setIsShippingAddress] = useState(true)
@@ -63,6 +66,16 @@ function BillingBlock({
             </section>
             <p>Use a different billing address</p>
           </section>
+          {isBillingAddress && (
+            <ShippingAddress
+              address={{}}
+              basketData={basketData}
+              email={''}
+              emailError={''}
+              isFromPayment
+              isPaynowClicked={isPaynowClicked}
+            />
+          )}
         </section>
       </section>
       <section className="flex h-auto w-full flex-col gap-3">
@@ -151,6 +164,7 @@ function Payment() {
   const [basketData, setBasketData] = useState([])
   const [showToast, setShowToast] = useState(false)
   const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
+  const [isPaynowClicked, setIsPaynowClicked] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [decodedJson, setDecodedJson] = useState({})
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false)
@@ -370,6 +384,7 @@ function Payment() {
       setToastMessage('Please enter required card details')
       return
     }
+    setIsPaynowClicked(true)
     // Check if loginToken is available
     if (loginToken) {
       headers['Authorization'] = `Bearer ${loginToken}`
@@ -465,6 +480,8 @@ function Payment() {
             message={toastMessage}
             setShowToast={setShowToast}
             isPaymentProcessing={isPaymentProcessing}
+            basketData={basketData}
+            isPaynowClicked={isPaynowClicked}
           />
         </section>
       </section>

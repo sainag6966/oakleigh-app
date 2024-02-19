@@ -152,6 +152,7 @@ function CardForm({ getStripeResponse, basketData, cardClear }) {
       handleCardFormSubmitForm()
   }, [cardNumberValid, cardExpValid, cardCvvValid])
 
+  const handleChange = () => {}
   // useEffect(() => {
   //   if (cardClear) {
   //     elements.getElement(CardNumberElement).clear()
@@ -186,50 +187,61 @@ function CardForm({ getStripeResponse, basketData, cardClear }) {
             // }}
           />
         </label>
-        <label>
-          <CardExpiryElement
-            className="bg-search p-2 dxl:p-4"
-            options={options}
-            // onReady={() => {
-            //   console.log('CardNumberElement [ready]')
-            // }}
-            onChange={(event) => {
-              event && event.complete
-                ? setCardexpValid(true)
-                : setCardexpValid(false)
-              event && event.error && setCardexpError(event.error.message)
-              console.log('CardNumberElement [change]', event)
-            }}
-            // onBlur={() => {
-            //   console.log('CardNumberElement [blur]')
-            // }}
-            // onFocus={() => {
-            //   console.log('CardNumberElement [focus]')
-            // }}
-          />
-        </label>
-        <label>
-          <CardCvcElement
-            className="bg-search p-2 dxl:p-4"
-            options={options}
-            // onReady={() => {
-            //   console.log('CardNumberElement [ready]')
-            // }}
-            onChange={(event) => {
-              event && event.complete
-                ? setCardCvvValid(true)
-                : setCardCvvValid(false)
-              event && event.error && setCardCvvError(event.error.message)
-              console.log('CardNumberElement [change]', event)
-            }}
-            // onBlur={() => {
-            //   console.log('CardNumberElement [blur]')
-            // }}
-            // onFocus={() => {
-            //   console.log('CardNumberElement [focus]')
-            // }}
-          />
-        </label>
+        <input
+          type="text"
+          id="nameOnCard"
+          name="nameOnCard"
+          // value={formData?.first_name || ''}
+          placeholder="Name On Card"
+          onChange={handleChange}
+          className="selection: h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight placeholder-opacity-100 focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
+        />
+        <section className="flex h-auto w-full gap-4">
+          <label className="w-full">
+            <CardExpiryElement
+              className="bg-search p-2 text-display-3 dxl:p-4"
+              options={options}
+              // onReady={() => {
+              //   console.log('CardNumberElement [ready]')
+              // }}
+              onChange={(event) => {
+                event && event.complete
+                  ? setCardexpValid(true)
+                  : setCardexpValid(false)
+                event && event.error && setCardexpError(event.error.message)
+                console.log('CardNumberElement [change]', event)
+              }}
+              // onBlur={() => {
+              //   console.log('CardNumberElement [blur]')
+              // }}
+              // onFocus={() => {
+              //   console.log('CardNumberElement [focus]')
+              // }}
+            />
+          </label>
+          <label className="w-full">
+            <CardCvcElement
+              className="bg-search p-2 dxl:p-4"
+              options={options}
+              // onReady={() => {
+              //   console.log('CardNumberElement [ready]')
+              // }}
+              onChange={(event) => {
+                event && event.complete
+                  ? setCardCvvValid(true)
+                  : setCardCvvValid(false)
+                event && event.error && setCardCvvError(event.error.message)
+                console.log('CardNumberElement [change]', event)
+              }}
+              // onBlur={() => {
+              //   console.log('CardNumberElement [blur]')
+              // }}
+              // onFocus={() => {
+              //   console.log('CardNumberElement [focus]')
+              // }}
+            />
+          </label>
+        </section>
       </form>
       {cardSetup && (
         <section className="mt-2">
