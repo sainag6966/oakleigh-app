@@ -22,10 +22,17 @@ function BillingBlock({
   message,
 }) {
   const [isOverlayOpen, setIsOverlayOpen] = useState('')
+  const [isShippingAddress, setIsShippingAddress] = useState(true)
+  const [isBillingAddress, setIsBillingAddress] = useState(false)
   const leftIcon = '/Images/leftArrow.svg'
 
   const handleOverlay = (clickedLink) => {
     setIsOverlayOpen(clickedLink)
+  }
+
+  const handleAddress = () => {
+    setIsShippingAddress(!isShippingAddress)
+    setIsBillingAddress(!isBillingAddress)
   }
 
   return (
@@ -39,11 +46,21 @@ function BillingBlock({
         </p>
         <section className="flex flex-col gap-1 text-display-3 dxl:text-display-6">
           <section className="flex items-center gap-2">
-            <CheckBox />
+            <section onClick={handleAddress}>
+              <CheckBox
+                isChecked={isShippingAddress}
+                // setIsChecked={setIsShippingAddress}
+              />
+            </section>
             <p>Same as shipping address</p>
           </section>
           <section className="flex items-center gap-2">
-            <CheckBox />
+            <section onClick={handleAddress}>
+              <CheckBox
+                isChecked={isBillingAddress}
+                // setIsChecked={setIsBillingAddress}
+              />
+            </section>
             <p>Use a different billing address</p>
           </section>
         </section>

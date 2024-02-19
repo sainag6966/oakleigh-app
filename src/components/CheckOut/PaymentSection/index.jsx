@@ -9,6 +9,7 @@ function PaymentSection({ basketData, getStripeResponse, cardClear }) {
   const stripe = useStripe()
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
   const gateWayIcon = '/Images/gatewayIcons.svg'
 
   return (
@@ -22,7 +23,7 @@ function PaymentSection({ basketData, getStripeResponse, cardClear }) {
       <section className="flex h-auto w-full flex-col gap-3 dxl:gap-6">
         <section className="flex items-center justify-between">
           <section className="flex items-center gap-2 dxl:gap-4">
-            <CheckBox />
+            <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} />
             <p className="text-display-5 dxl:text-display-16">Credit Card</p>
           </section>
           <section className="h-[20px] w-[100px] dxl:h-[30px] dxl:w-[150px]">
