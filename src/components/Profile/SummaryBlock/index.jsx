@@ -28,9 +28,10 @@ function SummaryBlock() {
         <>
           {!isItemClicked && (
             <section className=" bg-search p-[30px] font-sans">
-              {itemList.map((e) => {
+              {itemList.map((e, index) => {
                 return (
                   <section
+                    key={index}
                     className="border-y-[1px] border-orderSummaryBorder p-5 text-display-5 leading-none"
                     onClick={() => {
                       handleItemClick(e)
@@ -69,9 +70,10 @@ function SummaryBlock() {
       ) : (
         <section className="flex h-auto w-full gap-4 xl:gap-6">
           <section className=" min-w-[296px] bg-search p-[30px] font-sans dxl:min-w-[474px]">
-            {itemList.map((e) => {
+            {itemList.map((e, index) => {
               return (
                 <section
+                  key={index}
                   className={`border-y-[1px] ${
                     e === isItemClicked ? 'bg-textPrimary' : 'bg-none'
                   } border-orderSummaryBorder p-5 text-display-5 leading-none dxl:p-7 dxl:text-display-16`}
