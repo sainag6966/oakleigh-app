@@ -84,6 +84,7 @@ function HeaderDweb({ data }) {
     if (icon === 'account') {
       if (isLoggedIn()) {
         router.push('/profile-page')
+        document.body.classList.remove('no-scroll')
         return
       }
       if (openLoginModal) {

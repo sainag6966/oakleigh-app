@@ -29,7 +29,7 @@ function AccountInfoBlock() {
               id="first_name"
               name="first_name"
               // value={formData?.first_name || ''}
-              placeholder="First Name*"
+              placeholder="Last Name*"
               // onChange={handleChange}
               className="selection: h-[40px] w-full appearance-none bg-textPrimary px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
             />
@@ -43,7 +43,7 @@ function AccountInfoBlock() {
               id="first_name"
               name="first_name"
               // value={formData?.first_name || ''}
-              placeholder="First Name*"
+              placeholder="Email Address*"
               // onChange={handleChange}
               className="selection: h-[40px] w-full appearance-none bg-textPrimary px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
             />
@@ -57,7 +57,7 @@ function AccountInfoBlock() {
               id="first_name"
               name="first_name"
               // value={formData?.first_name || ''}
-              placeholder="First Name*"
+              placeholder="Phone Number*"
               // onChange={handleChange}
               className="selection: h-[40px] w-full appearance-none bg-textPrimary px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
             />

@@ -3,8 +3,14 @@ import { useMediaQuery } from 'react-responsive'
 import AccountInfoBlock from '../AccountInfoBlock'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
-function SummaryBlock() {
-  const itemList = ['Account Information', 'My Orders', 'My Alerts', 'Log Out']
+function SummaryBlock({ handleLogout }) {
+  const itemList = [
+    'Account Information',
+    'My Orders',
+    'My Alerts',
+    'Become a VIP',
+    'Log Out',
+  ]
   const leftIcon = '/Images/leftArrow.svg'
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   const [isItemClicked, setIsItemClicked] = useState(
@@ -23,7 +29,7 @@ function SummaryBlock() {
   }
 
   return (
-    <section className="h-auto w-full">
+    <section className="h-auto w-full px-9 lg:px-20 dxl:px-[140px]">
       {!isDesktop ? (
         <>
           {!isItemClicked && (
@@ -84,7 +90,12 @@ function SummaryBlock() {
                   {e !== 'Log Out' && <p>{e}</p>}
                   {e === 'Log Out' && (
                     <u>
-                      <p className="text-display-4 leading-none">{e}</p>
+                      <p
+                        className="text-display-4 leading-none"
+                        onClick={handleLogout}
+                      >
+                        {e}
+                      </p>
                     </u>
                   )}
                 </section>
