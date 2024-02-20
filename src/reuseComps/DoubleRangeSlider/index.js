@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import styles from '../../styles/doubleRange.module.css'
+import { priceFormatter } from '@/utils/formatPrice'
 
 const MultiRangeSlider = ({ min, max, onChange, preText, postText }) => {
   const [minVal, setMinVal] = useState(min)
@@ -7,6 +8,8 @@ const MultiRangeSlider = ({ min, max, onChange, preText, postText }) => {
   const minValRef = useRef(min)
   const maxValRef = useRef(max)
   const range = useRef(null)
+  const formattedMaxVal = preText === '£' ? priceFormatter(max, false) : max
+  const prevText = preText !== '£' ? preText : ''
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -85,14 +88,14 @@ const MultiRangeSlider = ({ min, max, onChange, preText, postText }) => {
           </div>
           <p>-</p>
           <div>
-            {preText}
-            {maxVal}
+            {prevText}
+            {formattedMaxVal}
             {postText}
           </div>
         </div>
         <div className="">
-          {preText}
-          {max}
+          {prevText}
+          {formattedMaxVal}
           {postText}
         </div>
       </div>

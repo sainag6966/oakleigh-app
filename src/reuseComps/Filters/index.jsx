@@ -30,8 +30,8 @@ function Filters() {
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
                 expandGenderSec
-                  ? '/Images/downArrow.svg'
-                  : '/Images/upArrow.svg'
+                  ? '/Images/upArrow.svg'
+                  : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
@@ -40,12 +40,12 @@ function Filters() {
             />
           </div>
           {expandGenderSec && (
-            <div className="mt-5">
+            <div className="mt-5 font-sans">
               <div className="flex items-center justify-start space-x-4">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none border-[1px]  border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -56,7 +56,7 @@ function Filters() {
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -67,7 +67,7 @@ function Filters() {
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -83,7 +83,7 @@ function Filters() {
             <img
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
-                expandModelSec ? '/Images/downArrow.svg' : '/Images/upArrow.svg'
+                expandModelSec ? '/Images/upArrow.svg' : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
@@ -92,12 +92,12 @@ function Filters() {
             />
           </div>
           {expandModelSec && (
-            <div className="mt-5">
+            <div className="mt-5 font-sans">
               <div className="flex items-center justify-start space-x-4">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -108,7 +108,7 @@ function Filters() {
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -119,7 +119,7 @@ function Filters() {
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -130,7 +130,7 @@ function Filters() {
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -141,7 +141,7 @@ function Filters() {
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -157,7 +157,7 @@ function Filters() {
             <img
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
-                expandYearSec ? '/Images/downArrow.svg' : '/Images/upArrow.svg'
+                expandYearSec ? '/Images/upArrow.svg' : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
@@ -184,8 +184,8 @@ function Filters() {
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
                 expandIncludedSec
-                  ? '/Images/downArrow.svg'
-                  : '/Images/upArrow.svg'
+                  ? '/Images/upArrow.svg'
+                  : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
@@ -195,33 +195,33 @@ function Filters() {
           </div>
           {expandIncludedSec && (
             <>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
                   <p className="text-display-6">Full Set</p>
                 </label>
               </div>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
                   <p className="text-display-6">Box and Papers</p>
                 </label>
               </div>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -238,8 +238,8 @@ function Filters() {
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
                 expandConditionSec
-                  ? '/Images/downArrow.svg'
-                  : '/Images/upArrow.svg'
+                  ? '/Images/upArrow.svg'
+                  : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
@@ -249,33 +249,33 @@ function Filters() {
           </div>
           {expandConditionSec && (
             <>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
                   <p className="text-display-6">Unworn</p>
                 </label>
               </div>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
                   <p className="text-display-6">Excellent</p>
                 </label>
               </div>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -291,7 +291,7 @@ function Filters() {
             <img
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
-                expandPriceSec ? '/Images/downArrow.svg' : '/Images/upArrow.svg'
+                expandPriceSec ? '/Images/upArrow.svg' : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
@@ -317,7 +317,7 @@ function Filters() {
             <img
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
-                expandAvailSec ? '/Images/downArrow.svg' : '/Images/upArrow.svg'
+                expandAvailSec ? '/Images/upArrow.svg' : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
@@ -327,44 +327,44 @@ function Filters() {
           </div>
           {expandAvailSec && (
             <>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
                   <p className="text-display-6">Available</p>
                 </label>
               </div>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
                   <p className="text-display-6">Reserved</p>
                 </label>
               </div>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
                   <p className="text-display-6">Coming Soon</p>
                 </label>
               </div>
-              <div className="flex items-center justify-start space-x-4">
+              <div className="flex items-center justify-start space-x-4 font-sans">
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />
@@ -380,7 +380,7 @@ function Filters() {
             <img
               className="mt-1 h-3 w-4 cursor-pointer"
               src={
-                expandSizeSec ? '/Images/downArrow.svg' : '/Images/upArrow.svg'
+                expandSizeSec ? '/Images/upArrow.svg' : '/Images/downArrow.svg'
               }
               alt="upArrow"
               onClick={() => {
