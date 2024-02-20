@@ -1,13 +1,11 @@
 function AccountInfoBlock() {
   return (
-    <section className=" bg-search p-[30px] xl:p-[50px]">
-      <section>
-        <p className="text-display-11 dxl:text-display-13">
-          Account Information
+    <section className=" flex flex-col gap-[15px] bg-search p-[30px] xl:p-[50px] dxl:gap-[30px]">
+      <p className="text-display-11 dxl:text-display-13">Account Information</p>
+      <section className="flex flex-col gap-[15px] font-sans dxl:gap-[30px]">
+        <p className="text-display-5 leading-none dxl:text-display-16">
+          Account Details
         </p>
-      </section>
-      <section className="flex flex-col gap-[15px] font-sans">
-        <p className="text-display-5 dxl:text-display-16">Account Details</p>
         <section className="flex h-auto w-full flex-wrap gap-4">
           <section className="h-auto shrink-0 grow basis-[200px] opacity-100 sm:basis-[250px] lg:basis-[280px] xl:basis-[340px]">
             <input
