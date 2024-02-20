@@ -97,7 +97,7 @@ function Filters() {
                 <label className="flex items-center justify-center gap-[18px]">
                   <input
                     type="checkbox"
-                    className="h-3 w-3 appearance-none rounded-none  border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
+                    className="h-3 w-3 appearance-none rounded-none border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                     // checked={selectedFilters.includes("men")}
                     // onChange={() => handleFilterChange("men")}
                   />

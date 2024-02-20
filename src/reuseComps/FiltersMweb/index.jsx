@@ -77,7 +77,10 @@ function FiltersMweb() {
 
   return (
     <div className="flex h-auto w-full flex-col items-center justify-center gap-4">
-      <div className="flex gap-2 bg-search p-3" onClick={handleFilterWindow}>
+      <div
+        className="flex items-center gap-2 bg-search p-3"
+        onClick={handleFilterWindow}
+      >
         <Image src={headerIcon} width={16} height={16} alt="plusIcon" />
         <div className="text-display-11">Filter By Category</div>
       </div>
@@ -99,7 +102,7 @@ function FiltersMweb() {
                         onClick={() => {
                           handleClose(link)
                         }}
-                        className="mb-[3px] text-[25px]"
+                        className="mb-[3px] font-sans text-[16px] font-light"
                       >
                         -
                       </div>
@@ -123,9 +126,9 @@ function FiltersMweb() {
                             <label className="flex items-center justify-center gap-[18px]">
                               <input
                                 type="checkbox"
-                                className="h-3 w-3 xl:h-5 xl:w-5"
+                                className="h-3 w-3 appearance-none rounded-none border-[1px] border-textSecondary ring-0 checked:bg-black xl:h-5 xl:w-5"
                               />
-                              <p className="text-display-6">{e}</p>
+                              <p className="font-sans text-display-3">{e}</p>
                             </label>
                           </div>
                         )
