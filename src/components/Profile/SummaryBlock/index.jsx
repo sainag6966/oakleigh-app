@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import AccountInfoBlock from '../AccountInfoBlock'
+import MyOrders from '../MyOrders'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
 function SummaryBlock({ handleLogout }) {
@@ -25,6 +26,8 @@ function SummaryBlock({ handleLogout }) {
     switch (isItemClicked) {
       case 'Account Information':
         return <AccountInfoBlock />
+      case 'My Orders':
+        return <MyOrders />
     }
   }
 
@@ -75,7 +78,7 @@ function SummaryBlock({ handleLogout }) {
         </>
       ) : (
         <section className="flex h-auto w-full gap-4 xl:gap-6">
-          <section className=" min-w-[296px] bg-search p-[30px] font-sans dxl:min-w-[474px]">
+          <section className="max-h-[336px] min-w-[296px] bg-search p-[30px] font-sans dxl:max-h-[494px] dxl:min-w-[474px]">
             {itemList.map((e, index) => {
               return (
                 <section
