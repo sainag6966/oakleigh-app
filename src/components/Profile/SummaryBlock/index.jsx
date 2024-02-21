@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive'
 import AccountInfoBlock from '../AccountInfoBlock'
 import MyOrders from '../MyOrders'
 import MyAlerts from '../MyAlerts'
+import BecomeVip from '../BecomeVip'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
 function SummaryBlock({ handleLogout }) {
@@ -31,6 +32,8 @@ function SummaryBlock({ handleLogout }) {
         return <MyOrders />
       case 'My Alerts':
         return <MyAlerts />
+      case 'Become a VIP':
+        return <BecomeVip />
     }
   }
 
