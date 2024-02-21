@@ -204,6 +204,27 @@ function ServiceEnquiry({ handleEnquireNow }) {
         )
       }
     }
+    if (name === 'description') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? {
+                  ...field,
+                  value,
+                  errorMsg: 'Brief description of the problem is required',
+                }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
     setFormData((prevFormData) => {
       return prevFormData.map((field) =>
         field.name === name ? { ...field, value } : field,
@@ -298,6 +319,27 @@ function ServiceEnquiry({ handleEnquireNow }) {
               )
             })}
           </section>
+        </section>
+        <section className="flex flex-1 flex-col gap-3">
+          {/* <p className="text-display-12">Your Watch</p> */}
+          {descArr.map((field) => {
+            return (
+              <section className="relative h-auto font-sans text-display-3 opacity-100">
+                <textarea
+                  type="text"
+                  id={field.name}
+                  name={field.name}
+                  value={field?.value || ''}
+                  placeholder={`${field.placeholder}*`}
+                  onChange={handleChange}
+                  className="selection: h-[40px] min-h-[200px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
+                />
+                {field?.errorMsg && (
+                  <p className="mt-1 text-sm text-red-500">{field?.errorMsg}</p>
+                )}
+              </section>
+            )
+          })}
         </section>
         <section
           className="relative flex h-8 w-[120px] font-sans text-display-1 sm:h-[40px] sm:w-[150px] sm:text-display-4 xl:h-[53px] xl:w-[220px] xl:text-display-17"
