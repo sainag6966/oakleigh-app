@@ -170,6 +170,8 @@ module.exports = {
         metaBorder: '#EAEAEA',
         orderSummaryBorder: '#CDC1B6',
         reservedColor: '#C4C4C4',
+        toggleSwitchOn: '#529134',
+        toggleSwitchOff: '#C61D1D',
       },
     },
   },

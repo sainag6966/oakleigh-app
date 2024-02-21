@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import AccountInfoBlock from '../AccountInfoBlock'
 import MyOrders from '../MyOrders'
+import MyAlerts from '../MyAlerts'
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
 
 function SummaryBlock({ handleLogout }) {
@@ -28,6 +29,8 @@ function SummaryBlock({ handleLogout }) {
         return <AccountInfoBlock />
       case 'My Orders':
         return <MyOrders />
+      case 'My Alerts':
+        return <MyAlerts />
     }
   }
 
@@ -85,7 +88,7 @@ function SummaryBlock({ handleLogout }) {
                   key={index}
                   className={`border-y-[1px] ${
                     e === isItemClicked ? 'bg-textPrimary' : 'bg-none'
-                  } border-orderSummaryBorder p-5 text-display-5 leading-none dxl:p-7 dxl:text-display-16`}
+                  } cursor-pointer border-orderSummaryBorder p-5 text-display-5 leading-none dxl:p-7 dxl:text-display-16`}
                   onClick={() => {
                     handleItemClick(e)
                   }}
