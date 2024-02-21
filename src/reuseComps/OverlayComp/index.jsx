@@ -14,7 +14,7 @@ const OverlayWindow = ({ isOverlayOpen, setIsOverlayOpen }) => {
               </p>
               <div className="flex  justify-end">
                 <button
-                  className="h-4 w-4 text-gray-500"
+                  className="h-4 w-4 font-sans text-gray-500"
                   onClick={() => {
                     setIsOverlayOpen('')
                   }}

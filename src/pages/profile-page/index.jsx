@@ -1,17 +1,24 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { getNonce } from '@/utils/nonce'
 import Breadcrumbs from '@/components/BreadCrumbs'
 import SummaryBlock from '@/components/Profile/SummaryBlock'
 import ImageAndTextBlock from '@/components/ContentBlocks/ImageAndTextBlock'
 import SliderBlock from '@/components/ContentBlocks/SliderBlock'
+import ServiceEnquiry from '@/components/Profile/ServiceEnquiry'
 
 function ProfilePage() {
   const router = useRouter()
+  const [isSeriveEnqOpen, setIsServiceEnqOpen] = useState(false)
 
   const handleLogout = () => {
     localStorage.removeItem('loginToken')
     getNonce()
     router.push('/')
+  }
+
+  const handleEnquireNow = () => {
+    setIsServiceEnqOpen(!isSeriveEnqOpen)
   }
 
   return (
@@ -25,11 +32,14 @@ function ProfilePage() {
         </section>
       </section>
       <SummaryBlock handleLogout={handleLogout} />
-      <ImageAndTextBlock />
+      <ImageAndTextBlock handleButtonClick={handleEnquireNow} />
       <section className="h-auto w-full">
         {' '}
         <SliderBlock />
       </section>
+      {isSeriveEnqOpen && (
+        <ServiceEnquiry handleEnquireNow={handleEnquireNow} />
+      )}
     </section>
   )
 }

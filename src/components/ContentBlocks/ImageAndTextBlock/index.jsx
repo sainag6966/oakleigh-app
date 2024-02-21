@@ -1,6 +1,8 @@
 import ProgressiveImageComp from '@/reuseComps/ProgressiveImageComp'
-function ImageAndTextBlock() {
+
+function ImageAndTextBlock({ handleButtonClick }) {
   const imgSrc = '/Images/Sample/imageTextBlock.svg'
+
   return (
     <section className="flex h-auto w-full flex-col justify-between gap-[30px] px-9 pt-[60px] md:flex-row lg:gap-[60px] lg:px-20 lg:pt-[100px] xl:gap-[120px] dxl:gap-[160px] dxl:px-[140px] dxl:pt-[120px]">
       <figure className="aspect-square flex-1">
@@ -19,7 +21,10 @@ function ImageAndTextBlock() {
           rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
           ipsum dolor sit amet. Lorem ipsum dolor sit
         </p>
-        <div className="relative flex h-[42px] w-[153px] xl:h-[53px] xl:w-[175px]">
+        <div
+          className="relative flex h-[42px] w-[153px] xl:h-[53px] xl:w-[175px]"
+          onClick={handleButtonClick}
+        >
           <div className="absolute bottom-0 h-[39px] w-[150px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
           <div className="absolute right-0 h-[39px] w-[150px] border-[0.5px] border-textSecondary xl:h-[50px] xl:w-[172px]"></div>
           <div className="relative flex w-full cursor-pointer items-center justify-center font-sans text-display-4 xl:text-display-17">
