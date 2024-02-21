@@ -251,7 +251,7 @@ function ServiceEnquiry({ handleEnquireNow }) {
 
   return (
     <div className="fixed left-0 top-0 z-10 h-full w-full bg-black bg-opacity-50 px-7 py-7 lg:px-[200px] lg:py-[40px] xl:px-[250px] dxl:px-[300px] dxl:py-[90px]">
-      <div className="flex h-full w-full flex-col gap-4 overflow-y-scroll rounded bg-white px-6 py-6 lg:py-[50px] lg:pl-[100px] lg:pr-[50px] xl:gap-10">
+      <div className="flex h-full w-full flex-col gap-4 overflow-y-scroll rounded bg-white px-6 py-6 lg:px-10 lg:py-[50px] xl:gap-10 xl:px-[100px]">
         <section className="flex items-center justify-between">
           <p className="font-cormorant text-display-11 dxl:text-display-14">
             Service Enquiry
@@ -349,7 +349,7 @@ function ServiceEnquiry({ handleEnquireNow }) {
           <div className="absolute right-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[217px]"></div>
           <button
             type="submit"
-            className="relative flex w-full items-center justify-center"
+            className="relative flex w-full items-center justify-center xl:h-[47px]"
           >
             Submit Details
           </button>
