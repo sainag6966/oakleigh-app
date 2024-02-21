@@ -1,14 +1,11 @@
 import { useState } from 'react'
 
 function ServiceEnquiry({ handleEnquireNow }) {
-  const yourDetailFields = [
+  const formFields = [
     { name: 'first_name', placeholder: 'First name', value: '', errorMsg: '' },
     { name: 'last_name', placeholder: 'Last name', value: '', errorMsg: '' },
     { name: 'email', placeholder: 'Email address', value: '', errorMsg: '' },
     { name: 'phone', placeholder: 'Phone number', value: '', errorMsg: '' },
-  ]
-
-  const yourWatchFields = [
     { name: 'make', placeholder: 'Make', value: '', errorMsg: '' },
     { name: 'model', placeholder: 'Model', value: '', errorMsg: '' },
     {
@@ -18,8 +15,19 @@ function ServiceEnquiry({ handleEnquireNow }) {
       errorMsg: '',
     },
     { name: 'year', placeholder: 'Year', value: '', errorMsg: '' },
+    {
+      name: 'description',
+      placeholder: 'Brief description of the problem',
+      value: '',
+      errorMsg: '',
+    },
   ]
-  const [formData, setFormData] = useState(yourDetailFields)
+
+  const [formData, setFormData] = useState(formFields)
+  const yourDetailsArr = formData.slice(0, 4)
+  const yourWatchArr = formData.slice(4, 8)
+  const descArr = formData.slice(8)
+
   const handleChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target
@@ -41,7 +49,6 @@ function ServiceEnquiry({ handleEnquireNow }) {
           ),
         )
       } else {
-        console.log(value, '!!')
         setFormData((prevFormData) =>
           prevFormData.map((field) =>
             field.name === name ? { ...field, value, errorMsg: '' } : field,
@@ -54,7 +61,7 @@ function ServiceEnquiry({ handleEnquireNow }) {
         setFormData((prevFormData) =>
           prevFormData.map((field) =>
             field.name === name
-              ? { ...field, value, errorMsg: 'First name is required' }
+              ? { ...field, value, errorMsg: 'Last name is required' }
               : field,
           ),
         )
@@ -129,12 +136,96 @@ function ServiceEnquiry({ handleEnquireNow }) {
         )
       }
     }
-
+    if (name === 'make') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Make is required' }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
+    if (name === 'model') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Model is required' }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
+    if (name === 'referenceNumber') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Reference number is required' }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
+    if (name === 'year') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Year is required' }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
     setFormData((prevFormData) => {
       return prevFormData.map((field) =>
         field.name === name ? { ...field, value } : field,
       )
     })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Check if any field is empty
+    const hasEmptyField = formData.some((field) => !field.value.trim())
+    if (hasEmptyField) {
+      // Set error messages for empty fields
+      setFormData((prevFormData) =>
+        prevFormData.map((field) =>
+          !field.value.trim()
+            ? { ...field, errorMsg: `${field.placeholder} is required` }
+            : field,
+        ),
+      )
+      return
+    }
   }
 
   return (
@@ -160,10 +251,10 @@ function ServiceEnquiry({ handleEnquireNow }) {
             erat, sed diam voluptua.
           </p>
         </section>
-        <section className="h-auto w-full">
-          <section className="flex flex-col gap-3">
+        <section className="flex h-auto w-full flex-col justify-between gap-4 sm:flex-row">
+          <section className="flex flex-1 flex-col gap-3">
             <p className="text-display-12">Your Details</p>
-            {formData.map((field) => {
+            {yourDetailsArr.map((field) => {
               return (
                 <section className="h-auto font-sans text-display-3 opacity-100">
                   <input
@@ -184,6 +275,42 @@ function ServiceEnquiry({ handleEnquireNow }) {
               )
             })}
           </section>
+          <section className="flex flex-1 flex-col gap-3">
+            <p className="text-display-12">Your Watch</p>
+            {yourWatchArr.map((field) => {
+              return (
+                <section className="h-auto font-sans text-display-3 opacity-100">
+                  <input
+                    type="text"
+                    id={field.name}
+                    name={field.name}
+                    value={field?.value || ''}
+                    placeholder={`${field.placeholder}*`}
+                    onChange={handleChange}
+                    className="selection: h-[40px] w-full appearance-none bg-search px-3 py-2 text-display-3 leading-tight focus:border-none focus:outline-none focus:ring-0 dxl:h-[50px] dxl:text-display-6"
+                  />
+                  {field?.errorMsg && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {field?.errorMsg}
+                    </p>
+                  )}
+                </section>
+              )
+            })}
+          </section>
+        </section>
+        <section
+          className="relative flex h-8 w-[120px] font-sans text-display-1 sm:h-[40px] sm:w-[150px] sm:text-display-4 xl:h-[53px] xl:w-[220px] xl:text-display-17"
+          onClick={handleSubmit}
+        >
+          <div className="absolute bottom-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[217px]"></div>
+          <div className="absolute right-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[217px]"></div>
+          <button
+            type="submit"
+            className="relative flex w-full items-center justify-center"
+          >
+            Submit Details
+          </button>
         </section>
       </div>
     </div>
