@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import CheckBox from '@/reuseComps/CheckBox'
-import { useSearchParams } from 'next/navigation'
 
 function VipSignupForm() {
+  const router = useRouter()
   const [isChecked, setIsChecked] = useState(false)
   const [selectedBrands, setSelectedBrands] = useState([])
   const [selectedRange, setSelectedRange] = useState([])
@@ -193,6 +194,7 @@ function VipSignupForm() {
       window.scroll(0, 300)
       return
     }
+    router.push('vip-form-confirmation')
   }
 
   return (
