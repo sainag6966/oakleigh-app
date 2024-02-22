@@ -5,13 +5,13 @@ import { useSearchParams } from 'next/navigation'
 function VipSignupForm() {
   const [isChecked, setIsChecked] = useState(false)
   const [selectedBrands, setSelectedBrands] = useState([])
+  const [selectedRange, setSelectedRange] = useState([])
   const formFields = [
     { name: 'first_name', placeholder: 'First name', value: '', errorMsg: '' },
     { name: 'last_name', placeholder: 'Last name', value: '', errorMsg: '' },
     { name: 'email', placeholder: 'Email address', value: '', errorMsg: '' },
     { name: 'dob', placeholder: 'Date of birth', value: '', errorMsg: '' },
   ]
-
   const brandList = [
     'Rolex',
     'Omega',
@@ -26,7 +26,6 @@ function VipSignupForm() {
     'Litan',
     'Limex',
   ]
-
   const budgetRangeList = [
     '£0 - £1000',
     '£1001 - £2000',
@@ -49,6 +48,19 @@ function VipSignupForm() {
     }
     setSelectedBrands((prev) => {
       return [...prev, brand]
+    })
+  }
+
+  const handleRangeSel = (range) => {
+    if (selectedRange.includes(range)) {
+      const filteredRange = selectedRange.filter((e) => {
+        return e !== range
+      })
+      setSelectedRange(filteredRange)
+      return
+    }
+    setSelectedRange((prev) => {
+      return [...prev, range]
     })
   }
 
@@ -267,14 +279,21 @@ function VipSignupForm() {
           What Is Your Average Budget When Purchasing A Watch?
         </p>
         <section className="grid grid-cols-1 justify-between gap-y-4 sm:grid-cols-2 lg:grid-cols-3 dxl:gap-y-[30px]">
-          {budgetRangeList.map((brand, index) => {
+          {budgetRangeList.map((range, index) => {
+            const selRange = selectedRange.includes(range)
             return (
               <section
                 key={index}
                 className="flex flex-wrap items-center gap-2 dxl:gap-4"
+                onClick={() => {
+                  handleRangeSel(range)
+                }}
               >
-                <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} />
-                <p className="text-display-3 dxl:text-display-6">{brand}</p>
+                <CheckBox
+                  isChecked={selRange ? true : false}
+                  setIsChecked={setIsChecked}
+                />
+                <p className="text-display-3 dxl:text-display-6">{range}</p>
               </section>
             )
           })}
