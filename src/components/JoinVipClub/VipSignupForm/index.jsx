@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 
 function VipSignupForm() {
   const [isChecked, setIsChecked] = useState(false)
+  const [selectedBrands, setSelectedBrands] = useState([])
   const formFields = [
     { name: 'first_name', placeholder: 'First name', value: '', errorMsg: '' },
     { name: 'last_name', placeholder: 'Last name', value: '', errorMsg: '' },
@@ -18,12 +19,12 @@ function VipSignupForm() {
     'Fasttrack',
     'Titan',
     'Timex',
-    'Rolex',
-    'Omega',
-    'Philhuges',
-    'Fasttrack',
-    'Titan',
-    'Timex',
+    'Solex',
+    'Mmega',
+    'Ihilhuges',
+    'Masttrack',
+    'Litan',
+    'Limex',
   ]
 
   const budgetRangeList = [
@@ -36,10 +37,151 @@ function VipSignupForm() {
     '£30,001 - £50,000',
     'Over £50,000',
   ]
+  const [formData, setFormData] = useState(formFields)
 
-  const handleChange = () => {}
+  const handleBrandSel = (brand) => {
+    if (selectedBrands.includes(brand)) {
+      const filteredBrands = selectedBrands.filter((e) => {
+        return e !== brand
+      })
+      setSelectedBrands(filteredBrands)
+      return
+    }
+    setSelectedBrands((prev) => {
+      return [...prev, brand]
+    })
+  }
 
-  const handleSubmit = () => {}
+  const handleChange = (e) => {
+    e.preventDefault()
+    const { name, value } = e.target
+    if (name === 'first_name') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'First name is required' }
+              : field,
+          ),
+        )
+      } else if (!/^[a-zA-Z\s]+$/.test(value)) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Please enter only alphabets' }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
+    if (name === 'last_name') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Last name is required' }
+              : field,
+          ),
+        )
+      } else if (!/^[a-zA-Z\s]+$/.test(value)) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Please enter only alphabets' }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
+    if (name === 'email') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Email address is required' }
+              : field,
+          ),
+        )
+      } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? {
+                  ...field,
+                  value,
+                  errorMsg: 'Please enter a valid email address',
+                }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
+    if (name === 'dob') {
+      if (!value) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? { ...field, value, errorMsg: 'Date of birth is required' }
+              : field,
+          ),
+        )
+      } else if (!/^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}$/.test(value)) {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name
+              ? {
+                  ...field,
+                  value,
+                  errorMsg: 'Please enter a valid date in dd/mm/yyyy format',
+                }
+              : field,
+          ),
+        )
+      } else {
+        setFormData((prevFormData) =>
+          prevFormData.map((field) =>
+            field.name === name ? { ...field, value, errorMsg: '' } : field,
+          ),
+        )
+      }
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Check if any field is empty
+    const hasEmptyField = formData.some((field) => !field.value.trim())
+    if (hasEmptyField) {
+      // Set error messages for empty fields
+      setFormData((prevFormData) =>
+        prevFormData.map((field) =>
+          !field.value.trim()
+            ? { ...field, errorMsg: `${field.placeholder} is required` }
+            : field,
+        ),
+      )
+      window.scroll(0, 300)
+      return
+    }
+  }
 
   return (
     <main className="flex h-auto w-full max-w-[804px] flex-col gap-[15px] bg-search p-[30px] font-sans xl:p-[50px] dxl:gap-[30px]">
@@ -53,7 +195,7 @@ function VipSignupForm() {
       </p>
       <section>
         <section className="flex flex-1 flex-col gap-3">
-          {formFields.map((field, index) => {
+          {formData.map((field, index) => {
             return (
               <section
                 key={index}
@@ -87,12 +229,19 @@ function VipSignupForm() {
         </p>
         <section className="grid grid-cols-2 justify-between gap-y-4 sm:grid-cols-3 lg:grid-cols-4 dxl:gap-y-[30px]">
           {brandList.map((brand, index) => {
+            const selBrand = selectedBrands.includes(brand)
             return (
               <section
                 key={index}
                 className="flex flex-wrap items-center gap-2 dxl:gap-4"
+                onClick={() => {
+                  handleBrandSel(brand)
+                }}
               >
-                <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} />
+                <CheckBox
+                  isChecked={selBrand ? true : false}
+                  setIsChecked={setIsChecked}
+                />
                 <p className="text-display-3 dxl:text-display-6">{brand}</p>
               </section>
             )

@@ -74,7 +74,6 @@ function ServiceEnquiry({ handleEnquireNow }) {
           ),
         )
       } else {
-        console.log(value, '!!')
         setFormData((prevFormData) =>
           prevFormData.map((field) =>
             field.name === name ? { ...field, value, errorMsg: '' } : field,
