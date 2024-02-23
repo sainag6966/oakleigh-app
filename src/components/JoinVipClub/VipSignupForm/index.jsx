@@ -194,7 +194,7 @@ function VipSignupForm() {
       window.scroll(0, 300)
       return
     }
-    router.push('vip-form-confirmation')
+    router.push('/vip-club/join-vip-club/vip-form-confirmation')
   }
 
   return (

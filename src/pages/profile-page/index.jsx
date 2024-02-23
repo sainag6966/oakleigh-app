@@ -25,7 +25,7 @@ function ProfilePage() {
   }
 
   return (
-    <section className="flex h-auto w-full flex-col items-start">
+    <main className="flex h-auto w-full flex-col items-start">
       <section className="mb-[30px] w-full px-9 pt-[14px] lg:px-20 dxl:px-[140px]">
         <section>
           <Breadcrumbs />
@@ -71,7 +71,7 @@ function ProfilePage() {
       {isSeriveEnqOpen && (
         <ServiceEnquiry handleEnquireNow={handleEnquireNow} />
       )}
-    </section>
+    </main>
   )
 }
 export default ProfilePage

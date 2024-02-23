@@ -47,7 +47,7 @@ function BecomeVip() {
           <section
             className="relative flex h-8 w-[120px] items-center font-sans text-display-1 sm:h-[40px] sm:w-[150px] sm:text-display-4 xl:h-[53px] xl:w-[180px] xl:text-display-17 dxl:w-[220px]"
             onClick={() => {
-              router.push('/join-vip-club')
+              router.push('/vip-club')
             }}
           >
             <div className="absolute bottom-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[177px] dxl:w-[217px]"></div>
