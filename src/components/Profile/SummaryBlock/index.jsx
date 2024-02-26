@@ -20,8 +20,8 @@ function SummaryBlock({ handleLogout }) {
     isDesktop ? 'Account Information' : '',
   )
 
-  const handleItemClick = (e) => {
-    setIsItemClicked(e)
+  const handleItemClick = (item) => {
+    setIsItemClicked(item)
   }
 
   const getBlock = () => {
