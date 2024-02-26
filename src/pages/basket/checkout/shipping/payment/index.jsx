@@ -163,6 +163,7 @@ function Payment() {
   const [stripeData, setStripeData] = useState({})
   const [basketData, setBasketData] = useState([])
   const [showToast, setShowToast] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState('stripe_cc')
   const [addOrRemovePromo, setAddOrRemovePromo] = useState(false)
   const [isPaynowClicked, setIsPaynowClicked] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
@@ -390,6 +391,9 @@ function Payment() {
       headers['Authorization'] = `Bearer ${loginToken}`
     }
     setCardClear(true)
+    if (stripeData.payment_method == 'eh_klarna_stripe') {
+      formArr['eh_klarna_token'] = stripeData.klarnaId
+    }
     try {
       setIsPaymentProcessing(true)
       const response = await fetch(
@@ -473,6 +477,7 @@ function Payment() {
             basketData={basketData}
             getStripeResponse={getStripeResponse}
             cardClear={cardClear}
+            setPaymentMethod={setPaymentMethod}
           />
           <BillingBlock
             handlePayment={handlePayment}
