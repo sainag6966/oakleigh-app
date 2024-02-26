@@ -21,6 +21,7 @@ function AccountInfoBlock() {
     },
   ]
   const [formData, setFormData] = useState(formFields)
+  const [passwordEntered, setPasswordEntered] = useState(false)
   const istabScreen = useMediaQuery({ query: '(min-width:600px)' })
 
   const handleChange = (e) => {
@@ -135,6 +136,7 @@ function AccountInfoBlock() {
       }
     }
     if (name === 'newPassword') {
+      setPasswordEntered(true)
       if (!value) {
         setFormData((prevFormData) =>
           prevFormData.map((field) =>
@@ -191,11 +193,17 @@ function AccountInfoBlock() {
     if (hasEmptyField) {
       // Set error messages for empty fields
       setFormData((prevFormData) =>
-        prevFormData.map((field) =>
-          !field.value.trim()
+        prevFormData.map((field) => {
+          if (
+            !passwordEntered &&
+            (field?.name === 'newPassword' || field?.name === 'confirmPassword')
+          ) {
+            return
+          }
+          return !field.value.trim()
             ? { ...field, errorMsg: `${field.placeholder} is required` }
-            : field,
-        ),
+            : field
+        }),
       )
       window.scroll(0, 300)
       return
@@ -205,7 +213,7 @@ function AccountInfoBlock() {
   return (
     <section className=" flex flex-col gap-[15px] bg-search p-[30px] xl:p-[50px] dxl:gap-[30px]">
       <p className="text-display-11 dxl:text-display-13">Account Information</p>
-      <section className="flex flex-col gap-[15px] font-sans dxl:gap-[30px]">
+      <section className="flex flex-col gap-[15px] border-b-[1px] border-orderSummaryBorder pb-[30px] font-sans dxl:gap-[30px] dxl:pb-[50px]">
         <p className="text-display-5 leading-none dxl:text-display-16">
           Account Details
         </p>
@@ -259,6 +267,11 @@ function AccountInfoBlock() {
             Save Changes
           </button>
         </section>
+      </section>
+      <section className="pt-[30px] dxl:pb-[50px]">
+        <p className="font-sans text-display-5 leading-none dxl:text-display-16">
+          Default Billing Address
+        </p>
       </section>
     </section>
   )
