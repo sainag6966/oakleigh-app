@@ -49,13 +49,13 @@ function HeaderMweb({ data }) {
   return (
     <>
       <div className="flex h-[98px] w-full items-center justify-between px-9 py-[30px]">
-        <secion
+        <section
           onClick={() => {
             router.push('/')
           }}
         >
           <NextImage src={oakleighLogo} width="174" height="34" />
-        </secion>
+        </section>
         <div className="flex items-center gap-2.5">
           <p
             onClick={openDrawer}
