@@ -28,7 +28,7 @@ function DefaultBillingAddress() {
     },
     {
       name: 'country',
-      placeholder: 'Village / City / Town',
+      placeholder: 'Country',
       value: '',
       errorMsg: '',
     },
@@ -41,7 +41,7 @@ function DefaultBillingAddress() {
     },
     {
       name: 'county',
-      placeholder: 'Village / City / Town',
+      placeholder: 'County',
       value: '',
       errorMsg: '',
     },
@@ -108,12 +108,15 @@ function DefaultBillingAddress() {
       // Set error messages for empty fields
       setFormData((prevFormData) =>
         prevFormData.map((field) => {
-          //   if (
-          //     !passwordEntered &&
-          //     (field?.name === 'newPassword' || field?.name === 'confirmPassword')
-          //   ) {
-          //     return
-          //   }
+          if (field?.name === 'country' && countryCode) {
+            return !field.value.trim() ? { ...field, errorMsg: '' } : field
+          }
+          if (field?.name === 'address_2' || field?.name === 'city') {
+            return !field.value.trim() ? { ...field, errorMsg: '' } : field
+          }
+          if (field?.name === 'county' && stateCode) {
+            return !field.value.trim() ? { ...field, errorMsg: '' } : field
+          }
           return !field.value.trim()
             ? { ...field, errorMsg: `${field.placeholder} is required` }
             : field

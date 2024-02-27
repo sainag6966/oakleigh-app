@@ -206,7 +206,6 @@ function AccountInfoBlock() {
             : field
         }),
       )
-      window.scroll(0, 300)
       return
     }
   }
