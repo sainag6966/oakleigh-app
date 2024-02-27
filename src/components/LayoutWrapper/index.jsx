@@ -15,6 +15,7 @@ function LayoutWrapper({ children }) {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false)
   const [isFooterVisible, setIsFooterVisible] = useState(true)
   const [footerItem, setFooterItem] = useState([])
+  const [cartData, setCartData] = useState({})
   const isDesktop = useMediaQuery({ query: '(min-width:900px)' })
   //   const trayData = data?.acf?.flexible_listing;
   const username = 'oakleighcdadevel'
@@ -35,6 +36,28 @@ function LayoutWrapper({ children }) {
   const restrictedFooterPath = hideFooterPaths.includes(asPath)
 
   useEffect(() => {
+    const nonce = localStorage.getItem('nonce')
+    const loginToken = localStorage.getItem('loginToken')
+    const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
+    const getCartData = async () => {
+      if (loginToken) {
+        headers['Authorization'] = `Bearer ${loginToken}`
+      }
+      try {
+        const response = await fetch(
+          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart',
+          {
+            method: 'get',
+            headers,
+            credentials: 'include',
+          },
+        )
+        const responseData = await response.json()
+        if (responseData) {
+          setCartData(responseData)
+        }
+      } catch (error) {}
+    }
     const getData = async () => {
       const response = await fetch(headerUrl, {
         method: 'get',
@@ -46,6 +69,7 @@ function LayoutWrapper({ children }) {
       const headerData = (await response?.json()) || []
       setItem(headerData)
     }
+    getCartData()
     getData()
     getNonce()
   }, [])
