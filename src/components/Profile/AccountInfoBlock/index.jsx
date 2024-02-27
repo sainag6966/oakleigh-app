@@ -1,11 +1,8 @@
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import dynamic from 'next/dynamic'
+import DefaultBillingAddress from '../DefaultBillingAddress'
 
 function AccountInfoBlock() {
-  const CountrySelector = dynamic(
-    () => import('../../../reuseComps/CountrySelector'),
-  )
   const formFields = [
     { name: 'first_name', placeholder: 'First name', value: '', errorMsg: '' },
     { name: 'last_name', placeholder: 'Last name', value: '', errorMsg: '' },
@@ -259,11 +256,11 @@ function AccountInfoBlock() {
           })}
         </section>
         <section
-          className="relative mt-2 flex h-8 w-[120px] items-center font-sans text-display-1 sm:h-[40px] sm:w-[150px] sm:text-display-4 lg:mt-[15px] xl:h-[53px] xl:w-[220px] xl:text-display-17 dxl:mt-[20px]"
+          className="relative mt-2 flex h-8 w-[120px] items-center font-sans text-display-1 sm:h-[40px] sm:w-[150px] sm:text-display-4 lg:mt-[15px] dxl:mt-[20px] dxl:h-[53px] dxl:w-[220px] dxl:text-display-17"
           onClick={handleSubmit}
         >
-          <div className="absolute bottom-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[217px]"></div>
-          <div className="absolute right-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[37px] sm:w-[147px] xl:h-[50px] xl:w-[217px]"></div>
+          <div className="absolute bottom-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[35px] sm:w-[147px] dxl:h-[50px] dxl:w-[217px]"></div>
+          <div className="absolute right-0 h-[29px] w-[117px] border-[0.5px] border-textSecondary sm:h-[35px] sm:w-[147px] dxl:h-[50px] dxl:w-[217px]"></div>
           <button
             type="submit"
             className="relative flex w-full items-center justify-center xl:h-[47px]"
@@ -276,7 +273,7 @@ function AccountInfoBlock() {
         <p className="font-sans text-display-5 leading-none dxl:text-display-16">
           Default Billing Address
         </p>
-        <CountrySelector />
+        <DefaultBillingAddress />
       </section>
     </section>
   )
