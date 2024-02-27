@@ -23,6 +23,7 @@ function AccountInfoBlock() {
   ]
   const [formData, setFormData] = useState(formFields)
   const [passwordEntered, setPasswordEntered] = useState(false)
+  const [editAddress, setEditAddress] = useState(false)
   const istabScreen = useMediaQuery({ query: '(min-width:600px)' })
 
   const handleChange = (e) => {
@@ -267,6 +268,34 @@ function AccountInfoBlock() {
             Save Changes
           </button>
         </section>
+      </section>
+      <section className="flex flex-col gap-[15px] dxl:gap-[30px]">
+        <p className="text-display-11 dxl:text-display-13">Address Book</p>
+        <p className="font-sans text-display-5 leading-none dxl:text-display-16">
+          Default Delivery Address
+        </p>
+        {editAddress ? (
+          <DefaultBillingAddress setEditAddress={setEditAddress} />
+        ) : (
+          <section className="flex flex-col font-sans text-display-3 dxl:text-display-6">
+            <p>Address line 1</p>
+            <p>Address line 2</p>
+            <p>City</p>
+            <p>County</p>
+            <p>Postcode</p>
+            <p>Country</p>
+          </section>
+        )}
+        {!editAddress && (
+          <p
+            className="cursor-pointer font-sans text-display-4 dxl:text-display-17"
+            onClick={() => {
+              setEditAddress(true)
+            }}
+          >
+            <u>Edit Address</u>
+          </p>
+        )}
       </section>
       <section className="pt-[30px] dxl:pb-[50px]">
         <p className="font-sans text-display-5 leading-none dxl:text-display-16">

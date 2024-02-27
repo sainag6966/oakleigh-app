@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-function DefaultBillingAddress() {
+function DefaultBillingAddress({ setEditAddress }) {
   const CountrySelector = dynamic(
     () => import('../../../reuseComps/CountrySelector'),
   )
@@ -123,6 +123,9 @@ function DefaultBillingAddress() {
         }),
       )
       return
+    }
+    if (setEditAddress) {
+      setEditAddress(false)
     }
   }
   return (
