@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import dynamic from 'next/dynamic'
 
 function AccountInfoBlock() {
+  const CountrySelector = dynamic(
+    () => import('../../../reuseComps/CountrySelector'),
+  )
   const formFields = [
     { name: 'first_name', placeholder: 'First name', value: '', errorMsg: '' },
     { name: 'last_name', placeholder: 'Last name', value: '', errorMsg: '' },
@@ -272,6 +276,7 @@ function AccountInfoBlock() {
         <p className="font-sans text-display-5 leading-none dxl:text-display-16">
           Default Billing Address
         </p>
+        <CountrySelector />
       </section>
     </section>
   )
