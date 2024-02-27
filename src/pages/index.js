@@ -14,6 +14,8 @@ import PromiseBlock from '@/components/ContentBlocks/PromiseBlock'
 import VipAdBlock from '@/components/ContentBlocks/VipAdBlock'
 import SliderBlock from '@/components/ContentBlocks/SliderBlock'
 import BrandWidget from '@/components/ContentBlocks/BrandWidget'
+import { trayDataUrl } from '@/utils/urls'
+import { headerUrl } from '@/utils/urls'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -70,27 +72,21 @@ export async function getServerSideProps(context) {
   try {
     const username = 'oakleighcdadevel'
     const password = 'QsJY lkVy QxL8 3iFY NhhP Cto1'
-    const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/pages/55?acf_format=standard',
-      {
-        method: 'get',
-        headers: {
-          'Content-Type': 'text/plain',
-          Authorization: 'Basic ' + btoa(username + ':' + password),
-        },
+    const response = await fetch(trayDataUrl, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'text/plain',
+        Authorization: 'Basic ' + btoa(username + ':' + password),
       },
-    )
+    })
 
-    const headerRes = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18',
-      {
-        method: 'get',
-        headers: {
-          'Content-Type': 'text/plain',
-          Authorization: 'Basic ' + btoa(username + ':' + password),
-        },
+    const headerRes = await fetch(headerUrl, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'text/plain',
+        Authorization: 'Basic ' + btoa(username + ':' + password),
       },
-    )
+    })
 
     if (!response.ok || !headerRes.ok) {
       // Handle non-successful responses (e.g., 404, 500)

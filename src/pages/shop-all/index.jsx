@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
+import { shopAllUrl } from '@/utils/urls'
 import Spinner from '@/reuseComps/Spinner'
 import Filters from '@/reuseComps/Filters'
 import FiltersMweb from '@/reuseComps/FiltersMweb'
@@ -22,15 +23,12 @@ const ProductListing = ({ data }) => {
     try {
       const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
       const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
-      const response = await axios.get(
-        `https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?page=${page}`,
-        {
-          headers: {
-            'Content-Type': 'text/plain',
-            Authorization: 'Basic ' + btoa(username + ':' + password),
-          },
+      const response = await axios.get(`${shopAllUrl}?page=${page}`, {
+        headers: {
+          'Content-Type': 'text/plain',
+          Authorization: 'Basic ' + btoa(username + ':' + password),
         },
-      )
+      })
       const newData = response.data
 
       // Assuming the API response has a property called 'items' containing the data
@@ -130,17 +128,14 @@ export async function getServerSideProps(context) {
   try {
     const username = 'ck_96e01d53953b1372491dc07807ed0f0bd896d3a3'
     const password = 'cs_e6dc67bafbc6907125843f189e2c377eb1a40606'
-    const response = await fetch(
-      'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/v3/products?per_page=20',
-      {
-        method: 'get',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'text/plain',
-          Authorization: 'Basic ' + btoa(username + ':' + password),
-        },
+    const response = await fetch(`${shopAllUrl}?per_page=20`, {
+      method: 'get',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'text/plain',
+        Authorization: 'Basic ' + btoa(username + ':' + password),
       },
-    )
+    })
     if (!response.ok) {
       // Handle non-successful responses (e.g., 404, 500)
       console.error(`API request failed with status ${response.status}`)

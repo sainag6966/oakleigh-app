@@ -3,6 +3,8 @@ import Footer from '../Footer'
 import { useRouter } from 'next/router'
 import FooterTop from '../Footer/FooterTop'
 import Header from '../Header'
+import { headerUrl } from '@/utils/urls'
+import { footerUrl } from '@/utils/urls'
 import { getNonce } from '@/utils/nonce'
 import { useMediaQuery } from 'react-responsive'
 
@@ -34,16 +36,13 @@ function LayoutWrapper({ children }) {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=18',
-        {
-          method: 'get',
-          headers: {
-            'Content-Type': 'text/plain',
-            Authorization: 'Basic ' + btoa(username + ':' + password),
-          },
+      const response = await fetch(headerUrl, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'text/plain',
+          Authorization: 'Basic ' + btoa(username + ':' + password),
         },
-      )
+      })
       const headerData = (await response?.json()) || []
       setItem(headerData)
     }
@@ -66,16 +65,13 @@ function LayoutWrapper({ children }) {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch(
-        'https://oakleigh.cda-development3.co.uk/cms/wp-json/wp/v2/menu-items?menus=108',
-        {
-          method: 'get',
-          headers: {
-            'Content-Type': 'text/plain',
-            Authorization: 'Basic ' + btoa(username + ':' + password),
-          },
+      const response = await fetch(footerUrl, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'text/plain',
+          Authorization: 'Basic ' + btoa(username + ':' + password),
         },
-      )
+      })
       const footerData = (await response?.json()) || []
       setFooterItem(footerData)
     }
