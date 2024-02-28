@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Footer from '../Footer'
 import { useRouter } from 'next/router'
+import { CartDataProvider } from '@/context/BasketContext'
 import FooterTop from '../Footer/FooterTop'
 import Header from '../Header'
 import { headerUrl } from '@/utils/urls'
@@ -36,28 +37,6 @@ function LayoutWrapper({ children }) {
   const restrictedFooterPath = hideFooterPaths.includes(asPath)
 
   useEffect(() => {
-    const nonce = localStorage.getItem('nonce')
-    const loginToken = localStorage.getItem('loginToken')
-    const headers = { 'Content-Type': 'text/plain', Nonce: nonce }
-    const getCartData = async () => {
-      if (loginToken) {
-        headers['Authorization'] = `Bearer ${loginToken}`
-      }
-      try {
-        const response = await fetch(
-          'https://oakleigh.cda-development3.co.uk/cms/wp-json/wc/store/v1/cart',
-          {
-            method: 'get',
-            headers,
-            credentials: 'include',
-          },
-        )
-        const responseData = await response.json()
-        if (responseData) {
-          setCartData(responseData)
-        }
-      } catch (error) {}
-    }
     const getData = async () => {
       const response = await fetch(headerUrl, {
         method: 'get',
@@ -69,7 +48,6 @@ function LayoutWrapper({ children }) {
       const headerData = (await response?.json()) || []
       setItem(headerData)
     }
-    getCartData()
     getData()
     getNonce()
   }, [])
@@ -103,12 +81,14 @@ function LayoutWrapper({ children }) {
   }, [])
 
   return (
-    <div className="flex h-screen flex-col justify-between text-footerBg">
-      <Header data={item} isHeaderVisible={isHeaderVisible} />
-      {children}
-      <FooterTop isFooterVisible={isFooterVisible} />
-      <Footer footerData={footerItem} isFooterVisible={isFooterVisible} />
-    </div>
+    <CartDataProvider>
+      <div className="flex h-screen flex-col justify-between text-footerBg">
+        <Header data={item} isHeaderVisible={isHeaderVisible} />
+        {children}
+        <FooterTop isFooterVisible={isFooterVisible} />
+        <Footer footerData={footerItem} isFooterVisible={isFooterVisible} />
+      </div>
+    </CartDataProvider>
   )
 }
 export default LayoutWrapper
