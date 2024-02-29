@@ -274,9 +274,12 @@ function ServiceEnquiry({ handleEnquireNow }) {
         <section className="flex h-auto w-full flex-col justify-between gap-4 sm:flex-row">
           <section className="flex flex-1 flex-col gap-3">
             <p className="text-display-12">Your Details</p>
-            {yourDetailsArr.map((field) => {
+            {yourDetailsArr.map((field, index) => {
               return (
-                <section className="h-auto font-sans text-display-3 opacity-100">
+                <section
+                  key={index}
+                  className="h-auto font-sans text-display-3 opacity-100"
+                >
                   <input
                     type="text"
                     id={field.name}
@@ -297,9 +300,12 @@ function ServiceEnquiry({ handleEnquireNow }) {
           </section>
           <section className="flex flex-1 flex-col gap-3">
             <p className="text-display-12">Your Watch</p>
-            {yourWatchArr.map((field) => {
+            {yourWatchArr.map((field, index) => {
               return (
-                <section className="h-auto font-sans text-display-3 opacity-100">
+                <section
+                  key={index}
+                  className="h-auto font-sans text-display-3 opacity-100"
+                >
                   <input
                     type="text"
                     id={field.name}
@@ -321,9 +327,12 @@ function ServiceEnquiry({ handleEnquireNow }) {
         </section>
         <section className="flex flex-1 flex-col gap-3">
           {/* <p className="text-display-12">Your Watch</p> */}
-          {descArr.map((field) => {
+          {descArr.map((field, index) => {
             return (
-              <section className="relative h-auto font-sans text-display-3 opacity-100">
+              <section
+                key={index}
+                className="relative h-auto font-sans text-display-3 opacity-100"
+              >
                 <textarea
                   type="text"
                   id={field.name}
