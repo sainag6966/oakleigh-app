@@ -2,7 +2,7 @@
   "name": "oakleigh-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://oakleigh.cda-development3.co.uk/",
+  "homepage": "https://flamepro.cda-development3.co.uk/",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
