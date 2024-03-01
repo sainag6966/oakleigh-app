@@ -6,7 +6,8 @@ const nextConfig = {
 module.exports = {
   ...nextConfig,
   env: {
-    WORDPRESS_API_URL: 'https://flamepro.cda-development3.co.uk/wp-json',
+    WORDPRESS_API_URL:
+      'https://oakleigh-staging.cda-development3.co.uk/wp-json',
   },
   images: {
     remotePatterns: [
